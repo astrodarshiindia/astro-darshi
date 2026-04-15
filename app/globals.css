@@ -165,10 +165,10 @@
   animation: fadeUp 0.8s ease-out forwards;
 }
 
-/* Slow rotate for background elements */
+/* Slow rotate for background elements - Updated to preserve translation */
 @keyframes slowRotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 .animate-slow-rotate {

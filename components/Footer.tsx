@@ -32,7 +32,7 @@ const FOOTER_LINKS = {
 
 export default function Footer() {
   return (
-    <footer className="dark relative border-t border-border bg-[#050505] pt-24 pb-12 overflow-hidden">
+    <footer className="dark relative border-t border-border bg-[#0a0c10] pt-24 pb-12 overflow-hidden">
       {/* Decorative Background Elements */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[100px] -translate-y-1/2" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[100px] translate-y-1/2" />
