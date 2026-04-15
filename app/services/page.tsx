@@ -98,10 +98,10 @@ export default function ServicesPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative pt-12 pb-20 md:pb-32">
+      <section className="relative pt-18 pb-10 md:pb-12">
         <div className="section-container text-center">
           <h1 className="text-5xl md:text-6xl font-bold mb-4">
-            <span className="gradient-text">Our Sacred Services</span>
+            <span className="gradient-text pt-6">Our Sacred Services</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Comprehensive vedic astrology and tarot card readings designed to illuminate your cosmic path

@@ -68,10 +68,10 @@ export default function ContactPage() {
                   href="https://wa.me/919999999999"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex gap-4 p-4 cosmic-border glass-effect rounded-lg hover:border-secondary transition-colors"
+                  className="flex gap-4 p-4 cosmic-border glass-effect rounded-lg hover:border-primary transition-colors"
                 >
                   <div className="flex-shrink-0 flex items-center">
-                    <MessageCircle className="text-secondary" size={24} />
+                    <MessageCircle className="text-primary" size={24} />
                   </div>
                   <div>
                     <h3 className="font-semibold text-foreground">WhatsApp</h3>

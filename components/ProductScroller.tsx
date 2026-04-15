@@ -72,7 +72,7 @@ export default function ProductScroller({ products }: { products: Product[] }) {
             <div 
                 ref={scrollerRef}
                 onScroll={checkScroll}
-                className="flex overflow-x-auto gap-8 pb-12 scrollbar-hide snap-x snap-mandatory px-4 -mx-4"
+                className="flex overflow-x-auto gap-8 pb-12 scrollbar-hide snap-x snap-mandatory"
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
                 {products.map((product: Product) => (
@@ -129,10 +129,6 @@ export default function ProductScroller({ products }: { products: Product[] }) {
                     </div>
                 ))}
             </div>
-            
-            {/* Gradient Fades for Scrolling */}
-            <div className={`absolute top-0 left-0 bottom-12 w-24 bg-gradient-to-r from-background to-transparent pointer-events-none transition-opacity duration-500 ${canScrollLeft ? 'opacity-100' : 'opacity-0'}`} />
-            <div className={`absolute top-0 right-0 bottom-12 w-24 bg-gradient-to-l from-background to-transparent pointer-events-none transition-opacity duration-500 ${canScrollRight ? 'opacity-100' : 'opacity-0'}`} />
         </div>
     );
 }
