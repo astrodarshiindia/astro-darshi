@@ -82,7 +82,7 @@ export default function Hero() {
           <Phone size={16} /> {t('hero.call')}
         </a>
         <a
-          href="https://wa.me/919999999999?text=Hi%20AstroDarshini!%20I'd%20like%20a%20consultation."
+          href="https://wa.me/919999999999?text=Hi%20AstroDarshi!%20I'd%20like%20a%20consultation."
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-2 px-6 py-3 bg-green-600 text-white rounded-full hover:opacity-90 transition-all font-medium text-sm"

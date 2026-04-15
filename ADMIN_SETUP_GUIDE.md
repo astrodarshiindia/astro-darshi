@@ -1,8 +1,8 @@
-# Astro Darshini - Admin Panel Setup Guide
+# Astro Darshi - Admin Panel Setup Guide
 
 ## 📋 Overview
 
-This guide will help you set up the complete admin panel system for Astro Darshini with database integration, authentication, and contact management.
+This guide will help you set up the complete admin panel system for Astro Darshi with database integration, authentication, and contact management.
 
 ## 🗄️ Database Setup
 
@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS blog_posts (
   excerpt VARCHAR(500),
   category VARCHAR(100),
   image_url VARCHAR(500),
-  author VARCHAR(255) DEFAULT 'Astro Darshini',
+  author VARCHAR(255) DEFAULT 'Astro Darshi',
   is_published BOOLEAN DEFAULT false,
   published_at TIMESTAMP,
   view_count INTEGER DEFAULT 0,
@@ -146,9 +146,9 @@ Execute this SQL to create your admin account (change email and password hash):
 
 INSERT INTO admin_users (email, password_hash, name, role, is_active)
 VALUES (
-  'admin@astrodarshini.com',
+  'admin@astroDarshi.com',
   'your_sha256_hash_here', -- Replace with actual SHA-256 hash of your password
-  'Astro Darshini Admin',
+  'Astro Darshi Admin',
   'admin',
   true
 );
@@ -176,7 +176,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 
 ### Login
 - Navigate to: `http://localhost:3000/admin/login`
-- Email: `admin@astrodarshini.com`
+- Email: `admin@astroDarshi.com`
 - Password: Your chosen password
 
 ### Admin Dashboard Features
@@ -262,7 +262,7 @@ All tables are optimized with:
 Edit `components/Header.tsx`, `components/Hero.tsx`, and `components/Footer.tsx`:
 - Phone: +919999999999
 - WhatsApp: wa.me/919999999999
-- Email: admin@astrodarshini.com
+- Email: admin@astroDarshi.com
 
 ### Add Services
 Use the Admin Dashboard → Services section or manually insert:

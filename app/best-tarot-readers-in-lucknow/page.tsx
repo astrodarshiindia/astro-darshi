@@ -2,7 +2,7 @@ import SEOLayout from '@/components/SEOLayout';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Best Tarot Readers in Lucknow - Astro Darshini',
+  title: 'Best Tarot Readers in Lucknow - Astro Darshi',
   description: 'Connect with the best Tarot Readers in Lucknow. Gain intuitive insights and spiritual guidance through sacred spreads.',
   keywords: 'best tarot readers in lucknow, tarot card reading lucknow, intuitive tarot guidance, spiritual growth',
 };

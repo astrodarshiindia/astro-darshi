@@ -53,7 +53,7 @@ export default function AdminSidebar({ onLogout }: AdminSidebarProps) {
       >
         {/* Header */}
         <div className="p-6 border-b border-border">
-          <h1 className="text-xl font-serif text-primary">Astro Darshini</h1>
+          <h1 className="text-xl font-serif text-primary">Astro Darshi</h1>
           <p className="text-xs text-muted-foreground mt-1">Admin Panel</p>
         </div>
 
@@ -68,8 +68,8 @@ export default function AdminSidebar({ onLogout }: AdminSidebarProps) {
                 href={item.href}
                 onClick={() => setIsOpen(false)}
                 className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${isActive
-                    ? 'bg-primary/20 text-primary border border-primary/30'
-                    : 'text-foreground hover:bg-muted'
+                  ? 'bg-primary/20 text-primary border border-primary/30'
+                  : 'text-foreground hover:bg-muted'
                   }`}
               >
                 <Icon size={20} />

@@ -2,7 +2,7 @@ import SEOLayout from '@/components/SEOLayout';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Marriage Astrology & Relationship Guidance - Astro Darshini',
+  title: 'Marriage Astrology & Relationship Guidance - Astro Darshi',
   description: 'Expert marriage astrology and relationship guidance. Find harmony in your love life based on your birth chart and planetary periods.',
   keywords: 'marriage astrology, relationship guidance, love astrology, marriage matching, zodiac love, partnership analysis',
 };

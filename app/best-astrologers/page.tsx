@@ -2,7 +2,7 @@ import SEOLayout from '@/components/SEOLayout';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Best Astrologers for Vedic & Tarot Guidance - Astro Darshini',
+  title: 'Best Astrologers for Vedic & Tarot Guidance - Astro Darshi',
   description: 'Connect with the world\'s best astrologers for deep Vedic insights and intuitive Tarot readings. Transform your life with expert cosmic guidance.',
   keywords: 'best astrologers, top vedic astrologers, professional tarot readers, cosmic guidance, spiritual advisors',
 };
@@ -24,7 +24,7 @@ export default function BestAstrologers() {
           <section className="space-y-6 bg-card/50 p-8 md:p-12 rounded-[2rem] border border-border/50">
             <h2 className="text-3xl md:text-4xl text-foreground font-serif text-primary">Our Global Standards of Excellence</h2>
             <p className="text-muted-foreground text-lg leading-relaxed">
-              At Astro Darshini, we maintain a rigorous standard for all our practitioners. Whether they specialize in Vedic Astrology or Tarot, they bring years of study and intuitive practice to every session.
+              At Astro Darshi, we maintain a rigorous standard for all our practitioners. Whether they specialize in Vedic Astrology or Tarot, they bring years of study and intuitive practice to every session.
             </p>
             <ul className="grid md:grid-cols-2 gap-4 text-muted-foreground">
               <li className="flex items-center gap-3">✨ Authenticity & Ethics</li>

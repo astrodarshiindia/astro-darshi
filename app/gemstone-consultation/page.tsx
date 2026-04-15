@@ -2,7 +2,7 @@ import SEOLayout from '@/components/SEOLayout';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Gemstone Consultation Online - Astro Darshini',
+  title: 'Gemstone Consultation Online - Astro Darshi',
   description: 'Expert gemstone consultation for spiritual and material well-being. Find your lucky stone based on your birth chart and planetary periods.',
   keywords: 'gemstone consultation, birthstone analysis, lucky gemstones, vedic gemology, ruby, sapphire, emerald',
 };

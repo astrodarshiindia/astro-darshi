@@ -46,7 +46,7 @@ export default function Footer() {
           <div className="lg:col-span-2 space-y-8">
             <Link href="/" className="inline-block group">
               <span className="text-3xl font-serif font-bold tracking-tighter text-foreground">
-                ASTRO <span className="text-primary group-hover:text-primary/80 transition-colors">DARSHINI</span>
+                ASTRO <span className="text-primary group-hover:text-primary/80 transition-colors">Darshi</span>
               </span>
             </Link>
             <p className="text-muted-foreground text-base font-light leading-relaxed max-w-md">
@@ -63,7 +63,7 @@ export default function Footer() {
               <div className="flex gap-4">
                 {[
                   { icon: Phone, href: 'tel:+919999999999', label: t('hero.call') },
-                  { icon: Mail, href: 'mailto:hello@astrodarshini.com', label: 'Email' },
+                  { icon: Mail, href: 'mailto:hello@astroDarshi.com', label: 'Email' },
                   { icon: MessageCircle, href: 'https://wa.me/919999999999', label: 'WhatsApp' }
                 ].map((item, i) => (
                   <a

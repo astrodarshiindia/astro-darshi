@@ -2,7 +2,7 @@ import SEOLayout from '@/components/SEOLayout';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Best Vedic Astrologer in Lucknow - Astro Darshini',
+  title: 'Best Vedic Astrologer in Lucknow - Astro Darshi',
   description: 'Experience the best Vedic Astrology services in Lucknow. Get deep insights into your birth chart, planetary positions, and future predictions.',
   keywords: 'best vedic astrologer in lucknow, astrology lucknow, birth chart reading, kundli analysis',
 };
@@ -24,7 +24,7 @@ export default function BestVedicAstrologerLucknow() {
           <section className="space-y-6 bg-card/50 p-8 md:p-12 rounded-[2rem] border border-border/50">
             <h2 className="text-3xl md:text-4xl text-foreground font-serif text-primary">Our Expertise in Lucknow</h2>
             <p className="text-muted-foreground text-lg leading-relaxed">
-              At Astro Darshini, we provide personalized consultations that address your unique concerns, from career and wealth to relationships and spiritual growth. Our methods are rooted in Parasara and Jaimini systems, ensuring the highest level of accuracy.
+              At Astro Darshi, we provide personalized consultations that address your unique concerns, from career and wealth to relationships and spiritual growth. Our methods are rooted in Parasara and Jaimini systems, ensuring the highest level of accuracy.
             </p>
             <ul className="grid md:grid-cols-2 gap-4 text-muted-foreground">
               <li className="flex items-center gap-3">✨ Detailed Kundli Analysis</li>

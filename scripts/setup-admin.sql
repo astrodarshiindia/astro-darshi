@@ -1,10 +1,10 @@
--- Setup default admin user for Astro Darshini
--- Email: admin@astrodarshini.com
+-- Setup default admin user for Astro Darshi
+-- Email: admin@astroDarshi.com
 -- Password: admin123 (hashed with SHA256)
 
 INSERT INTO admin_users (email, password_hash, name, role, is_active)
 VALUES (
-  'admin@astrodarshini.com',
+  'admin@astroDarshi.com',
   '8d969eef6ecad3c29a3a629280e3193e4e3f2c7f3e2e8b5c4d7e6f8a9b0c1d2e',  -- SHA256 of 'admin123'
   'Admin User',
   'superadmin',

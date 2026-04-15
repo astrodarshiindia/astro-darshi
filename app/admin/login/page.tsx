@@ -58,7 +58,7 @@ export default function AdminLogin() {
         <Card className="w-full max-w-md cosmic-border glass-effect">
           <CardHeader className="text-center space-y-2">
             <div className="text-4xl mb-4">✨</div>
-            <CardTitle className="text-2xl text-primary">Astro Darshini</CardTitle>
+            <CardTitle className="text-2xl text-primary">Astro Darshi</CardTitle>
             <CardDescription className="text-muted-foreground">
               Admin Portal
             </CardDescription>
@@ -75,7 +75,7 @@ export default function AdminLogin() {
                 <label className="text-sm font-medium text-foreground">Email</label>
                 <Input
                   type="email"
-                  placeholder="admin@astrodarshini.com"
+                  placeholder="admin@astroDarshi.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required

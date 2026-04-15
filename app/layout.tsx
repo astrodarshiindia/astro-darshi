@@ -5,12 +5,12 @@ import { ThemeProvider } from '@/components/theme-provider'
 import { LanguageProvider } from '@/lib/LanguageContext'
 import './globals.css'
 
-const geist = Geist({ 
+const geist = Geist({
   subsets: ["latin"],
   variable: '--font-geist-sans',
 });
 
-const geistMono = Geist_Mono({ 
+const geistMono = Geist_Mono({
   subsets: ["latin"],
   variable: '--font-geist-mono',
 });
@@ -22,8 +22,8 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: 'Astro Darshini - Vedic Astrology & Tarot Card Reading',
-  description: 'Discover your cosmic destiny with Astro Darshini. Expert vedic astrology and tarot card readings tailored for you.',
+  title: 'Astro Darshi - Vedic Astrology & Tarot Card Reading',
+  description: 'Discover your cosmic destiny with Astro Darshi. Expert vedic astrology and tarot card readings tailored for you.',
   keywords: ['vedic astrology', 'tarot reading', 'astrology consultation', 'birth chart analysis'],
   viewport: {
     width: 'device-width',

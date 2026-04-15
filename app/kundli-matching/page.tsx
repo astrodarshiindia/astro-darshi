@@ -2,7 +2,7 @@ import SEOLayout from '@/components/SEOLayout';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Kundli Matching for Marriage - Astro Darshini',
+  title: 'Kundli Matching for Marriage - Astro Darshi',
   description: 'Online Kundli Matching for marriage. Get accurate horoscope matching, Guna Milan, and compatibility analysis by expert Vedic astrologers.',
   keywords: 'kundli matching, horoscope matching for marriage, guna milan, vedic astrology compatibility, marriage matching',
 };

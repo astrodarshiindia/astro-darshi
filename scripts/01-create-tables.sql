@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS blog_posts (
   excerpt VARCHAR(500),
   category VARCHAR(100),
   image_url VARCHAR(500),
-  author VARCHAR(255) DEFAULT 'Astro Darshini',
+  author VARCHAR(255) DEFAULT 'Astro Darshi',
   is_published BOOLEAN DEFAULT false,
   published_at TIMESTAMP,
   view_count INTEGER DEFAULT 0,

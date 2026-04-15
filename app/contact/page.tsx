@@ -6,8 +6,8 @@ import ContactForm from '@/components/ContactForm';
 import { Phone, Mail, MessageCircle, MapPin } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Contact Us | Astro Darshini',
-  description: 'Get in touch with Astro Darshini for vedic astrology and tarot card reading consultations.',
+  title: 'Contact Us | Astro Darshi',
+  description: 'Get in touch with Astro Darshi for vedic astrology and tarot card reading consultations.',
 };
 
 export default function ContactPage() {
@@ -23,7 +23,7 @@ export default function ContactPage() {
             <span className="gradient-text">Get in Touch</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Connect with Astro Darshini and begin your cosmic journey
+            Connect with Astro Darshi and begin your cosmic journey
           </p>
         </div>
       </section>
@@ -82,7 +82,7 @@ export default function ContactPage() {
 
                 {/* Email */}
                 <a
-                  href="mailto:hello@astrodarshini.com"
+                  href="mailto:hello@astroDarshi.com"
                   className="flex gap-4 p-4 cosmic-border glass-effect rounded-lg hover:border-primary transition-colors"
                 >
                   <div className="flex-shrink-0 flex items-center">
@@ -90,7 +90,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-foreground">Email</h3>
-                    <p className="text-muted-foreground">hello@astrodarshini.com</p>
+                    <p className="text-muted-foreground">hello@astroDarshi.com</p>
                     <p className="text-sm text-muted-foreground mt-1">Response within 24 hours</p>
                   </div>
                 </a>

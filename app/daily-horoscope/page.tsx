@@ -2,7 +2,7 @@ import SEOLayout from '@/components/SEOLayout';
 import { Metadata } from 'metadata';
 
 export const metadata: Metadata = {
-  title: 'Daily Horoscope & Zodiac Predictions - Astro Darshini',
+  title: 'Daily Horoscope & Zodiac Predictions - Astro Darshi',
   description: 'Your daily horoscope for all 12 zodiac signs. Get personalized insights into your day based on planetary movements and cosmic energy.',
   keywords: 'daily horoscope, zodiac predictions, personalized astrology, star signs, today horoscope',
 };

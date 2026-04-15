@@ -2,7 +2,7 @@ import SEOLayout from '@/components/SEOLayout';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Vastu Consultation for Home & Office - Astro Darshini',
+  title: 'Vastu Consultation for Home & Office - Astro Darshi',
   description: 'Traditional Vastu Shastra consultation for a harmonious home and prosperous business. Expert Vastu advice and simple remedies for Vastu Dosha.',
   keywords: 'vastu consultation, vastu shastra for home, vastu for office, vastu dosha remedies, directions and elements',
 };

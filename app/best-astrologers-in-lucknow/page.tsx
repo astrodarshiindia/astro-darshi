@@ -2,7 +2,7 @@ import SEOLayout from '@/components/SEOLayout';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Best Astrologers in Lucknow - Astro Darshini',
+  title: 'Best Astrologers in Lucknow - Astro Darshi',
   description: 'Connect with the best astrologers in Lucknow for all your cosmic and spiritual needs. From Vedic Astrology to Tarot, we offer comprehensive consultations.',
   keywords: 'best astrologers in lucknow, astrologer lucknow, spiritual consultation, cosmic guidance',
 };

@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS blog_posts (
   excerpt VARCHAR(500),
   category VARCHAR(100),
   image_url VARCHAR(500),
-  author VARCHAR(255) DEFAULT 'Astro Darshini',
+  author VARCHAR(255) DEFAULT 'Astro Darshi',
   is_published BOOLEAN DEFAULT false,
   published_at TIMESTAMP,
   view_count INTEGER DEFAULT 0,
@@ -114,7 +114,7 @@ CREATE INDEX IF NOT EXISTS idx_analytics_created ON analytics(created_at);
 
 -- Insert Default Admin
 INSERT INTO admin_users (email, password_hash, name, role, is_active)
-VALUES ('admin@astrodarshini.com', '8d969eef6ecad3c29a3a629280e3193e4e3f2c7f3e2e8b5c4d7e6f8a9b0c1d2e', 'Admin', 'superadmin', true)
+VALUES ('admin@astroDarshi.com', '8d969eef6ecad3c29a3a629280e3193e4e3f2c7f3e2e8b5c4d7e6f8a9b0c1d2e', 'Admin', 'superadmin', true)
 ON CONFLICT (email) DO NOTHING;
 
 -- Sample Product (optional)

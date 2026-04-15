@@ -32,7 +32,7 @@ export default function Header() {
         <nav className="flex items-center justify-between">
           <Link href="/" className="group flex items-center gap-2">
             <span className="text-xl md:text-2xl font-serif font-bold tracking-tighter text-foreground">
-              ASTRO <span className="text-primary">DARSHINI</span>
+              ASTRO <span className="text-primary">Darshi</span>
             </span>
           </Link>
 
@@ -62,13 +62,13 @@ export default function Header() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="bg-background/90 backdrop-blur-md border-white/10">
-                <DropdownMenuItem 
+                <DropdownMenuItem
                   onClick={() => setLanguage('en')}
                   className={`cursor-pointer ${language === 'en' ? 'text-primary' : ''}`}
                 >
                   English
                 </DropdownMenuItem>
-                <DropdownMenuItem 
+                <DropdownMenuItem
                   onClick={() => setLanguage('hi')}
                   className={`cursor-pointer ${language === 'hi' ? 'text-primary' : ''}`}
                 >
@@ -115,7 +115,7 @@ export default function Header() {
           <div className="flex flex-col h-full p-8">
             <div className="flex items-center justify-between mb-12">
               <span className="text-xl font-serif font-bold tracking-tighter text-foreground">
-                ASTRO <span className="text-primary">DARSHINI</span>
+                ASTRO <span className="text-primary">Darshi</span>
               </span>
               <button
                 onClick={() => setIsOpen(false)}

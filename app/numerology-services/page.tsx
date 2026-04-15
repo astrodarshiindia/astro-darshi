@@ -2,7 +2,7 @@ import SEOLayout from '@/components/SEOLayout';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Numerology Services Online - Astro Darshini',
+  title: 'Numerology Services Online - Astro Darshi',
   description: 'Unlock the power of your numbers with numerology services. From name numerology to birth number analysis, get deep insights into your life.',
   keywords: 'numerology services, name numerology, birth number analysis, life path number, destiny number, numerology consultation',
 };

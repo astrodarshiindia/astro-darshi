@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Sparkles, Star } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Our Services | Astro Darshini',
+  title: 'Our Services | Astro Darshi',
   description: 'Explore vedic astrology and tarot card reading services tailored for your cosmic journey.',
 };
 

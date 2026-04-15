@@ -2,7 +2,7 @@ import SEOLayout from '@/components/SEOLayout';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Career Astrology & Business Success - Astro Darshini',
+  title: 'Career Astrology & Business Success - Astro Darshi',
   description: 'Expert career astrology and business guidance. Find the right path for your success based on your birth chart and planetary periods.',
   keywords: 'career astrology, business success, vocational astrology, career path, career guidance, zodiac career',
 };
