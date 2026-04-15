@@ -25,11 +25,11 @@ export default function Hero() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
 
       {/* Zodiac Circle - Enhanced Visibility */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] border border-primary/40 rounded-full animate-slow-rotate pointer-events-none hidden md:block">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[650px] md:h-[650px] border border-primary/40 rounded-full animate-slow-rotate pointer-events-none">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3 h-3 bg-primary rounded-full shadow-[0_0_25px_rgba(59,130,246,0.8)]" />
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-primary/60 rounded-full" />
       </div>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] border border-primary/20 rounded-full animate-slow-rotate-reverse pointer-events-none hidden md:block" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] md:w-[550px] md:h-[550px] border border-primary/20 rounded-full animate-slow-rotate-reverse pointer-events-none" />
 
       <div className="section-container relative z-10 text-center">
         {/* Sanskrit Text - Artistic */}
@@ -38,12 +38,12 @@ export default function Hero() {
         {/* Main Heading */}
         <div className="max-w-4xl mx-auto mb-10 space-y-1">
           <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif text-foreground leading-tight tracking-tight animate-fade-up opacity-0 [animation-fill-mode:forwards] [animation-delay:0.2s]">
-            Your Path to <br />
-            <span className="blue-gradient-text font-italic">Cosmic Wisdom</span>
+            Decode Your <br />
+            <span className="blue-gradient-text font-italic">Destiny's Blueprint</span>
           </h1>
 
           <p className="text-lg md:text-xl text-foreground/60 font-light tracking-wide max-w-2xl mx-auto animate-fade-up opacity-0 [animation-fill-mode:forwards] [animation-delay:0.4s]">
-            Experience the profound accuracy of Vedic Astrology and the intuitive guidance of Sacred Tarot, curated for your spiritual evolution.
+            Stop wondering about your future. Gain crystal-clear clarity on your career, relationships, and life purpose with India's most trusted cosmic guides.
           </p>
         </div>
 

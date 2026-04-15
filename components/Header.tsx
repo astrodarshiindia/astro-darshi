@@ -22,7 +22,7 @@ export default function Header() {
       <div className="section-container">
         <nav className="flex items-center justify-between">
           <Link href="/" className="group flex items-center gap-2">
-            <span className="text-2xl font-serif font-bold tracking-tighter text-foreground">
+            <span className="text-xl md:text-2xl font-serif font-bold tracking-tighter text-foreground">
               ASTRO <span className="text-primary">DARSHINI</span>
             </span>
           </Link>
@@ -83,7 +83,7 @@ export default function Header() {
         >
           <div className="flex flex-col h-full p-8">
             <div className="flex items-center justify-between mb-12">
-              <span className=" font-serif font-bold tracking-tighter text-foreground">
+              <span className="text-xl font-serif font-bold tracking-tighter text-foreground">
                 ASTRO <span className="text-primary">DARSHINI</span>
               </span>
               <button
