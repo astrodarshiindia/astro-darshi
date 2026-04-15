@@ -1,96 +1,183 @@
 'use client';
 
 import Link from 'next/link';
-import { Phone, Mail, MessageCircle, MapPin } from 'lucide-react';
+import { Phone, Mail, MessageCircle, Instagram, Youtube, Facebook, MapPin } from 'lucide-react';
+
+const FOOTER_LINKS = {
+  explore: [
+    { name: 'Home', href: '/' },
+    { name: 'Services', href: '/services' },
+    { name: 'Contact', href: '/contact' },
+    { name: 'Daily Horoscope', href: '/daily-horoscope' },
+  ],
+  services: [
+    { name: 'Career Astrology', href: '/career-astrology' },
+    { name: 'Marriage Astrology', href: '/marriage-astrology' },
+    { name: 'Kundli Matching', href: '/kundli-matching' },
+    { name: 'Vastu Consultation', href: '/vastu-consultation' },
+    { name: 'Numerology Services', href: '/numerology-services' },
+    { name: 'Gemstone Consultation', href: '/gemstone-consultation' },
+  ],
+  guides: [
+    { name: 'Best Vedic Astrologer in Lucknow', href: '/best-vedic-astrologer-in-lucknow' },
+    { name: 'Best Tarot Readers in Lucknow', href: '/best-tarot-readers-in-lucknow' },
+    { name: 'Best Astrologers in Lucknow', href: '/best-astrologers-in-lucknow' },
+    { name: 'Best Astrologers Globally', href: '/best-astrologers' },
+  ],
+  legal: [
+    { name: 'Privacy Policy', href: '/privacy-policy' },
+    { name: 'Terms of Service', href: '/terms-of-service' },
+  ]
+};
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-border/50 bg-gradient-to-t from-muted/50 via-muted/20 backdrop-blur-sm z-40">
-      <div className="section-container py-16 md:py-20">
-        {/* Main Footer Content */}
-        <div className="grid md:grid-cols-3 gap-12 lg:gap-16 mb-12">
-          {/* Brand */}
-          <div className="space-y-6">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center shadow-lg">
-                <span className="text-primary-foreground font-bold text-xl">✨</span>
-              </div>
-              <h3 className="text-2xl font-bold gradient-text">Astro Darshini</h3>
-            </div>
-            <p className="text-muted-foreground/90 leading-relaxed">
-              Illuminating your path through the cosmic wisdom of Vedic astrology and tarot guidance.
+    <footer className="dark relative border-t border-border bg-[#050505] pt-24 pb-12 overflow-hidden">
+      {/* Decorative Background Elements */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[100px] -translate-y-1/2" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[100px] translate-y-1/2" />
+
+      <div className="section-container relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12 mb-24">
+          {/* Brand & Mission */}
+          <div className="lg:col-span-2 space-y-8">
+            <Link href="/" className="inline-block group">
+              <span className="text-3xl font-serif font-bold tracking-tighter text-foreground">
+                ASTRO <span className="text-primary group-hover:text-primary/80 transition-colors">DARSHINI</span>
+              </span>
+            </Link>
+            <p className="text-muted-foreground text-lg font-light leading-relaxed max-w-md">
+              Illuminating your spiritual journey through the ancient wisdom of Vedic Astrology 
+              and the intuitive guidance of Sacred Tarot. Your cosmic compass for life's transformation.
             </p>
+            
+            <div className="space-y-4">
+              <div className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors cursor-pointer group">
+                <div className="w-10 h-10 rounded-full border border-border flex items-center justify-center group-hover:border-primary/50">
+                  <MapPin size={18} />
+                </div>
+                <span className="text-sm font-light">Lucknow, Uttar Pradesh, India</span>
+              </div>
+              <div className="flex gap-4">
+                {[
+                  { icon: Phone, href: 'tel:+919999999999', label: 'Call' },
+                  { icon: Mail, href: 'mailto:hello@astrodarshini.com', label: 'Email' },
+                  { icon: MessageCircle, href: 'https://wa.me/919999999999', label: 'WhatsApp' }
+                ].map((item, i) => (
+                  <a 
+                    key={i} 
+                    href={item.href} 
+                    aria-label={item.label}
+                    className="w-12 h-12 rounded-full border border-border flex items-center justify-center text-foreground/60 hover:border-primary hover:text-primary hover:bg-primary/5 transition-all duration-300 group"
+                  >
+                    <item.icon size={20} className="group-hover:scale-110 transition-transform" />
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* Quick Links */}
-          <div className="space-y-6">
-            <h4 className="font-bold text-foreground text-lg tracking-wide uppercase mb-6 border-b border-border/30 pb-2">Quick Links</h4>
-            <nav className="space-y-3">
-              <Link href="/" className="block w-full py-3 px-4 rounded-xl text-foreground/90 hover:text-foreground hover:bg-accent/60 hover:shadow-md transition-all duration-300 group">
-                <span className="group-hover:translate-x-2 transition-transform">Home</span>
-              </Link>
-              <Link href="/services" className="block w-full py-3 px-4 rounded-xl text-foreground/90 hover:text-foreground hover:bg-accent/60 hover:shadow-md transition-all duration-300 group">
-                <span className="group-hover:translate-x-2 transition-transform">Services</span>
-              </Link>
-              <Link href="/contact" className="block w-full py-3 px-4 rounded-xl text-foreground/90 hover:text-foreground hover:bg-accent/60 hover:shadow-md transition-all duration-300 group">
-                <span className="group-hover:translate-x-2 transition-transform">Contact</span>
-              </Link>
+          <div className="space-y-8">
+            <h4 className="text-[10px] font-bold tracking-[0.4em] uppercase text-primary/80">Navigation</h4>
+            <nav className="flex flex-col gap-4">
+              {FOOTER_LINKS.explore.map((item) => (
+                <Link 
+                  key={item.name}
+                  href={item.href}
+                  className="text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 font-light text-sm flex items-center gap-2 group"
+                >
+                  <span className="w-1 h-1 bg-primary rounded-full scale-0 group-hover:scale-100 transition-transform" />
+                  {item.name}
+                </Link>
+              ))}
             </nav>
           </div>
 
-          {/* Contact Info */}
-          <div className="space-y-6">
-            <h4 className="font-bold text-foreground text-lg tracking-wide uppercase mb-6 border-b border-border/30 pb-2">Get in Touch</h4>
-            <div className="space-y-4">
-              <a
-                href="tel:+919999999999"
-                className="flex items-center gap-4 p-4 rounded-xl hover:bg-accent/50 text-foreground/90 hover:text-foreground hover:shadow-md transition-all duration-300 group"
-              >
-                <Phone size={20} className="text-primary shrink-0" />
-                <span>+91 9999999999</span>
-              </a>
-              <a
-                href="mailto:hello@astrodarshini.com"
-                className="flex items-center gap-4 p-4 rounded-xl hover:bg-accent/50 text-foreground/90 hover:text-foreground hover:shadow-md transition-all duration-300 group"
-              >
-                <Mail size={20} className="text-primary shrink-0" />
-                <span>hello@astrodarshini.com</span>
-              </a>
-              <a
-                href="https://wa.me/919999999999"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-4 p-4 rounded-xl hover:bg-secondary/10 text-foreground/90 hover:text-foreground hover:shadow-md transition-all duration-300 group"
-              >
-                <MessageCircle size={20} className="text-secondary shrink-0" />
-                <span>WhatsApp Chat</span>
-              </a>
+          {/* Services */}
+          <div className="space-y-8">
+            <h4 className="text-[10px] font-bold tracking-[0.4em] uppercase text-primary/80">Services</h4>
+            <nav className="flex flex-col gap-4">
+              {FOOTER_LINKS.services.map((item) => (
+                <Link 
+                  key={item.name}
+                  href={item.href}
+                  className="text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 font-light text-sm flex items-center gap-2 group"
+                >
+                  <span className="w-1 h-1 bg-primary rounded-full scale-0 group-hover:scale-100 transition-transform" />
+                  {item.name}
+                </Link>
+              ))}
+            </nav>
+          </div>
+
+          {/* Expert Guides */}
+          <div className="space-y-8">
+            <h4 className="text-[10px] font-bold tracking-[0.4em] uppercase text-primary/80">Expert Guides</h4>
+            <nav className="flex flex-col gap-4">
+              {FOOTER_LINKS.guides.map((item) => (
+                <Link 
+                  key={item.name}
+                  href={item.href}
+                  className="text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 font-light text-sm flex items-center gap-2 group"
+                >
+                  <span className="w-1 h-1 bg-primary rounded-full scale-0 group-hover:scale-100 transition-transform" />
+                  {item.name}
+                </Link>
+              ))}
+            </nav>
+          </div>
+
+          {/* Connect & Legal */}
+          <div className="space-y-12">
+            <div className="space-y-8">
+              <h4 className="text-[10px] font-bold tracking-[0.4em] uppercase text-primary/80">Connect</h4>
+              <div className="flex gap-4">
+                {[Instagram, Youtube, Facebook].map((Icon, i) => (
+                  <a key={i} href="#" className="text-muted-foreground hover:text-primary transition-colors">
+                    <Icon size={20} />
+                  </a>
+                ))}
+              </div>
+            </div>
+            <div className="space-y-8">
+              <h4 className="text-[10px] font-bold tracking-[0.4em] uppercase text-primary/80">Legal</h4>
+              <nav className="flex flex-col gap-4">
+                {FOOTER_LINKS.legal.map((item) => (
+                  <Link 
+                    key={item.name}
+                    href={item.href}
+                    className="text-muted-foreground hover:text-foreground transition-colors font-light text-sm"
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </nav>
             </div>
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-border/50 to-transparent my-12"></div>
-
         {/* Bottom Bar */}
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-6 text-center lg:text-left">
-          <p className="text-sm text-muted-foreground/80">
-            © {new Date().getFullYear()} Astro Darshini. All cosmic rights reserved. 🌌
-          </p>
-          <div className="flex gap-6 text-sm">
-            <Link href="/privacy" className="text-muted-foreground/80 hover:text-foreground hover:underline transition-colors">
-              Privacy Policy
-            </Link>
-            <Link href="/terms" className="text-muted-foreground/80 hover:text-foreground hover:underline transition-colors">
-              Terms of Service
-            </Link>
+        <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+            <p className="text-muted-foreground/40 text-[10px] tracking-[0.2em] uppercase">
+              © {new Date().getFullYear()} Astro Darshini.
+            </p>
+            <div className="hidden md:block w-1 h-1 bg-muted-foreground/20 rounded-full" />
+            <p className="text-muted-foreground/40 text-[10px] tracking-[0.2em] uppercase">
+              Crafted for Spiritual Evolution
+            </p>
+          </div>
+          
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-2 text-muted-foreground/30 text-[10px] tracking-widest uppercase group">
+              <span>Made with</span>
+              <span className="text-primary group-hover:scale-125 transition-transform">✨</span>
+              <span>by the Cosmic Team</span>
+            </div>
           </div>
         </div>
       </div>
-
-      {/* Subtle Cosmic Border */}
-      <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-primary/30 via-secondary/20 to-primary/30 blur-sm"></div>
     </footer>
   );
 }
-

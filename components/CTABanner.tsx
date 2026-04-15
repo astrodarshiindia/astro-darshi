@@ -1,61 +1,49 @@
 'use client';
 
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { Sparkles } from 'lucide-react';
+import { MessageCircle, Phone } from 'lucide-react';
 
 export default function CTABanner() {
   return (
-    <section className="relative py-16 md:py-24 overflow-hidden">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-secondary/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-      </div>
-
+    <section className="py-24 md:py-32 relative overflow-hidden">
       <div className="section-container relative z-10">
-        <div className="cosmic-border glass-effect rounded-lg p-8 md:p-16 text-center space-y-8 max-w-4xl mx-auto">
-          {/* Icon */}
-          <div className="flex justify-center">
-            <Sparkles size={48} className="text-primary animate-spin" style={{ animationDuration: '4s' }} />
-          </div>
+        <div className="relative p-12 md:p-20 rounded-[3rem] bg-card border border-border overflow-hidden text-center max-w-5xl mx-auto">
+          {/* Subtle Background Glow */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-primary/5 blur-[100px] pointer-events-none" />
+          
+          <div className="relative z-10 space-y-10">
+            <div className="space-y-4">
+              <span className="text-xs font-bold tracking-[0.4em] uppercase text-primary">Your Journey Awaits</span>
+              <h2 className="text-4xl md:text-6xl text-foreground leading-tight font-serif">
+                Illuminate Your <span className="text-primary italic">Cosmic</span> Path
+              </h2>
+              <p className="text-muted-foreground text-lg md:text-xl font-light max-w-2xl mx-auto leading-relaxed">
+                Take the first step towards clarity. Whether you seek Vedic wisdom or Tarot intuition, we are here to guide your evolution.
+              </p>
+            </div>
 
-          {/* Content */}
-          <div className="space-y-4">
-            <h2 className="text-4xl md:text-5xl font-bold">
-              <span className="gradient-text">Illuminate Your Cosmic Path</span>
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Whether you seek clarity through vedic astrology or intuitive guidance through tarot, 
-              take the first step on your transformative journey today.
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+              <Link 
+                href="/contact" 
+                className="w-full sm:w-auto px-12 py-5 bg-primary text-primary-foreground rounded-full text-sm font-bold tracking-[0.2em] uppercase hover:scale-105 transition-all duration-300 shadow-2xl shadow-primary/20"
+              >
+                Book Consultation
+              </Link>
+              
+              <a
+                href="https://wa.me/919999999999"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto flex items-center justify-center gap-2 px-12 py-5 border border-border text-foreground rounded-full text-sm font-bold tracking-[0.2em] uppercase hover:bg-accent transition-all duration-300"
+              >
+                <MessageCircle size={18} /> WhatsApp
+              </a>
+            </div>
+
+            <p className="text-muted-foreground/50 text-xs tracking-widest uppercase">
+              Trusted by 500+ seekers worldwide
             </p>
           </div>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-            <Link href="/contact">
-              <Button size="lg" className="btn-gold px-8 py-6 text-lg hover:glow-effect">
-                Book Your Consultation
-              </Button>
-            </Link>
-            <a
-              href="https://wa.me/919999999999"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button
-                size="lg"
-                className="btn-outline-gold px-8 py-6 text-lg"
-              >
-                Chat on WhatsApp
-              </Button>
-            </a>
-          </div>
-
-          {/* Trust message */}
-          <p className="text-sm text-muted-foreground pt-4">
-            Join 500+ seekers who have found clarity and direction
-          </p>
         </div>
       </div>
     </section>

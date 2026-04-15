@@ -98,7 +98,7 @@ export default function ServicesPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 md:pb-32">
+      <section className="relative pt-12 pb-20 md:pb-32">
         <div className="section-container text-center">
           <h1 className="text-5xl md:text-6xl font-bold mb-4">
             <span className="gradient-text">Our Sacred Services</span>

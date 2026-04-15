@@ -202,7 +202,7 @@ export default function ContactForm() {
           <Button
             type="submit"
             disabled={status === 'loading'}
-            className="btn-gold w-full py-6 text-base"
+            className="btn-premium w-full py-6 text-base"
           >
             {status === 'loading' ? (
               <>

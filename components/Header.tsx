@@ -2,90 +2,141 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { Menu, X, Phone, MessageCircle } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Menu, X, Phone } from 'lucide-react';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const toggleMenu = () => setIsOpen(!isOpen);
-
   return (
-    <header className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-500 ${isScrolled ? 'pt-[6px] md:pt-8 backdrop-blur-md bg-slate-900/95 border-b border-white/10 shadow-xl py-2 md:py-3' : 'pt-12 md:pt-14 py-4 md:py-6'}`}>
+    <header 
+      className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 ${
+        isScrolled ? 'py-4 bg-background/80 backdrop-blur-lg border-b border-white/5' : 'py-6 bg-transparent'
+      }`}
+    >
       <div className="section-container">
         <nav className="flex items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className={`w-12 h-12 bg-gradient-to-br rounded-xl flex items-center justify-center shadow-lg transition-all backdrop-blur-sm ${isScrolled ? 'border border-white/20 bg-white/90' : 'bg-white/80'}`}>
-              <span className="text-slate-900 font-bold text-xl drop-shadow-md">✨</span>
-            </div>
-            <span className={`text-xl md:text-2xl font-black bg-clip-text drop-shadow-lg transition-all ${isScrolled ? 'bg-gradient-to-r from-white via-sky-50 to-white text-transparent' : 'bg-gradient-to-r from-white via-sky-100 to-white text-transparent'}`}>
-              Astro Darshini
+          <Link href="/" className="group flex items-center gap-2">
+            <span className="text-2xl font-serif font-bold tracking-tighter text-foreground">
+              ASTRO <span className="text-primary">DARSHINI</span>
             </span>
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-12">
-            {['/', '/services', '/contact'].map((href, i) => (
+          <div className="hidden md:flex items-center gap-10">
+            {[
+              { name: 'Home', href: '/' },
+              { name: 'Services', href: '/services' },
+              { name: 'Contact', href: '/contact' }
+            ].map((link) => (
               <Link
-                key={href}
-                href={href}
-                className="text-white/90 hover:text-white font-semibold px-5 py-3 rounded-2xl backdrop-blur-sm transition-all duration-300 hover:bg-white/20 hover:shadow-lg hover:scale-[1.02]"
+                key={link.name}
+                href={link.href}
+                className="text-sm font-medium tracking-widest uppercase text-foreground/70 hover:text-primary transition-colors duration-300"
               >
-                {href === '/' ? 'Home' : href === '/services' ? 'Services' : 'Contact'}
+                {link.name}
               </Link>
             ))}
           </div>
 
-          {/* Desktop CTAs */}
-          <div className="hidden lg:flex items-center gap-4">
-            <a href="tel:+919999999999" className="p-3 hover:bg-white/20 rounded-2xl transition-all duration-300 text-white backdrop-blur-sm hover:shadow-lg">
-              <Phone size={20} />
+          {/* Right Section: CTA & Mobile Menu */}
+          <div className="flex items-center gap-4 md:gap-6">
+            <a 
+              href="tel:+919999999999" 
+              className="hidden sm:flex text-foreground/70 hover:text-foreground transition-colors"
+              title="Call Us"
+            >
+              <Phone size={18} />
             </a>
-            <Button className={`px-8 py-4 font-bold rounded-2xl shadow-2xl hover:shadow-white/30 hover:-translate-y-px transition-all backdrop-blur-sm ${isScrolled ? 'bg-white/95 text-slate-900 hover:bg-white' : 'bg-white/80 hover:bg-white text-slate-900'}`}>
-              Book Now
-            </Button>
-          </div>
+            
+            <Link 
+              href="/contact" 
+              className="px-4 py-1.5 md:px-6 md:py-2 border border-primary/30 rounded-full text-[10px] md:text-xs font-bold tracking-[0.1em] md:tracking-[0.2em] uppercase text-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+            >
+              Consult Now
+            </Link>
 
-          {/* Mobile */}
-          <div className="flex items-center gap-4">
-            <a href="https://wa.me/919999999999" target="_blank" rel="noopener" className="p-3 hover:bg-white/20 rounded-2xl transition-all duration-300 text-white backdrop-blur-sm hover:shadow-lg">
-              <MessageCircle size={20} />
-            </a>
-            <button onClick={toggleMenu} className="p-3 hover:bg-white/20 rounded-2xl transition-all duration-300 text-white backdrop-blur-sm hover:shadow-lg">
+            {/* Mobile Menu Button */}
+            <button 
+              onClick={() => setIsOpen(!isOpen)} 
+              className="md:hidden text-foreground p-1.5"
+            >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </nav>
 
         {/* Mobile Menu */}
-        {isOpen && (
-          <div className={`lg:hidden mt-4 p-8 backdrop-blur-md rounded-3xl shadow-2xl transition-all ${isScrolled ? 'bg-slate-900/90 border border-white/10' : 'bg-white/5 border border-white/10'}`}>
-            <nav className="space-y-4">
-              <Link href="/" className="block py-5 px-8 font-semibold rounded-2xl hover:bg-white/20 backdrop-blur-sm text-white/95 transition-all text-xl" onClick={() => setIsOpen(false)}>
-                Home
-              </Link>
-              <Link href="/services" className="block py-5 px-8 font-semibold rounded-2xl hover:bg-white/20 backdrop-blur-sm text-white/95 transition-all text-xl" onClick={() => setIsOpen(false)}>
-                Services
-              </Link>
-              <Link href="/contact" className="block py-5 px-8 font-semibold rounded-2xl hover:bg-white/20 backdrop-blur-sm text-white/95 transition-all text-xl" onClick={() => setIsOpen(false)}>
-                Contact
-              </Link>
-              <Button className="w-full mt-6 py-5 text-lg font-bold bg-gradient-to-r from-emerald-500 to-blue-600 hover:from-emerald-600 hover:to-blue-700 text-white shadow-2xl hover:shadow-emerald-500/50 rounded-2xl backdrop-blur-md border-0" onClick={() => setIsOpen(false)}>
-                Book Consultation
-              </Button>
+        <div 
+          className={`fixed inset-0 bg-background/60 backdrop-blur-md z-[70] md:hidden transition-all duration-500 ${
+            isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
+          }`}
+          onClick={() => setIsOpen(false)}
+        />
+        <div 
+          className={`fixed top-0 right-0 bottom-0 w-[300px] bg-background border-l border-border z-[80] md:hidden transition-transform duration-500 ease-in-out ${
+            isOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
+        >
+          <div className="flex flex-col h-full p-8">
+            <div className="flex items-center justify-between mb-12">
+              <span className="text-xl font-serif font-bold tracking-tighter text-foreground">
+                ASTRO <span className="text-primary">DARSHINI</span>
+              </span>
+              <button 
+                onClick={() => setIsOpen(false)} 
+                className="p-2 text-foreground hover:bg-muted rounded-full transition-colors"
+              >
+                <X size={24} />
+              </button>
+            </div>
+
+            <nav className="flex flex-col gap-6">
+              {[
+                { name: 'Home', href: '/' },
+                { name: 'Services', href: '/services' },
+                { name: 'Contact', href: '/contact' }
+              ].map((link, idx) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className="text-3xl font-serif text-foreground hover:text-primary transition-all duration-300 transform"
+                  style={{ 
+                    transitionDelay: `${idx * 100}ms`,
+                    opacity: isOpen ? 1 : 0,
+                    transform: isOpen ? 'translateX(0)' : 'translateX(20px)'
+                  }}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {link.name}
+                </Link>
+              ))}
             </nav>
+
+            <div className="mt-auto space-y-6">
+              <div className="h-[1px] bg-border w-full" />
+              <div className="flex items-center gap-4">
+                <a 
+                  href="tel:+919999999999" 
+                  className="w-12 h-12 flex items-center justify-center bg-primary/10 text-primary rounded-full hover:bg-primary hover:text-primary-foreground transition-all"
+                >
+                  <Phone size={20} />
+                </a>
+                <div className="flex flex-col">
+                  <span className="text-[10px] uppercase tracking-widest text-muted-foreground">Expert Consultation</span>
+                  <span className="text-sm font-medium">+91 99999 99999</span>
+                </div>
+              </div>
+            </div>
           </div>
-        )}
+        </div>
       </div>
     </header>
   );
 }
-

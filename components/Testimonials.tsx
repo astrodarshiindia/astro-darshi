@@ -1,7 +1,6 @@
 'use client';
 
-import { Card, CardContent } from '@/components/ui/card';
-import { Star } from 'lucide-react';
+import { Star, Quote } from 'lucide-react';
 
 export default function Testimonials() {
   const testimonials = [
@@ -9,92 +8,58 @@ export default function Testimonials() {
       id: 1,
       name: 'Priya Sharma',
       role: 'Business Owner',
-      text: 'Astro Darshini\'s vedic astrology reading gave me the clarity I needed during a challenging career transition. The insights were remarkably accurate and transformative.',
-      rating: 5,
+      text: 'Darshini\'s Vedic Astrology reading gave me the clarity I needed during a challenging career transition. The insights were remarkably accurate and transformative.',
     },
     {
       id: 2,
       name: 'Anjali Verma',
       role: 'Healthcare Professional',
       text: 'The tarot readings have been incredibly helpful in understanding my relationships and personal growth. Darshini\'s intuition is truly exceptional.',
-      rating: 5,
     },
     {
       id: 3,
       name: 'Neha Patel',
       role: 'Creative Professional',
       text: 'The birth chart analysis provided me with a deeper understanding of my strengths and potential. I\'ve never felt more aligned with my purpose.',
-      rating: 5,
     },
   ];
 
   return (
-    <section className="relative py-20 md:py-32 bg-gradient-to-b from-background to-muted/10">
-      <div className="section-container">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="gradient-text">Celestial Blessings</span>
+    <section className="py-24 md:py-32 relative bg-muted/20">
+      <div className="section-container relative z-10">
+        <div className="text-center mb-20 space-y-4">
+          <h2 className="text-4xl md:text-6xl text-foreground">
+            Celestial <span className="text-primary italic">Blessings</span>
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Hear from those whose lives have been transformed by cosmic wisdom
+          <p className="text-muted-foreground text-lg font-light max-w-2xl mx-auto">
+            Voices of those whose paths have been illuminated by cosmic wisdom.
           </p>
         </div>
 
-        {/* Testimonials Grid */}
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {testimonials.map((testimonial, index) => (
-            <Card
+          {testimonials.map((testimonial) => (
+            <div 
               key={testimonial.id}
-              className="cosmic-border glass-effect hover:border-primary transition-all duration-500 hover:shadow-lg hover:scale-105"
-              style={{
-                animation: `slideIn 0.6s ease-out ${0.3 + index * 0.1}s both`
-              }}
+              className="relative p-10 rounded-[2.5rem] bg-card border border-border hover:border-primary/20 transition-all duration-500 group"
             >
-              <CardContent className="pt-6 space-y-4">
-                {/* Rating */}
-                <div className="flex gap-1">
-                  {Array.from({ length: testimonial.rating }).map((_, i) => (
-                    <Star
-                      key={i}
-                      size={16}
-                      className="fill-primary text-primary"
-                    />
-                  ))}
-                </div>
+              <Quote className="absolute top-8 right-8 text-primary/10 group-hover:text-primary/20 transition-colors" size={40} />
+              
+              <div className="flex gap-1 mb-6">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} size={14} className="fill-primary text-primary" />
+                ))}
+              </div>
 
-                {/* Text */}
-                <p className="text-muted-foreground italic">
-                  "{testimonial.text}"
-                </p>
+              <p className="text-foreground/70 font-light italic leading-relaxed mb-8">
+                "{testimonial.text}"
+              </p>
 
-                {/* Author */}
-                <div className="border-t border-border pt-4">
-                  <p className="font-semibold text-foreground">{testimonial.name}</p>
-                  <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                </div>
-              </CardContent>
-            </Card>
+              <div className="pt-6 border-t border-border">
+                <p className="text-foreground font-medium">{testimonial.name}</p>
+                <p className="text-muted-foreground/50 text-xs tracking-widest uppercase mt-1">{testimonial.role}</p>
+              </div>
+            </div>
           ))}
-        </div>
-
-        {/* Trust Badge */}
-        <div className="mt-16 text-center">
-          <p className="text-muted-foreground mb-4">Trusted by seekers of cosmic wisdom</p>
-          <div className="flex justify-center items-center gap-8 flex-wrap">
-            <div className="text-center">
-              <p className="text-3xl font-bold text-primary">500+</p>
-              <p className="text-sm text-muted-foreground">Happy Clients</p>
-            </div>
-            <div className="text-center">
-              <p className="text-3xl font-bold text-primary">10+</p>
-              <p className="text-sm text-muted-foreground">Years Experience</p>
-            </div>
-            <div className="text-center">
-              <p className="text-3xl font-bold text-primary">1000+</p>
-              <p className="text-sm text-muted-foreground">Readings Given</p>
-            </div>
-          </div>
         </div>
       </div>
     </section>
