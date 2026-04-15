@@ -2,35 +2,38 @@
 
 import Link from 'next/link';
 import { Phone, Mail, MessageCircle, Instagram, Youtube, Facebook, MapPin } from 'lucide-react';
-
-const FOOTER_LINKS = {
-  explore: [
-    { name: 'Home', href: '/' },
-    { name: 'Services', href: '/services' },
-    { name: 'Contact', href: '/contact' },
-    { name: 'Daily Horoscope', href: '/daily-horoscope' },
-  ],
-  services: [
-    { name: 'Career Astrology', href: '/career-astrology' },
-    { name: 'Marriage Astrology', href: '/marriage-astrology' },
-    { name: 'Kundli Matching', href: '/kundli-matching' },
-    { name: 'Vastu Consultation', href: '/vastu-consultation' },
-    { name: 'Numerology Services', href: '/numerology-services' },
-    { name: 'Gemstone Consultation', href: '/gemstone-consultation' },
-  ],
-  guides: [
-    { name: 'Best Vedic Astrologer in Lucknow', href: '/best-vedic-astrologer-in-lucknow' },
-    { name: 'Best Tarot Readers in Lucknow', href: '/best-tarot-readers-in-lucknow' },
-    { name: 'Best Astrologers in Lucknow', href: '/best-astrologers-in-lucknow' },
-    { name: 'Best Astrologers Globally', href: '/best-astrologers' },
-  ],
-  legal: [
-    { name: 'Privacy Policy', href: '/privacy-policy' },
-    { name: 'Terms of Service', href: '/terms-of-service' },
-  ]
-};
+import { useLanguage } from '@/lib/LanguageContext';
 
 export default function Footer() {
+  const { t } = useLanguage();
+
+  const FOOTER_LINKS = {
+    explore: [
+      { name: t('link.home'), href: '/' },
+      { name: t('link.services'), href: '/services' },
+      { name: t('link.contact'), href: '/contact' },
+      { name: t('link.horoscope'), href: '/daily-horoscope' },
+    ],
+    services: [
+      { name: t('link.career'), href: '/career-astrology' },
+      { name: t('link.marriage'), href: '/marriage-astrology' },
+      { name: t('link.kundli'), href: '/kundli-matching' },
+      { name: t('link.vastu'), href: '/vastu-consultation' },
+      { name: t('link.numerology'), href: '/numerology-services' },
+      { name: t('link.gemstone'), href: '/gemstone-consultation' },
+    ],
+    guides: [
+      { name: t('link.guide1'), href: '/best-vedic-astrologer-in-lucknow' },
+      { name: t('link.guide2'), href: '/best-tarot-readers-in-lucknow' },
+      { name: t('link.guide3'), href: '/best-astrologers-in-lucknow' },
+      { name: t('link.guide4'), href: '/best-astrologers' },
+    ],
+    legal: [
+      { name: t('link.privacy'), href: '/privacy-policy' },
+      { name: t('link.terms'), href: '/terms-of-service' },
+    ]
+  };
+
   return (
     <footer className="relative border-t border-border bg-slate-50 pt-24 pb-12 overflow-hidden">
       {/* Decorative Background Elements */}
@@ -47,8 +50,7 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-muted-foreground text-base font-light leading-relaxed max-w-md">
-              Illuminating your spiritual journey through the ancient wisdom of Vedic Astrology
-              and the intuitive guidance of Sacred Tarot. Your cosmic compass for life's transformation.
+              {t('footer.description')}
             </p>
 
             <div className="space-y-4">
@@ -56,11 +58,11 @@ export default function Footer() {
                 <div className="w-10 h-10 rounded-full border border-border flex items-center justify-center group-hover:border-primary/50">
                   <MapPin size={18} />
                 </div>
-                <span className="text-sm font-light">Lucknow, Uttar Pradesh, India</span>
+                <span className="text-sm font-light">{t('footer.address')}</span>
               </div>
               <div className="flex gap-4">
                 {[
-                  { icon: Phone, href: 'tel:+919999999999', label: 'Call' },
+                  { icon: Phone, href: 'tel:+919999999999', label: t('hero.call') },
                   { icon: Mail, href: 'mailto:hello@astrodarshini.com', label: 'Email' },
                   { icon: MessageCircle, href: 'https://wa.me/919999999999', label: 'WhatsApp' }
                 ].map((item, i) => (
@@ -79,7 +81,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div className="space-y-8">
-            <h4 className="text-[10px] font-sans font-bold tracking-[0.2em] uppercase text-primary">Navigation</h4>
+            <h4 className="text-[10px] font-sans font-bold tracking-[0.2em] uppercase text-primary">{t('footer.navigation')}</h4>
             <nav className="flex flex-col gap-4">
               {FOOTER_LINKS.explore.map((item) => (
                 <Link
@@ -96,7 +98,7 @@ export default function Footer() {
 
           {/* Services */}
           <div className="space-y-8">
-            <h4 className="text-[10px] font-sans font-bold tracking-[0.2em] uppercase text-primary">Services</h4>
+            <h4 className="text-[10px] font-sans font-bold tracking-[0.2em] uppercase text-primary">{t('footer.services')}</h4>
             <nav className="flex flex-col gap-4">
               {FOOTER_LINKS.services.map((item) => (
                 <Link
@@ -113,7 +115,7 @@ export default function Footer() {
 
           {/* Expert Guides */}
           <div className="space-y-8">
-            <h4 className="text-[10px] font-sans font-bold tracking-[0.2em] uppercase text-primary">Expert Guides</h4>
+            <h4 className="text-[10px] font-sans font-bold tracking-[0.2em] uppercase text-primary">{t('footer.guides')}</h4>
             <nav className="flex flex-col gap-4">
               {FOOTER_LINKS.guides.map((item) => (
                 <Link
@@ -131,7 +133,7 @@ export default function Footer() {
           {/* Connect & Legal */}
           <div className="space-y-12">
             <div className="space-y-8">
-              <h4 className="text-[10px] font-sans font-bold tracking-[0.2em] uppercase text-primary">Connect</h4>
+              <h4 className="text-[10px] font-sans font-bold tracking-[0.2em] uppercase text-primary">{t('footer.connect')}</h4>
               <div className="flex gap-4">
                 {[Instagram, Youtube, Facebook].map((Icon, i) => (
                   <a key={i} href="#" className="text-muted-foreground hover:text-primary transition-colors">
@@ -141,7 +143,7 @@ export default function Footer() {
               </div>
             </div>
             <div className="space-y-8">
-              <h4 className="text-[10px] font-sans font-bold tracking-[0.2m] uppercase text-primary">Legal</h4>
+              <h4 className="text-[10px] font-sans font-bold tracking-[0.2m] uppercase text-primary">{t('footer.legal')}</h4>
               <nav className="flex flex-col gap-4">
                 {FOOTER_LINKS.legal.map((item) => (
                   <Link
@@ -161,19 +163,19 @@ export default function Footer() {
         <div className="pt-12 border-t border-black/5 flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
             <p className="text-muted-foreground/60 text-[10px] tracking-[0.2em] uppercase">
-              © {new Date().getFullYear()} Astro Darshini.
+              © {new Date().getFullYear()} {t('footer.rights')}
             </p>
             <div className="hidden md:block w-1 h-1 bg-muted-foreground/20 rounded-full" />
             <p className="text-muted-foreground/60 text-[10px] tracking-[0.2em] uppercase">
-              Crafted for Spiritual Evolution
+              {t('footer.crafted')}
             </p>
           </div>
 
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2 text-muted-foreground/60 text-[10px] tracking-widest uppercase group">
-              <span>Made with</span>
+              <span>{t('footer.made_with')}</span>
               <span className="text-primary group-hover:scale-125 transition-transform">✨</span>
-              <span>by the Cosmic Team</span>
+              <span>{t('footer.by_team')}</span>
             </div>
           </div>
         </div>

@@ -2,11 +2,20 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { Menu, X, Phone } from 'lucide-react';
+import { Menu, X, Phone, Languages } from 'lucide-react';
+import { useLanguage } from '@/lib/LanguageContext';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { Button } from "@/components/ui/button"
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { language, setLanguage, t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -30,9 +39,9 @@ export default function Header() {
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-10">
             {[
-              { name: 'Home', href: '/' },
-              { name: 'Services', href: '/services' },
-              { name: 'Contact', href: '/contact' }
+              { name: t('nav.home'), href: '/' },
+              { name: t('nav.services'), href: '/services' },
+              { name: t('nav.contact'), href: '/contact' }
             ].map((link) => (
               <Link
                 key={link.name}
@@ -46,10 +55,32 @@ export default function Header() {
 
           {/* Right Section: CTA & Mobile Menu */}
           <div className="flex items-center gap-4 md:gap-6">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" className="w-9 h-9 rounded-full border border-white/10 hover:bg-white/5 transition-colors">
+                  <Languages size={18} className="text-foreground/70" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="bg-background/90 backdrop-blur-md border-white/10">
+                <DropdownMenuItem 
+                  onClick={() => setLanguage('en')}
+                  className={`cursor-pointer ${language === 'en' ? 'text-primary' : ''}`}
+                >
+                  English
+                </DropdownMenuItem>
+                <DropdownMenuItem 
+                  onClick={() => setLanguage('hi')}
+                  className={`cursor-pointer ${language === 'hi' ? 'text-primary' : ''}`}
+                >
+                  हिंदी
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
             <a
               href="tel:+919999999999"
               className="hidden sm:flex text-foreground/70 hover:text-foreground transition-colors"
-              title="Call Us"
+              title={t('hero.call')}
             >
               <Phone size={18} />
             </a>
@@ -58,7 +89,7 @@ export default function Header() {
               href="/contact"
               className="px-4 py-1.5 md:px-6 md:py-2 border border-primary/30 rounded-full text-[10px] md:text-xs font-bold tracking-[0.1em] md:tracking-[0.2em] uppercase text-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-300"
             >
-              Consult Now
+              {t('nav.consult')}
             </Link>
 
             {/* Mobile Menu Button */}
@@ -96,9 +127,9 @@ export default function Header() {
 
             <nav className="flex flex-col gap-6">
               {[
-                { name: 'Home', href: '/' },
-                { name: 'Services', href: '/services' },
-                { name: 'Contact', href: '/contact' }
+                { name: t('nav.home'), href: '/' },
+                { name: t('nav.services'), href: '/services' },
+                { name: t('nav.contact'), href: '/contact' }
               ].map((link, idx) => (
                 <Link
                   key={link.name}
@@ -126,7 +157,7 @@ export default function Header() {
                   <Phone size={20} />
                 </a>
                 <div className="flex flex-col">
-                  <span className="text-[10px] uppercase tracking-widest text-muted-foreground">Expert Consultation</span>
+                  <span className="text-[10px] uppercase tracking-widest text-muted-foreground">{t('nav.expert')}</span>
                   <span className="text-sm font-medium">+91 99999 99999</span>
                 </div>
               </div>

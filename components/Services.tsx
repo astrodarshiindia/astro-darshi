@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { Star, Wand2, ArrowRight } from 'lucide-react';
+import { useLanguage } from '@/lib/LanguageContext';
 
 const NorthIndianChartVector = () => (
   <svg viewBox="0 0 100 100" className="w-full h-full stroke-current fill-none" strokeWidth="0.5">
@@ -45,33 +46,35 @@ const TarotCardVector = () => (
 );
 
 export default function Services() {
+  const { t } = useLanguage();
+
   const services = [
     {
       id: 1,
-      title: 'Vedic Astrology',
-      description: 'Your cosmic blueprint revealed through ancient sidereal calculations and planetary periods.',
+      title: t('service.vedic.title'),
+      description: t('service.vedic.desc'),
       icon: Star,
       vector: NorthIndianChartVector,
       color: 'primary',
       features: [
-        'Birth Chart Analysis',
-        'Planetary Dashas',
-        'Career & Wealth',
-        'Relationship Compatibility'
+        t('service.vedic.f1'),
+        t('service.vedic.f2'),
+        t('service.vedic.f3'),
+        t('service.vedic.f4')
       ],
     },
     {
       id: 2,
-      title: 'Sacred Tarot',
-      description: 'Intuitive guidance using esoteric symbolism to illuminate your current energies and paths.',
+      title: t('service.tarot.title'),
+      description: t('service.tarot.desc'),
       icon: Wand2,
       vector: TarotCardVector,
       color: 'accent',
       features: [
-        'Intuitive Spreads',
-        'Spiritual Growth',
-        'Decision Clarity',
-        'Energy Alignment'
+        t('service.tarot.f1'),
+        t('service.tarot.f2'),
+        t('service.tarot.f3'),
+        t('service.tarot.f4')
       ],
     },
   ];
@@ -88,21 +91,20 @@ export default function Services() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
           <div className="max-w-2xl">
             <div className="inline-block px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-6">
-              <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-primary">Our Services</span>
+              <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-primary">{t('services.our_services')}</span>
             </div>
             <h2 className="text-5xl md:text-7xl mb-8 font-serif">
-              Our <span className="text-primary italic">Sacred</span> Offerings
+              {t('services.title')} <span className="text-primary italic">{t('services.title.highlight')}</span>
             </h2>
             <p className="text-muted-foreground text-lg font-light leading-relaxed max-w-xl">
-              We blend ancient wisdom with modern understanding to provide 
-              clarity for your life's most significant questions.
+              {t('services.subtitle')}
             </p>
           </div>
           <Link 
             href="/services" 
             className="group flex items-center gap-4 text-xs font-bold tracking-[0.2em] uppercase text-primary hover:text-foreground transition-all"
           >
-            <span>Explore All</span>
+            <span>{t('services.explore_all')}</span>
             <div className="w-10 h-10 rounded-full border border-primary/30 flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all">
               <ArrowRight size={16} />
             </div>
@@ -163,7 +165,7 @@ export default function Services() {
                     href="/contact" 
                     className="group/btn inline-flex items-center justify-between gap-6 px-10 py-5 rounded-2xl bg-primary text-primary-foreground text-[10px] font-bold tracking-[0.3em] uppercase hover:bg-foreground hover:text-background transition-all duration-500 w-full sm:w-auto overflow-hidden relative shadow-lg shadow-primary/20"
                   >
-                    <span className="relative z-10">Begin Your Journey</span>
+                    <span className="relative z-10">{t('services.begin_journey')}</span>
                     <ArrowRight size={18} className="relative z-10 group-hover/btn:translate-x-2 transition-transform duration-500" />
                   </Link>
                 </div>

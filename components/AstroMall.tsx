@@ -1,4 +1,8 @@
+'use client';
+
+import { useLanguage } from '@/lib/LanguageContext';
 import ProductScroller from './ProductScroller';
+import { useEffect, useState } from 'react';
 
 interface Product {
     id: string;
@@ -11,41 +15,44 @@ interface Product {
     is_active: boolean;
 }
 
-async function fetchProducts() {
-    try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/astro_products?select=*`, {
-            headers: {
-                'apikey': process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || '',
-            },
-            next: { revalidate: 3600 }
-        });
-        if (!response.ok) return [];
-        return await response.json();
-    } catch (error) {
-        console.error('Failed to fetch products:', error);
-        return [];
-    }
-}
+export default function AstroMall() {
+    const { t } = useLanguage();
+    const [products, setProducts] = useState<Product[]>([]);
 
-export default async function AstroMall() {
-    const products = await fetchProducts();
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const response = await fetch(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/astro_products?select=*`, {
+                    headers: {
+                        'apikey': process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || '',
+                    }
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    setProducts(data);
+                }
+            } catch (error) {
+                console.error('Failed to fetch products:', error);
+            }
+        };
+        fetchProducts();
+    }, []);
 
     return (
         <section className="py-24 md:py-32 relative">
             <div className="section-container">
                 <div className="text-center mb-20">
                     <h2 className="text-4xl md:text-6xl mb-6">
-                        The <span className="text-primary italic">Astro</span> Mall
+                        {t('mall.title')} <span className="text-primary italic">{t('mall.title.highlight')}</span> {t('mall.mall')}
                     </h2>
                     <p className="text-muted-foreground text-lg font-light max-w-2xl mx-auto">
-                        Premium gemstones and sacred artifacts, personally curated and 
-                        energetically cleansed for your cosmic journey.
+                        {t('mall.subtitle')}
                     </p>
                 </div>
 
                 {products.length === 0 ? (
                     <div className="text-center py-20 border border-border rounded-[2rem] bg-card">
-                        <p className="text-muted-foreground/50 text-lg font-light tracking-widest uppercase">Coming Soon - Sacred Artifacts</p>
+                        <p className="text-muted-foreground/50 text-lg font-light tracking-widest uppercase">{t('mall.coming_soon')}</p>
                     </div>
                 ) : (
                     <ProductScroller products={products} />

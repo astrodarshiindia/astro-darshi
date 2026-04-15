@@ -2,8 +2,11 @@
 
 import Link from 'next/link';
 import { MessageCircle, Phone } from 'lucide-react';
+import { useLanguage } from '@/lib/LanguageContext';
 
 export default function CTABanner() {
+  const { t } = useLanguage();
+
   return (
     <section className="py-24 md:py-32 relative overflow-hidden">
       <div className="section-container relative z-10">
@@ -15,10 +18,10 @@ export default function CTABanner() {
             <div className="space-y-4">
               {/* <span className="text-xs font-bold tracking-[0.4em] uppercase text-primary">Start Your Divine Journey</span> */}
               <h2 className="text-4xl md:text-6xl text-foreground leading-tight font-serif">
-                Unlock the Secrets of Your <span className="text-primary italic">Kundli</span>
+                {t('cta.title')} <span className="text-primary italic">{t('cta.title.highlight')}</span>
               </h2>
               <p className="text-muted-foreground text-lg md:text-xl font-light max-w-2xl mx-auto leading-relaxed">
-                Get expert guidance for career, marriage, and life's biggest questions. Connect with Lucknow's most trusted astrologers for a personalized consultation.
+                {t('cta.subtitle')}
               </p>
             </div>
 
@@ -27,7 +30,7 @@ export default function CTABanner() {
                 href="/contact"
                 className="w-full sm:w-auto px-12 py-5 bg-primary text-primary-foreground rounded-full text-sm font-bold tracking-[0.2em] uppercase hover:scale-105 transition-all duration-300 shadow-2xl shadow-primary/20"
               >
-                Book Consultation
+                {t('cta.button.book')}
               </Link>
 
               <a
@@ -36,12 +39,12 @@ export default function CTABanner() {
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto flex items-center justify-center gap-2 px-12 py-5 border border-border text-foreground rounded-full text-sm font-bold tracking-[0.2em] uppercase hover:bg-accent transition-all duration-300"
               >
-                <MessageCircle size={18} /> WhatsApp
+                <MessageCircle size={18} /> {t('cta.button.whatsapp')}
               </a>
             </div>
 
             <p className="text-muted-foreground/50 text-xs tracking-widest uppercase">
-              Trusted by 500+ seekers worldwide
+              {t('cta.trusted')}
             </p>
           </div>
         </div>

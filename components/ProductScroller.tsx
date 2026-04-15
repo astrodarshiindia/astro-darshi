@@ -2,8 +2,9 @@
 
 import { useRef, useState, useEffect } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight, MessageCircle } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { useLanguage } from '@/lib/LanguageContext';
 
 interface Product {
     id: string;
@@ -20,6 +21,7 @@ export default function ProductScroller({ products }: { products: Product[] }) {
     const scrollerRef = useRef<HTMLDivElement>(null);
     const [canScrollLeft, setCanScrollLeft] = useState(false);
     const [canScrollRight, setCanScrollRight] = useState(true);
+    const { t } = useLanguage();
 
     const checkScroll = () => {
         if (scrollerRef.current) {
@@ -80,30 +82,34 @@ export default function ProductScroller({ products }: { products: Product[] }) {
                         key={product.id} 
                         className="flex-none w-[300px] md:w-[380px] snap-start group relative bg-card/50 backdrop-blur-sm border border-border/50 rounded-[2.5rem] overflow-hidden hover:border-primary/30 transition-all duration-700 hover:shadow-[0_20px_50px_rgba(37,99,235,0.1)]"
                     >
-                        <div className="relative h-72 overflow-hidden bg-accent/30">
-                            {product.image_url ? (
-                                <img
-                                    src={product.image_url}
-                                    alt={product.name}
-                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 ease-out"
-                                />
-                            ) : (
-                                <div className="w-full h-full flex items-center justify-center text-5xl opacity-20 group-hover:scale-125 transition-transform duration-1000">✨</div>
-                            )}
-                            <div className="absolute top-6 right-6">
-                                <Badge className="bg-primary/90 backdrop-blur-md text-primary-foreground border-0 text-[10px] tracking-[0.2em] uppercase px-4 py-1.5 rounded-full">
-                                    Authentic
-                                </Badge>
+                        <Link href={`/product/${product.id}`} className="block">
+                            <div className="relative h-72 overflow-hidden bg-accent/30">
+                                {product.image_url ? (
+                                    <img
+                                        src={product.image_url}
+                                        alt={product.name}
+                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 ease-out"
+                                    />
+                                ) : (
+                                    <div className="w-full h-full flex items-center justify-center text-5xl opacity-20 group-hover:scale-125 transition-transform duration-1000">✨</div>
+                                )}
+                                <div className="absolute top-6 right-6">
+                                    <Badge className="bg-primary/90 backdrop-blur-md text-primary-foreground border-0 text-[10px] tracking-[0.2em] uppercase px-4 py-1.5 rounded-full">
+                                        {t('mall.authentic')}
+                                    </Badge>
+                                </div>
+                                
+                                {/* Hover Overlay */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                             </div>
-                            
-                            {/* Hover Overlay */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        </div>
+                        </Link>
                         
                         <div className="p-10">
-                            <h3 className="text-2xl font-serif text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
-                                {product.name}
-                            </h3>
+                            <Link href={`/product/${product.id}`}>
+                                <h3 className="text-2xl font-serif text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
+                                    {product.name}
+                                </h3>
+                            </Link>
                             <div className="flex items-baseline gap-2 mb-6">
                                 <span className="text-3xl text-primary font-light tracking-tight">
                                     ₹{product.price.toLocaleString()}
@@ -115,16 +121,22 @@ export default function ProductScroller({ products }: { products: Product[] }) {
                                 )}
                             </div>
                             
-                            <Link
-                                href="/contact"
+                            <a
+                                href={`https://wa.me/919999999999?text=${encodeURIComponent(
+                                    t('whatsapp.message')
+                                        .replace('{productName}', product.name)
+                                        .replace('{price}', product.price.toLocaleString())
+                                )}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="inline-flex items-center gap-3 text-[10px] font-bold tracking-[0.3em] uppercase text-muted-foreground group-hover:text-primary transition-all duration-300 relative"
                             >
                                 <span className="relative">
-                                    Enquire Now
+                                    {t('mall.enquire')}
                                     <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-primary group-hover:w-full transition-all duration-500" />
                                 </span>
-                                <ArrowRight size={14} className="group-hover:translate-x-2 transition-transform duration-500" />
-                            </Link>
+                                <MessageCircle size={14} className="group-hover:translate-x-2 transition-transform duration-500" />
+                            </a>
                         </div>
                     </div>
                 ))}

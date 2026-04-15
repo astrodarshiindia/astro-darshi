@@ -1,26 +1,28 @@
 'use client';
 
 import { Star, Quote } from 'lucide-react';
+import { useLanguage } from '@/lib/LanguageContext';
 
 export default function Testimonials() {
+  const { t } = useLanguage();
   const testimonials = [
     {
       id: 1,
-      name: 'Priya Sharma',
-      role: 'Business Owner',
-      text: 'Darshini\'s Vedic Astrology reading gave me the clarity I needed during a challenging career transition. The insights were remarkably accurate and transformative.',
+      name: t('testimonials.1.name'),
+      role: t('testimonials.1.role'),
+      text: t('testimonials.1.text'),
     },
     {
       id: 2,
-      name: 'Anjali Verma',
-      role: 'Healthcare Professional',
-      text: 'The tarot readings have been incredibly helpful in understanding my relationships and personal growth. Darshini\'s intuition is truly exceptional.',
+      name: t('testimonials.2.name'),
+      role: t('testimonials.2.role'),
+      text: t('testimonials.2.text'),
     },
     {
       id: 3,
-      name: 'Neha Patel',
-      role: 'Creative Professional',
-      text: 'The birth chart analysis provided me with a deeper understanding of my strengths and potential. I\'ve never felt more aligned with my purpose.',
+      name: t('testimonials.3.name'),
+      role: t('testimonials.3.role'),
+      text: t('testimonials.3.text'),
     },
   ];
 
@@ -29,10 +31,10 @@ export default function Testimonials() {
       <div className="section-container relative z-10">
         <div className="text-center mb-20 space-y-4">
           <h2 className="text-4xl md:text-6xl text-foreground">
-            Celestial <span className="text-primary italic">Blessings</span>
+            {t('testimonials.title')} <span className="text-primary italic">{t('testimonials.title.highlight')}</span>
           </h2>
           <p className="text-muted-foreground text-lg font-light max-w-2xl mx-auto">
-            Voices of those whose paths have been illuminated by cosmic wisdom.
+            {t('testimonials.subtitle')}
           </p>
         </div>
 
