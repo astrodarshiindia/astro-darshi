@@ -32,9 +32,76 @@ const translations = {
     'services.title': 'Our',
     'services.title.highlight': 'Sacred Offerings',
     'services.subtitle': "We blend ancient wisdom with modern understanding to provide clarity for your life's most significant questions.",
+    'services.sacred': 'Sacred Services',
+    'services.sacred.subtitle': 'Comprehensive vedic astrology and tarot card readings designed to illuminate your cosmic path',
+    'services.includes': 'Includes:',
+    'services.duration': 'Duration:',
+    'services.ready': 'Ready to Begin Your Journey?',
+    'services.ready.subtitle': 'Choose the service that resonates with your soul and let cosmic wisdom guide you.',
+    'services.book': 'Book Your Session',
     'services.explore_all': 'Explore All',
     'services.begin_journey': 'Begin Your Journey',
     'services.our_services': 'Our Services',
+    
+    // Service 1: Birth Chart Analysis
+    'service.birth.title': 'Birth Chart Analysis',
+    'service.birth.desc': 'Deep analysis of your natal chart to understand your personality, strengths, and life path.',
+    'service.birth.f1': 'Planetary positions at birth',
+    'service.birth.f2': 'House analysis and meanings',
+    'service.birth.f3': 'Zodiac sign interpretations',
+    'service.birth.f4': 'Aspect analysis for relationships',
+    'service.birth.f5': 'Dasha predictions',
+    'service.birth.duration': '60 minutes',
+
+    // Service 2: Planetary Predictions
+    'service.planetary.title': 'Planetary Predictions',
+    'service.planetary.desc': 'Get insights into upcoming planetary transits and their influence on your life.',
+    'service.planetary.f1': 'Current planetary movements',
+    'service.planetary.f2': 'Upcoming opportunities',
+    'service.planetary.f3': 'Challenges and solutions',
+    'service.planetary.f4': 'Timing for important decisions',
+    'service.planetary.f5': 'Remedial measures (Upayes)',
+    'service.planetary.duration': '45 minutes',
+
+    // Service 3: Career Guidance
+    'service.career.title': 'Career Guidance',
+    'service.career.desc': 'Vedic insights to help you find your ideal career path and professional growth.',
+    'service.career.f1': '10th house analysis',
+    'service.career.f2': 'Career compatibility',
+    'service.career.f3': 'Best time for career changes',
+    'service.career.f4': 'Business opportunities',
+    'service.career.f5': 'Success indicators',
+    'service.career.duration': '50 minutes',
+
+    // Service 4: Relationship Insights
+    'service.relationship.title': 'Relationship Insights',
+    'service.relationship.desc': 'Understand your relationship patterns and compatibility with your partner.',
+    'service.relationship.f1': 'Synastry analysis',
+    'service.relationship.f2': 'Compatibility report',
+    'service.relationship.f3': 'Timing for commitments',
+    'service.relationship.f4': 'Family harmony insights',
+    'service.relationship.f5': 'Guidance for challenges',
+    'service.relationship.duration': '60 minutes',
+
+    // Service 5: Tarot Card Reading
+    'service.tarot.title.main': 'Tarot Card Reading',
+    'service.tarot.desc.main': 'Intuitive guidance through tarot to illuminate your current situation and future path.',
+    'service.tarot.main.f1': 'Three-card spread',
+    'service.tarot.main.f2': 'Detailed card interpretations',
+    'service.tarot.main.f3': 'Life advice and guidance',
+    'service.tarot.main.f4': 'Energy clearing insights',
+    'service.tarot.main.f5': 'Spiritual messages',
+    'service.tarot.main.duration': '45 minutes',
+
+    // Service 6: Life Purpose Session
+    'service.purpose.title': 'Life Purpose Session',
+    'service.purpose.desc': "Discover your soul's purpose and life mission through vedic wisdom.",
+    'service.purpose.f1': 'Nodal axis analysis',
+    'service.purpose.f2': 'Soul karmic lessons',
+    'service.purpose.f3': 'Life purpose indicators',
+    'service.purpose.f4': 'Spiritual growth path',
+    'service.purpose.f5': 'Fulfillment strategies',
+    'service.purpose.duration': '75 minutes',
     
     // Service 1: Vedic Astrology
     'service.vedic.title': 'Vedic Astrology',
@@ -187,10 +254,77 @@ const translations = {
     'services.title': 'हमारी',
     'services.title.highlight': 'पवित्र सेवाएं',
     'services.subtitle': 'हम आपके जीवन के सबसे महत्वपूर्ण प्रश्नों के लिए स्पष्टता प्रदान करने के लिए आधुनिक समझ के साथ प्राचीन ज्ञान का मिश्रण करते हैं।',
+    'services.sacred': 'हमारी पवित्र सेवाएं',
+    'services.sacred.subtitle': 'आपकी ब्रह्मांडीय यात्रा को रोशन करने के लिए डिज़ाइन की गई व्यापक वैदिक ज्योतिष और टैरो कार्ड रीडिंग',
+    'services.includes': 'शामिल है:',
+    'services.duration': 'अवधि:',
+    'services.ready': 'अपनी यात्रा शुरू करने के लिए तैयार हैं?',
+    'services.ready.subtitle': 'उस सेवा को चुनें जो आपकी आत्मा के साथ गूंजती है और ब्रह्मांडीय ज्ञान को अपना मार्गदर्शन करने दें।',
+    'services.book': 'अपना सत्र बुक करें',
     'services.explore_all': 'सभी देखें',
     'services.begin_journey': 'अपनी यात्रा शुरू करें',
     'services.our_services': 'हमारी सेवाएं',
-    
+
+    // Service 1: Birth Chart Analysis
+    'service.birth.title': 'जन्म कुंडली विश्लेषण',
+    'service.birth.desc': 'अपने व्यक्तित्व, शक्तियों और जीवन पथ को समझने के लिए अपनी जन्म कुंडली का गहरा विश्लेषण।',
+    'service.birth.f1': 'जन्म के समय ग्रहों की स्थिति',
+    'service.birth.f2': 'भाव विश्लेषण और अर्थ',
+    'service.birth.f3': 'राशि चक्र की व्याख्या',
+    'service.birth.f4': 'रिश्तों के लिए दृष्टि विश्लेषण',
+    'service.birth.f5': 'दशा भविष्यवाणियां',
+    'service.birth.duration': '60 मिनट',
+
+    // Service 2: Planetary Predictions
+    'service.planetary.title': 'ग्रह भविष्यवाणियां',
+    'service.planetary.desc': 'आगामी ग्रहों के गोचर और आपके जीवन पर उनके प्रभाव के बारे में जानकारी प्राप्त करें।',
+    'service.planetary.f1': 'वर्तमान ग्रहों की चाल',
+    'service.planetary.f2': 'आगामी अवसर',
+    'service.planetary.f3': 'चुनौतियां और समाधान',
+    'service.planetary.f4': 'महत्वपूर्ण निर्णयों के लिए समय',
+    'service.planetary.f5': 'उपचारात्मक उपाय (उपाय)',
+    'service.planetary.duration': '45 मिनट',
+
+    // Service 3: Career Guidance
+    'service.career.title': 'करियर मार्गदर्शन',
+    'service.career.desc': 'अपने आदर्श करियर पथ और व्यावसायिक विकास को खोजने में मदद करने के लिए वैदिक अंतर्दृष्टि।',
+    'service.career.f1': 'दसवें भाव का विश्लेषण',
+    'service.career.f2': 'करियर अनुकूलता',
+    'service.career.f3': 'करियर परिवर्तन के लिए सबसे अच्छा समय',
+    'service.career.f4': 'व्यापार के अवसर',
+    'service.career.f5': 'सफलता के संकेतक',
+    'service.career.duration': '50 मिनट',
+
+    // Service 4: Relationship Insights
+    'service.relationship.title': 'संबंध अंतर्दृष्टि',
+    'service.relationship.desc': 'अपने रिश्ते के पैटर्न और अपने साथी के साथ अनुकूलता को समझें।',
+    'service.relationship.f1': 'सिनस्ट्री विश्लेषण',
+    'service.relationship.f2': 'अनुकूलता रिपोर्ट',
+    'service.relationship.f3': 'प्रतिबद्धताओं के लिए समय',
+    'service.relationship.f4': 'पारिवारिक सद्भाव अंतर्दृष्टि',
+    'service.relationship.f5': 'चुनौतियों के लिए मार्गदर्शन',
+    'service.relationship.duration': '60 मिनट',
+
+    // Service 5: Tarot Card Reading
+    'service.tarot.title.main': 'टैरो कार्ड रीडिंग',
+    'service.tarot.desc.main': 'आपकी वर्तमान स्थिति और भविष्य के पथ को रोशन करने के लिए टैरो के माध्यम से सहज मार्गदर्शन।',
+    'service.tarot.main.f1': 'तीन-कार्ड स्प्रेड',
+    'service.tarot.main.f2': 'विस्तृत कार्ड व्याख्या',
+    'service.tarot.main.f3': 'जीवन सलाह और मार्गदर्शन',
+    'service.tarot.main.f4': 'ऊर्जा समाशोधन अंतर्दृष्टि',
+    'service.tarot.main.f5': 'आध्यात्मिक संदेश',
+    'service.tarot.main.duration': '45 मिनट',
+
+    // Service 6: Life Purpose Session
+    'service.purpose.title': 'जीवन उद्देश्य सत्र',
+    'service.purpose.desc': 'वैदिक ज्ञान के माध्यम से अपनी आत्मा के उद्देश्य और जीवन मिशन की खोज करें।',
+    'service.purpose.f1': 'नोडल अक्ष विश्लेषण',
+    'service.purpose.f2': 'आत्मा के कर्म सबक',
+    'service.purpose.f3': 'जीवन उद्देश्य संकेतक',
+    'service.purpose.f4': 'आध्यात्मिक विकास पथ',
+    'service.purpose.f5': 'पूर्ति रणनीतियाँ',
+    'service.purpose.duration': '75 मिनट',
+
     // Service 1: Vedic Astrology
     'service.vedic.title': 'वैदिक ज्योतिष',
     'service.vedic.desc': 'आपका ब्रह्मांडीय खाका प्राचीन नाक्षत्र गणना और ग्रहों की अवधि के माध्यम से प्रकट हुआ।',
