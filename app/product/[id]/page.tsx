@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { ArrowLeft, MessageCircle, ShieldCheck, Star } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { useLanguage } from '@/lib/LanguageContext';
+import { supabase } from '@/lib/supabase';
 
 interface Product {
     id: string;
@@ -28,16 +29,15 @@ export default function ProductDetailPage() {
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const response = await fetch(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/astro_products?id=eq.${id}&select=*`, {
-                    headers: {
-                        'apikey': process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || '',
-                    }
-                });
-                if (response.ok) {
-                    const data = await response.json();
-                    if (data.length > 0) {
-                        setProduct(data[0]);
-                    }
+                const { data, error } = await supabase
+                    .from('astro_products')
+                    .select('*')
+                    .eq('id', id)
+                    .single();
+
+                if (error) throw error;
+                if (data) {
+                    setProduct(data as Product);
                 }
             } catch (error) {
                 console.error('Failed to fetch product:', error);

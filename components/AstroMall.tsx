@@ -3,6 +3,7 @@
 import { useLanguage } from '@/lib/LanguageContext';
 import ProductScroller from './ProductScroller';
 import { useEffect, useState } from 'react';
+import { supabase } from '@/lib/supabase';
 
 interface Product {
     id: string;
@@ -22,14 +23,14 @@ export default function AstroMall() {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await fetch(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/astro_products?select=*`, {
-                    headers: {
-                        'apikey': process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || '',
-                    }
-                });
-                if (response.ok) {
-                    const data = await response.json();
-                    setProducts(data);
+                const { data, error } = await supabase
+                    .from('astro_products')
+                    .select('*')
+                    .eq('is_active', true);
+
+                if (error) throw error;
+                if (data) {
+                    setProducts(data as Product[]);
                 }
             } catch (error) {
                 console.error('Failed to fetch products:', error);
