@@ -176,7 +176,7 @@ export default function Hero() {
         <div className="flex h-full">
           {slides.map((slide, index) => (
             <div key={index} className="flex-[0_0_100%] min-w-0 min-h-screen flex items-center justify-center relative px-4">
-              <div className="max-w-4xl mx-auto text-center z-10 -mt-80 md:-mt-112">
+              <div className="max-w-4xl mx-auto text-center z-10 -mt-96 md:-mt-128">
                 {/* Main Heading */}
                 <div className="space-y-1 mb-3">
                   <h1 className={`text-3xl md:text-6xl lg:text-7xl font-serif leading-tight tracking-tight transition-all duration-700 ${index === selectedIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'} ${slide.accent}`}>
