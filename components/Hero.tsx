@@ -176,9 +176,9 @@ export default function Hero() {
         <div className="flex h-full">
           {slides.map((slide, index) => (
             <div key={index} className="flex-[0_0_100%] min-w-0 h-full flex items-center justify-center relative px-4">
-              <div className="max-w-4xl mx-auto text-center z-10 -mt-32 md:-mt-48">
+              <div className="max-w-4xl mx-auto text-center z-10 -mt-56 md:-mt-80">
                 {/* Main Heading */}
-                <div className="space-y-1 mb-3">
+                <div className="space-y-1 mb-6">
                   <h1 className={`text-3xl md:text-6xl lg:text-7xl font-serif leading-tight tracking-tight transition-all duration-700 ${index === selectedIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'} ${slide.accent}`}>
                     {t(slide.title)} <br />
                     <span className={`${slide.highlightColor} italic`}>{t(slide.highlight)}</span>
@@ -248,20 +248,20 @@ export default function Hero() {
       </div>
 
       {/* Floating Call/Chat - Premium Version */}
-      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex gap-1 p-1 bg-white/80 backdrop-blur-xl border border-black/5 rounded-full shadow-2xl">
+      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex gap-2 p-1 bg-white/80 backdrop-blur-xl border border-black/5 rounded-full shadow-2xl">
         <a
           href="tel:+919999999999"
-          className={`flex items-center gap-2 px-6 py-3 ${slides[selectedIndex].btnBg} text-white rounded-full hover:opacity-90 transition-all font-medium text-sm shadow-md`}
+          className={`flex items-center gap-3 px-6 py-3 ${slides[selectedIndex].btnBg} text-white rounded-full hover:opacity-90 transition-all font-medium text-sm shadow-md`}
         >
-          <Phone size={16} /> {t('hero.call')}
+          <Phone size={16} className="shrink-0" /> {t('hero.call')}
         </a>
         <a
           href="https://wa.me/919999999999?text=Hi%20AstroDarshi!%20I'd%20like%20a%20consultation."
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 px-6 py-3 bg-green-600 text-white rounded-full hover:opacity-90 transition-all font-medium text-sm shadow-md"
+          className="flex items-center gap-3 px-6 py-3 bg-green-600 text-white rounded-full hover:opacity-90 transition-all font-medium text-sm shadow-md"
         >
-          <MessageCircle size={16} /> {t('hero.chat')}
+          <MessageCircle size={16} className="shrink-0" /> {t('hero.chat')}
         </a>
       </div>
 
