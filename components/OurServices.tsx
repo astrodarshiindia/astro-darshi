@@ -144,7 +144,7 @@ export default function OurServices() {
   ];
 
   return (
-    <section id="services" className="py-16 md:py-24 relative bg-background overflow-hidden">
+    <section id="services" className="pt-24 pb-16 md:pt-40 md:pb-24 relative bg-background overflow-hidden">
       {/* Dynamic Background */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] -translate-y-1/2" />
