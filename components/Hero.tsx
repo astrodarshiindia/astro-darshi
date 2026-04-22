@@ -126,7 +126,7 @@ export default function Hero() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/20 rounded-full blur-[120px] pointer-events-none transition-colors duration-1000" />
 
       {/* Semi-circle Icons above ab.png */}
-      <div className="absolute bottom-48 md:bottom-72 left-1/2 -translate-x-1/2 w-full max-w-lg h-32 z-10 flex justify-center items-center pointer-events-none">
+      <div className="absolute bottom-24 md:bottom-40 left-1/2 -translate-x-1/2 w-full max-w-lg h-32 z-10 flex justify-center items-center pointer-events-none">
         <div className="relative w-full h-full">
           {slides.map((slide, index) => {
             const total = slides.length;
@@ -135,7 +135,7 @@ export default function Hero() {
             const iconSize = isMobile ? 48 : 80;
             const zoomedIconSize = iconSize * 1.2; // Reduced zoom scale
             const padding = 20;
-            const containerBottom = isMobile ? 192 : 288; // Adjusted bottom-48 (192px) and bottom-72 (288px)
+            const containerBottom = isMobile ? 96 : 160; // Adjusted bottom-24 (96px) and bottom-40 (160px)
             const containerCenterY = containerBottom + 64; // h-32 center is 64px from top/bottom
 
             const maxRadiusX = (dimensions.width / 2) - (zoomedIconSize / 2 + padding * 2);
@@ -232,7 +232,7 @@ export default function Hero() {
       </button>
 
       {/* Slide Indicators */}
-      <div className="absolute bottom-32 left-1/2 -translate-x-1/2 flex gap-3 z-20">
+      <div className="absolute bottom-20 md:bottom-28 left-1/2 -translate-x-1/2 flex gap-3 z-20">
         {slides.map((_, index) => (
           <button
             key={index}
