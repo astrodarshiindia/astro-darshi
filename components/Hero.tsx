@@ -121,12 +121,12 @@ export default function Hero() {
   const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
 
   return (
-    <section className={`relative min-h-screen flex items-center justify-center overflow-hidden transition-colors duration-1000 ${slides[selectedIndex].bg}`}>
+    <section className={`relative h-[650px] md:h-[850px] flex items-center justify-center overflow-hidden transition-colors duration-1000 ${slides[selectedIndex].bg}`}>
       {/* Background Decorative Element */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/20 rounded-full blur-[120px] pointer-events-none transition-colors duration-1000" />
 
       {/* Semi-circle Icons above ab.png */}
-      <div className="absolute bottom-40 md:bottom-80 left-1/2 -translate-x-1/2 w-full max-w-lg h-32 z-10 flex justify-center items-center pointer-events-none">
+      <div className="absolute bottom-48 md:bottom-72 left-1/2 -translate-x-1/2 w-full max-w-lg h-32 z-10 flex justify-center items-center pointer-events-none">
         <div className="relative w-full h-full">
           {slides.map((slide, index) => {
             const total = slides.length;
@@ -135,7 +135,7 @@ export default function Hero() {
             const iconSize = isMobile ? 48 : 80;
             const zoomedIconSize = iconSize * 1.2; // Reduced zoom scale
             const padding = 20;
-            const containerBottom = isMobile ? 160 : 320; // Adjusted bottom-40 (160px) and bottom-80 (320px)
+            const containerBottom = isMobile ? 192 : 288; // Adjusted bottom-48 (192px) and bottom-72 (288px)
             const containerCenterY = containerBottom + 64; // h-32 center is 64px from top/bottom
 
             const maxRadiusX = (dimensions.width / 2) - (zoomedIconSize / 2 + padding * 2);
@@ -175,8 +175,8 @@ export default function Hero() {
       <div className="w-full h-full" ref={emblaRef}>
         <div className="flex h-full">
           {slides.map((slide, index) => (
-            <div key={index} className="flex-[0_0_100%] min-w-0 min-h-screen flex items-center justify-center relative px-4">
-              <div className="max-w-4xl mx-auto text-center z-10 -mt-96 md:-mt-128">
+            <div key={index} className="flex-[0_0_100%] min-w-0 h-full flex items-center justify-center relative px-4">
+              <div className="max-w-4xl mx-auto text-center z-10 -mt-32 md:-mt-48">
                 {/* Main Heading */}
                 <div className="space-y-1 mb-3">
                   <h1 className={`text-3xl md:text-6xl lg:text-7xl font-serif leading-tight tracking-tight transition-all duration-700 ${index === selectedIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'} ${slide.accent}`}>
