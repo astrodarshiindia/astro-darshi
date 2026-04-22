@@ -9,9 +9,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { AlertCircle, CheckCircle, Loader2 } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useLanguage } from '@/lib/LanguageContext';
+import { useSelectedService } from '@/lib/SelectedServiceContext';
+import { useEffect } from 'react';
 
 export default function ContactForm() {
   const { t } = useLanguage();
+  const { selectedService } = useSelectedService();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -19,6 +22,21 @@ export default function ContactForm() {
     service: '',
     message: '',
   });
+
+  useEffect(() => {
+    if (selectedService) {
+      let serviceValue = '';
+      if (['kundli', 'matchmaking'].includes(selectedService)) {
+        serviceValue = 'vedic-astrology';
+      } else if (['gemstone', 'vastu', 'prashna', 'matrimonial'].includes(selectedService)) {
+        serviceValue = 'other';
+      }
+      
+      if (serviceValue) {
+        setFormData(prev => ({ ...prev, service: serviceValue }));
+      }
+    }
+  }, [selectedService]);
 
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');

@@ -42,7 +42,7 @@ const translations = {
 
     // Services
     'services.title': 'Our',
-    'services.title.highlight': 'Sacred Offerings',
+    'services.title.highlight': 'Services',
     'services.subtitle': "We blend ancient wisdom with modern understanding to provide clarity for your life's most significant questions.",
     'services.sacred': 'Sacred Services',
     'services.sacred.subtitle': 'Comprehensive vedic astrology and tarot card readings designed to illuminate your cosmic path',
@@ -130,6 +130,26 @@ const translations = {
     'service.tarot.f2': 'Spiritual Growth',
     'service.tarot.f3': 'Decision Clarity',
     'service.tarot.f4': 'Energy Alignment',
+
+    // New Services Section
+    'service.kundli.title': 'Janm Kundli Reading',
+    'service.kundli.desc': 'Understand your life, career, marriage & future deeply',
+    'service.kundli.btn': 'Book Now',
+    'service.prashna.title': 'Prashna Kundli',
+    'service.prashna.desc': 'Get answers to your specific questions instantly',
+    'service.prashna.btn': 'Ask Now',
+    'service.vastu.title': 'Vastu Consultation',
+    'service.vastu.desc': 'Home / Shop / Office solutions',
+    'service.vastu.btn': 'Book Visit',
+    'service.gemstone.title': 'Gemstone Consultation & Purchase',
+    'service.gemstone.desc': 'Get correct gemstone with certification',
+    'service.gemstone.btn': 'View Stones',
+    'service.matchmaking.title': 'Matchmaking Analysis',
+    'service.matchmaking.desc': 'Deep compatibility check for successful marriage',
+    'service.matchmaking.btn': 'Check Compatibility',
+    'service.matrimonial.title': 'Matrimonial Services',
+    'service.matrimonial.desc': 'Just Fill our matrimonial form and get your suitable partner',
+    'service.matrimonial.btn': 'Fill Form',
 
     // Astro Mall
     'mall.title': 'The',
@@ -364,6 +384,26 @@ const translations = {
     'service.tarot.f2': 'आध्यात्मिक विकास',
     'service.tarot.f3': 'निर्णय स्पष्टता',
     'service.tarot.f4': 'ऊर्जा संरेखण',
+
+    // New Services Section
+    'service.kundli.title': 'जन्म कुंडली विश्लेषण',
+    'service.kundli.desc': 'अपने जीवन, करियर, विवाह और भविष्य को गहराई से समझें',
+    'service.kundli.btn': 'अभी बुक करें',
+    'service.prashna.title': 'प्रश्न कुंडली',
+    'service.prashna.desc': 'अपने विशिष्ट प्रश्नों के उत्तर तुरंत प्राप्त करें',
+    'service.prashna.btn': 'अभी पूछें',
+    'service.vastu.title': 'वास्तु परामर्श',
+    'service.vastu.desc': 'घर / दुकान / कार्यालय समाधान',
+    'service.vastu.btn': 'विजिट बुक करें',
+    'service.gemstone.title': 'रत्न परामर्श और खरीद',
+    'service.gemstone.desc': 'प्रमाणन के साथ सही रत्न प्राप्त करें',
+    'service.gemstone.btn': 'पत्थर देखें',
+    'service.matchmaking.title': 'गुण मिलान विश्लेषण',
+    'service.matchmaking.desc': 'सफल विवाह के लिए गहरी अनुकूलता जांच',
+    'service.matchmaking.btn': 'अनुकूलता जांचें',
+    'service.matrimonial.title': 'वैवाहिक सेवाएं',
+    'service.matrimonial.desc': 'बस हमारा वैवाहिक फॉर्म भरें और अपना उपयुक्त साथी पाएं',
+    'service.matrimonial.btn': 'फॉर्म भरें',
 
     // Astro Mall
     'mall.title': 'द',

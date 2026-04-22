@@ -126,7 +126,7 @@ export default function Hero() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/20 rounded-full blur-[120px] pointer-events-none transition-colors duration-1000" />
 
       {/* Semi-circle Icons above ab.png */}
-      <div className="absolute bottom-48 md:bottom-96 left-1/2 -translate-x-1/2 w-full max-w-lg h-32 z-10 flex justify-center items-center pointer-events-none">
+      <div className="absolute bottom-40 md:bottom-80 left-1/2 -translate-x-1/2 w-full max-w-lg h-32 z-10 flex justify-center items-center pointer-events-none">
         <div className="relative w-full h-full">
           {slides.map((slide, index) => {
             const total = slides.length;
@@ -135,7 +135,7 @@ export default function Hero() {
             const iconSize = isMobile ? 48 : 80;
             const zoomedIconSize = iconSize * 1.2; // Reduced zoom scale
             const padding = 20;
-            const containerBottom = isMobile ? 192 : 384; // Matching bottom-48 (192px) and bottom-96 (384px)
+            const containerBottom = isMobile ? 160 : 320; // Adjusted bottom-40 (160px) and bottom-80 (320px)
             const containerCenterY = containerBottom + 64; // h-32 center is 64px from top/bottom
 
             const maxRadiusX = (dimensions.width / 2) - (zoomedIconSize / 2 + padding * 2);
@@ -214,7 +214,7 @@ export default function Hero() {
 
       {/* ab.png at the very bottom center */}
       <div className="absolute bottom-0 left-0 w-full flex justify-center pointer-events-none z-0">
-        <img src="/ab.png" alt="Bottom Background" className="w-full max-w-5xl object-contain opacity-40 translate-y-1/4" />
+        <img src="/ab.png" alt="Bottom Background" className="w-full max-w-3xl md:max-w-4xl object-contain opacity-40 translate-y-1/4" />
       </div>
 
       {/* Navigation Arrows - Desktop Only */}

@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Cormorant_Garamond } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { ThemeProvider } from '@/components/theme-provider'
 import { LanguageProvider } from '@/lib/LanguageContext'
+import { SelectedServiceProvider } from '@/lib/SelectedServiceContext'
 import './globals.css'
 
 const geist = Geist({
@@ -64,8 +65,10 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <LanguageProvider>
-            {children}
-            {process.env.NODE_ENV === 'production' && <Analytics />}
+            <SelectedServiceProvider>
+              {children}
+              {process.env.NODE_ENV === 'production' && <Analytics />}
+            </SelectedServiceProvider>
           </LanguageProvider>
         </ThemeProvider>
       </body>

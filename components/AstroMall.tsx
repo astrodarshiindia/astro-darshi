@@ -1,8 +1,9 @@
 'use client';
 
 import { useLanguage } from '@/lib/LanguageContext';
+import { useSelectedService } from '@/lib/SelectedServiceContext';
 import ProductScroller from './ProductScroller';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { supabase } from '@/lib/supabase';
 
 interface Product {
@@ -18,6 +19,7 @@ interface Product {
 
 export default function AstroMall() {
     const { t } = useLanguage();
+    const { selectedService } = useSelectedService();
     const [products, setProducts] = useState<Product[]>([]);
 
     useEffect(() => {
@@ -39,8 +41,29 @@ export default function AstroMall() {
         fetchProducts();
     }, []);
 
+    const filteredProducts = useMemo(() => {
+        if (!selectedService || selectedService === 'matrimonial') return products;
+        
+        if (selectedService === 'gemstone') {
+            const gemstoneKeywords = ['sapphire', 'ruby', 'emerald', 'diamond', 'pearl', 'coral', 'eye', 'hessonite', 'stone', 'gemstone', 'panna', 'manak', 'pukhraj', 'neelam', 'moti'];
+            return products.filter(p => 
+                gemstoneKeywords.some(kw => p.name.toLowerCase().includes(kw)) ||
+                (p.description && gemstoneKeywords.some(kw => p.description!.toLowerCase().includes(kw)))
+            );
+        }
+        
+        if (selectedService === 'vastu') {
+            return products.filter(p => 
+                p.name.toLowerCase().includes('vastu') || 
+                (p.description && p.description.toLowerCase().includes('vastu'))
+            );
+        }
+
+        return products;
+    }, [products, selectedService]);
+
     return (
-        <section className="py-24 md:py-32 relative">
+        <section id="astro-mall" className="py-24 md:py-32 relative">
             <div className="section-container">
                 <div className="text-center mb-20">
                     <h2 className="text-4xl md:text-6xl mb-6">
@@ -51,12 +74,14 @@ export default function AstroMall() {
                     </p>
                 </div>
 
-                {products.length === 0 ? (
+                {filteredProducts.length === 0 ? (
                     <div className="text-center py-20 border border-border rounded-[2rem] bg-card">
-                        <p className="text-muted-foreground/50 text-lg font-light tracking-widest uppercase">{t('mall.coming_soon')}</p>
+                        <p className="text-muted-foreground/50 text-lg font-light tracking-widest uppercase">
+                            {selectedService ? 'No products found for this service' : t('mall.coming_soon')}
+                        </p>
                     </div>
                 ) : (
-                    <ProductScroller products={products} />
+                    <ProductScroller products={filteredProducts} />
                 )}
             </div>
         </section>
