@@ -214,7 +214,7 @@ export default function Hero() {
 
       {/* ab.png at the very bottom center */}
       <div className="absolute bottom-0 left-0 w-full flex justify-center pointer-events-none z-0">
-        <img src="/ab.png" alt="Bottom Background" className="w-full max-w-3xl md:max-w-4xl object-contain opacity-40 translate-y-1/4" />
+        <img src="/ab.png" alt="Bottom Background" className="w-full max-w-3xl md:max-w-4xl object-contain opacity-40 translate-y-1/4 scale-90" />
       </div>
 
       {/* Navigation Arrows - Desktop Only */}
