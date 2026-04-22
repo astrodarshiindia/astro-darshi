@@ -153,12 +153,6 @@ export default function OurServices() {
 
       <div className="section-container relative z-10">
         <div className="text-center mb-12 space-y-4">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-4 animate-fade-in">
-            <Sparkles size={14} className="text-primary" />
-            <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-primary">
-              {t('services.our_services')}
-            </span>
-          </div>
           <h2 className="text-4xl md:text-6xl font-serif tracking-tight">
             {t('services.title')} <span className="text-primary italic">{t('services.title.highlight')}</span>
           </h2>

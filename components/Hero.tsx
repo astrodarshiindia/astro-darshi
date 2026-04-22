@@ -214,7 +214,7 @@ export default function Hero() {
 
       {/* ab.png at the very bottom center */}
       <div className="absolute bottom-0 left-0 w-full flex justify-center pointer-events-none z-0">
-        <img src="/ab.png" alt="Bottom Background" className="w-full max-w-3xl md:max-w-4xl object-contain opacity-40 translate-y-1/4 scale-90" />
+        <img src="/ab.png" alt="Bottom Background" className="w-full max-w-3xl md:max-w-4xl object-contain opacity-40 translate-y-1/4 scale-80" />
       </div>
 
       {/* Navigation Arrows - Desktop Only */}
@@ -232,7 +232,7 @@ export default function Hero() {
       </button>
 
       {/* Slide Indicators */}
-      <div className="absolute bottom-20 md:bottom-28 left-1/2 -translate-x-1/2 flex gap-3 z-20">
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-20">
         {slides.map((_, index) => (
           <button
             key={index}
