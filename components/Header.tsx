@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { Menu, X, Phone, Languages } from 'lucide-react';
 import { useLanguage } from '@/lib/LanguageContext';
@@ -16,6 +17,13 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { language, setLanguage, t } = useLanguage();
+  const pathname = usePathname();
+
+  const isDarkPage = pathname === '/astromall';
+  const headerTextColor = (isDarkPage && !isScrolled) ? 'text-white' : 'text-foreground';
+  const navLinkColor = (isDarkPage && !isScrolled) ? 'text-white/70 hover:text-white' : 'text-foreground/70 hover:text-primary';
+  const iconColor = (isDarkPage && !isScrolled) ? 'text-white/70' : 'text-foreground/70';
+  const logoColor = (isDarkPage && !isScrolled) ? 'text-white' : 'text-foreground';
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -31,7 +39,7 @@ export default function Header() {
       <div className="section-container">
         <nav className="flex items-center justify-between">
           <Link href="/" className="group flex items-center gap-2">
-            <span className="text-xl md:text-2xl font-serif font-bold tracking-tighter text-foreground">
+            <span className={`text-xl md:text-2xl font-serif font-bold tracking-tighter transition-colors ${logoColor}`}>
               ASTRO <span className="text-primary">Darshi</span>
             </span>
           </Link>
@@ -46,7 +54,7 @@ export default function Header() {
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium tracking-widest uppercase text-foreground/70 hover:text-primary transition-colors duration-300"
+                className={`text-sm font-medium tracking-widest uppercase transition-colors duration-300 ${navLinkColor}`}
               >
                 {link.name}
               </Link>
@@ -57,8 +65,8 @@ export default function Header() {
           <div className="flex items-center gap-4 md:gap-6">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="w-9 h-9 rounded-full border border-white/10 hover:bg-white/5 transition-colors">
-                  <Languages size={18} className="text-foreground/70" />
+                <Button variant="ghost" size="icon" className={`w-9 h-9 rounded-full border transition-colors ${isDarkPage && !isScrolled ? 'border-white/10 hover:bg-white/5' : 'border-black/5 hover:bg-black/5'}`}>
+                  <Languages size={18} className={iconColor} />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="bg-background/90 backdrop-blur-md border-white/10">
@@ -79,7 +87,7 @@ export default function Header() {
 
             <a
               href="tel:+919999999999"
-              className="hidden sm:flex text-foreground/70 hover:text-foreground transition-colors"
+              className={`${iconColor} hover:text-primary transition-colors hidden sm:flex`}
               title={t('hero.call')}
             >
               <Phone size={18} />
@@ -87,7 +95,10 @@ export default function Header() {
 
             <Link
               href="/contact"
-              className="px-4 py-1.5 md:px-6 md:py-2 border border-primary/30 rounded-full text-[10px] md:text-xs font-bold tracking-[0.1em] md:tracking-[0.2em] uppercase text-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+              className={`px-4 py-1.5 md:px-6 md:py-2 border rounded-full text-[10px] md:text-xs font-bold tracking-[0.1em] md:tracking-[0.2em] uppercase transition-all duration-300 ${isDarkPage && !isScrolled
+                  ? 'border-white/30 text-white hover:bg-white hover:text-black'
+                  : 'border-primary/30 text-foreground hover:bg-primary hover:text-primary-foreground'
+                }`}
             >
               {t('nav.consult')}
             </Link>
@@ -95,7 +106,7 @@ export default function Header() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden text-foreground p-1.5"
+              className={`md:hidden p-1.5 transition-colors ${headerTextColor}`}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -104,12 +115,12 @@ export default function Header() {
 
         {/* Mobile Menu */}
         <div
-          className={`fixed inset-0 bg-background/60 backdrop-blur-md z-[70] md:hidden transition-all duration-500 ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
+          className={`fixed inset-0 bg-black/60 backdrop-blur-md z-[70] md:hidden transition-all duration-500 ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
             }`}
           onClick={() => setIsOpen(false)}
         />
         <div
-          className={`fixed top-0 right-0 bottom-0 w-[300px] bg-background border-l border-border z-[80] md:hidden transition-transform duration-500 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'
+          className={`fixed top-0 right-0 bottom-0 w-[300px] bg-white border-l border-border z-[80] md:hidden transition-transform duration-500 ease-in-out shadow-2xl ${isOpen ? 'translate-x-0' : 'translate-x-full'
             }`}
         >
           <div className="flex flex-col h-full p-8">
