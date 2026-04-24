@@ -356,7 +356,7 @@ export default function MatrimonialPage() {
                       <Label htmlFor="height">{t('matrimonial.form.height')}</Label>
                       <Input 
                         id="height" 
-                        placeholder="e.g. 5'8\""
+                        placeholder={"e.g. 5'8\""}
                         value={formData.height}
                         onChange={(e) => setFormData({...formData, height: e.target.value})}
                         className="bg-background/50 py-5 rounded-xl border-border/50"
