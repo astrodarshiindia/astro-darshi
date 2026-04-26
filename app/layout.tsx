@@ -1,26 +1,9 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono, Cormorant_Garamond } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { ThemeProvider } from '@/components/theme-provider'
 import { LanguageProvider } from '@/lib/LanguageContext'
 import { SelectedServiceProvider } from '@/lib/SelectedServiceContext'
 import './globals.css'
-
-const geist = Geist({
-  subsets: ["latin"],
-  variable: '--font-geist-sans',
-});
-
-const geistMono = Geist_Mono({
-  subsets: ["latin"],
-  variable: '--font-geist-mono',
-});
-
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-cormorant',
-});
 
 export const metadata: Metadata = {
   title: 'Astro Darshi - Vedic Astrology & Tarot Card Reading',
@@ -56,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${geist.variable} ${geistMono.variable} ${cormorant.variable}`} suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body className="font-sans antialiased bg-background text-foreground">
         <ThemeProvider
           attribute="class"

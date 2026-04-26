@@ -14,7 +14,8 @@ import {
   ArrowRight,
   MessageCircle,
   Phone,
-  Sparkles
+  Sparkles,
+  TrendingUp
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -140,6 +141,17 @@ export default function OurServices() {
       iconColor: 'text-cyan-500',
       href: '/matrimonial',
       action: () => setSelectedService('matrimonial')
+    },
+    {
+      id: 'business',
+      title: t('service.business.title'),
+      desc: t('service.business.desc'),
+      icon: TrendingUp,
+      btnText: t('service.business.btn'),
+      color: 'from-orange-500/20 to-yellow-500/20',
+      iconColor: 'text-orange-500',
+      href: '/business-growth',
+      action: () => setSelectedService('business')
     }
   ];
 

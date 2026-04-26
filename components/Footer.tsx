@@ -21,6 +21,7 @@ export default function Footer() {
       { name: t('link.vastu'), href: '/vastu-consultation' },
       { name: t('link.numerology'), href: '/numerology-services' },
       { name: t('link.gemstone'), href: '/gemstone-consultation' },
+      { name: t('link.business'), href: '/business-growth' },
     ],
     guides: [
       { name: t('link.guide1'), href: '/best-vedic-astrologer-in-lucknow' },

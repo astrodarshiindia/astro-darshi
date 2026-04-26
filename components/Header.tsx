@@ -19,7 +19,8 @@ export default function Header() {
   const { language, setLanguage, t } = useLanguage();
   const pathname = usePathname();
 
-  const isDarkPage = pathname === '/astromall';
+  const darkPages = ['/astromall', '/vedic-astrology', '/astro-mall'];
+  const isDarkPage = darkPages.includes(pathname);
   const headerTextColor = (isDarkPage && !isScrolled) ? 'text-white' : 'text-foreground';
   const navLinkColor = (isDarkPage && !isScrolled) ? 'text-white/70 hover:text-white' : 'text-foreground/70 hover:text-primary';
   const iconColor = (isDarkPage && !isScrolled) ? 'text-white/70' : 'text-foreground/70';
