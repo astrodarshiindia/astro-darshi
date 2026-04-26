@@ -199,7 +199,7 @@ export default function MatrimonialFormModal({ isOpen, onOpenChange }: Matrimoni
                     <Label htmlFor="height" className="text-slate-700 font-bold">{t('matrimonial.form.height')}</Label>
                     <Input 
                       id="height" 
-                      placeholder="5'8\""
+                      placeholder={'5\'8"'}
                       value={formData.height}
                       onChange={(e) => setFormData({...formData, height: e.target.value})}
                       className="h-12 rounded-xl border-slate-200"
