@@ -227,11 +227,7 @@ export default function Hero() {
   const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
 
   return (
-    <section className={`relative h-[100svh] min-h-[600px] md:h-[850px] flex items-center justify-center overflow-hidden transition-colors duration-1000 ${slides[selectedIndex].bg}`}>
-      {/* Background Decorative Element */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/20 rounded-full blur-[120px] pointer-events-none transition-colors duration-1000" />
-
-
+    <section className={`relative h-[80svh] min-h-[500px] md:h-[700px] flex items-center justify-center overflow-hidden transition-colors duration-1000 ${slides[selectedIndex].bg}`}>
       {/* Zodiac Circle - Background Animation */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] md:w-[650px] md:h-[650px] border border-black/5 rounded-full animate-slow-rotate pointer-events-none">
         <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full shadow-lg transition-colors duration-1000 ${slides[selectedIndex].btnBg}`} />
@@ -241,7 +237,7 @@ export default function Hero() {
         <div className="flex h-full">
           {slides.map((slide, index) => (
             <div key={index} className="flex-[0_0_100%] min-w-0 h-full flex items-center justify-center relative px-4">
-              <div className="max-w-4xl mx-auto text-center z-10 -mt-44 md:-mt-48">
+              <div className="max-w-4xl mx-auto text-center z-10 -mt-72 md:-mt-80">
                 {/* Main Heading */}
                 <div className="space-y-1 md:space-y-2 mb-4 md:mb-8">
                   <h1 className={`text-3xl md:text-6xl lg:text-8xl font-serif leading-tight tracking-tight transition-all duration-700 ${index === selectedIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'} ${slide.accent}`}>
@@ -305,7 +301,7 @@ export default function Hero() {
         <img 
           src={slides[selectedIndex].bottomImage} 
           alt="Bottom Background" 
-          className="w-full max-w-3xl md:max-w-4xl object-contain opacity-40 translate-y-1/4 scale-80 transition-all duration-1000" 
+          className="w-full max-w-3xl md:max-w-4xl object-contain translate-y-0 transition-all duration-1000" 
         />
       </div>
 
