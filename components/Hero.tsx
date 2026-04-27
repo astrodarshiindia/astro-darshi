@@ -18,6 +18,7 @@ const slides = [
     btnBg: 'bg-[#E11D48]',
     icon: <Heart className="w-12 h-12 md:w-20 md:h-20" />,
     image: '/love.gif',
+    bottomImage: '/marriage.png',
     questions: [
       'मेरी शादी कब होगी?', 
       'क्या मुझे सच्चा प्यार मिलेगा?', 
@@ -40,6 +41,7 @@ const slides = [
     btnBg: 'bg-[#D97706]',
     icon: <Briefcase className="w-12 h-12 md:w-20 md:h-20" />,
     image: '/career.gif',
+    bottomImage: '/wealth.png',
     questions: [
       'सरकारी नौकरी कब मिलेगी?', 
       'प्रमोशन के योग कब हैं?', 
@@ -62,6 +64,7 @@ const slides = [
     btnBg: 'bg-[#7C3AED]',
     icon: <Activity className="w-12 h-12 md:w-20 md:h-20" />,
     image: '/health.gif',
+    bottomImage: '/health.png',
     questions: [
       'सेहत में सुधार कब होगा?', 
       'बार-बार बीमार क्यों पड़ते हैं?', 
@@ -84,6 +87,7 @@ const slides = [
     btnBg: 'bg-[#059669]',
     icon: <Home className="w-12 h-12 md:w-20 md:h-20" />,
     image: '/finance.gif',
+    bottomImage: '/vastu.png',
     questions: [
       'अपना घर कब बनेगा?', 
       'नया घर लेते समय क्या सावधानी बरतें?', 
@@ -106,6 +110,7 @@ const slides = [
     btnBg: 'bg-[#2563EB]',
     icon: <TrendingUp className="w-12 h-12 md:w-20 md:h-20" />,
     image: '/finance.gif',
+    bottomImage: '/business.png',
     questions: [
       'व्यापार में घाटा क्यों हो रहा है?', 
       'नया बिज़नेस शुरू करने का शुभ मुहूर्त?', 
@@ -128,6 +133,7 @@ const slides = [
     btnBg: 'bg-[#DC2626]',
     icon: <Users className="w-12 h-12 md:w-20 md:h-20" />,
     image: '/marriage.gif',
+    bottomImage: '/match.png',
     questions: [
       'कुंडली मिलान क्यों जरूरी है?', 
       'गुण मिलान के साथ क्या देखें?', 
@@ -150,6 +156,7 @@ const slides = [
     btnBg: 'bg-[#CA8A04]',
     icon: <Gem className="w-12 h-12 md:w-20 md:h-20" />,
     image: '/marriage.gif',
+    bottomImage: '/matrimonial.png',
     questions: [
       'सर्वश्रेष्ठ जीवनसाथी कैसे चुनें?', 
       'विवाह में हो रही देरी के कारण?', 
@@ -293,9 +300,13 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* ab.png at the very bottom center */}
+      {/* Slide-specific image at the very bottom center */}
       <div className="absolute bottom-0 left-0 w-full flex justify-center pointer-events-none z-0">
-        <img src="/ab.png" alt="Bottom Background" className="w-full max-w-3xl md:max-w-4xl object-contain opacity-40 translate-y-1/4 scale-80" />
+        <img 
+          src={slides[selectedIndex].bottomImage} 
+          alt="Bottom Background" 
+          className="w-full max-w-3xl md:max-w-4xl object-contain opacity-40 translate-y-1/4 scale-80 transition-all duration-1000" 
+        />
       </div>
 
       {/* Navigation Arrows - Desktop Only */}
