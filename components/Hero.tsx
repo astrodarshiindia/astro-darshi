@@ -239,7 +239,7 @@ export default function Hero() {
             <div key={index} className="flex-[0_0_100%] min-w-0 h-full flex items-center justify-center relative px-4">
               <div className="max-w-4xl mx-auto text-center z-10 -mt-60 md:-mt-64">
                 {/* Main Heading */}
-                <div className={`space-y-1 md:space-y-2 mb-4 md:mb-8 pt-4 md:pt-6 ${index === 0 ? 'pt-8 md:pt-12' : ''}`}>
+                <div className="space-y-1 md:space-y-2 mb-4 md:mb-8 pt-12 md:pt-16">
                   <h1 className={`text-3xl md:text-6xl lg:text-8xl font-serif leading-tight tracking-tight transition-all duration-700 ${index === selectedIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'} ${slide.accent}`}>
                     {t(slide.title)} <br />
                     <span className={`${slide.highlightColor} italic`}>{t(slide.highlight)}</span>
@@ -301,7 +301,7 @@ export default function Hero() {
         <img 
           src={slides[selectedIndex].bottomImage} 
           alt="Bottom Background" 
-          className="w-full max-w-xl md:max-w-2xl object-contain translate-y-0 transition-all duration-1000" 
+          className="w-full max-w-xl md:max-w-2xl max-h-[200px] md:max-h-[280px] object-contain translate-y-0 transition-all duration-1000" 
         />
       </div>
 
