@@ -18,7 +18,17 @@ const slides = [
     btnBg: 'bg-[#E11D48]',
     icon: <Heart className="w-12 h-12 md:w-20 md:h-20" />,
     image: '/love.gif',
-    questions: ['मेरी शादी कब होगी?', 'क्या मुझे सच्चा प्यार मिलेगा?', 'पति-पत्नी के बीच अनबन कैसे दूर करें?', 'लव मैरिज होगी या अरेंज मैरिज?']
+    questions: [
+      'मेरी शादी कब होगी?', 
+      'क्या मुझे सच्चा प्यार मिलेगा?', 
+      'पति-पत्नी के बीच अनबन कैसे दूर करें?', 
+      'लव मैरिज होगी या अरेंज मैरिज?',
+      'शादी में आ रही बाधाएं कैसे दूर करें?',
+      'मेरा जीवनसाथी कैसा होगा?',
+      'तलाक के योग तो नहीं हैं?',
+      'ससुराल में संबंध कैसे रहेंगे?',
+      'विवाह का शुभ मुहूर्त कब है?'
+    ]
   },
   {
     title: 'hero.career.title',
@@ -30,7 +40,17 @@ const slides = [
     btnBg: 'bg-[#D97706]',
     icon: <Briefcase className="w-12 h-12 md:w-20 md:h-20" />,
     image: '/career.gif',
-    questions: ['सरकारी नौकरी कब मिलेगी?', 'प्रमोशन के योग कब हैं?', 'धन लाभ के उपाय क्या हैं?', 'कर्ज से मुक्ति कैसे पाएं?']
+    questions: [
+      'सरकारी नौकरी कब मिलेगी?', 
+      'प्रमोशन के योग कब हैं?', 
+      'धन लाभ के उपाय क्या हैं?', 
+      'कर्ज से मुक्ति कैसे पाएं?',
+      'विदेश यात्रा के योग कब हैं?',
+      'नौकरी बदलनी चाहिए या नहीं?',
+      'बॉस के साथ संबंध कैसे सुधारें?',
+      'सैलरी में वृद्धि कब होगी?',
+      'इंटरव्यू में सफलता कैसे पाएं?'
+    ]
   },
   {
     title: 'hero.health.title',
@@ -42,7 +62,17 @@ const slides = [
     btnBg: 'bg-[#7C3AED]',
     icon: <Activity className="w-12 h-12 md:w-20 md:h-20" />,
     image: '/health.gif',
-    questions: ['सेहत में सुधार कब होगा?', 'बार-बार बीमार क्यों पड़ते हैं?', 'मानसिक शांति के उपाय?', 'बीमारी से बचाव के उपाय?']
+    questions: [
+      'सेहत में सुधार कब होगा?', 
+      'बार-बार बीमार क्यों पड़ते हैं?', 
+      'मानसिक शांति के उपाय?', 
+      'बीमारी से बचाव के उपाय?',
+      'योग और ध्यान का सही समय?',
+      'नींद न आने की समस्या का समाधान?',
+      'पुरानी बीमारी से कब छुटकारा मिलेगा?',
+      'तनाव मुक्त जीवन कैसे जिएं?',
+      'ऊर्जा का स्तर कैसे बढ़ाएं?'
+    ]
   },
   {
     title: 'hero.vastu.title',
@@ -54,7 +84,17 @@ const slides = [
     btnBg: 'bg-[#059669]',
     icon: <Home className="w-12 h-12 md:w-20 md:h-20" />,
     image: '/finance.gif',
-    questions: ['अपना घर कब बनेगा?', 'नया घर लेते समय क्या सावधानी बरतें?', 'घर में वास्तु दोष कैसे पहचानें?', 'संपत्ति विवाद से छुटकारा कैसे पाएं?']
+    questions: [
+      'अपना घर कब बनेगा?', 
+      'नया घर लेते समय क्या सावधानी बरतें?', 
+      'घर में वास्तु दोष कैसे पहचानें?', 
+      'संपत्ति विवाद से छुटकारा कैसे पाएं?',
+      'किचन की सही दिशा क्या है?',
+      'बेडरूम में खुशहाली के उपाय?',
+      'वास्तु अनुसार मुख्य द्वार कहाँ हो?',
+      'घर में सकारात्मक ऊर्जा कैसे बढ़ाएं?',
+      'ऑफिस का वास्तु कैसा होना चाहिए?'
+    ]
   },
   {
     title: 'hero.business.title',
@@ -66,7 +106,17 @@ const slides = [
     btnBg: 'bg-[#2563EB]',
     icon: <TrendingUp className="w-12 h-12 md:w-20 md:h-20" />,
     image: '/finance.gif',
-    questions: ['व्यापार में घाटा क्यों हो रहा है?', 'नया बिज़नेस शुरू करने का शुभ मुहूर्त?', 'बिजनेस में सफलता कैसे पाएं?', 'पार्टनरशिप में काम कैसा रहेगा?']
+    questions: [
+      'व्यापार में घाटा क्यों हो रहा है?', 
+      'नया बिज़नेस शुरू करने का शुभ मुहूर्त?', 
+      'बिजनेस में सफलता कैसे पाएं?', 
+      'पार्टनरशिप में काम कैसा रहेगा?',
+      'स्टॉक मार्केट में निवेश सही है?',
+      'बिक्री बढ़ाने के उपाय?',
+      'कर्मचारियों के साथ तालमेल कैसे बिठाएं?',
+      'बिजनेस का नाम क्या रखें?',
+      'नए निवेश के लिए सही समय?'
+    ]
   },
   {
     title: 'hero.matchmaking.title',
@@ -78,7 +128,17 @@ const slides = [
     btnBg: 'bg-[#DC2626]',
     icon: <Users className="w-12 h-12 md:w-20 md:h-20" />,
     image: '/marriage.gif',
-    questions: ['कुंडली मिलान क्यों जरूरी है?', 'गुण मिलान के साथ क्या देखें?', 'मांगलिक दोष का उपाय क्या है?', 'मैच मेकिंग से सुखद भविष्य कैसे?']
+    questions: [
+      'कुंडली मिलान क्यों जरूरी है?', 
+      'गुण मिलान के साथ क्या देखें?', 
+      'मांगलिक दोष का उपाय क्या है?', 
+      'मैच मेकिंग से सुखद भविष्य कैसे?',
+      'क्या हमारे स्वभाव मेल खाएंगे?',
+      'भकूत और नाड़ी दोष का निवारण?',
+      'संतान सुख के योग क्या हैं?',
+      'शादी के बाद करियर कैसा रहेगा?',
+      'क्या हम एक दूसरे के लिए सही हैं?'
+    ]
   },
   {
     title: 'hero.matrimonial.title',
@@ -90,7 +150,17 @@ const slides = [
     btnBg: 'bg-[#CA8A04]',
     icon: <Gem className="w-12 h-12 md:w-20 md:h-20" />,
     image: '/marriage.gif',
-    questions: ['सर्वश्रेष्ठ जीवनसाथी कैसे चुनें?', 'विवाह में हो रही देरी के कारण?', 'सुखी वैवाहिक जीवन का रहस्य?', 'रिश्ते को मजबूत कैसे बनाएं?']
+    questions: [
+      'सर्वश्रेष्ठ जीवनसाथी कैसे चुनें?', 
+      'विवाह में हो रही देरी के कारण?', 
+      'सुखी वैवाहिक जीवन का रहस्य?', 
+      'रिश्ते को मजबूत कैसे बनाएं?',
+      'समान विचार वाला साथी कैसे मिले?',
+      'शादी के लिए सही उम्र क्या है?',
+      'क्या दूसरी शादी के योग हैं?',
+      'पति/पत्नी के साथ विदेश योग?',
+      'सफल वैवाहिक जीवन के ज्योतिष उपाय?'
+    ]
   },
 ];
 
@@ -154,46 +224,6 @@ export default function Hero() {
       {/* Background Decorative Element */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/20 rounded-full blur-[120px] pointer-events-none transition-colors duration-1000" />
 
-      {/* Semi-circle Icons above ab.png */}
-      <div className="absolute bottom-16 md:bottom-40 left-1/2 -translate-x-1/2 w-full max-w-lg h-32 z-10 flex justify-center items-center pointer-events-none">
-        <div className="relative w-full h-full">
-          {slides.map((slide, index) => {
-            const total = slides.length;
-            
-            // Dynamic radius based on viewport to keep icons in view
-            const iconSize = isMobile ? 32 : 80;
-            const zoomedIconSize = iconSize * 1.2;
-            const padding = 10;
-            const containerBottom = isMobile ? 64 : 160;
-            const containerCenterY = containerBottom + 64;
-
-            const maxRadiusX = (dimensions.width / 2) - (zoomedIconSize / 2 + padding * 2);
-            const maxRadiusY = dimensions.height - containerCenterY - (zoomedIconSize / 2 + padding * 2);
-            
-            const radius = Math.min(isMobile ? 140 : 440, maxRadiusX, maxRadiusY);
-            
-            const angle = (0.05 + (index / (total - 1)) * 0.9) * Math.PI; 
-            const x = Math.cos(angle + Math.PI) * radius; 
-            const y = -Math.sin(angle) * radius; 
-
-            return (
-              <div
-                key={index}
-                className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-700 flex flex-col items-center gap-2`}
-                style={{
-                  transform: `translate(${x}px, ${y}px)`,
-                  opacity: index <= selectedIndex ? 1 : 0.2,
-                  scale: index === selectedIndex ? '1.2' : '0.95',
-                }}
-              >
-                <div className={`w-8 h-8 md:w-20 md:h-20 rounded-full overflow-hidden border-2 transition-all duration-500 ${index === selectedIndex ? `border-white shadow-[0_0_20px_rgba(255,255,255,0.5)]` : 'border-white/20'}`}>
-                  <img src={slide.image} alt="" className="w-full h-full object-cover" />
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
 
       {/* Zodiac Circle - Background Animation */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] md:w-[650px] md:h-[650px] border border-black/5 rounded-full animate-slow-rotate pointer-events-none">
@@ -204,7 +234,7 @@ export default function Hero() {
         <div className="flex h-full">
           {slides.map((slide, index) => (
             <div key={index} className="flex-[0_0_100%] min-w-0 h-full flex items-center justify-center relative px-4">
-              <div className="max-w-4xl mx-auto text-center z-10 -mt-20 md:-mt-32">
+              <div className="max-w-4xl mx-auto text-center z-10 -mt-12 md:-mt-20">
                 {/* Main Heading */}
                 <div className="space-y-1 md:space-y-2 mb-4 md:mb-8">
                   <h1 className={`text-3xl md:text-6xl lg:text-8xl font-serif leading-tight tracking-tight transition-all duration-700 ${index === selectedIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'} ${slide.accent}`}>
@@ -212,13 +242,13 @@ export default function Hero() {
                     <span className={`${slide.highlightColor} italic`}>{t(slide.highlight)}</span>
                   </h1>
 
-                  <p className={`text-sm md:text-xl text-black/60 font-light tracking-wide max-w-2xl mx-auto transition-all duration-700 delay-200 ${index === selectedIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                  <p className={`text-sm md:text-xl text-black/60 font-light tracking-wide max-w-[90vw] md:max-w-2xl mx-auto transition-all duration-700 delay-200 ${index === selectedIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                     {t(slide.subtitle)}
                   </p>
 
-                  {/* Hindi Questions Marquee */}
-                  <div className={`mt-6 md:mt-12 overflow-hidden relative transition-all duration-700 delay-300 ${index === selectedIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-                    <div className="animate-marquee flex gap-3 md:gap-6 py-1.5 md:py-2">
+                  {/* Hindi Questions Scrollable Marquee */}
+                  <div className={`mt-6 md:mt-12 overflow-x-auto no-scrollbar relative transition-all duration-700 delay-300 ${index === selectedIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                    <div className="animate-marquee flex gap-3 md:gap-6 py-1.5 md:py-2 hover:[animation-play-state:paused] active:[animation-play-state:paused]">
                       {slide.questions.map((q, i) => (
                         <div 
                           key={i} 
