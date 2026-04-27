@@ -2,66 +2,95 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
-import { ArrowUp, MessageCircle, Phone, Sparkles, Briefcase, Heart, Coins, Activity, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowUp, MessageCircle, Phone, Sparkles, Briefcase, Heart, Coins, Activity, ChevronLeft, ChevronRight, Home, TrendingUp, Users, Gem } from 'lucide-react';
 import { useLanguage } from '@/lib/LanguageContext';
 import useEmblaCarousel from 'embla-carousel-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 const slides = [
   {
-    title: 'hero.title',
-    highlight: 'hero.title.highlight',
-    subtitle: 'hero.subtitle',
-    bg: 'bg-[#E3F2FD]',
-    accent: 'text-[#0D47A1]',
-    highlightColor: 'text-[#1976D2]',
-    btnBg: 'bg-[#1976D2]',
-    icon: <Sparkles className="w-12 h-12 md:w-20 md:h-20" />,
-    image: '/marriage.gif', // Using marriage for general destiny
+    title: 'hero.relationship.title',
+    highlight: 'hero.relationship.title.highlight',
+    subtitle: 'hero.relationship.subtitle',
+    bg: 'bg-[#FFF1F2]',
+    accent: 'text-[#881337]',
+    highlightColor: 'text-[#BE123C]',
+    btnBg: 'bg-[#E11D48]',
+    icon: <Heart className="w-12 h-12 md:w-20 md:h-20" />,
+    image: '/love.gif',
+    questions: ['मेरी शादी कब होगी?', 'क्या मुझे सच्चा प्यार मिलेगा?', 'पति-पत्नी के बीच अनबन कैसे दूर करें?', 'लव मैरिज होगी या अरेंज मैरिज?']
   },
   {
     title: 'hero.career.title',
     highlight: 'hero.career.title.highlight',
     subtitle: 'hero.career.subtitle',
-    bg: 'bg-[#FFF3E0]',
-    accent: 'text-[#E65100]',
-    highlightColor: 'text-[#F57C00]',
-    btnBg: 'bg-[#F57C00]',
+    bg: 'bg-[#FFFBEB]',
+    accent: 'text-[#78350F]',
+    highlightColor: 'text-[#B45309]',
+    btnBg: 'bg-[#D97706]',
     icon: <Briefcase className="w-12 h-12 md:w-20 md:h-20" />,
     image: '/career.gif',
-  },
-  {
-    title: 'hero.love.title',
-    highlight: 'hero.love.title.highlight',
-    subtitle: 'hero.love.subtitle',
-    bg: 'bg-[#FCE4EC]',
-    accent: 'text-[#880E4F]',
-    highlightColor: 'text-[#C2185B]',
-    btnBg: 'bg-[#C2185B]',
-    icon: <Heart className="w-12 h-12 md:w-20 md:h-20" />,
-    image: '/love.gif',
-  },
-  {
-    title: 'hero.wealth.title',
-    highlight: 'hero.wealth.title.highlight',
-    subtitle: 'hero.wealth.subtitle',
-    bg: 'bg-[#E8F5E9]',
-    accent: 'text-[#1B5E20]',
-    highlightColor: 'text-[#388E3C]',
-    btnBg: 'bg-[#388E3C]',
-    icon: <Coins className="w-12 h-12 md:w-20 md:h-20" />,
-    image: '/finance.gif',
+    questions: ['सरकारी नौकरी कब मिलेगी?', 'प्रमोशन के योग कब हैं?', 'धन लाभ के उपाय क्या हैं?', 'कर्ज से मुक्ति कैसे पाएं?']
   },
   {
     title: 'hero.health.title',
     highlight: 'hero.health.title.highlight',
     subtitle: 'hero.health.subtitle',
-    bg: 'bg-[#F3E5F5]',
-    accent: 'text-[#4A148C]',
-    highlightColor: 'text-[#7B1FA2]',
-    btnBg: 'bg-[#7B1FA2]',
+    bg: 'bg-[#F5F3FF]',
+    accent: 'text-[#4C1D95]',
+    highlightColor: 'text-[#6D28D9]',
+    btnBg: 'bg-[#7C3AED]',
     icon: <Activity className="w-12 h-12 md:w-20 md:h-20" />,
     image: '/health.gif',
+    questions: ['सेहत में सुधार कब होगा?', 'बार-बार बीमार क्यों पड़ते हैं?', 'मानसिक शांति के उपाय?', 'बीमारी से बचाव के उपाय?']
+  },
+  {
+    title: 'hero.vastu.title',
+    highlight: 'hero.vastu.title.highlight',
+    subtitle: 'hero.vastu.subtitle',
+    bg: 'bg-[#F0FDF4]',
+    accent: 'text-[#064E3B]',
+    highlightColor: 'text-[#047857]',
+    btnBg: 'bg-[#059669]',
+    icon: <Home className="w-12 h-12 md:w-20 md:h-20" />,
+    image: '/finance.gif',
+    questions: ['अपना घर कब बनेगा?', 'नया घर लेते समय क्या सावधानी बरतें?', 'घर में वास्तु दोष कैसे पहचानें?', 'संपत्ति विवाद से छुटकारा कैसे पाएं?']
+  },
+  {
+    title: 'hero.business.title',
+    highlight: 'hero.business.title.highlight',
+    subtitle: 'hero.business.subtitle',
+    bg: 'bg-[#EEF2FF]',
+    accent: 'text-[#1E3A8A]',
+    highlightColor: 'text-[#1D4ED8]',
+    btnBg: 'bg-[#2563EB]',
+    icon: <TrendingUp className="w-12 h-12 md:w-20 md:h-20" />,
+    image: '/finance.gif',
+    questions: ['व्यापार में घाटा क्यों हो रहा है?', 'नया बिज़नेस शुरू करने का शुभ मुहूर्त?', 'बिजनेस में सफलता कैसे पाएं?', 'पार्टनरशिप में काम कैसा रहेगा?']
+  },
+  {
+    title: 'hero.matchmaking.title',
+    highlight: 'hero.matchmaking.title.highlight',
+    subtitle: 'hero.matchmaking.subtitle',
+    bg: 'bg-[#FEF2F2]',
+    accent: 'text-[#7F1D1D]',
+    highlightColor: 'text-[#B91C1C]',
+    btnBg: 'bg-[#DC2626]',
+    icon: <Users className="w-12 h-12 md:w-20 md:h-20" />,
+    image: '/marriage.gif',
+    questions: ['कुंडली मिलान क्यों जरूरी है?', 'गुण मिलान के साथ क्या देखें?', 'मांगलिक दोष का उपाय क्या है?', 'मैच मेकिंग से सुखद भविष्य कैसे?']
+  },
+  {
+    title: 'hero.matrimonial.title',
+    highlight: 'hero.matrimonial.title.highlight',
+    subtitle: 'hero.matrimonial.subtitle',
+    bg: 'bg-[#FFFDF0]',
+    accent: 'text-[#713F12]',
+    highlightColor: 'text-[#A16207]',
+    btnBg: 'bg-[#CA8A04]',
+    icon: <Gem className="w-12 h-12 md:w-20 md:h-20" />,
+    image: '/marriage.gif',
+    questions: ['सर्वश्रेष्ठ जीवनसाथी कैसे चुनें?', 'विवाह में हो रही देरी के कारण?', 'सुखी वैवाहिक जीवन का रहस्य?', 'रिश्ते को मजबूत कैसे बनाएं?']
   },
 ];
 
@@ -121,28 +150,27 @@ export default function Hero() {
   const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
 
   return (
-    <section className={`relative h-[650px] md:h-[850px] flex items-center justify-center overflow-hidden transition-colors duration-1000 ${slides[selectedIndex].bg}`}>
+    <section className={`relative h-[100svh] min-h-[600px] md:h-[850px] flex items-center justify-center overflow-hidden transition-colors duration-1000 ${slides[selectedIndex].bg}`}>
       {/* Background Decorative Element */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/20 rounded-full blur-[120px] pointer-events-none transition-colors duration-1000" />
 
       {/* Semi-circle Icons above ab.png */}
-      <div className="absolute bottom-24 md:bottom-40 left-1/2 -translate-x-1/2 w-full max-w-lg h-32 z-10 flex justify-center items-center pointer-events-none">
+      <div className="absolute bottom-16 md:bottom-40 left-1/2 -translate-x-1/2 w-full max-w-lg h-32 z-10 flex justify-center items-center pointer-events-none">
         <div className="relative w-full h-full">
           {slides.map((slide, index) => {
             const total = slides.length;
             
             // Dynamic radius based on viewport to keep icons in view
-            const iconSize = isMobile ? 48 : 80;
-            const zoomedIconSize = iconSize * 1.2; // Reduced zoom scale
-            const padding = 20;
-            const containerBottom = isMobile ? 96 : 160; // Adjusted bottom-24 (96px) and bottom-40 (160px)
-            const containerCenterY = containerBottom + 64; // h-32 center is 64px from top/bottom
+            const iconSize = isMobile ? 32 : 80;
+            const zoomedIconSize = iconSize * 1.2;
+            const padding = 10;
+            const containerBottom = isMobile ? 64 : 160;
+            const containerCenterY = containerBottom + 64;
 
             const maxRadiusX = (dimensions.width / 2) - (zoomedIconSize / 2 + padding * 2);
             const maxRadiusY = dimensions.height - containerCenterY - (zoomedIconSize / 2 + padding * 2);
             
-            // Maintain the perfect arc shape while ensuring it fits in viewport
-            const radius = Math.min(isMobile ? 180 : 440, maxRadiusX, maxRadiusY);
+            const radius = Math.min(isMobile ? 140 : 440, maxRadiusX, maxRadiusY);
             
             const angle = (0.05 + (index / (total - 1)) * 0.9) * Math.PI; 
             const x = Math.cos(angle + Math.PI) * radius; 
@@ -158,7 +186,7 @@ export default function Hero() {
                   scale: index === selectedIndex ? '1.2' : '0.95',
                 }}
               >
-                <div className={`w-12 h-12 md:w-20 md:h-20 rounded-full overflow-hidden border-2 transition-all duration-500 ${index === selectedIndex ? `border-white shadow-[0_0_20px_rgba(255,255,255,0.5)]` : 'border-white/20'}`}>
+                <div className={`w-8 h-8 md:w-20 md:h-20 rounded-full overflow-hidden border-2 transition-all duration-500 ${index === selectedIndex ? `border-white shadow-[0_0_20px_rgba(255,255,255,0.5)]` : 'border-white/20'}`}>
                   <img src={slide.image} alt="" className="w-full h-full object-cover" />
                 </div>
               </div>
@@ -168,7 +196,7 @@ export default function Hero() {
       </div>
 
       {/* Zodiac Circle - Background Animation */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[650px] md:h-[650px] border border-black/5 rounded-full animate-slow-rotate pointer-events-none">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] md:w-[650px] md:h-[650px] border border-black/5 rounded-full animate-slow-rotate pointer-events-none">
         <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full shadow-lg transition-colors duration-1000 ${slides[selectedIndex].btnBg}`} />
       </div>
 
@@ -176,24 +204,47 @@ export default function Hero() {
         <div className="flex h-full">
           {slides.map((slide, index) => (
             <div key={index} className="flex-[0_0_100%] min-w-0 h-full flex items-center justify-center relative px-4">
-              <div className="max-w-4xl mx-auto text-center z-10 -mt-56 md:-mt-80">
+              <div className="max-w-4xl mx-auto text-center z-10 -mt-20 md:-mt-32">
                 {/* Main Heading */}
-                <div className="space-y-1 mb-6">
-                  <h1 className={`text-3xl md:text-6xl lg:text-7xl font-serif leading-tight tracking-tight transition-all duration-700 ${index === selectedIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'} ${slide.accent}`}>
+                <div className="space-y-1 md:space-y-2 mb-4 md:mb-8">
+                  <h1 className={`text-3xl md:text-6xl lg:text-8xl font-serif leading-tight tracking-tight transition-all duration-700 ${index === selectedIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'} ${slide.accent}`}>
                     {t(slide.title)} <br />
                     <span className={`${slide.highlightColor} italic`}>{t(slide.highlight)}</span>
                   </h1>
 
-                  <p className={`text-base md:text-xl text-black/60 font-light tracking-wide max-w-2xl mx-auto transition-all duration-700 delay-200 ${index === selectedIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                  <p className={`text-sm md:text-xl text-black/60 font-light tracking-wide max-w-2xl mx-auto transition-all duration-700 delay-200 ${index === selectedIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                     {t(slide.subtitle)}
                   </p>
+
+                  {/* Hindi Questions Marquee */}
+                  <div className={`mt-6 md:mt-12 overflow-hidden relative transition-all duration-700 delay-300 ${index === selectedIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                    <div className="animate-marquee flex gap-3 md:gap-6 py-1.5 md:py-2">
+                      {slide.questions.map((q, i) => (
+                        <div 
+                          key={i} 
+                          className={`flex-shrink-0 px-3 py-1.5 md:px-6 md:py-3 rounded-xl md:rounded-3xl text-[10px] md:text-base font-medium border border-black/5 shadow-sm backdrop-blur-sm transition-all hover:scale-105 ${slide.bg} ${slide.accent}`}
+                        >
+                          {q}
+                        </div>
+                      ))}
+                      {/* Duplicate for seamless loop */}
+                      {slide.questions.map((q, i) => (
+                        <div 
+                          key={`dup-${i}`} 
+                          className={`flex-shrink-0 px-3 py-1.5 md:px-6 md:py-3 rounded-xl md:rounded-3xl text-[10px] md:text-base font-medium border border-black/5 shadow-sm backdrop-blur-sm transition-all hover:scale-105 ${slide.bg} ${slide.accent}`}
+                        >
+                          {q}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
 
                 {/* Action Buttons */}
-                <div className={`flex flex-row items-center justify-center gap-3 md:gap-4 transition-all duration-700 delay-400 ${index === selectedIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                <div className={`flex flex-row items-center justify-center gap-2 md:gap-4 transition-all duration-700 delay-500 ${index === selectedIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                   <Link
                     href="/services"
-                    className={`group relative px-5 py-2.5 md:px-8 md:py-3 ${slide.btnBg} text-white rounded-full text-[10px] md:text-sm font-bold tracking-[0.1em] md:tracking-[0.2em] uppercase overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl whitespace-nowrap`}
+                    className={`group relative px-4 py-2 md:px-8 md:py-3 ${slide.btnBg} text-white rounded-full text-[10px] md:text-sm font-bold tracking-[0.05em] md:tracking-[0.2em] uppercase overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl whitespace-nowrap`}
                   >
                     <span className="relative z-10">{t('hero.cta.services')}</span>
                     <div className="absolute inset-0 bg-black/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
@@ -201,7 +252,7 @@ export default function Hero() {
 
                   <Link
                     href="/contact"
-                    className={`px-5 py-2.5 md:px-8 md:py-3 border border-black/10 text-black/70 rounded-full text-[10px] md:text-sm font-bold tracking-[0.1em] md:tracking-[0.2em] uppercase hover:bg-black/5 transition-all duration-300 whitespace-nowrap`}
+                    className={`px-4 py-2 md:px-8 md:py-3 border border-black/10 text-black/70 rounded-full text-[10px] md:text-sm font-bold tracking-[0.05em] md:tracking-[0.2em] uppercase hover:bg-black/5 transition-all duration-300 whitespace-nowrap`}
                   >
                     {t('hero.cta.book')}
                   </Link>
