@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: 'Astromall - Premium Vedic Gemstones | Astro Darshi',
   description: 'Discover authentic, lab-certified, and energized gemstones recommended based on your Kundli. Transform your life with Vedic remedies.',
 };
-
+  
 export default function AstromallPage() {
   return (
     <main className="min-h-screen">
