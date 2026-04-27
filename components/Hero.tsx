@@ -234,7 +234,7 @@ export default function Hero() {
         <div className="flex h-full">
           {slides.map((slide, index) => (
             <div key={index} className="flex-[0_0_100%] min-w-0 h-full flex items-center justify-center relative px-4">
-              <div className="max-w-4xl mx-auto text-center z-10 -mt-12 md:-mt-20">
+              <div className="max-w-4xl mx-auto text-center z-10 -mt-20 md:-mt-40">
                 {/* Main Heading */}
                 <div className="space-y-1 md:space-y-2 mb-4 md:mb-8">
                   <h1 className={`text-3xl md:text-6xl lg:text-8xl font-serif leading-tight tracking-tight transition-all duration-700 ${index === selectedIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'} ${slide.accent}`}>
@@ -247,7 +247,7 @@ export default function Hero() {
                   </p>
 
                   {/* Hindi Questions Scrollable Marquee */}
-                  <div className={`mt-6 md:mt-12 overflow-x-auto no-scrollbar relative transition-all duration-700 delay-300 ${index === selectedIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                  <div className={`mt-6 md:mt-12 overflow-x-auto scrollbar-hide relative transition-all duration-700 delay-300 ${index === selectedIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                     <div className="animate-marquee flex gap-3 md:gap-6 py-1.5 md:py-2 hover:[animation-play-state:paused] active:[animation-play-state:paused]">
                       {slide.questions.map((q, i) => (
                         <div 
