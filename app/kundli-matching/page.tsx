@@ -2,16 +2,16 @@ import SEOLayout from '@/components/SEOLayout';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Kundli Matching for Marriage - Astro Darshi',
-  description: 'Online Kundli Matching for marriage. Get accurate horoscope matching, Guna Milan, and compatibility analysis by expert Vedic astrologers.',
-  keywords: 'kundli matching, horoscope matching for marriage, guna milan, vedic astrology compatibility, marriage matching',
+  title: 'Kundli Matching for Happy Marriage - Astro Darshi',
+  description: 'Online Kundli Matching for a successful marriage. Get accurate horoscope matching, Guna Milan, and compatibility analysis by expert astrologers.',
+  keywords: 'kundli matching, horoscope matching for marriage, guna milan, astrology compatibility, happy marriage solutions',
 };
 
 export default function KundliMatching() {
   return (
     <SEOLayout
-      title="Sacred Kundli Matching"
-      description="Ensure a harmonious life journey with precise Vedic horoscope matching and deep compatibility analysis."
+      title="Perfect Match for Happy Marriage"
+      description="Ensure a harmonious life journey with precise horoscope matching and deep compatibility analysis."
       content={
         <div className="space-y-12">
           <section className="space-y-6">

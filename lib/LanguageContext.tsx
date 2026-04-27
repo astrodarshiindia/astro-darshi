@@ -20,8 +20,8 @@ const translations = {
     'nav.expert': 'Expert Consultation',
 
     // Hero
-    'hero.relationship.title': 'Sacred Karma &',
-    'hero.relationship.title.highlight': 'Vedic Marriage',
+    'hero.relationship.title': 'Love Life &',
+    'hero.relationship.title.highlight': 'Marriage Success',
     'hero.relationship.subtitle': 'Get clarity on your love life and marriage through ancient wisdom.',
     'hero.career.title': 'Stuck in career &',
     'hero.career.title.highlight': 'Want growth?',
@@ -508,8 +508,8 @@ const translations = {
     'nav.expert': 'विशेषज्ञ परामर्श',
 
     // Hero
-    'hero.relationship.title': 'पवित्र बंधन और',
-    'hero.relationship.title.highlight': 'सुखद वैवाहिक जीवन',
+    'hero.relationship.title': 'सच्चा प्यार और',
+    'hero.relationship.title.highlight': 'सुखी वैवाहिक जीवन',
     'hero.relationship.subtitle': 'प्राचीन ज्ञान के माध्यम से अपने प्रेम जीवन और विवाह के बारे में स्पष्टता प्राप्त करें।',
     'hero.career.title': 'करियर में रुकावट?',
     'hero.career.title.highlight': 'ग्रोथ चाहते हैं?',

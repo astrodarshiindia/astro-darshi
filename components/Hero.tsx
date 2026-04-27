@@ -227,7 +227,7 @@ export default function Hero() {
   const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
 
   return (
-    <section className={`relative h-[80svh] min-h-[500px] md:h-[700px] flex items-center justify-center overflow-hidden transition-colors duration-1000 ${slides[selectedIndex].bg}`}>
+    <section className={`relative h-[85svh] min-h-[600px] md:h-[800px] flex items-center justify-center overflow-hidden transition-colors duration-1000 ${slides[selectedIndex].bg}`}>
       {/* Zodiac Circle - Background Animation */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] md:w-[650px] md:h-[650px] border border-black/5 rounded-full animate-slow-rotate pointer-events-none">
         <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full shadow-lg transition-colors duration-1000 ${slides[selectedIndex].btnBg}`} />
@@ -301,7 +301,7 @@ export default function Hero() {
         <img 
           src={slides[selectedIndex].bottomImage} 
           alt="Bottom Background" 
-          className="w-full max-w-xl md:max-w-2xl max-h-[200px] md:max-h-[280px] object-contain translate-y-0 transition-all duration-1000" 
+          className="w-full max-w-2xl md:max-w-4xl max-h-[250px] md:max-h-[350px] object-contain translate-y-0 transition-all duration-1000" 
         />
       </div>
 
