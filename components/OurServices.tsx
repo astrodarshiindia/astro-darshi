@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useLanguage } from '@/lib/LanguageContext';
 import VedicMandala from './VedicMandala';
@@ -97,6 +98,7 @@ export default function OurServices() {
       glowColor: 'group-hover:shadow-purple-500/20',
       cardHref: '/services?service=tarot',
       buttonHref: '/tarot-reading',
+      detailHref: '/tarot-reading',
       actionType: 'link'
     },
     {
@@ -111,6 +113,7 @@ export default function OurServices() {
       glowColor: 'group-hover:shadow-emerald-500/20',
       cardHref: '/services?service=vastu',
       buttonHref: '/vastu-consultation',
+      detailHref: '/vastu-consultation',
       actionType: 'link'
     },
     {
@@ -125,6 +128,7 @@ export default function OurServices() {
       glowColor: 'group-hover:shadow-red-500/20',
       cardHref: '/services?service=gemstone',
       buttonHref: '/astromall',
+      detailHref: '/astromall',
       actionType: 'link'
     },
     {
@@ -138,6 +142,7 @@ export default function OurServices() {
       borderColor: 'border-rose-500/20',
       glowColor: 'group-hover:shadow-rose-500/20',
       cardHref: '/services?service=matchmaking',
+      detailHref: '/matchmaking',
       actionType: 'modal'
     },
     {
@@ -152,6 +157,7 @@ export default function OurServices() {
       glowColor: 'group-hover:shadow-cyan-500/20',
       cardHref: '/services?service=matrimonial',
       buttonHref: '/matrimonial',
+      detailHref: '/matrimonial',
       actionType: 'link'
     },
     {
@@ -166,6 +172,7 @@ export default function OurServices() {
       glowColor: 'group-hover:shadow-orange-500/20',
       cardHref: '/services?service=business',
       buttonHref: '/business-growth',
+      detailHref: '/business-growth',
       actionType: 'link'
     }
   ];
@@ -229,7 +236,7 @@ export default function OurServices() {
                   </p>
                 </div>
 
-                <div className="mt-auto">
+                <div className="mt-auto space-y-3">
                   <Button
                     type="button"
                     onClick={(event) => {
@@ -251,6 +258,21 @@ export default function OurServices() {
                     {service.btnText}
                     <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform duration-500" />
                   </Button>
+
+                  {service.detailHref && (
+                    <Link
+                      href={service.detailHref}
+                      onClick={(event: React.MouseEvent<HTMLAnchorElement>) => event.stopPropagation()}
+                      className="block"
+                    >
+                      <Button
+                        variant="outline"
+                        className="w-full py-4 h-auto rounded-xl border border-border/50 text-foreground/80 hover:text-foreground hover:bg-background/10 transition-all duration-500 font-bold text-[9px] uppercase tracking-widest"
+                      >
+                        View in detail
+                      </Button>
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>
