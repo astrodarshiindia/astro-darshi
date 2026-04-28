@@ -101,7 +101,7 @@ export default function Header() {
 
             <Link
               href="/contact"
-              className={`px-4 py-1.5 md:px-6 md:py-2 border rounded-full text-[10px] md:text-xs font-bold tracking-[0.1em] md:tracking-[0.2em] uppercase transition-all duration-300 ${isDarkPage && !isScrolled
+              className={`shine-effect px-3 py-1 text-[9px] md:px-6 md:py-2 md:text-xs border rounded-full font-bold tracking-[0.12em] md:tracking-[0.2em] uppercase transition-all duration-300 ${isDarkPage && !isScrolled
                   ? 'border-white/30 text-white hover:bg-white hover:text-black'
                   : 'border-primary/30 text-foreground hover:bg-primary hover:text-primary-foreground'
                 }`}
