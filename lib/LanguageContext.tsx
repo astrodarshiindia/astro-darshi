@@ -158,7 +158,7 @@ const translations = {
     
     'service.tarot.title': 'Tarot Reading',
     'service.tarot.desc': 'Intuitive guidance through tarot to illuminate your current situation and future path',
-    'service.tarot.btn': 'Read More',
+    'service.tarot.btn': 'Book Now',
     'service.tarot.details': 'Expert tarot card reading to give you clarity on your relationships, career, and personal life.',
     
     'service.vastu.title': 'Vastu Consultation',
@@ -698,7 +698,7 @@ const translations = {
 
     'service.tarot.title': 'टैरो कार्ड रीडिंग',
     'service.tarot.desc': 'आपकी वर्तमान स्थिति और भविष्य के पथ को रोशन करने के लिए टैरो के माध्यम से सहज मार्गदर्शन',
-    'service.tarot.btn': 'और पढ़ें',
+    'service.tarot.btn': 'बुक नाउ',
     'service.tarot.details': 'गूढ़ प्रतीकवाद और ऊर्जा संरेखण का उपयोग करके रिश्तों, करियर और व्यक्तिगत विकास पर सहज मार्गदर्शन प्रदान करने वाले पवित्र टैरो स्प्रेड।',
 
     // Business Growth Page

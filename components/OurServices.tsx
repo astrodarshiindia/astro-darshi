@@ -1,9 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useLanguage } from '@/lib/LanguageContext';
-import { useSelectedService } from '@/lib/SelectedServiceContext';
 import VedicMandala from './VedicMandala';
 import { 
   FileText, 
@@ -33,8 +32,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 export default function OurServices() {
+  const router = useRouter();
   const { t } = useLanguage();
-  const { setSelectedService } = useSelectedService();
   const [isMatchmakingOpen, setIsMatchmakingOpen] = useState(false);
   const [isAskNowOpen, setIsAskNowOpen] = useState(false);
   const [matchmakingDetails, setMatchmakingDetails] = useState({
@@ -69,8 +68,9 @@ export default function OurServices() {
       iconColor: 'text-amber-600',
       borderColor: 'border-amber-500/20',
       glowColor: 'group-hover:shadow-amber-500/20',
-      href: '/services?service=kundli',
-      action: () => setSelectedService('kundli')
+      cardHref: '/services?service=kundli',
+      buttonHref: '/services?service=kundli',
+      actionType: 'link'
     },
     {
       id: 'prashna',
@@ -82,8 +82,8 @@ export default function OurServices() {
       iconColor: 'text-blue-600',
       borderColor: 'border-blue-500/20',
       glowColor: 'group-hover:shadow-blue-500/20',
-      href: '/services?service=prashna',
-      action: () => setSelectedService('prashna')
+      cardHref: '/services?service=prashna',
+      actionType: 'ask'
     },
     {
       id: 'tarot',
@@ -95,8 +95,9 @@ export default function OurServices() {
       iconColor: 'text-purple-600',
       borderColor: 'border-purple-500/20',
       glowColor: 'group-hover:shadow-purple-500/20',
-      href: '/services?service=tarot',
-      action: () => setSelectedService('tarot')
+      cardHref: '/services?service=tarot',
+      buttonHref: '/tarot-reading',
+      actionType: 'link'
     },
     {
       id: 'vastu',
@@ -108,8 +109,9 @@ export default function OurServices() {
       iconColor: 'text-emerald-600',
       borderColor: 'border-emerald-500/20',
       glowColor: 'group-hover:shadow-emerald-500/20',
-      href: '/services?service=vastu',
-      action: () => setSelectedService('vastu')
+      cardHref: '/services?service=vastu',
+      buttonHref: '/vastu-consultation',
+      actionType: 'link'
     },
     {
       id: 'gemstone',
@@ -121,8 +123,9 @@ export default function OurServices() {
       iconColor: 'text-red-600',
       borderColor: 'border-red-500/20',
       glowColor: 'group-hover:shadow-red-500/20',
-      href: '/services?service=gemstone',
-      action: () => setSelectedService('gemstone')
+      cardHref: '/services?service=gemstone',
+      buttonHref: '/astromall',
+      actionType: 'link'
     },
     {
       id: 'matchmaking',
@@ -134,8 +137,8 @@ export default function OurServices() {
       iconColor: 'text-rose-600',
       borderColor: 'border-rose-500/20',
       glowColor: 'group-hover:shadow-rose-500/20',
-      href: '/services?service=matchmaking',
-      action: () => setSelectedService('matchmaking')
+      cardHref: '/services?service=matchmaking',
+      actionType: 'modal'
     },
     {
       id: 'matrimonial',
@@ -147,8 +150,9 @@ export default function OurServices() {
       iconColor: 'text-cyan-600',
       borderColor: 'border-cyan-500/20',
       glowColor: 'group-hover:shadow-cyan-500/20',
-      href: '/services?service=matrimonial',
-      action: () => setSelectedService('matrimonial')
+      cardHref: '/services?service=matrimonial',
+      buttonHref: '/matrimonial',
+      actionType: 'link'
     },
     {
       id: 'business',
@@ -160,8 +164,9 @@ export default function OurServices() {
       iconColor: 'text-orange-600',
       borderColor: 'border-orange-500/20',
       glowColor: 'group-hover:shadow-orange-500/20',
-      href: '/services?service=business',
-      action: () => setSelectedService('business')
+      cardHref: '/services?service=business',
+      buttonHref: '/business-growth',
+      actionType: 'link'
     }
   ];
 
@@ -199,7 +204,8 @@ export default function OurServices() {
           {services.map((service, index) => (
             <div 
               key={service.id}
-              className={`group relative flex flex-col h-full rounded-[2rem] border ${service.borderColor} bg-card hover:bg-white dark:hover:bg-white/5 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl ${service.glowColor} overflow-hidden`}
+              onClick={() => router.push(service.cardHref)}
+              className={`group relative flex flex-col h-full rounded-[2rem] border ${service.borderColor} bg-card hover:bg-white dark:hover:bg-white/5 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl ${service.glowColor} overflow-hidden cursor-pointer`}
             >
               {/* Background Gradient on Hover */}
               <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
@@ -224,25 +230,27 @@ export default function OurServices() {
                 </div>
 
                 <div className="mt-auto">
-                  {service.href ? (
-                    <Link href={service.href} className="block group/btn">
-                      <Button 
-                        onClick={service.action}
-                        className="w-full py-4 h-auto rounded-xl bg-secondary/80 hover:bg-primary text-foreground hover:text-primary-foreground border border-border/50 hover:border-primary transition-all duration-500 flex items-center justify-center gap-2 font-bold text-[9px] uppercase tracking-widest"
-                      >
-                        {service.btnText}
-                        <ArrowRight size={12} className="group-hover/btn:translate-x-1 transition-transform duration-500" />
-                      </Button>
-                    </Link>
-                  ) : (
-                    <Button 
-                      onClick={service.action}
-                      className="w-full py-4 h-auto rounded-xl bg-secondary/80 hover:bg-primary text-foreground hover:text-primary-foreground border border-border/50 hover:border-primary group/btn transition-all duration-500 flex items-center justify-center gap-2 font-bold text-[9px] uppercase tracking-widest"
-                    >
-                      {service.btnText}
-                      <ArrowRight size={12} className="group-hover/btn:translate-x-1 transition-transform duration-500" />
-                    </Button>
-                  )}
+                  <Button
+                    type="button"
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      if (service.actionType === 'ask') {
+                        setIsAskNowOpen(true);
+                        return;
+                      }
+                      if (service.actionType === 'modal') {
+                        setIsMatchmakingOpen(true);
+                        return;
+                      }
+                      if (service.buttonHref) {
+                        router.push(service.buttonHref);
+                      }
+                    }}
+                    className="w-full py-4 h-auto rounded-xl bg-secondary/80 hover:bg-primary text-foreground hover:text-primary-foreground border border-border/50 hover:border-primary transition-all duration-500 flex items-center justify-center gap-2 font-bold text-[9px] uppercase tracking-widest"
+                  >
+                    {service.btnText}
+                    <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform duration-500" />
+                  </Button>
                 </div>
               </div>
             </div>
