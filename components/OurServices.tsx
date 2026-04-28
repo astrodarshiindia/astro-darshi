@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useLanguage } from '@/lib/LanguageContext';
 import { useSelectedService } from '@/lib/SelectedServiceContext';
+import VedicMandala from './VedicMandala';
 import { 
   FileText, 
   Search, 
@@ -16,7 +17,9 @@ import {
   Phone,
   Sparkles,
   TrendingUp,
-  Wand2
+  Wand2,
+  CheckCircle2,
+  Zap
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -25,17 +28,9 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { 
-  Select, 
-  SelectContent, 
-  SelectItem, 
-  SelectTrigger, 
-  SelectValue 
-} from "@/components/ui/select";
 
 export default function OurServices() {
   const { t } = useLanguage();
@@ -70,8 +65,10 @@ export default function OurServices() {
       desc: t('service.kundli.desc'),
       icon: FileText,
       btnText: t('service.kundli.btn'),
-      color: 'from-blue-500/20 to-indigo-500/20',
-      iconColor: 'text-blue-500',
+      color: 'from-amber-500/20 to-orange-600/20',
+      iconColor: 'text-amber-600',
+      borderColor: 'border-amber-500/20',
+      glowColor: 'group-hover:shadow-amber-500/20',
       action: () => {
         setSelectedService('kundli');
         const element = document.getElementById('contact-form');
@@ -84,12 +81,27 @@ export default function OurServices() {
       desc: t('service.prashna.desc'),
       icon: Search,
       btnText: t('service.prashna.btn'),
-      color: 'from-purple-500/20 to-pink-500/20',
-      iconColor: 'text-purple-500',
+      color: 'from-blue-500/20 to-indigo-600/20',
+      iconColor: 'text-blue-600',
+      borderColor: 'border-blue-500/20',
+      glowColor: 'group-hover:shadow-blue-500/20',
       action: () => {
         setSelectedService('prashna');
         setIsAskNowOpen(true);
       }
+    },
+    {
+      id: 'tarot',
+      title: t('service.tarot.title'),
+      desc: t('service.tarot.desc'),
+      icon: Wand2,
+      btnText: t('service.tarot.btn'),
+      color: 'from-purple-500/20 to-pink-600/20',
+      iconColor: 'text-purple-600',
+      borderColor: 'border-purple-500/20',
+      glowColor: 'group-hover:shadow-purple-500/20',
+      href: '/tarot-reading',
+      action: () => setSelectedService('tarot')
     },
     {
       id: 'vastu',
@@ -97,8 +109,10 @@ export default function OurServices() {
       desc: t('service.vastu.desc'),
       icon: Home,
       btnText: t('service.vastu.btn'),
-      color: 'from-emerald-500/20 to-teal-500/20',
-      iconColor: 'text-emerald-500',
+      color: 'from-emerald-500/20 to-teal-600/20',
+      iconColor: 'text-emerald-600',
+      borderColor: 'border-emerald-500/20',
+      glowColor: 'group-hover:shadow-emerald-500/20',
       action: () => {
         setSelectedService('vastu');
         const element = document.getElementById('contact-form');
@@ -111,8 +125,10 @@ export default function OurServices() {
       desc: t('service.gemstone.desc'),
       icon: Gem,
       btnText: t('service.gemstone.btn'),
-      color: 'from-amber-500/20 to-orange-500/20',
-      iconColor: 'text-amber-500',
+      color: 'from-red-500/20 to-rose-600/20',
+      iconColor: 'text-red-600',
+      borderColor: 'border-red-500/20',
+      glowColor: 'group-hover:shadow-red-500/20',
       action: () => {
         setSelectedService('gemstone');
         const element = document.getElementById('astro-mall');
@@ -125,8 +141,10 @@ export default function OurServices() {
       desc: t('service.matchmaking.desc'),
       icon: Heart,
       btnText: t('service.matchmaking.btn'),
-      color: 'from-rose-500/20 to-pink-500/20',
-      iconColor: 'text-rose-500',
+      color: 'from-rose-500/20 to-pink-600/20',
+      iconColor: 'text-rose-600',
+      borderColor: 'border-rose-500/20',
+      glowColor: 'group-hover:shadow-rose-500/20',
       action: () => {
         setSelectedService('matchmaking');
         setIsMatchmakingOpen(true);
@@ -137,9 +155,11 @@ export default function OurServices() {
       title: t('service.matrimonial.title'),
       desc: t('service.matrimonial.desc'),
       icon: Users,
-      btnText: 'Fill Form',
-      color: 'from-cyan-500/20 to-blue-500/20',
-      iconColor: 'text-cyan-500',
+      btnText: t('service.matrimonial.btn'),
+      color: 'from-cyan-500/20 to-blue-600/20',
+      iconColor: 'text-cyan-600',
+      borderColor: 'border-cyan-500/20',
+      glowColor: 'group-hover:shadow-cyan-500/20',
       href: '/matrimonial',
       action: () => setSelectedService('matrimonial')
     },
@@ -149,94 +169,93 @@ export default function OurServices() {
       desc: t('service.business.desc'),
       icon: TrendingUp,
       btnText: t('service.business.btn'),
-      color: 'from-orange-500/20 to-yellow-500/20',
-      iconColor: 'text-orange-500',
+      color: 'from-orange-500/20 to-yellow-600/20',
+      iconColor: 'text-orange-600',
+      borderColor: 'border-orange-500/20',
+      glowColor: 'group-hover:shadow-orange-500/20',
       href: '/business-growth',
       action: () => setSelectedService('business')
-    },
-    {
-      id: 'tarot',
-      title: t('service.tarot.title.main'),
-      desc: t('service.tarot.desc.main'),
-      icon: Wand2,
-      btnText: 'Read More',
-      color: 'from-purple-500/20 to-indigo-500/20',
-      iconColor: 'text-purple-500',
-      href: '/tarot-reading',
-      action: () => setSelectedService('tarot')
     }
   ];
 
   return (
-    <section id="services" className="pt-24 pb-16 md:pt-40 md:pb-24 relative bg-background overflow-hidden">
-      {/* Dynamic Background */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] -translate-y-1/2" />
-        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px] translate-y-1/2" />
+    <section id="services" className="py-12 md:py-24 relative bg-background overflow-hidden">
+      {/* Decorative Background Elements */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] translate-x-1/3 -translate-y-1/3" />
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-amber-500/5 rounded-full blur-[120px] -translate-x-1/3 translate-y-1/3" />
+        
+        {/* Floating Mandalas */}
+        <div className="absolute top-20 left-10 opacity-10 animate-slow-rotate hidden lg:block">
+          <VedicMandala />
+        </div>
+        <div className="absolute bottom-20 right-10 opacity-10 animate-slow-rotate-reverse hidden lg:block">
+          <VedicMandala />
+        </div>
       </div>
 
       <div className="section-container relative z-10">
-        <div className="text-center mb-12 space-y-4">
-          <h2 className="text-4xl md:text-6xl font-serif tracking-tight">
-            {t('services.title')} <span className="text-primary italic">{t('services.title.highlight')}</span>
+        <div className="max-w-4xl mx-auto text-center mb-12 space-y-4">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold tracking-widest uppercase">
+            <Sparkles size={14} />
+            Our Services
+          </div>
+          <h2 className="text-4xl md:text-6xl font-serif tracking-tight leading-tight text-foreground">
+            Consult for <span className="text-primary italic">Better Life</span> Decisions
           </h2>
-          <p className="text-muted-foreground text-base font-light max-w-2xl mx-auto leading-relaxed">
-            Discover divine guidance through our curated astrological services, 
-            blending ancient wisdom with modern precision.
+          <p className="text-muted-foreground text-lg font-light max-w-2xl mx-auto leading-relaxed">
+            {t('services.subtitle')}
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {services.map((service, index) => (
             <div 
               key={service.id}
-              className="group relative flex flex-col h-full p-0.5 rounded-[2rem] bg-gradient-to-b from-border/50 to-transparent hover:from-primary/20 transition-all duration-700 shadow-2xl shadow-black/5"
+              className={`group relative flex flex-col h-full rounded-[2rem] border ${service.borderColor} bg-card hover:bg-white dark:hover:bg-white/5 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl ${service.glowColor} overflow-hidden`}
             >
-              <div className="flex flex-col h-full p-6 rounded-[1.9rem] bg-card/80 backdrop-blur-xl border border-white/5 relative overflow-hidden">
-                {/* Hover Gradient Overlay */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-100 transition-opacity duration-700`} />
-                
-                <div className="relative z-10 flex flex-col h-full">
-                  <div className="mb-6 relative">
-                    <div className={`w-12 h-12 rounded-xl bg-background border border-border flex items-center justify-center ${service.iconColor} group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg shadow-black/10`}>
-                      <service.icon size={24} strokeWidth={1.5} />
-                    </div>
-                    {/* Decorative number */}
-                    <span className="absolute top-0 right-0 text-3xl font-serif text-foreground/5 select-none">
-                      0{index + 1}
-                    </span>
+              {/* Background Gradient on Hover */}
+              <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+              
+              <div className="relative z-10 p-5 flex flex-col h-full">
+                <div className="mb-4 flex justify-between items-start">
+                  <div className={`w-10 h-10 rounded-xl bg-white dark:bg-card border ${service.borderColor} flex items-center justify-center ${service.iconColor} shadow-lg group-hover:scale-110 transition-all duration-500`}>
+                    <service.icon size={20} strokeWidth={1.5} />
                   </div>
+                  <span className="text-2xl font-serif text-foreground/5 font-bold">
+                    0{index + 1}
+                  </span>
+                </div>
 
-                  <div className="space-y-2 mb-6 flex-grow">
-                    <h3 className="text-xl font-serif text-foreground group-hover:text-primary transition-colors">
-                      {service.title}
-                    </h3>
-                    <p className="text-muted-foreground font-light leading-relaxed text-xs">
-                      {service.desc}
-                    </p>
-                  </div>
+                <div className="space-y-2 mb-4 flex-grow">
+                  <h3 className="text-lg font-serif text-foreground group-hover:text-primary transition-colors">
+                    {service.title}
+                  </h3>
+                  <p className="text-muted-foreground font-light leading-relaxed text-[11px]">
+                    {service.desc}
+                  </p>
+                </div>
 
-                  <div className="mt-auto">
-                    {service.href ? (
-                      <Link href={service.href} className="block group/btn">
-                        <Button 
-                          onClick={service.action}
-                          className="w-full py-5 rounded-xl bg-secondary/50 hover:bg-primary text-foreground hover:text-primary-foreground border border-border/50 hover:border-primary transition-all duration-500 flex items-center justify-between px-6"
-                        >
-                          <span className="text-[10px] font-bold tracking-[0.2em] uppercase">{service.btnText}</span>
-                          <ArrowRight size={16} className="group-hover/btn:translate-x-2 transition-transform duration-500" />
-                        </Button>
-                      </Link>
-                    ) : (
+                <div className="mt-auto">
+                  {service.href ? (
+                    <Link href={service.href} className="block group/btn">
                       <Button 
                         onClick={service.action}
-                        className="w-full py-5 rounded-xl bg-secondary/50 hover:bg-primary text-foreground hover:text-primary-foreground border border-border/50 hover:border-primary group/btn transition-all duration-500 flex items-center justify-between px-6"
+                        className="w-full py-4 h-auto rounded-xl bg-secondary/80 hover:bg-primary text-foreground hover:text-primary-foreground border border-border/50 hover:border-primary transition-all duration-500 flex items-center justify-center gap-2 font-bold text-[9px] uppercase tracking-widest"
                       >
-                        <span className="text-[10px] font-bold tracking-[0.2em] uppercase">{service.btnText}</span>
-                        <ArrowRight size={16} className="group-hover/btn:translate-x-2 transition-transform duration-500" />
+                        {service.btnText}
+                        <ArrowRight size={12} className="group-hover/btn:translate-x-1 transition-transform duration-500" />
                       </Button>
-                    )}
-                  </div>
+                    </Link>
+                  ) : (
+                    <Button 
+                      onClick={service.action}
+                      className="w-full py-4 h-auto rounded-xl bg-secondary/80 hover:bg-primary text-foreground hover:text-primary-foreground border border-border/50 hover:border-primary group/btn transition-all duration-500 flex items-center justify-center gap-2 font-bold text-[9px] uppercase tracking-widest"
+                    >
+                      {service.btnText}
+                      <ArrowRight size={12} className="group-hover/btn:translate-x-1 transition-transform duration-500" />
+                    </Button>
+                  )}
                 </div>
               </div>
             </div>
@@ -395,7 +414,7 @@ export default function OurServices() {
               </div>
             </div>
 
-            <Button type="submit" className="w-full mt-4 btn-premium py-8 text-lg">
+            <Button type="submit" className="w-full py-8 rounded-2xl text-lg font-serif">
               Check Compatibility
             </Button>
           </form>

@@ -7,7 +7,7 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: 'Astro Darshi - Vedic Astrology & Tarot Card Reading',
-  description: 'Discover your cosmic destiny with Astro Darshi. Expert vedic astrology and tarot card readings tailored for you.',
+  description: 'Get expert advice for your life journey with Astro Darshi. Traditional Vedic astrology and tarot card readings for your success.',
   keywords: ['vedic astrology', 'tarot reading', 'astrology consultation', 'birth chart analysis'],
   viewport: {
     width: 'device-width',

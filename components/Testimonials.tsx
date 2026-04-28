@@ -8,57 +8,63 @@ export default function Testimonials() {
   const testimonials = [
     {
       id: 1,
-      name: t('testimonials.1.name'),
-      role: t('testimonials.1.role'),
-      text: t('testimonials.1.text'),
+      name: "Rahul",
+      location: "Lucknow",
+      text: "Aap ki guidance se meri job problem solve hui, 2 mahine me result mila.",
     },
     {
       id: 2,
-      name: t('testimonials.2.name'),
-      role: t('testimonials.2.role'),
-      text: t('testimonials.2.text'),
+      name: "Neha",
+      location: "Delhi",
+      text: "Marriage delay issue clear hua, bahut accurate prediction tha.",
     },
     {
       id: 3,
-      name: t('testimonials.3.name'),
-      role: t('testimonials.3.role'),
-      text: t('testimonials.3.text'),
+      name: "Amit",
+      location: "Mumbai",
+      text: "Life was stuck, but your remedies worked like magic. Highly recommended!",
+    },
+    {
+      id: 4,
+      name: "Priya",
+      location: "Bangalore",
+      text: "Career transition was smooth after your consultation. Thank you!",
+    },
+    {
+      id: 5,
+      name: "Vikram",
+      location: "Jaipur",
+      text: "Accurate and very professional service. The best in the field.",
     },
   ];
 
   return (
-    <section className="py-24 md:py-32 relative bg-muted/20">
+    <section className="py-12 md:py-32 relative bg-muted/50 overflow-hidden">
       <div className="section-container relative z-10">
-        <div className="text-center mb-20 space-y-4">
-          <h2 className="text-4xl md:text-6xl text-foreground">
-            {t('testimonials.title')} <span className="text-primary italic">{t('testimonials.title.highlight')}</span>
+        <div className="text-center mb-20">
+          <h2 className="text-4xl md:text-5xl font-google text-foreground mb-4">
+            Our <span className="text-primary italic">Testimonials</span>
           </h2>
-          <p className="text-muted-foreground text-lg font-light max-w-2xl mx-auto">
-            {t('testimonials.subtitle')}
+          <p className="text-muted-foreground text-lg font-google max-w-2xl mx-auto">
+            Real stories from people who found clarity and success through our guidance.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
           {testimonials.map((testimonial) => (
             <div 
               key={testimonial.id}
-              className="relative p-10 rounded-[2.5rem] bg-card border border-border hover:border-primary/20 transition-all duration-500 group"
+              className="relative p-8 rounded-3xl bg-card border border-border/50 hover:border-primary/30 transition-all duration-500 group flex flex-col min-w-[300px] md:min-w-[380px] snap-center"
             >
-              <Quote className="absolute top-8 right-8 text-primary/10 group-hover:text-primary/20 transition-colors" size={40} />
+              <Quote className="text-primary/10 mb-6" size={28} />
               
-              <div className="flex gap-1 mb-6">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} size={14} className="fill-primary text-primary" />
-                ))}
-              </div>
-
-              <p className="text-foreground/70 font-light italic leading-relaxed mb-8">
+              <p className="text-foreground/80 font-google text-base md:text-lg leading-relaxed mb-8 flex-grow">
                 "{testimonial.text}"
               </p>
 
-              <div className="pt-6 border-t border-border">
-                <p className="text-foreground font-medium">{testimonial.name}</p>
-                <p className="text-muted-foreground/50 text-xs tracking-widest uppercase mt-1">{testimonial.role}</p>
+              <div className="pt-6 border-t border-border/50">
+                <p className="text-foreground font-semibold font-google">{testimonial.name}</p>
+                <p className="text-muted-foreground text-sm font-google mt-0.5">{testimonial.location}</p>
               </div>
             </div>
           ))}

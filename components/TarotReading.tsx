@@ -218,7 +218,7 @@ export default function TarotReading() {
       <div id="tarot-spreads" className="py-24 bg-muted/20 relative z-20">
         <div className="section-container">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-google text-foreground mb-4">Sacred Tarot Spreads</h2>
+            <h2 className="text-4xl font-google text-foreground mb-4">Common Tarot Spreads</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">Different situations require different perspectives. We use specific spreads to uncover the most relevant insights for your journey.</p>
           </div>
           

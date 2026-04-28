@@ -7,7 +7,7 @@ export default function AstrologerProfile() {
   const { t } = useLanguage();
 
   return (
-    <section className="py-24 md:py-32 relative bg-muted/20">
+    <section className="py-12 md:py-32 relative bg-muted/50">
       <div className="section-container">
         <div className="max-w-4xl mx-auto text-center space-y-12">
           {/* About Content */}

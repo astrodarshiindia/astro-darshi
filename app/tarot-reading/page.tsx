@@ -5,7 +5,7 @@ import ContactForm from '@/components/ContactForm';
 
 export const metadata = {
   title: 'Tarot Card Reading - Instant Guidance | Astro Darshi',
-  description: 'Experience deep intuitive Tarot card readings for clarity on love, career, and life situations. Get instant guidance through sacred esoteric wisdom.',
+  description: 'Experience simple and effective Tarot card readings for clarity on love, career, and life. Get instant guidance for your problems.',
 };
 
 export default function TarotReadingPage() {

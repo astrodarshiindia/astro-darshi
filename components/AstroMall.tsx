@@ -63,7 +63,7 @@ export default function AstroMall() {
     }, [products, selectedService]);
 
     return (
-        <section id="astro-mall" className="py-24 md:py-32 relative">
+        <section id="astro-mall" className="py-12 md:py-32 relative bg-background">
             <div className="section-container">
                 <div className="text-center mb-20">
                     <h2 className="text-4xl md:text-6xl mb-6">

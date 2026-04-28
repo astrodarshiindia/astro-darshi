@@ -1,178 +1,227 @@
-import type { Metadata } from 'next';
+'use client';
+
+import React from 'react';
 import Header from '@/components/Header';
 import CosmicBackground from '@/components/CosmicBackground';
 import Footer from '@/components/Footer';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Sparkles, Star } from 'lucide-react';
-
-export const metadata: Metadata = {
-  title: 'Our Services | Astro Darshi',
-  description: 'Explore vedic astrology and tarot card reading services tailored for your cosmic journey.',
-};
+import { 
+  Accordion, 
+  AccordionContent, 
+  AccordionItem, 
+  AccordionTrigger 
+} from '@/components/ui/accordion';
+import { 
+  Star, 
+  Sparkles, 
+  FileText, 
+  Search, 
+  Home, 
+  Gem, 
+  Heart, 
+  Users, 
+  TrendingUp, 
+  Wand2,
+  ArrowRight
+} from 'lucide-react';
+import { useLanguage } from '@/lib/LanguageContext';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 export default function ServicesPage() {
+  const { t } = useLanguage();
+  
   const services = [
     {
-      id: 1,
-      title: 'Birth Chart Analysis',
-      description: 'Deep analysis of your natal chart to understand your personality, strengths, and life path.',
-      details: [
-        'Planetary positions at birth',
-        'House analysis and meanings',
-        'Zodiac sign interpretations',
-        'Aspect analysis for relationships',
-        'Dasha predictions',
-      ],
-      duration: '60 minutes',
+      id: 'kundli',
+      title: t('service.kundli.title'),
+      description: t('service.kundli.desc'),
+      details: t('service.kundli.details'),
+      icon: FileText,
+      btnText: t('service.kundli.btn'),
+      href: '/#contact-form',
+      color: 'text-blue-500',
+      bgColor: 'bg-blue-500/10'
     },
     {
-      id: 2,
-      title: 'Planetary Predictions',
-      description: 'Get insights into upcoming planetary transits and their influence on your life.',
-      details: [
-        'Current planetary movements',
-        'Upcoming opportunities',
-        'Challenges and solutions',
-        'Timing for important decisions',
-        'Remedial measures (Upayes)',
-      ],
-      duration: '45 minutes',
+      id: 'prashna',
+      title: t('service.prashna.title'),
+      description: t('service.prashna.desc'),
+      details: t('service.prashna.details'),
+      icon: Search,
+      btnText: t('service.prashna.btn'),
+      href: '/#services',
+      color: 'text-purple-500',
+      bgColor: 'bg-purple-500/10'
     },
     {
-      id: 3,
-      title: 'Career Guidance',
-      description: 'Vedic insights to help you find your ideal career path and professional growth.',
-      details: [
-        '10th house analysis',
-        'Career compatibility',
-        'Best time for career changes',
-        'Business opportunities',
-        'Success indicators',
-      ],
-      duration: '50 minutes',
+      id: 'tarot',
+      title: t('service.tarot.title'),
+      description: t('service.tarot.desc'),
+      details: t('service.tarot.details'),
+      icon: Wand2,
+      btnText: t('service.tarot.btn'),
+      href: '/tarot-reading',
+      color: 'text-indigo-500',
+      bgColor: 'bg-indigo-500/10'
     },
     {
-      id: 4,
-      title: 'Relationship Insights',
-      description: 'Understand your relationship patterns and compatibility with your partner.',
-      details: [
-        'Synastry analysis',
-        'Compatibility report',
-        'Timing for commitments',
-        'Family harmony insights',
-        'Guidance for challenges',
-      ],
-      duration: '60 minutes',
+      id: 'vastu',
+      title: t('service.vastu.title'),
+      description: t('service.vastu.desc'),
+      details: t('service.vastu.details'),
+      icon: Home,
+      btnText: t('service.vastu.btn'),
+      href: '/#contact-form',
+      color: 'text-emerald-500',
+      bgColor: 'bg-emerald-500/10'
     },
     {
-      id: 5,
-      title: 'Tarot Card Reading',
-      description: 'Intuitive guidance through tarot to illuminate your current situation and future path.',
-      details: [
-        'Three-card spread',
-        'Detailed card interpretations',
-        'Life advice and guidance',
-        'Energy clearing insights',
-        'Spiritual messages',
-      ],
-      duration: '45 minutes',
+      id: 'gemstone',
+      title: t('service.gemstone.title'),
+      description: t('service.gemstone.desc'),
+      details: t('service.gemstone.details'),
+      icon: Gem,
+      btnText: t('service.gemstone.btn'),
+      href: '/#astro-mall',
+      color: 'text-amber-500',
+      bgColor: 'bg-amber-500/10'
     },
     {
-      id: 6,
-      title: 'Life Purpose Session',
-      description: 'Discover your soul\'s purpose and life mission through vedic wisdom.',
-      details: [
-        'Nodal axis analysis',
-        'Soul karmic lessons',
-        'Life purpose indicators',
-        'Spiritual growth path',
-        'Fulfillment strategies',
-      ],
-      duration: '75 minutes',
+      id: 'matchmaking',
+      title: t('service.matchmaking.title'),
+      description: t('service.matchmaking.desc'),
+      details: t('service.matchmaking.details'),
+      icon: Heart,
+      btnText: t('service.matchmaking.btn'),
+      href: '/#services',
+      color: 'text-rose-500',
+      bgColor: 'bg-rose-500/10'
     },
+    {
+      id: 'matrimonial',
+      title: t('service.matrimonial.title'),
+      description: t('service.matrimonial.desc'),
+      details: t('service.matrimonial.details'),
+      icon: Users,
+      btnText: t('service.matrimonial.btn'),
+      href: '/matrimonial',
+      color: 'text-cyan-500',
+      bgColor: 'bg-cyan-500/10'
+    },
+    {
+      id: 'business',
+      title: t('service.business.title'),
+      description: t('service.business.desc'),
+      details: t('service.business.details'),
+      icon: TrendingUp,
+      btnText: t('service.business.btn'),
+      href: '/business-growth',
+      color: 'text-orange-500',
+      bgColor: 'bg-orange-500/10'
+    }
   ];
 
   return (
-    <main className="relative">
+    <main className="relative min-h-screen">
       <CosmicBackground />
       <Header />
 
       {/* Hero Section */}
-      <section className="relative pt-18 pb-10 md:pb-12">
+      <section className="relative pt-32 pb-12">
         <div className="section-container text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4">
-            <span className="gradient-text pt-6">Our Sacred Services</span>
+          <h1 className="text-5xl md:text-7xl font-serif mb-6">
+            {t('services.title')} <span className="text-primary italic">{t('services.title.highlight')}</span>
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Comprehensive vedic astrology and tarot card readings designed to illuminate your cosmic path
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto font-light leading-relaxed">
+            {t('services.subtitle')}
           </p>
         </div>
       </section>
 
-      {/* Services Grid */}
-      <section className="relative py-12">
-        <div className="section-container">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service) => (
-              <Card
-                key={service.id}
-                className="cosmic-border glass-effect hover:border-primary transition-all duration-300"
+      {/* Row-wise Detailed Services */}
+      <section className="relative pb-32">
+        <div className="section-container max-w-5xl">
+          <Accordion type="single" collapsible className="space-y-6">
+            {services.map((service, index) => (
+              <AccordionItem 
+                key={service.id} 
+                value={service.id}
+                className="group border border-white/5 rounded-[2rem] bg-card/30 backdrop-blur-xl overflow-hidden hover:border-primary/20 transition-all duration-500 px-4 md:px-8"
               >
-                <CardHeader className="space-y-4">
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <CardTitle className="text-xl mb-2">{service.title}</CardTitle>
-                      <p className="text-sm text-muted-foreground">{service.description}</p>
+                <AccordionTrigger className="hover:no-underline py-8">
+                  <div className="flex items-center gap-6 text-left w-full">
+                    <div className={`hidden sm:flex w-14 h-14 rounded-2xl ${service.bgColor} ${service.color} items-center justify-center shrink-0`}>
+                      <service.icon size={28} />
                     </div>
-                    <div className="text-primary">
-                      {service.id % 2 === 0 ? (
-                        <Sparkles size={24} />
-                      ) : (
-                        <Star size={24} />
-                      )}
+                    <div className="space-y-1 pr-4">
+                      <div className="flex items-center gap-2">
+                        <span className="text-primary/40 font-serif text-lg">0{index + 1}</span>
+                        <h3 className="text-xl md:text-2xl font-serif group-hover:text-primary transition-colors">
+                          {service.title}
+                        </h3>
+                      </div>
+                      <p className="text-muted-foreground font-light text-sm md:text-base line-clamp-1">
+                        {service.description}
+                      </p>
                     </div>
                   </div>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div>
-                    <h4 className="text-sm font-semibold text-primary mb-2">Includes:</h4>
-                    <ul className="space-y-1">
-                      {service.details.map((detail, idx) => (
-                        <li key={idx} className="text-sm text-muted-foreground flex items-center gap-2">
-                          <span className="w-1 h-1 rounded-full bg-primary"></span>
-                          {detail}
-                        </li>
-                      ))}
-                    </ul>
+                </AccordionTrigger>
+                <AccordionContent className="pb-8">
+                  <div className="flex flex-col md:flex-row gap-8 items-start pt-4 border-t border-white/5">
+                    <div className="flex-1 space-y-6">
+                      <div className="space-y-4">
+                        <h4 className="text-primary font-bold tracking-widest text-[10px] uppercase">Detailed Insights</h4>
+                        <p className="text-lg font-light leading-relaxed text-foreground/80 italic">
+                          "{service.details}"
+                        </p>
+                      </div>
+                      
+                      <div className="flex flex-wrap gap-4 pt-4">
+                        <Link href={service.href} className="w-full sm:w-auto">
+                          <Button className="w-full sm:w-auto px-8 py-6 rounded-2xl flex items-center justify-between gap-4 group/btn">
+                            <span>{service.btnText}</span>
+                            <ArrowRight size={18} className="group-hover/btn:translate-x-1 transition-transform" />
+                          </Button>
+                        </Link>
+                        <Link href="/contact" className="w-full sm:w-auto">
+                          <Button variant="outline" className="w-full sm:w-auto px-8 py-6 rounded-2xl border-primary/20 hover:bg-primary/5">
+                            Expert Consultation
+                          </Button>
+                        </Link>
+                      </div>
+                    </div>
+                    <div className={`hidden lg:flex w-48 h-48 rounded-[2rem] ${service.bgColor} items-center justify-center ${service.color} opacity-20 rotate-12 shrink-0`}>
+                       <service.icon size={80} strokeWidth={1} />
+                    </div>
                   </div>
-                  <div className="border-t border-border pt-3">
-                    <p className="text-sm">
-                      <span className="text-primary font-semibold">Duration:</span>{' '}
-                      <span className="text-muted-foreground">{service.duration}</span>
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
+                </AccordionContent>
+              </AccordionItem>
             ))}
-          </div>
+          </Accordion>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="relative py-20">
+      {/* Journey CTA */}
+      <section className="relative py-24 bg-primary/5 border-t border-primary/10">
         <div className="section-container">
-          <Card className="cosmic-border glass-effect max-w-2xl mx-auto text-center p-8">
-            <h2 className="text-3xl font-bold mb-4">Ready to Begin Your Journey?</h2>
-            <p className="text-muted-foreground mb-6">
-              Choose the service that resonates with your soul and let cosmic wisdom guide you.
+          <div className="max-w-3xl mx-auto text-center space-y-8">
+            <div className="inline-block p-3 rounded-full bg-primary/10 mb-2">
+               <Sparkles className="text-primary" size={24} />
+            </div>
+            <h2 className="text-4xl md:text-5xl font-serif leading-tight">
+              {t('services.ready')}
+            </h2>
+            <p className="text-xl text-muted-foreground font-light leading-relaxed">
+              {t('services.ready.subtitle')}
             </p>
-            <a
-              href="/contact"
-              className="inline-block px-8 py-3 btn-gold rounded-lg font-semibold"
-            >
-              Book Your Session
-            </a>
-          </Card>
+            <div className="pt-6">
+              <Link href="/contact">
+                <Button className="px-12 py-8 rounded-2xl text-lg font-serif shadow-xl shadow-primary/20">
+                  {t('services.book')}
+                </Button>
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 

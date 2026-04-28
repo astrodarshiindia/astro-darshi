@@ -49,13 +49,13 @@ const translations = {
     // Services
     'services.title': 'Our',
     'services.title.highlight': 'Services',
-    'services.subtitle': "We blend ancient wisdom with modern understanding to provide clarity for your life's most significant questions.",
-    'services.sacred': 'Sacred Services',
-    'services.sacred.subtitle': 'Comprehensive vedic astrology and tarot card readings designed to illuminate your cosmic path',
+    'services.subtitle': "We combine traditional knowledge with practical advice to help you make better life decisions.",
+    'services.sacred': 'Special Astrology Services',
+    'services.sacred.subtitle': 'Expert Vedic astrology and Tarot readings to guide you in your life journey',
     'services.includes': 'Includes:',
     'services.duration': 'Duration:',
-    'services.ready': 'Ready to Begin Your Journey?',
-    'services.ready.subtitle': 'Choose the service that resonates with your soul and let cosmic wisdom guide you.',
+    'services.ready': 'Ready to solve your problems?',
+    'services.ready.subtitle': 'Choose the service you need and get expert guidance today.',
     'services.book': 'Book Your Session',
     'services.explore_all': 'Explore All',
     'services.begin_journey': 'Begin Your Journey',
@@ -123,15 +123,15 @@ const translations = {
 
     // Service 1: Vedic Astrology
     'service.vedic.title': 'Vedic Astrology',
-    'service.vedic.desc': 'Your cosmic blueprint revealed through ancient sidereal calculations and planetary periods.',
+    'service.vedic.desc': 'Get detailed life predictions based on your birth chart and planetary positions.',
     'service.vedic.f1': 'Birth Chart Analysis',
     'service.vedic.f2': 'Planetary Dashas',
     'service.vedic.f3': 'Career & Wealth',
     'service.vedic.f4': 'Relationship Compatibility',
 
-    // Service 2: Sacred Tarot
-    'service.tarot.title': 'Sacred Tarot',
-    'service.tarot.desc': 'Intuitive guidance using esoteric symbolism to illuminate your current energies and paths.',
+    // Service 2: Tarot Reading
+    'service.tarot.title': 'Tarot Reading',
+    'service.tarot.desc': 'Simple and effective guidance to understand your current situation and future possibilities.',
     'service.tarot.f1': 'Intuitive Spreads',
     'service.tarot.f2': 'Spiritual Growth',
     'service.tarot.f3': 'Decision Clarity',
@@ -139,26 +139,44 @@ const translations = {
 
     // New Services Section
     'service.kundli.title': 'Janm Kundli Reading',
-    'service.kundli.desc': 'Understand your life, career, marriage & future deeply',
+    'service.kundli.desc': '(Understand your life, career, marriage & future deeply) through vedic astrology',
     'service.kundli.btn': 'Book Now',
+    'service.kundli.details': 'Deep analysis of your natal chart including planetary positions at birth, house analysis, zodiac sign interpretations, and dasha predictions for all life aspects.',
+    
     'service.prashna.title': 'Prashna Kundli',
     'service.prashna.desc': 'Get answers to your specific questions instantly',
     'service.prashna.btn': 'Ask Now',
+    'service.prashna.details': 'Horary astrology providing immediate answers to specific queries without a birth chart, based on the planetary alignment at the moment of asking.',
+    
+    'service.tarot.title': 'Tarot Reading',
+    'service.tarot.desc': 'Intuitive guidance through tarot to illuminate your current situation and future path',
+    'service.tarot.btn': 'Read More',
+    'service.tarot.details': 'Expert tarot card reading to give you clarity on your relationships, career, and personal life.',
+    
     'service.vastu.title': 'Vastu Consultation',
     'service.vastu.desc': 'Home / Shop / Office solutions',
     'service.vastu.btn': 'Book Visit',
+    'service.vastu.details': 'Traditional Vastu tips for your home or office to bring more positivity, wealth, and peace in your life.',
+    
     'service.gemstone.title': 'Gemstone Consultation & Purchase',
     'service.gemstone.desc': 'Get correct gemstone with certification',
     'service.gemstone.btn': 'View Stones',
+    'service.gemstone.details': 'Get suggestions for high-quality, lab-certified gemstones based on your stars to help you succeed in life.',
+    
     'service.matchmaking.title': 'Matchmaking Analysis',
     'service.matchmaking.desc': 'Deep compatibility check for successful marriage',
     'service.matchmaking.btn': 'Check Compatibility',
+    'service.matchmaking.details': 'Detailed Kundli matching (Guna Milan) and check for Manglik Dosha to ensure a happy and long marriage.',
+    
     'service.matrimonial.title': 'Matrimonial Services',
     'service.matrimonial.desc': 'Just Fill our matrimonial form and get your suitable partner',
     'service.matrimonial.btn': 'Fill Form',
+    'service.matrimonial.details': 'A unique platform to find your life partner based on family values and kundli matching.',
+    
     'service.business.title': 'Business Growth',
     'service.business.desc': 'Get astrological guidance for business success and loss recovery',
     'service.business.btn': 'Grow Business',
+    'service.business.details': 'Strategic astrological consulting for entrepreneurs, focusing on auspicious launch timings, partnership compatibility, and financial recovery.',
 
     // Business Growth Page
     'business.hero.title': 'BUSINESS GROWTH PAGE',
@@ -239,14 +257,14 @@ const translations = {
     // Astro Mall
     'mall.title': 'The',
     'mall.title.highlight': 'Astro',
-    'mall.subtitle': 'Premium gemstones and sacred artifacts, personally curated and energetically cleansed for your cosmic journey.',
-    'mall.coming_soon': 'Coming Soon - Sacred Artifacts',
+    'mall.subtitle': 'Buy original gemstones and items, tested and checked for quality to help you in your life journey.',
+    'mall.coming_soon': 'Coming Soon - Items',
     'mall.enquire': 'Enquire Now',
     'mall.authentic': 'Authentic',
     'mall.mall': 'Mall',
 
     // Footer
-    'footer.description': 'Illuminating your spiritual journey through the ancient wisdom of Vedic Astrology and the intuitive guidance of Sacred Tarot. Your cosmic compass for lifes transformation.',
+    'footer.description': 'Helping you in your life journey through the knowledge of Vedic Astrology and Tarot Reading. Your trusted guide for better life decisions.',
     'footer.address': 'Lucknow, Uttar Pradesh, India',
     'footer.navigation': 'Navigation',
     'footer.services': 'Services',
@@ -628,26 +646,44 @@ const translations = {
 
     // New Services Section
     'service.kundli.title': 'जन्म कुंडली विश्लेषण',
-    'service.kundli.desc': 'अपने जीवन, करियर, विवाह और भविष्य को गहराई से समझें',
+    'service.kundli.desc': 'अपने जीवन, करियर, विवाह और भविष्य को गहराई से समझें (वैदिक ज्योतिष के माध्यम से)',
     'service.kundli.btn': 'अभी बुक करें',
+    'service.kundli.details': 'जन्म के समय ग्रहों की स्थिति, भाव विश्लेषण, राशि चक्र की व्याख्या और जीवन के सभी पहलुओं के लिए दशा भविष्यवाणियों सहित आपकी जन्म कुंडली का गहरा विश्लेषण।',
+
     'service.prashna.title': 'प्रश्न कुंडली',
     'service.prashna.desc': 'अपने विशिष्ट प्रश्नों के उत्तर तुरंत प्राप्त करें',
     'service.prashna.btn': 'अभी पूछें',
+    'service.prashna.details': 'होरी ज्योतिष (Prashna Astrology) जो जन्म कुंडली के बिना विशिष्ट प्रश्नों के तत्काल उत्तर प्रदान करती है, जो पूछने के समय ग्रहों की स्थिति पर आधारित होती है।',
+
     'service.vastu.title': 'वास्तु परामर्श',
     'service.vastu.desc': 'घर / दुकान / कार्यालय समाधान',
     'service.vastu.btn': 'विजिट बुक करें',
+    'service.vastu.details': 'सकारात्मक ऊर्जा का प्रवाह, समृद्धि और शांति सुनिश्चित करने के लिए आधुनिक स्थानों पर लागू प्राचीन वास्तुकला ज्ञान।',
+
     'service.gemstone.title': 'रत्न परामर्श और खरीद',
     'service.gemstone.desc': 'प्रमाणन के साथ सही रत्न प्राप्त करें',
     'service.gemstone.btn': 'पत्थर देखें',
+    'service.gemstone.details': 'शक्तियों को बढ़ाने और चुनौतियों को कम करने के लिए आपकी ग्रहों की स्थिति के आधार पर प्रामाणिक, लैब-प्रमाणित रत्नों की व्यक्तिगत सिफारिश।',
+
     'service.matchmaking.title': 'गुण मिलान विश्लेषण',
     'service.matchmaking.desc': 'सफल विवाह के लिए गहरी अनुकूलता जांच',
     'service.matchmaking.btn': 'अनुकूलता जांचें',
+    'service.matchmaking.details': 'दीर्घकालिक वैवाहिक सद्भाव और स्थिरता के लिए व्यापक गुण मिलान और मांगलिक दोष, भकूट और नाड़ी का विश्लेषण।',
+
     'service.matrimonial.title': 'वैवाहिक सेवाएं',
     'service.matrimonial.desc': 'बस हमारा वैवाहिक फॉर्म भरें और अपना उपयुक्त साथी पाएं',
     'service.matrimonial.btn': 'फॉर्म भरें',
+    'service.matrimonial.details': 'एक अनूठा ज्योतिष-आधारित वैवाहिक मंच जहां हम ब्रह्मांडीय अनुकूलता और पारंपरिक मूल्यों के आधार पर प्रोफाइल को फिल्टर करते हैं।',
+
     'service.business.title': 'व्यापार वृद्धि',
     'service.business.desc': 'व्यापार में सफलता और घाटे से उबरने के लिए ज्योतिषीय मार्गदर्शन प्राप्त करें',
     'service.business.btn': 'व्यापार बढ़ाएं',
+    'service.business.details': 'उद्यमियों के लिए रणनीतिक ज्योतिषीय परामर्श, जो शुभ लॉन्चिंग समय, साझेदारी अनुकूलता और वित्तीय सुधार पर केंद्रित है।',
+
+    'service.tarot.title': 'टैरो कार्ड रीडिंग',
+    'service.tarot.desc': 'आपकी वर्तमान स्थिति और भविष्य के पथ को रोशन करने के लिए टैरो के माध्यम से सहज मार्गदर्शन',
+    'service.tarot.btn': 'और पढ़ें',
+    'service.tarot.details': 'गूढ़ प्रतीकवाद और ऊर्जा संरेखण का उपयोग करके रिश्तों, करियर और व्यक्तिगत विकास पर सहज मार्गदर्शन प्रदान करने वाले पवित्र टैरो स्प्रेड।',
 
     // Business Growth Page
     'business.hero.title': 'व्यापार वृद्धि पेज',
