@@ -1,6 +1,7 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Header from '@/components/Header';
 import CosmicBackground from '@/components/CosmicBackground';
 import Footer from '@/components/Footer';
@@ -29,6 +30,8 @@ import { Button } from '@/components/ui/button';
 
 export default function ServicesPage() {
   const { t } = useLanguage();
+  const searchParams = useSearchParams();
+  const [activeService, setActiveService] = useState<string | undefined>(undefined);
   
   const services = [
     {
@@ -121,6 +124,18 @@ export default function ServicesPage() {
     }
   ];
 
+  useEffect(() => {
+    const serviceParam = searchParams.get('service');
+    const valid = services.some((service) => service.id === serviceParam);
+    if (valid) {
+      setActiveService(serviceParam || undefined);
+      const element = document.getElementById(serviceParam as string);
+      element?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      setActiveService(undefined);
+    }
+  }, [searchParams]);
+
   return (
     <main className="relative min-h-screen">
       <CosmicBackground />
@@ -141,11 +156,12 @@ export default function ServicesPage() {
       {/* Row-wise Detailed Services */}
       <section className="relative pb-32">
         <div className="section-container max-w-5xl">
-          <Accordion type="single" collapsible className="space-y-6">
+          <Accordion type="single" collapsible value={activeService} onValueChange={(value) => setActiveService(value || undefined)} className="space-y-6">
             {services.map((service, index) => (
               <AccordionItem 
                 key={service.id} 
                 value={service.id}
+                id={service.id}
                 className="group border border-white/5 rounded-[2rem] bg-card/30 backdrop-blur-xl overflow-hidden hover:border-primary/20 transition-all duration-500 px-4 md:px-8"
               >
                 <AccordionTrigger className="hover:no-underline py-8">

@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
-type ServiceId = 'kundli' | 'prashna' | 'vastu' | 'gemstone' | 'matchmaking' | 'matrimonial' | null;
+type ServiceId = 'kundli' | 'prashna' | 'tarot' | 'vastu' | 'gemstone' | 'matchmaking' | 'matrimonial' | 'business' | null;
 
 interface SelectedServiceContextType {
   selectedService: ServiceId;

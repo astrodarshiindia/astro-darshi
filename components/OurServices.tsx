@@ -69,11 +69,8 @@ export default function OurServices() {
       iconColor: 'text-amber-600',
       borderColor: 'border-amber-500/20',
       glowColor: 'group-hover:shadow-amber-500/20',
-      action: () => {
-        setSelectedService('kundli');
-        const element = document.getElementById('contact-form');
-        element?.scrollIntoView({ behavior: 'smooth' });
-      }
+      href: '/services?service=kundli',
+      action: () => setSelectedService('kundli')
     },
     {
       id: 'prashna',
@@ -85,10 +82,8 @@ export default function OurServices() {
       iconColor: 'text-blue-600',
       borderColor: 'border-blue-500/20',
       glowColor: 'group-hover:shadow-blue-500/20',
-      action: () => {
-        setSelectedService('prashna');
-        setIsAskNowOpen(true);
-      }
+      href: '/services?service=prashna',
+      action: () => setSelectedService('prashna')
     },
     {
       id: 'tarot',
@@ -100,7 +95,7 @@ export default function OurServices() {
       iconColor: 'text-purple-600',
       borderColor: 'border-purple-500/20',
       glowColor: 'group-hover:shadow-purple-500/20',
-      href: '/tarot-reading',
+      href: '/services?service=tarot',
       action: () => setSelectedService('tarot')
     },
     {
@@ -113,11 +108,8 @@ export default function OurServices() {
       iconColor: 'text-emerald-600',
       borderColor: 'border-emerald-500/20',
       glowColor: 'group-hover:shadow-emerald-500/20',
-      action: () => {
-        setSelectedService('vastu');
-        const element = document.getElementById('contact-form');
-        element?.scrollIntoView({ behavior: 'smooth' });
-      }
+      href: '/services?service=vastu',
+      action: () => setSelectedService('vastu')
     },
     {
       id: 'gemstone',
@@ -129,11 +121,8 @@ export default function OurServices() {
       iconColor: 'text-red-600',
       borderColor: 'border-red-500/20',
       glowColor: 'group-hover:shadow-red-500/20',
-      action: () => {
-        setSelectedService('gemstone');
-        const element = document.getElementById('astro-mall');
-        element?.scrollIntoView({ behavior: 'smooth' });
-      }
+      href: '/services?service=gemstone',
+      action: () => setSelectedService('gemstone')
     },
     {
       id: 'matchmaking',
@@ -145,10 +134,8 @@ export default function OurServices() {
       iconColor: 'text-rose-600',
       borderColor: 'border-rose-500/20',
       glowColor: 'group-hover:shadow-rose-500/20',
-      action: () => {
-        setSelectedService('matchmaking');
-        setIsMatchmakingOpen(true);
-      }
+      href: '/services?service=matchmaking',
+      action: () => setSelectedService('matchmaking')
     },
     {
       id: 'matrimonial',
@@ -160,7 +147,7 @@ export default function OurServices() {
       iconColor: 'text-cyan-600',
       borderColor: 'border-cyan-500/20',
       glowColor: 'group-hover:shadow-cyan-500/20',
-      href: '/matrimonial',
+      href: '/services?service=matrimonial',
       action: () => setSelectedService('matrimonial')
     },
     {
@@ -173,7 +160,7 @@ export default function OurServices() {
       iconColor: 'text-orange-600',
       borderColor: 'border-orange-500/20',
       glowColor: 'group-hover:shadow-orange-500/20',
-      href: '/business-growth',
+      href: '/services?service=business',
       action: () => setSelectedService('business')
     }
   ];
