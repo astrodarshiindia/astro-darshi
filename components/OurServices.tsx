@@ -70,8 +70,7 @@ export default function OurServices() {
       borderColor: 'border-amber-500/20',
       glowColor: 'group-hover:shadow-amber-500/20',
       cardHref: '/services?service=kundli',
-      buttonHref: '/services?service=kundli',
-      actionType: 'link'
+      actionType: 'ask'
     },
     {
       id: 'prashna',
@@ -97,7 +96,7 @@ export default function OurServices() {
       borderColor: 'border-purple-500/20',
       glowColor: 'group-hover:shadow-purple-500/20',
       cardHref: '/services?service=tarot',
-      buttonHref: '/tarot-reading',
+      buttonHref: '/tarot-reading#contact-form',
       detailHref: '/tarot-reading',
       actionType: 'link'
     },
@@ -142,8 +141,9 @@ export default function OurServices() {
       borderColor: 'border-rose-500/20',
       glowColor: 'group-hover:shadow-rose-500/20',
       cardHref: '/services?service=matchmaking',
+      buttonHref: '/matchmaking',
       detailHref: '/matchmaking',
-      actionType: 'modal'
+      actionType: 'link'
     },
     {
       id: 'matrimonial',

@@ -148,7 +148,7 @@ const translations = {
     // New Services Section
     'service.kundli.title': 'Janm Kundli Reading',
     'service.kundli.desc': '(Understand your life, career, marriage & future deeply) through vedic astrology',
-    'service.kundli.btn': 'Book Now',
+    'service.kundli.btn': 'Ask Now',
     'service.kundli.details': 'Deep analysis of your natal chart including planetary positions at birth, house analysis, zodiac sign interpretations, and dasha predictions for all life aspects.',
     
     'service.prashna.title': 'Prashna Kundli',
@@ -663,7 +663,7 @@ const translations = {
     // New Services Section
     'service.kundli.title': 'जन्म कुंडली विश्लेषण',
     'service.kundli.desc': 'अपने जीवन, करियर, विवाह और भविष्य को गहराई से समझें (वैदिक ज्योतिष के माध्यम से)',
-    'service.kundli.btn': 'अभी बुक करें',
+    'service.kundli.btn': 'अभी पूछें',
     'service.kundli.details': 'जन्म के समय ग्रहों की स्थिति, भाव विश्लेषण, राशि चक्र की व्याख्या और जीवन के सभी पहलुओं के लिए दशा भविष्यवाणियों सहित आपकी जन्म कुंडली का गहरा विश्लेषण।',
 
     'service.prashna.title': 'प्रश्न कुंडली',

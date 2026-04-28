@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { 
   Dialog, 
+  DialogClose,
   DialogContent, 
   DialogDescription, 
   DialogHeader, 
@@ -18,7 +19,7 @@ import {
   SelectTrigger, 
   SelectValue 
 } from "@/components/ui/select";
-import { Sparkles, Loader2, CheckCircle2, Heart } from 'lucide-react';
+import { Sparkles, Loader2, CheckCircle2, Heart, X } from 'lucide-react';
 import { useLanguage } from '@/lib/LanguageContext';
 import { useToast } from '@/hooks/use-toast';
 
@@ -109,13 +110,20 @@ export default function MatrimonialFormModal({ isOpen, onOpenChange }: Matrimoni
             <div className="p-8 pb-6 bg-slate-900 text-white relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-3xl -mr-16 -mt-16" />
               <div className="relative z-10">
-                <DialogTitle className="text-3xl font-serif flex items-center gap-3">
-                  <Heart className="text-primary fill-primary" />
-                  {t('matrimonial.form.title')}
-                </DialogTitle>
-                <DialogDescription className="text-slate-400 mt-2 text-lg">
-                  Share your details to find your cosmic match.
-                </DialogDescription>
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <DialogTitle className="text-3xl font-serif flex items-center gap-3">
+                      <Heart className="text-primary fill-primary" />
+                      {t('matrimonial.form.title')}
+                    </DialogTitle>
+                    <DialogDescription className="text-slate-400 mt-2 text-lg">
+                      Share your details to find your cosmic match.
+                    </DialogDescription>
+                  </div>
+                  <DialogClose className="text-slate-300 hover:text-white transition-colors rounded-full p-2 bg-white/5 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/50">
+                    <X size={20} />
+                  </DialogClose>
+                </div>
               </div>
             </div>
             
