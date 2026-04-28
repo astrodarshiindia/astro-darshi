@@ -51,9 +51,14 @@ export default function ServicesPageClient({ initialService }: ServicesPageClien
       details: t('service.kundli.details'),
       icon: FileText,
       btnText: t('service.kundli.btn'),
-      href: '/#contact-form',
+      href: '/contact',
       color: 'text-blue-500',
-      bgColor: 'bg-blue-500/10'
+      bgColor: 'bg-blue-500/10',
+      highlights: [
+        'Personalized Janm Kundli analysis with planetary positions and birth chart insights',
+        'Career, marriage, health and wealth timing through Dasha and house predictions',
+        'Remedies and predictions designed for the next 12–24 months'
+      ]
     },
     {
       id: 'prashna',
@@ -62,9 +67,14 @@ export default function ServicesPageClient({ initialService }: ServicesPageClien
       details: t('service.prashna.details'),
       icon: Search,
       btnText: t('service.prashna.btn'),
-      href: '/#services',
+      href: '/contact',
       color: 'text-purple-500',
-      bgColor: 'bg-purple-500/10'
+      bgColor: 'bg-purple-500/10',
+      highlights: [
+        'Quick horary answers for urgent life and relationship questions',
+        'No birth chart required — answers come from planetary timing at the moment of asking',
+        'Ideal for fast decision-making on travel, job offers, finance and relationships'
+      ]
     },
     {
       id: 'tarot',
@@ -75,7 +85,12 @@ export default function ServicesPageClient({ initialService }: ServicesPageClien
       btnText: t('service.tarot.btn'),
       href: '/tarot-reading',
       color: 'text-indigo-500',
-      bgColor: 'bg-indigo-500/10'
+      bgColor: 'bg-indigo-500/10',
+      highlights: [
+        'Deep tarot spreads for current energy, obstacles, and future possibilities',
+        'Clarity on relationships, career transitions, and soul purpose',
+        'Practical next steps and spiritual guidance for your current situation'
+      ]
     },
     {
       id: 'vastu',
@@ -84,9 +99,14 @@ export default function ServicesPageClient({ initialService }: ServicesPageClien
       details: t('service.vastu.details'),
       icon: Home,
       btnText: t('service.vastu.btn'),
-      href: '/#contact-form',
+      href: '/vastu-consultation',
       color: 'text-emerald-500',
-      bgColor: 'bg-emerald-500/10'
+      bgColor: 'bg-emerald-500/10',
+      highlights: [
+        'Practical home and office Vastu changes without demolition',
+        'Remedies for better health, wealth and family harmony',
+        'Auspicious layout optimization for doors, rooms and workplace energy flow'
+      ]
     },
     {
       id: 'gemstone',
@@ -95,9 +115,14 @@ export default function ServicesPageClient({ initialService }: ServicesPageClien
       details: t('service.gemstone.details'),
       icon: Gem,
       btnText: t('service.gemstone.btn'),
-      href: '/#astro-mall',
+      href: '/astromall',
       color: 'text-amber-500',
-      bgColor: 'bg-amber-500/10'
+      bgColor: 'bg-amber-500/10',
+      highlights: [
+        'Verified, lab-certified gemstones chosen for your chart',
+        'Remedies to enhance confidence, career and relationships',
+        'Gemstone guidance based on your unique planetary strengths'
+      ]
     },
     {
       id: 'matchmaking',
@@ -106,9 +131,14 @@ export default function ServicesPageClient({ initialService }: ServicesPageClien
       details: t('service.matchmaking.details'),
       icon: Heart,
       btnText: t('service.matchmaking.btn'),
-      href: '/#services',
+      href: '/matchmaking',
       color: 'text-rose-500',
-      bgColor: 'bg-rose-500/10'
+      bgColor: 'bg-rose-500/10',
+      highlights: [
+        'Full Kundli matching with Guna Milan and Manglik checks',
+        'Partner compatibility evaluation for long-term marriage success',
+        'Advice on remedies, timing and relationship stability'
+      ]
     },
     {
       id: 'matrimonial',
@@ -119,7 +149,12 @@ export default function ServicesPageClient({ initialService }: ServicesPageClien
       btnText: t('service.matrimonial.btn'),
       href: '/matrimonial',
       color: 'text-cyan-500',
-      bgColor: 'bg-cyan-500/10'
+      bgColor: 'bg-cyan-500/10',
+      highlights: [
+        'Astrology-backed matrimonial profiling and partner matching',
+        'Verified profile discovery with family values and compatibility',
+        'Submit your profile, receive matches and connect safely'
+      ]
     },
     {
       id: 'business',
@@ -130,7 +165,12 @@ export default function ServicesPageClient({ initialService }: ServicesPageClien
       btnText: t('service.business.btn'),
       href: '/business-growth',
       color: 'text-orange-500',
-      bgColor: 'bg-orange-500/10'
+      bgColor: 'bg-orange-500/10',
+      highlights: [
+        'Business chart analysis for growth, partnerships and recovery',
+        'Timing guidance for launches, investments and contract decisions',
+        'Practical astrology remedies for financial and operational stability'
+      ]
     }
   ];
 
@@ -188,6 +228,13 @@ export default function ServicesPageClient({ initialService }: ServicesPageClien
                         <p className="text-lg font-light leading-relaxed text-foreground/80 italic">
                           "{service.details}"
                         </p>
+                        {service.highlights && (
+                          <ul className="grid gap-2 text-foreground/75 text-sm md:text-base list-disc list-inside">
+                            {service.highlights.map((point) => (
+                              <li key={point}>{point}</li>
+                            ))}
+                          </ul>
+                        )}
                       </div>
 
                       <div className="flex flex-wrap gap-4 pt-4">
