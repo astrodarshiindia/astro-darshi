@@ -71,7 +71,7 @@ export default function Header() {
           <div className="flex items-center gap-4 md:gap-6">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className={`rounded-full border px-3 py-2 transition-colors ${isDarkPage && !isScrolled ? 'border-white/10 hover:bg-white/5' : 'border-black/5 hover:bg-black/5'}`}>
+                <Button variant="ghost" size="sm" className={`rounded-full border px-2 py-1 text-[10px] md:px-3 md:py-2 transition-colors ${isDarkPage && !isScrolled ? 'border-white/10 hover:bg-white/5' : 'border-black/5 hover:bg-black/5'}`}>
                   {language === 'en' ? 'En' : 'Hi'}
                 </Button>
               </DropdownMenuTrigger>
