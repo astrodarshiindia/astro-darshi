@@ -27,6 +27,9 @@ export default function Header() {
   const navLinkColor = (isDarkPage && !isScrolled) ? 'text-white/70 hover:text-white' : 'text-foreground/70 hover:text-primary';
   const iconColor = (isDarkPage && !isScrolled) ? 'text-white/70' : 'text-foreground/70';
   const logoColor = (isDarkPage && !isScrolled) ? 'text-white' : 'text-foreground';
+  const headerBgClass = isScrolled || isOpen
+    ? 'py-4 bg-background/95 backdrop-blur-lg border-b border-border'
+    : 'py-6 bg-transparent border-b border-transparent md:bg-transparent md:border-transparent md:backdrop-blur-0';
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -36,7 +39,7 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 ${isScrolled ? 'py-4 bg-background/95 backdrop-blur-lg border-b border-border' : 'py-6 bg-background/90 backdrop-blur-lg border-b border-transparent md:bg-transparent md:border-transparent md:backdrop-blur-0'}`}
+      className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 ${headerBgClass}`}
     >
       <div className="section-container">
         <nav className="flex items-center justify-between">
@@ -69,7 +72,7 @@ export default function Header() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="sm" className={`rounded-full border px-3 py-2 transition-colors ${isDarkPage && !isScrolled ? 'border-white/10 hover:bg-white/5' : 'border-black/5 hover:bg-black/5'}`}>
-                  {language === 'en' ? 'English' : 'हिंदी'}
+                  {language === 'en' ? 'En' : 'Hi'}
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="bg-background/90 backdrop-blur-md border-white/10">
@@ -118,22 +121,22 @@ export default function Header() {
 
         {/* Mobile Menu */}
         <div
-          className={`fixed inset-0 bg-black/60 backdrop-blur-md z-[70] md:hidden transition-all duration-500 ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
-            }`}
+          className={`fixed inset-0 z-[95] md:hidden transition-all duration-500 ${isOpen ? 'visible opacity-100' : 'invisible opacity-0 pointer-events-none'}`}
           onClick={() => setIsOpen(false)}
-        />
-        <div
-          className={`fixed top-0 right-0 bottom-0 w-[300px] bg-white border-l border-border z-[80] md:hidden transition-transform duration-500 ease-in-out shadow-2xl ${isOpen ? 'translate-x-0' : 'translate-x-full'
-            }`}
         >
-          <div className="flex flex-col h-full p-8">
-            <div className="flex items-center justify-between mb-12">
-              <span className="text-xl font-serif font-bold tracking-tighter text-foreground">
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-xl" />
+        </div>
+        <div
+          className={`fixed inset-y-0 right-0 z-[100] w-full max-w-[340px] bg-white dark:bg-slate-950/95 border-l border-border shadow-2xl md:hidden transition-transform duration-500 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
+        >
+          <div className="flex flex-col min-h-full p-8">
+            <div className="flex items-center justify-between mb-12 bg-white dark:bg-slate-950/95 px-0 py-0">
+              <span className="text-xl font-serif font-bold tracking-tighter text-slate-900 dark:text-slate-100">
                 ASTRO <span className="text-primary">Darshi</span>
               </span>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-2 text-foreground hover:bg-muted rounded-full transition-colors"
+                className="p-2 text-slate-900 dark:text-slate-100 hover:bg-muted rounded-full transition-colors"
               >
                 <X size={24} />
               </button>
@@ -149,7 +152,7 @@ export default function Header() {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="text-3xl font-serif text-foreground hover:text-primary transition-all duration-300 transform"
+                  className="text-3xl font-serif text-slate-900 dark:text-slate-100 hover:text-primary transition-all duration-300 transform"
                   style={{
                     transitionDelay: `${idx * 100}ms`,
                     opacity: isOpen ? 1 : 0,
