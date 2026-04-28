@@ -35,23 +35,42 @@ export default function CosmicBackground() {
     }
 
     const animate = () => {
-      // Background based on theme
-      ctx.fillStyle = resolvedTheme === 'dark' ? '#05070a' : '#fdfaf5';
+      if (resolvedTheme === 'dark') {
+        // Create a deep space gradient
+        const gradient = ctx.createRadialGradient(
+          canvas.width / 2, canvas.height / 2, 0,
+          canvas.width / 2, canvas.height / 2, canvas.width
+        );
+        gradient.addColorStop(0, '#0f0a1e'); // Deeper purple center
+        gradient.addColorStop(0.5, '#05070a'); // Darker mid
+        gradient.addColorStop(1, '#020305'); // Almost black edges
+        ctx.fillStyle = gradient;
+      } else {
+        ctx.fillStyle = '#fdfaf5';
+      }
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       // Draw subtle stars
       stars.forEach((star) => {
         star.opacity += star.twinkleSpeed * (Math.random() > 0.5 ? 1 : -1);
-        star.opacity = Math.max(0.05, Math.min(0.6, star.opacity));
+        star.opacity = Math.max(0.1, Math.min(0.8, star.opacity));
 
-        // Golden stars
+        // Brighter Golden stars
         ctx.fillStyle = resolvedTheme === 'dark' 
-          ? `rgba(197, 160, 89, ${star.opacity})` 
-          : `rgba(197, 160, 89, ${star.opacity * 0.4})`; // More subtle in light mode
+          ? `rgba(255, 215, 130, ${star.opacity})` 
+          : `rgba(197, 160, 89, ${star.opacity * 0.4})`;
         
         ctx.beginPath();
         ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
         ctx.fill();
+
+        // Add subtle glow to brighter stars
+        if (star.opacity > 0.6 && resolvedTheme === 'dark') {
+          ctx.shadowBlur = 4;
+          ctx.shadowColor = 'rgba(255, 215, 130, 0.4)';
+          ctx.stroke();
+          ctx.shadowBlur = 0;
+        }
       });
 
       requestAnimationFrame(animate);
@@ -67,7 +86,7 @@ export default function CosmicBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed top-0 left-0 w-full h-full -z-10 opacity-40 pointer-events-none"
+      className="fixed top-0 left-0 w-full h-full -z-10 opacity-100 pointer-events-none"
     />
   );
 }

@@ -253,10 +253,10 @@ const translations = {
     'footer.guides': 'Expert Guides',
     'footer.connect': 'Connect',
     'footer.legal': 'Legal',
-    'footer.rights': 'Astro Darshi. All Rights Reserved.',
-    'footer.crafted': 'Crafted for Spiritual Evolution',
-    'footer.made_with': 'Made with',
-    'footer.by_team': 'by the Cosmic Team',
+    'footer.rights': 'Astro Darshi. All Rights Reserved. Built in India 🇮🇳',
+    'footer.crafted': '',
+    'footer.made_with': '',
+    'footer.by_team': '',
 
     // Links
     'link.home': 'Home',
@@ -270,6 +270,7 @@ const translations = {
     'link.numerology': 'Numerology Services',
     'link.gemstone': 'Gemstone Consultation',
     'link.business': 'Business Growth',
+    'link.tarot': 'Tarot Reading',
     'link.guide1': 'Best Vedic Astrologer in Lucknow',
     'link.guide2': 'Best Tarot Readers in Lucknow',
     'link.guide3': 'Best Astrologers in Lucknow',

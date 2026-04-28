@@ -82,7 +82,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div className="space-y-8">
-            <h4 className="text-[10px] font-sans font-bold tracking-[0.2em] uppercase text-primary">{t('footer.navigation')}</h4>
+            <h4 className="text-[10px] font-sans font-bold tracking-[0.1em] uppercase text-primary">{t('footer.navigation')}</h4>
             <nav className="flex flex-col gap-4">
               {FOOTER_LINKS.explore.map((item) => (
                 <Link
@@ -99,7 +99,7 @@ export default function Footer() {
 
           {/* Services */}
           <div className="space-y-8">
-            <h4 className="text-[10px] font-sans font-bold tracking-[0.2em] uppercase text-primary">{t('footer.services')}</h4>
+            <h4 className="text-[10px] font-sans font-bold tracking-[0.1em] uppercase text-primary">{t('footer.services')}</h4>
             <nav className="flex flex-col gap-4">
               {FOOTER_LINKS.services.map((item) => (
                 <Link
@@ -116,7 +116,7 @@ export default function Footer() {
 
           {/* Expert Guides */}
           <div className="space-y-8">
-            <h4 className="text-[10px] font-sans font-bold tracking-[0.2em] uppercase text-primary">{t('footer.guides')}</h4>
+            <h4 className="text-[10px] font-sans font-bold tracking-[0.1em] uppercase text-primary">{t('footer.guides')}</h4>
             <nav className="flex flex-col gap-4">
               {FOOTER_LINKS.guides.map((item) => (
                 <Link
@@ -134,7 +134,7 @@ export default function Footer() {
           {/* Connect & Legal */}
           <div className="space-y-12">
             <div className="space-y-8">
-              <h4 className="text-[10px] font-sans font-bold tracking-[0.2em] uppercase text-primary">{t('footer.connect')}</h4>
+              <h4 className="text-[10px] font-sans font-bold tracking-[0.1em] uppercase text-primary">{t('footer.connect')}</h4>
               <div className="flex gap-4">
                 {[Instagram, Youtube, Facebook].map((Icon, i) => (
                   <a key={i} href="#" className="text-muted-foreground hover:text-primary transition-colors">
@@ -144,7 +144,7 @@ export default function Footer() {
               </div>
             </div>
             <div className="space-y-8">
-              <h4 className="text-[10px] font-sans font-bold tracking-[0.2m] uppercase text-primary">{t('footer.legal')}</h4>
+              <h4 className="text-[10px] font-sans font-bold tracking-[0.1em] uppercase text-primary">{t('footer.legal')}</h4>
               <nav className="flex flex-col gap-4">
                 {FOOTER_LINKS.legal.map((item) => (
                   <Link
@@ -161,23 +161,11 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-12 border-t border-black/5 flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
-            <p className="text-muted-foreground/60 text-[10px] tracking-[0.2em] uppercase">
+        <div className="pt-4 border-t border-black/5 flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="flex flex-col md:flex-row items-center gap-2 md:gap-8">
+            <p className="text-muted-foreground/60 text-[9px] tracking-[0.1em] uppercase">
               © {new Date().getFullYear()} {t('footer.rights')}
             </p>
-            <div className="hidden md:block w-1 h-1 bg-muted-foreground/20 rounded-full" />
-            <p className="text-muted-foreground/60 text-[10px] tracking-[0.2em] uppercase">
-              {t('footer.crafted')}
-            </p>
-          </div>
-
-          <div className="flex items-center gap-6">
-            <div className="flex items-center gap-2 text-muted-foreground/60 text-[10px] tracking-widest uppercase group">
-              <span>{t('footer.made_with')}</span>
-              <span className="text-primary group-hover:scale-125 transition-transform">✨</span>
-              <span>{t('footer.by_team')}</span>
-            </div>
           </div>
         </div>
       </div>

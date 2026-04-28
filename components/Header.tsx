@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { Menu, X, Phone, Languages } from 'lucide-react';
+import { useTheme } from 'next-themes';
 import { useLanguage } from '@/lib/LanguageContext';
 import {
   DropdownMenu,
@@ -17,10 +18,11 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { language, setLanguage, t } = useLanguage();
+  const { resolvedTheme } = useTheme();
   const pathname = usePathname();
 
-  const darkPages = ['/astromall', '/vedic-astrology', '/astro-mall'];
-  const isDarkPage = darkPages.includes(pathname);
+  const darkPages = ['/astromall', '/astro-mall'];
+  const isDarkPage = darkPages.includes(pathname) || (pathname === '/tarot-reading' && resolvedTheme === 'dark');
   const headerTextColor = (isDarkPage && !isScrolled) ? 'text-white' : 'text-foreground';
   const navLinkColor = (isDarkPage && !isScrolled) ? 'text-white/70 hover:text-white' : 'text-foreground/70 hover:text-primary';
   const iconColor = (isDarkPage && !isScrolled) ? 'text-white/70' : 'text-foreground/70';

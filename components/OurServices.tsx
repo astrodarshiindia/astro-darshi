@@ -15,7 +15,8 @@ import {
   MessageCircle,
   Phone,
   Sparkles,
-  TrendingUp
+  TrendingUp,
+  Wand2
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -152,6 +153,17 @@ export default function OurServices() {
       iconColor: 'text-orange-500',
       href: '/business-growth',
       action: () => setSelectedService('business')
+    },
+    {
+      id: 'tarot',
+      title: t('service.tarot.title.main'),
+      desc: t('service.tarot.desc.main'),
+      icon: Wand2,
+      btnText: 'Read More',
+      color: 'from-purple-500/20 to-indigo-500/20',
+      iconColor: 'text-purple-500',
+      href: '/tarot-reading',
+      action: () => setSelectedService('tarot')
     }
   ];
 
