@@ -36,8 +36,7 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 ${isScrolled ? 'py-4 bg-background/80 backdrop-blur-lg border-b border-white/5' : 'py-6 bg-transparent'
-        }`}
+      className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 ${isScrolled ? 'py-4 bg-background/95 backdrop-blur-lg border-b border-border' : 'py-6 bg-background/90 backdrop-blur-lg border-b border-transparent md:bg-transparent md:border-transparent md:backdrop-blur-0'}`}
     >
       <div className="section-container">
         <nav className="flex items-center justify-between">
@@ -52,6 +51,7 @@ export default function Header() {
             {[
               { name: t('nav.home'), href: '/' },
               { name: t('nav.services'), href: '/services' },
+              { name: t('nav.about'), href: '/about' },
               { name: t('nav.contact'), href: '/contact' }
             ].map((link) => (
               <Link
@@ -68,8 +68,8 @@ export default function Header() {
           <div className="flex items-center gap-4 md:gap-6">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className={`w-9 h-9 rounded-full border transition-colors ${isDarkPage && !isScrolled ? 'border-white/10 hover:bg-white/5' : 'border-black/5 hover:bg-black/5'}`}>
-                  <Languages size={18} className={iconColor} />
+                <Button variant="ghost" size="sm" className={`rounded-full border px-3 py-2 transition-colors ${isDarkPage && !isScrolled ? 'border-white/10 hover:bg-white/5' : 'border-black/5 hover:bg-black/5'}`}>
+                  {language === 'en' ? 'English' : 'हिंदी'}
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="bg-background/90 backdrop-blur-md border-white/10">
@@ -109,7 +109,7 @@ export default function Header() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className={`md:hidden p-1.5 transition-colors ${headerTextColor}`}
+              className={`md:hidden p-2 rounded-full transition-colors ${isDarkPage && !isScrolled ? 'bg-white/10 text-white hover:bg-white/15' : 'bg-background/80 text-foreground hover:bg-background/90'}`}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -143,6 +143,7 @@ export default function Header() {
               {[
                 { name: t('nav.home'), href: '/' },
                 { name: t('nav.services'), href: '/services' },
+                { name: t('nav.about'), href: '/about' },
                 { name: t('nav.contact'), href: '/contact' }
               ].map((link, idx) => (
                 <Link

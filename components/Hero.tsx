@@ -171,6 +171,16 @@ const slides = [
   },
 ];
 
+const slideCtas: Record<string, { key: string; href: string }> = {
+  'hero.relationship.title': { key: 'hero.cta.relationship', href: '/kundli-matching' },
+  'hero.career.title': { key: 'hero.cta.career', href: '/services' },
+  'hero.health.title': { key: 'hero.cta.health', href: '/services' },
+  'hero.vastu.title': { key: 'hero.cta.vastu', href: '/vastu-consultation' },
+  'hero.business.title': { key: 'hero.cta.business', href: '/business-growth' },
+  'hero.matchmaking.title': { key: 'hero.cta.matchmaking', href: '/matchmaking' },
+  'hero.matrimonial.title': { key: 'hero.cta.matrimonial', href: '/matrimonial' },
+};
+
 export default function Hero() {
   const [showTopBtn, setShowTopBtn] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -235,64 +245,67 @@ export default function Hero() {
 
       <div className="w-full h-full" ref={emblaRef}>
         <div className="flex h-full">
-          {slides.map((slide, index) => (
-            <div key={index} className="flex-[0_0_100%] min-w-0 h-full flex items-center justify-center relative px-4">
-              <div className="max-w-4xl mx-auto text-center z-10 -mt-60 md:-mt-64">
-                {/* Main Heading */}
-                <div className="space-y-1 md:space-y-2 mb-4 md:mb-8 pt-12 md:pt-16">
-                  <h1 className={`text-3xl md:text-6xl lg:text-8xl font-serif leading-tight tracking-tight transition-all duration-700 ${index === selectedIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'} ${slide.accent}`}>
-                    {t(slide.title)} <br />
-                    <span className={`${slide.highlightColor} italic`}>{t(slide.highlight)}</span>
-                  </h1>
+          {slides.map((slide, index) => {
+            const currentCta = slideCtas[slide.title] ?? { key: 'hero.cta.services', href: '/services' };
+            return (
+              <div key={index} className="flex-[0_0_100%] min-w-0 h-full flex items-center justify-center relative px-4">
+                <div className="max-w-4xl mx-auto text-center z-10 -mt-60 md:-mt-64">
+                  {/* Main Heading */}
+                  <div className="space-y-1 md:space-y-2 mb-4 md:mb-8 pt-12 md:pt-16">
+                    <h1 className={`text-3xl md:text-6xl lg:text-8xl font-serif leading-tight tracking-tight transition-all duration-700 ${index === selectedIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'} ${slide.accent}`}>
+                      {t(slide.title)} <br />
+                      <span className={`${slide.highlightColor} italic`}>{t(slide.highlight)}</span>
+                    </h1>
 
-                  <p className={`text-sm md:text-xl text-black/60 font-light tracking-wide max-w-[90vw] md:max-w-2xl mx-auto transition-all duration-700 delay-200 ${index === selectedIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-                    {t(slide.subtitle)}
-                  </p>
+                    <p className={`text-sm md:text-xl text-black/60 font-light tracking-wide max-w-[90vw] md:max-w-2xl mx-auto transition-all duration-700 delay-200 ${index === selectedIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                      {t(slide.subtitle)}
+                    </p>
 
-                  {/* Hindi Questions Scrollable Marquee */}
-                  <div className={`mt-6 md:mt-12 overflow-x-auto scrollbar-hide relative transition-all duration-700 delay-300 ${index === selectedIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-                    <div className="animate-marquee flex gap-3 md:gap-6 py-1.5 md:py-2 hover:[animation-play-state:paused] active:[animation-play-state:paused]">
-                      {slide.questions.map((q, i) => (
-                        <div 
-                          key={i} 
-                          className={`flex-shrink-0 px-3 py-1.5 md:px-6 md:py-3 rounded-xl md:rounded-3xl text-[10px] md:text-base font-medium border border-black/5 shadow-sm backdrop-blur-sm transition-all hover:scale-105 ${slide.bg} ${slide.accent}`}
-                        >
-                          {q}
-                        </div>
-                      ))}
-                      {/* Duplicate for seamless loop */}
-                      {slide.questions.map((q, i) => (
-                        <div 
-                          key={`dup-${i}`} 
-                          className={`flex-shrink-0 px-3 py-1.5 md:px-6 md:py-3 rounded-xl md:rounded-3xl text-[10px] md:text-base font-medium border border-black/5 shadow-sm backdrop-blur-sm transition-all hover:scale-105 ${slide.bg} ${slide.accent}`}
-                        >
-                          {q}
-                        </div>
-                      ))}
+                    {/* Hindi Questions Scrollable Marquee */}
+                    <div className={`mt-6 md:mt-12 overflow-x-auto scrollbar-hide relative transition-all duration-700 delay-300 ${index === selectedIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                      <div className="animate-marquee flex gap-3 md:gap-6 py-1.5 md:py-2 hover:[animation-play-state:paused] active:[animation-play-state:paused]">
+                        {slide.questions.map((q, i) => (
+                          <div 
+                            key={i} 
+                            className={`flex-shrink-0 px-3 py-1.5 md:px-6 md:py-3 rounded-xl md:rounded-3xl text-[10px] md:text-base font-medium border border-black/5 shadow-sm backdrop-blur-sm transition-all hover:scale-105 ${slide.bg} ${slide.accent}`}
+                          >
+                            {q}
+                          </div>
+                        ))}
+                        {/* Duplicate for seamless loop */}
+                        {slide.questions.map((q, i) => (
+                          <div 
+                            key={`dup-${i}`} 
+                            className={`flex-shrink-0 px-3 py-1.5 md:px-6 md:py-3 rounded-xl md:rounded-3xl text-[10px] md:text-base font-medium border border-black/5 shadow-sm backdrop-blur-sm transition-all hover:scale-105 ${slide.bg} ${slide.accent}`}
+                          >
+                            {q}
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                {/* Action Buttons */}
-                <div className={`flex flex-row items-center justify-center gap-2 md:gap-4 transition-all duration-700 delay-500 ${index === selectedIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-                  <Link
-                    href="/services"
-                    className={`group relative px-4 py-2 md:px-8 md:py-3 ${slide.btnBg} text-white rounded-full text-[10px] md:text-sm font-bold tracking-[0.05em] md:tracking-[0.2em] uppercase overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl whitespace-nowrap`}
-                  >
-                    <span className="relative z-10">{t('hero.cta.services')}</span>
-                    <div className="absolute inset-0 bg-black/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-                  </Link>
+                  {/* Action Buttons */}
+                  <div className={`flex flex-row items-center justify-center gap-2 md:gap-4 transition-all duration-700 delay-500 ${index === selectedIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                    <Link
+                      href={currentCta.href}
+                      className={`group relative px-4 py-2 md:px-8 md:py-3 ${slide.btnBg} text-white rounded-full text-[10px] md:text-sm font-bold tracking-[0.05em] md:tracking-[0.2em] uppercase overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl whitespace-nowrap`}
+                    >
+                      <span className="relative z-10">{t(currentCta.key)}</span>
+                      <div className="absolute inset-0 bg-black/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                    </Link>
 
-                  <Link
-                    href="/contact"
-                    className={`px-4 py-2 md:px-8 md:py-3 border border-black/10 text-black/70 rounded-full text-[10px] md:text-sm font-bold tracking-[0.05em] md:tracking-[0.2em] uppercase hover:bg-black/5 transition-all duration-300 whitespace-nowrap`}
-                  >
-                    {t('hero.cta.book')}
-                  </Link>
+                    <Link
+                      href="/contact"
+                      className={`px-4 py-2 md:px-8 md:py-3 border border-black/10 text-black/70 rounded-full text-[10px] md:text-sm font-bold tracking-[0.05em] md:tracking-[0.2em] uppercase hover:bg-black/5 transition-all duration-300 whitespace-nowrap`}
+                    >
+                      {t('hero.cta.book')}
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 

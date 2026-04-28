@@ -15,6 +15,7 @@ const translations = {
     // Header
     'nav.home': 'Home',
     'nav.services': 'Services',
+    'nav.about': 'About Us',
     'nav.contact': 'Contact',
     'nav.consult': 'Consult Now',
     'nav.expert': 'Expert Consultation',
@@ -43,6 +44,13 @@ const translations = {
     'hero.matrimonial.subtitle': 'Find the best life partner based on your values and stars.',
     'hero.cta.book': 'Book Consultation',
     'hero.cta.services': 'Explore Services',
+    'hero.cta.relationship': 'Love & Marriage',
+    'hero.cta.career': 'Career Guidance',
+    'hero.cta.health': 'Health Consultation',
+    'hero.cta.vastu': 'Vastu Consultation',
+    'hero.cta.business': 'Business Astrology',
+    'hero.cta.matchmaking': 'Check Compatibility',
+    'hero.cta.matrimonial': 'Register for Matrimony',
     'hero.call': 'Call',
     'hero.chat': 'Chat',
 
@@ -522,6 +530,7 @@ const translations = {
     // Header
     'nav.home': 'होम',
     'nav.services': 'सेवाएं',
+    'nav.about': 'हमारे बारे में',
     'nav.contact': 'संपर्क',
     'nav.consult': 'अभी परामर्श लें',
     'nav.expert': 'विशेषज्ञ परामर्श',
@@ -550,6 +559,13 @@ const translations = {
     'hero.matrimonial.subtitle': 'अपने संस्कारों और सितारों के आधार पर सबसे अच्छा जीवनसाथी पाएं।',
     'hero.cta.book': 'परामर्श बुक करें',
     'hero.cta.services': 'सेवाएं देखें',
+    'hero.cta.relationship': 'प्रेम व विवाह',
+    'hero.cta.career': 'करियर मार्गदर्शन',
+    'hero.cta.health': 'स्वास्थ्य परामर्श',
+    'hero.cta.vastu': 'वास्तु परामर्श',
+    'hero.cta.business': 'व्यापार ज्योतिष',
+    'hero.cta.matchmaking': 'मेल जांचें',
+    'hero.cta.matrimonial': 'पंजीकरण करें',
     'hero.call': 'कॉल',
     'hero.chat': 'चैट',
 
