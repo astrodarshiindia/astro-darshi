@@ -45,12 +45,13 @@ export default function VedicMandala() {
 
         {/* Petals */}
         {Array.from({ length: 12 }).map((_, i) => {
+          const round = (value: number) => Number(value.toFixed(3));
           const angle = (i * 360) / 12;
           const rad = (angle * Math.PI) / 180;
-          const x1 = 150 + 100 * Math.cos(rad);
-          const y1 = 150 + 100 * Math.sin(rad);
-          const x2 = 150 + 130 * Math.cos(rad);
-          const y2 = 150 + 130 * Math.sin(rad);
+          const x1 = round(150 + 100 * Math.cos(rad));
+          const y1 = round(150 + 100 * Math.sin(rad));
+          const x2 = round(150 + 130 * Math.cos(rad));
+          const y2 = round(150 + 130 * Math.sin(rad));
 
           return (
             <line
@@ -118,9 +119,10 @@ export default function VedicMandala() {
           const x2 = 150 + 65 * Math.cos(angle2);
           const y2 = 150 + 65 * Math.sin(angle2);
 
+          const round = (value: number) => Number(value.toFixed(3));
           const angle3 = ((baseAngle + 180) * Math.PI) / 180;
-          const x3 = 150 + 65 * Math.cos(angle3);
-          const y3 = 150 + 65 * Math.sin(angle3);
+          const x3 = round(150 + 65 * Math.cos(angle3));
+          const y3 = round(150 + 65 * Math.sin(angle3));
 
           return (
             <polygon

@@ -120,23 +120,19 @@ export default function Header() {
         </nav>
 
         {/* Mobile Menu */}
-        <div
-          className={`fixed inset-0 z-[95] md:hidden transition-all duration-500 ${isOpen ? 'visible opacity-100' : 'invisible opacity-0 pointer-events-none'}`}
-          onClick={() => setIsOpen(false)}
-        >
-          <div className="absolute inset-0 bg-black/70 backdrop-blur-xl" />
+        <div className={`fixed inset-0 z-[95] md:hidden ${isOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}>
+          <div className={`absolute inset-0 bg-black/70 transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0'}`} onClick={() => setIsOpen(false)} />
         </div>
-        <div
-          className={`fixed inset-y-0 right-0 z-[100] w-full max-w-[340px] bg-white dark:bg-slate-950/95 border-l border-border shadow-2xl md:hidden transition-transform duration-500 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
-        >
-          <div className="flex flex-col min-h-full p-8">
-            <div className="flex items-center justify-between mb-12 bg-white dark:bg-slate-950/95 px-0 py-0">
+
+        <div className={`fixed inset-y-0 right-0 z-[100] w-full max-w-[340px] bg-white dark:bg-slate-950 border-l border-border shadow-2xl md:hidden transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+          <div className="flex flex-col min-h-full bg-white dark:bg-slate-950 p-8">
+            <div className="flex items-center justify-between mb-10">
               <span className="text-xl font-serif font-bold tracking-tighter text-slate-900 dark:text-slate-100">
                 ASTRO <span className="text-primary">Darshi</span>
               </span>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-2 text-slate-900 dark:text-slate-100 hover:bg-muted rounded-full transition-colors"
+                className="p-2 text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors"
               >
                 <X size={24} />
               </button>
@@ -152,11 +148,11 @@ export default function Header() {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="text-3xl font-serif text-slate-900 dark:text-slate-100 hover:text-primary transition-all duration-300 transform"
+                  className="text-3xl font-serif text-slate-900 dark:text-slate-100 hover:text-primary transition-all duration-300"
                   style={{
                     transitionDelay: `${idx * 100}ms`,
                     opacity: isOpen ? 1 : 0,
-                    transform: isOpen ? 'translateX(0)' : 'translateX(20px)'
+                    transform: isOpen ? 'translateX(0)' : 'translateX(12px)'
                   }}
                   onClick={() => setIsOpen(false)}
                 >
@@ -165,8 +161,7 @@ export default function Header() {
               ))}
             </nav>
 
-            <div className="mt-auto space-y-6">
-              <div className="h-[1px] bg-border w-full" />
+            <div className="mt-auto space-y-6 border-t border-border pt-6">
               <div className="flex items-center gap-4">
                 <a
                   href="tel:+919999999999"
