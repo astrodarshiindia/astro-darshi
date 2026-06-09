@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
-import { Menu, X, Phone, Languages } from 'lucide-react';
+import { Menu, X, Phone, ChevronRight } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { useLanguage } from '@/lib/LanguageContext';
 import {
@@ -11,8 +11,21 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Button } from "@/components/ui/button"
+} from '@/components/ui/dropdown-menu';
+import { Button } from '@/components/ui/button';
+import {
+  Sheet,
+  SheetContent,
+  SheetTitle,
+} from '@/components/ui/sheet';
+
+const NAV_LINKS = [
+  { key: 'nav.home', href: '/' },
+  { key: 'nav.services', href: '/services' },
+  { key: 'nav.blog', href: '/blog' },
+  { key: 'nav.about', href: '/about' },
+  { key: 'nav.contact', href: '/contact' },
+] as const;
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,61 +34,99 @@ export default function Header() {
   const { resolvedTheme } = useTheme();
   const pathname = usePathname();
 
+  const isHomePage = pathname === '/';
   const darkPages = ['/astromall', '/astro-mall'];
-  const isDarkPage = darkPages.includes(pathname) || (pathname === '/tarot-reading' && resolvedTheme === 'dark');
-  const headerTextColor = (isDarkPage && !isScrolled) ? 'text-white' : 'text-foreground';
-  const navLinkColor = (isDarkPage && !isScrolled) ? 'text-white/70 hover:text-white' : 'text-foreground/70 hover:text-primary';
-  const iconColor = (isDarkPage && !isScrolled) ? 'text-white/70' : 'text-foreground/70';
-  const logoColor = (isDarkPage && !isScrolled) ? 'text-white' : 'text-foreground';
-  const headerBgClass = isScrolled || isOpen
-    ? 'py-4 bg-background/95 backdrop-blur-lg border-b border-border'
-    : 'py-6 bg-transparent border-b border-transparent md:bg-transparent md:border-transparent md:backdrop-blur-0';
+  const isDarkHero =
+    darkPages.includes(pathname) ||
+    (pathname === '/tarot-reading' && resolvedTheme === 'dark');
+
+  const showSolidNav = isScrolled || isOpen || !isHomePage;
+  const useLightText = isDarkHero && !showSolidNav;
+
+  const headerBgClass = showSolidNav
+    ? 'py-3.5 bg-white border-b border-stone-200/90 shadow-[0_1px_0_rgba(0,0,0,0.04),0_6px_24px_rgba(15,23,42,0.07)]'
+    : 'py-5 bg-transparent border-b border-transparent';
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
+    const handleScroll = () => setIsScrolled(window.scrollY > 24);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
+
+  const isActive = (href: string) =>
+    href === '/' ? pathname === '/' : pathname.startsWith(href);
+
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 ${headerBgClass}`}
+      className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-500 ease-out ${headerBgClass}`}
     >
       <div className="section-container">
-        <nav className="flex items-center justify-between">
-          <Link href="/" className="group flex items-center gap-2">
-            <span className={`text-xl md:text-2xl font-serif font-bold tracking-tighter transition-colors ${logoColor}`}>
+        <nav className="flex items-center justify-between gap-3">
+          <Link href="/" className="group flex min-w-0 items-center gap-2">
+            <span
+              className={`truncate text-xl font-serif font-bold tracking-tighter transition-colors duration-300 md:text-2xl ${
+                useLightText ? 'text-white' : 'text-stone-900'
+              }`}
+            >
               ASTRO <span className="text-primary">Darshi</span>
             </span>
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-10">
-            {[
-              { name: t('nav.home'), href: '/' },
-              { name: t('nav.services'), href: '/services' },
-              { name: t('nav.about'), href: '/about' },
-              { name: t('nav.contact'), href: '/contact' }
-            ].map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className={`text-sm font-medium tracking-widest uppercase transition-colors duration-300 ${navLinkColor}`}
-              >
-                {link.name}
-              </Link>
-            ))}
+          <div className="hidden items-center gap-8 md:flex lg:gap-10">
+            {NAV_LINKS.map((link) => {
+              const active = isActive(link.href);
+              return (
+                <Link
+                  key={link.key}
+                  href={link.href}
+                  className={`relative py-1 text-[13px] font-medium tracking-wide transition-colors duration-300 ${
+                    useLightText
+                      ? active
+                        ? 'text-white'
+                        : 'text-white/65 hover:text-white'
+                      : active
+                        ? 'text-stone-900'
+                        : 'text-stone-500 hover:text-stone-900'
+                  }`}
+                >
+                  {t(link.key)}
+                  <span
+                    className={`absolute -bottom-0.5 left-0 h-0.5 rounded-full bg-primary transition-all duration-300 ${
+                      active ? 'w-full opacity-100' : 'w-0 opacity-0'
+                    }`}
+                    aria-hidden
+                  />
+                </Link>
+              );
+            })}
           </div>
 
-          {/* Right Section: CTA & Mobile Menu */}
-          <div className="flex items-center gap-4 md:gap-6">
+          {/* Right Section */}
+          <div className="flex shrink-0 items-center gap-2 sm:gap-4 md:gap-6">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className={`rounded-full border px-2 py-1 text-[10px] md:px-3 md:py-2 transition-colors ${isDarkPage && !isScrolled ? 'border-white/10 hover:bg-white/5' : 'border-black/5 hover:bg-black/5'}`}>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className={`rounded-full border px-2 py-1 text-[10px] md:px-3 md:py-2 transition-colors ${
+                    useLightText
+                      ? 'border-white/20 text-white hover:bg-white/10'
+                      : 'border-stone-200 text-stone-700 hover:bg-stone-50'
+                  }`}
+                >
                   {language === 'en' ? 'En' : 'Hi'}
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="bg-background/90 backdrop-blur-md border-white/10">
+              <DropdownMenuContent
+                align="end"
+                className="bg-background/90 backdrop-blur-md border-white/10"
+              >
                 <DropdownMenuItem
                   onClick={() => setLanguage('en')}
                   className={`cursor-pointer ${language === 'en' ? 'text-primary' : ''}`}
@@ -93,7 +144,11 @@ export default function Header() {
 
             <a
               href="tel:+919999999999"
-              className={`${iconColor} hover:text-primary transition-colors hidden sm:flex`}
+              className={`hidden transition-colors sm:flex ${
+                useLightText
+                  ? 'text-white/70 hover:text-white'
+                  : 'text-stone-500 hover:text-stone-900'
+              }`}
               title={t('hero.call')}
             >
               <Phone size={18} />
@@ -101,83 +156,148 @@ export default function Header() {
 
             <Link
               href="/contact"
-              className={`shine-effect inline-flex items-center justify-center px-3 py-1 text-[9px] md:px-6 md:py-2 md:text-xs border rounded-full font-bold tracking-[0.12em] md:tracking-[0.2em] uppercase transition-all duration-300 ${isDarkPage && !isScrolled
-                  ? 'border-white/30 text-white hover:bg-white hover:text-black'
-                  : 'border-primary/30 text-foreground hover:bg-primary hover:text-primary-foreground'
-                }`}
+              className={`hidden items-center justify-center rounded-full px-4 py-2 text-[10px] font-semibold tracking-wide transition-all duration-300 sm:inline-flex md:px-5 md:text-xs ${
+                useLightText
+                  ? 'border border-white/30 text-white hover:bg-white hover:text-stone-900'
+                  : 'bg-stone-900 text-white shadow-sm hover:bg-stone-800'
+              }`}
             >
               {t('nav.consult')}
             </Link>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile Menu Toggle */}
             <button
-              onClick={() => setIsOpen(!isOpen)}
-              className={`md:hidden p-2 rounded-full transition-colors ${isDarkPage && !isScrolled ? 'bg-white/10 text-white hover:bg-white/15' : 'bg-background/80 text-foreground hover:bg-background/90'}`}
+              type="button"
+              aria-label={isOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={isOpen}
+              onClick={() => setIsOpen((open) => !open)}
+              className={`flex h-11 w-11 items-center justify-center rounded-full transition-colors md:hidden ${
+                useLightText && !isOpen
+                  ? 'bg-white/10 text-white hover:bg-white/15'
+                  : 'border border-stone-200 bg-white text-stone-800 hover:bg-stone-50'
+              }`}
             >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
+              {isOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
         </nav>
+      </div>
 
-        {/* Mobile Menu */}
-        <div className={`fixed inset-0 z-[95] md:hidden ${isOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}>
-          <div className={`absolute inset-0 bg-black/70 transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0'}`} onClick={() => setIsOpen(false)} />
-        </div>
+      {/* Mobile Menu — portaled via Sheet so it renders above the fixed header */}
+      <Sheet open={isOpen} onOpenChange={setIsOpen}>
+        <SheetContent
+          side="right"
+          overlayClassName="z-[200] bg-black/60 backdrop-blur-sm"
+          className="z-[201] flex h-full w-full max-w-[320px] flex-col gap-0 border-l border-border/60 bg-background p-0 shadow-2xl sm:max-w-[360px] [&>button]:hidden"
+        >
+          <SheetTitle className="sr-only">Navigation menu</SheetTitle>
 
-        <div className={`fixed inset-y-0 right-0 z-[100] w-full max-w-[340px] bg-white dark:bg-slate-950 border-l border-border shadow-2xl md:hidden transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-          <div className="flex flex-col min-h-full bg-white dark:bg-slate-950 p-8">
-            <div className="flex items-center justify-between mb-10">
-              <span className="text-xl font-serif font-bold tracking-tighter text-slate-900 dark:text-slate-100">
-                ASTRO <span className="text-primary">Darshi</span>
+          {/* Panel header */}
+          <div className="flex items-center justify-between border-b border-border/50 px-5 pb-4 pt-[max(1.25rem,env(safe-area-inset-top))]">
+            <span className="text-lg font-serif font-bold tracking-tighter text-foreground">
+              ASTRO <span className="text-primary">Darshi</span>
+            </span>
+            <button
+              type="button"
+              aria-label="Close menu"
+              onClick={() => setIsOpen(false)}
+              className="flex h-10 w-10 items-center justify-center rounded-full text-foreground transition-colors hover:bg-muted"
+            >
+              <X size={20} />
+            </button>
+          </div>
+
+          {/* Nav links */}
+          <nav className="flex-1 overflow-y-auto px-3 py-4">
+            <ul className="space-y-1">
+              {NAV_LINKS.map((link) => {
+                const active = isActive(link.href);
+                return (
+                  <li key={link.key}>
+                    <Link
+                      href={link.href}
+                      onClick={() => setIsOpen(false)}
+                      className={`group flex min-h-[52px] items-center justify-between rounded-xl px-4 py-3 transition-all ${
+                        active
+                          ? 'bg-primary/10 text-primary'
+                          : 'text-foreground hover:bg-muted/80'
+                      }`}
+                    >
+                      <span className="font-serif text-xl tracking-tight">
+                        {t(link.key)}
+                      </span>
+                      <ChevronRight
+                        size={18}
+                        className={`transition-transform group-hover:translate-x-0.5 ${
+                          active ? 'text-primary' : 'text-muted-foreground'
+                        }`}
+                      />
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+
+          {/* Panel footer */}
+          <div className="space-y-4 border-t border-border/50 px-5 py-5 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] uppercase tracking-widest text-muted-foreground">
+                Language
               </span>
-              <button
-                onClick={() => setIsOpen(false)}
-                className="p-2 text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors"
-              >
-                <X size={24} />
-              </button>
-            </div>
-
-            <nav className="flex flex-col gap-6">
-              {[
-                { name: t('nav.home'), href: '/' },
-                { name: t('nav.services'), href: '/services' },
-                { name: t('nav.about'), href: '/about' },
-                { name: t('nav.contact'), href: '/contact' }
-              ].map((link, idx) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className="text-3xl font-serif text-slate-900 dark:text-slate-100 hover:text-primary transition-all duration-300"
-                  style={{
-                    transitionDelay: `${idx * 100}ms`,
-                    opacity: isOpen ? 1 : 0,
-                    transform: isOpen ? 'translateX(0)' : 'translateX(12px)'
-                  }}
-                  onClick={() => setIsOpen(false)}
+              <div className="flex rounded-full border border-border/60 p-0.5">
+                <button
+                  type="button"
+                  onClick={() => setLanguage('en')}
+                  className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+                    language === 'en'
+                      ? 'bg-primary text-primary-foreground'
+                      : 'text-muted-foreground hover:text-foreground'
+                  }`}
                 >
-                  {link.name}
-                </Link>
-              ))}
-            </nav>
-
-            <div className="mt-auto space-y-6 border-t border-border pt-6">
-              <div className="flex items-center gap-4">
-                <a
-                  href="tel:+919999999999"
-                  className="w-12 h-12 flex items-center justify-center bg-primary/10 text-primary rounded-full hover:bg-primary hover:text-primary-foreground transition-all"
+                  En
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setLanguage('hi')}
+                  className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+                    language === 'hi'
+                      ? 'bg-primary text-primary-foreground'
+                      : 'text-muted-foreground hover:text-foreground'
+                  }`}
                 >
-                  <Phone size={20} />
-                </a>
-                <div className="flex flex-col">
-                  <span className="text-[10px] uppercase tracking-widest text-muted-foreground">{t('nav.expert')}</span>
-                  <span className="text-sm font-medium">+91 99999 99999</span>
-                </div>
+                  हिंदी
+                </button>
               </div>
             </div>
+
+            <a
+              href="tel:+919999999999"
+              className="flex items-center gap-3 rounded-xl bg-muted/50 px-4 py-3 transition-colors hover:bg-muted"
+            >
+              <span className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-primary">
+                <Phone size={18} />
+              </span>
+              <div className="flex flex-col">
+                <span className="text-[10px] uppercase tracking-widest text-muted-foreground">
+                  {t('nav.expert')}
+                </span>
+                <span className="text-sm font-medium text-foreground">
+                  +91 99999 99999
+                </span>
+              </div>
+            </a>
+
+            <Link
+              href="/contact"
+              onClick={() => setIsOpen(false)}
+              className="shine-effect flex h-12 w-full items-center justify-center rounded-full border border-primary/30 bg-primary text-sm font-bold uppercase tracking-widest text-primary-foreground transition-opacity hover:opacity-90"
+            >
+              {t('nav.consult')}
+            </Link>
           </div>
-        </div>
-      </div>
+        </SheetContent>
+      </Sheet>
     </header>
   );
 }

@@ -1,150 +1,158 @@
 import type { Metadata } from 'next';
 import Header from '@/components/Header';
-import CosmicBackground from '@/components/CosmicBackground';
 import Footer from '@/components/Footer';
 import ContactForm from '@/components/ContactForm';
-import { Phone, Mail, MessageCircle, MapPin } from 'lucide-react';
+import { Phone, Mail, MessageCircle, MapPin, Clock, ChevronDown } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Contact Us | Astro Darshi',
   description: 'Get in touch with Astro Darshi for vedic astrology and tarot card reading consultations.',
 };
 
+const CHANNELS = [
+  {
+    icon: Phone,
+    label: 'Call',
+    value: '+91 99999 99999',
+    href: 'tel:+919999999999',
+    note: 'Mon–Sun, 10am–8pm IST',
+  },
+  {
+    icon: MessageCircle,
+    label: 'WhatsApp',
+    value: '+91 99999 99999',
+    href: 'https://wa.me/919999999999',
+    note: 'Quick queries and instant support',
+    external: true,
+  },
+  {
+    icon: Mail,
+    label: 'Email',
+    value: 'hello@astroDarshi.com',
+    href: 'mailto:hello@astroDarshi.com',
+    note: 'Response within 24 hours',
+  },
+  {
+    icon: MapPin,
+    label: 'Location',
+    value: 'Lucknow, India',
+    note: 'Online consultations worldwide',
+  },
+];
+
+const FAQS = [
+  {
+    q: 'What is the best time to consult?',
+    a: 'You can consult anytime. Morning hours are traditionally considered auspicious for spiritual consultations.',
+  },
+  {
+    q: 'How long does a session take?',
+    a: 'Sessions typically range from 45 to 75 minutes depending on the service. See our Services page for details.',
+  },
+  {
+    q: 'Can I reschedule my appointment?',
+    a: 'Yes — up to 24 hours before your appointment. Contact us by phone or WhatsApp.',
+  },
+];
+
 export default function ContactPage() {
   return (
-    <main className="relative">
-      <CosmicBackground />
+    <main className="min-h-screen bg-[#fafaf9] text-stone-900">
       <Header />
 
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-16 md:pb-24">
-        <div className="section-container text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4">
-            <span className="gradient-text">Get in Touch</span>
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Connect with Astro Darshi and begin your cosmic journey
-          </p>
+      {/* Hero */}
+      <section className="border-b border-stone-200/80 bg-white pt-[110px] pb-12 md:pb-16">
+        <div className="section-container">
+          <div className="mx-auto max-w-2xl text-center">
+            <h1 className="text-[2.35rem] leading-[1.08] tracking-tight sm:text-5xl">
+              Get in <span className="font-serif italic text-amber-800">touch</span>
+            </h1>
+            <p className="mt-4 text-base leading-relaxed text-stone-600">
+              Tell us what you need — we&apos;ll respond within 24 hours with next steps.
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section className="relative py-12 md:py-20">
+      {/* Form + channels */}
+      <section className="py-12 md:py-16">
         <div className="section-container">
-          <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-            {/* Contact Form */}
-            <div>
-              <ContactForm />
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_300px] xl:grid-cols-[minmax(0,1fr)_320px] lg:gap-10">
+            <div className="min-w-0">
+              <ContactForm embedded />
             </div>
 
-            {/* Contact Information */}
-            <div className="space-y-8">
-              <div className="space-y-4">
-                <h2 className="text-3xl font-bold">Contact Information</h2>
-                <p className="text-muted-foreground">
-                  Reach out through any of these channels. We&apos;re here to guide you on your cosmic journey.
+            <aside className="relative z-0 space-y-8 lg:sticky lg:top-28 lg:self-start">
+              <div>
+                <h2 className="text-lg font-semibold">Reach us directly</h2>
+                <p className="mt-1 text-sm text-stone-500">Pick the channel that works best for you.</p>
+              </div>
+
+              <div className="space-y-3">
+                {CHANNELS.map((channel) => {
+                  const Icon = channel.icon;
+                  const inner = (
+                    <div className="flex gap-4 rounded-2xl border border-stone-200/80 bg-white p-4 transition-colors hover:border-stone-300 hover:bg-stone-50">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-stone-100 text-stone-700">
+                        <Icon size={18} />
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-xs font-medium uppercase tracking-wider text-stone-400">
+                          {channel.label}
+                        </p>
+                        <p className="mt-0.5 font-medium text-stone-900">{channel.value}</p>
+                        <p className="mt-0.5 text-xs text-stone-500">{channel.note}</p>
+                      </div>
+                    </div>
+                  );
+
+                  if (channel.href) {
+                    return (
+                      <a
+                        key={channel.label}
+                        href={channel.href}
+                        target={channel.external ? '_blank' : undefined}
+                        rel={channel.external ? 'noopener noreferrer' : undefined}
+                      >
+                        {inner}
+                      </a>
+                    );
+                  }
+                  return <div key={channel.label}>{inner}</div>;
+                })}
+              </div>
+
+              <div className="flex items-center gap-3 rounded-2xl border border-amber-200/80 bg-amber-50/60 px-4 py-3">
+                <Clock size={16} className="shrink-0 text-amber-700" />
+                <p className="text-xs leading-relaxed text-amber-900">
+                  We aim to reply to all enquiries within one business day.
                 </p>
               </div>
 
-              {/* Contact Methods */}
-              <div className="space-y-4">
-                {/* Phone */}
-                <a
-                  href="tel:+919999999999"
-                  className="flex gap-4 p-4 cosmic-border glass-effect rounded-lg hover:border-primary transition-colors"
-                >
-                  <div className="flex-shrink-0 flex items-center">
-                    <Phone className="text-primary" size={24} />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-foreground">Call Us</h3>
-                    <p className="text-muted-foreground">+91 9999999999</p>
-                    <p className="text-sm text-muted-foreground mt-1">Available Mon-Sun, 10am-8pm IST</p>
-                  </div>
-                </a>
-
-                {/* WhatsApp */}
-                <a
-                  href="https://wa.me/919999999999"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex gap-4 p-4 cosmic-border glass-effect rounded-lg hover:border-primary transition-colors"
-                >
-                  <div className="flex-shrink-0 flex items-center">
-                    <MessageCircle className="text-primary" size={24} />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-foreground">WhatsApp</h3>
-                    <p className="text-muted-foreground">+91 9999999999</p>
-                    <p className="text-sm text-muted-foreground mt-1">Quick queries and instant support</p>
-                  </div>
-                </a>
-
-                {/* Email */}
-                <a
-                  href="mailto:hello@astroDarshi.com"
-                  className="flex gap-4 p-4 cosmic-border glass-effect rounded-lg hover:border-primary transition-colors"
-                >
-                  <div className="flex-shrink-0 flex items-center">
-                    <Mail className="text-primary" size={24} />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-foreground">Email</h3>
-                    <p className="text-muted-foreground">hello@astroDarshi.com</p>
-                    <p className="text-sm text-muted-foreground mt-1">Response within 24 hours</p>
-                  </div>
-                </a>
-
-                {/* Location */}
-                <div className="flex gap-4 p-4 cosmic-border glass-effect rounded-lg">
-                  <div className="flex-shrink-0 flex items-center">
-                    <MapPin className="text-primary" size={24} />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-foreground">Location</h3>
-                    <p className="text-muted-foreground">India</p>
-                    <p className="text-sm text-muted-foreground mt-1">Online consultations worldwide</p>
-                  </div>
+              {/* FAQ */}
+              <div className="border-t border-stone-200/80 pt-8">
+                <h3 className="text-sm font-semibold text-stone-900">Common questions</h3>
+                <div className="mt-4 space-y-2">
+                  {FAQS.map((faq) => (
+                    <details
+                      key={faq.q}
+                      className="group rounded-xl border border-stone-200/80 bg-white"
+                    >
+                      <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 text-sm font-medium text-stone-800 [&::-webkit-details-marker]:hidden">
+                        {faq.q}
+                        <ChevronDown
+                          size={16}
+                          className="shrink-0 text-stone-400 transition-transform group-open:rotate-180"
+                        />
+                      </summary>
+                      <p className="border-t border-stone-100 px-4 py-3 text-sm leading-relaxed text-stone-600">
+                        {faq.a}
+                      </p>
+                    </details>
+                  ))}
                 </div>
               </div>
-
-              {/* FAQ Section */}
-              <div className="space-y-4 pt-8 border-t border-border">
-                <h3 className="text-xl font-semibold">Frequently Asked Questions</h3>
-
-                <div className="space-y-3">
-                  <details className="group cursor-pointer">
-                    <summary className="flex items-center justify-between p-3 cosmic-border glass-effect rounded-lg hover:border-primary">
-                      <span className="font-medium">What is the best time to consult?</span>
-                      <span className="transform group-open:rotate-180 transition-transform">▾</span>
-                    </summary>
-                    <p className="mt-2 text-sm text-muted-foreground px-3">
-                      You can consult anytime, but morning hours are traditionally considered auspicious for spiritual consultations.
-                    </p>
-                  </details>
-
-                  <details className="group cursor-pointer">
-                    <summary className="flex items-center justify-between p-3 cosmic-border glass-effect rounded-lg hover:border-primary">
-                      <span className="font-medium">How long does a session take?</span>
-                      <span className="transform group-open:rotate-180 transition-transform">▾</span>
-                    </summary>
-                    <p className="mt-2 text-sm text-muted-foreground px-3">
-                      Sessions typically range from 45 to 75 minutes depending on the service. Check our Services page for details.
-                    </p>
-                  </details>
-
-                  <details className="group cursor-pointer">
-                    <summary className="flex items-center justify-between p-3 cosmic-border glass-effect rounded-lg hover:border-primary">
-                      <span className="font-medium">Can I reschedule my appointment?</span>
-                      <span className="transform group-open:rotate-180 transition-transform">▾</span>
-                    </summary>
-                    <p className="mt-2 text-sm text-muted-foreground px-3">
-                      Yes, you can reschedule up to 24 hours before your appointment. Please contact us via phone or WhatsApp.
-                    </p>
-                  </details>
-                </div>
-              </div>
-            </div>
+            </aside>
           </div>
         </div>
       </section>

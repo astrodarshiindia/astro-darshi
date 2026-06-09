@@ -1,9 +1,33 @@
 import type { Metadata } from 'next'
+import { Hind, Noto_Serif, Playfair_Display } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { ThemeProvider } from '@/components/theme-provider'
 import { LanguageProvider } from '@/lib/LanguageContext'
 import { SelectedServiceProvider } from '@/lib/SelectedServiceContext'
 import './globals.css'
+
+const hind = Hind({
+  subsets: ['latin', 'devanagari'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-hind',
+  display: 'swap',
+})
+
+const notoSerif = Noto_Serif({
+  subsets: ['latin', 'latin-ext'],
+  weight: ['400', '500', '600', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-noto-serif',
+  display: 'swap',
+})
+
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-playfair',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'Astro Darshi - Vedic Astrology & Tarot Card Reading',
@@ -39,7 +63,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${hind.variable} ${notoSerif.variable} ${playfair.variable}`}
+    >
       <body className="font-sans antialiased bg-background text-foreground">
         <ThemeProvider
           attribute="class"

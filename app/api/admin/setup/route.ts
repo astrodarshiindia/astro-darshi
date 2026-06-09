@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
       .from('admin_users')
       .insert({
         email: 'admin@astroDarshi.com',
-        password_hash: '8d969eef6ecad3c29a3a629280e3193e4e3f2c7f3e2e8b5c4d7e6f8a9b0c1d2e', // SHA256('admin123')
+        password_hash: '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9', // SHA256('admin123')
         name: 'Admin User',
         role: 'superadmin',
         is_active: true,

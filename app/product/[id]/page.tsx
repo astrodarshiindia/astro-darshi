@@ -7,23 +7,13 @@ import { ArrowLeft, MessageCircle, ShieldCheck, Star } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { useLanguage } from '@/lib/LanguageContext';
 import { supabase } from '@/lib/supabase';
-
-interface Product {
-    id: string;
-    name: string;
-    image_url?: string;
-    price: number;
-    price_type: 'total' | 'per_unit';
-    unit_name: 'total' | 'ratti';
-    description?: string;
-    is_active: boolean;
-}
+import { type AstroProduct, formatProductPrice, getProductImageUrl } from '@/lib/products';
 
 export default function ProductDetailPage() {
     const { id } = useParams();
     const router = useRouter();
     const { t } = useLanguage();
-    const [product, setProduct] = useState<Product | null>(null);
+    const [product, setProduct] = useState<AstroProduct | null>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -37,7 +27,7 @@ export default function ProductDetailPage() {
 
                 if (error) throw error;
                 if (data) {
-                    setProduct(data as Product);
+                    setProduct(data as AstroProduct);
                 }
             } catch (error) {
                 console.error('Failed to fetch product:', error);
@@ -91,9 +81,9 @@ export default function ProductDetailPage() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
                     {/* Image Section */}
                     <div className="relative aspect-square rounded-[3rem] overflow-hidden bg-accent/30 border border-border/50 shadow-2xl">
-                        {product.image_url ? (
+                        {getProductImageUrl(product.image_url, 1200) ? (
                             <img
-                                src={product.image_url}
+                                src={getProductImageUrl(product.image_url, 1200)}
                                 alt={product.name}
                                 className="w-full h-full object-cover"
                             />
@@ -123,13 +113,8 @@ export default function ProductDetailPage() {
                             </h1>
                             <div className="flex items-baseline gap-3">
                                 <span className="text-4xl text-primary font-light tracking-tight">
-                                    ₹{product.price.toLocaleString()}
+                                    {formatProductPrice(product)}
                                 </span>
-                                {product.price_type === 'per_unit' && (
-                                    <span className="text-lg text-muted-foreground font-light tracking-widest uppercase">
-                                        / {product.unit_name}
-                                    </span>
-                                )}
                             </div>
                         </div>
 

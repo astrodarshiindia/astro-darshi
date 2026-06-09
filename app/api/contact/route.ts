@@ -1,27 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
+import { supabaseAdmin } from '@/lib/supabaseServer';
 
 export async function POST(request: NextRequest) {
   try {
     const { name, email, phone, service_type, message } = await request.json();
 
-    // Validation
-    if (!name || !email || !phone || !service_type || !message) {
+    if (!name?.trim() || !service_type?.trim() || !message?.trim()) {
       return NextResponse.json(
-        { error: 'All fields are required' },
+        { error: 'Name, service type, and message are required' },
         { status: 400 }
       );
     }
 
-    // Insert into contact_responses table
-    const { data, error } = await supabase
+    const { data, error } = await supabaseAdmin
       .from('contact_responses')
       .insert({
-        name,
-        email,
-        phone,
-        service_type,
-        message,
+        name: name.trim(),
+        email: email?.trim() || 'not-provided@astrodarshi.com',
+        phone: phone?.trim() || 'Not provided',
+        service_type: service_type.trim(),
+        message: message.trim(),
         status: 'new',
         created_at: new Date().toISOString(),
       })

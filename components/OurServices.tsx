@@ -4,23 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useLanguage } from '@/lib/LanguageContext';
-import VedicMandala from './VedicMandala';
-import { 
-  FileText, 
-  Search, 
-  Home, 
-  Gem, 
-  Heart, 
-  Users,
-  ArrowRight,
-  MessageCircle,
-  Phone,
-  Sparkles,
-  TrendingUp,
-  Wand2,
-  CheckCircle2,
-  Zap
-} from 'lucide-react';
+import { ArrowRight, MessageCircle, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -28,9 +12,13 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+} from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { submitEnquiry } from '@/lib/submitEnquiry';
+import ServiceShowcaseCard, { type ServiceItem } from '@/components/services/ServiceShowcaseCard';
+
+const FEATURED_IDS = ['kundli', 'prashna'];
 
 export default function OurServices() {
   const router = useRouter();
@@ -38,6 +26,9 @@ export default function OurServices() {
   const [isMatchmakingOpen, setIsMatchmakingOpen] = useState(false);
   const [isAskNowOpen, setIsAskNowOpen] = useState(false);
   const [matchmakingDetails, setMatchmakingDetails] = useState({
+    contactName: '',
+    contactPhone: '',
+    contactEmail: '',
     p1Name: '',
     p1Dob: '',
     p1Tob: '',
@@ -45,271 +36,289 @@ export default function OurServices() {
     p2Name: '',
     p2Dob: '',
     p2Tob: '',
-    p2Pob: ''
+    p2Pob: '',
   });
+  const [isMatchmakingSubmitting, setIsMatchmakingSubmitting] = useState(false);
 
-  const handleMatchmakingSubmit = (e: React.FormEvent) => {
+  const handleMatchmakingSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const message = `Matchmaking Analysis Inquiry:\n\n` +
+    setIsMatchmakingSubmitting(true);
+
+    const message =
+      `Matchmaking Analysis Inquiry:\n\n` +
       `Person 1:\nName: ${matchmakingDetails.p1Name}\nDOB: ${matchmakingDetails.p1Dob}\nTime: ${matchmakingDetails.p1Tob}\nPlace: ${matchmakingDetails.p1Pob}\n\n` +
       `Person 2:\nName: ${matchmakingDetails.p2Name}\nDOB: ${matchmakingDetails.p2Dob}\nTime: ${matchmakingDetails.p2Tob}\nPlace: ${matchmakingDetails.p2Pob}`;
-    const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/919999999999?text=${encodedMessage}`, '_blank');
-    setIsMatchmakingOpen(false);
+
+    const result = await submitEnquiry({
+      name: matchmakingDetails.contactName,
+      email: matchmakingDetails.contactEmail,
+      phone: matchmakingDetails.contactPhone,
+      service_type: 'matchmaking',
+      source_page: 'Homepage Services',
+      message,
+    });
+
+    setIsMatchmakingSubmitting(false);
+
+    if (result.success) {
+      const encodedMessage = encodeURIComponent(message);
+      window.open(`https://wa.me/919999999999?text=${encodedMessage}`, '_blank');
+      setIsMatchmakingOpen(false);
+    }
   };
 
-  const services = [
+  const services: ServiceItem[] = [
     {
       id: 'kundli',
       title: t('service.kundli.title'),
       desc: t('service.kundli.desc'),
-      icon: FileText,
+      image: '/service-cards/janm.svg',
+      imageAlt: 'Janm kundli birth chart',
+      imageBg: 'from-amber-50 via-orange-50 to-amber-100 dark:from-amber-950 dark:via-orange-950 dark:to-slate-900',
+      imageFit: 'contain',
       btnText: t('service.kundli.btn'),
-      color: 'from-amber-500/20 to-orange-600/20',
-      iconColor: 'text-amber-600',
-      borderColor: 'border-amber-500/20',
-      glowColor: 'group-hover:shadow-amber-500/20',
+      accentBar: 'bg-amber-500',
+      accentGlow: 'bg-amber-400/25',
       cardHref: '/services?service=kundli',
-      actionType: 'ask'
+      actionType: 'ask',
     },
     {
       id: 'prashna',
       title: t('service.prashna.title'),
       desc: t('service.prashna.desc'),
-      icon: Search,
+      image: '/service-cards/prashna.jpg',
+      imageAlt: 'Prashna kundli question chart',
+      imageBg: 'from-orange-100 via-amber-50 to-orange-200 dark:from-blue-950 dark:via-indigo-950 dark:to-slate-900',
+      imageFit: 'cover',
       btnText: t('service.prashna.btn'),
-      color: 'from-blue-500/20 to-indigo-600/20',
-      iconColor: 'text-blue-600',
-      borderColor: 'border-blue-500/20',
-      glowColor: 'group-hover:shadow-blue-500/20',
+      accentBar: 'bg-orange-500',
+      accentGlow: 'bg-orange-400/25',
       cardHref: '/services?service=prashna',
-      actionType: 'ask'
+      actionType: 'ask',
     },
     {
       id: 'tarot',
       title: t('service.tarot.title'),
       desc: t('service.tarot.desc'),
-      icon: Wand2,
+      image: '/service-cards/tarot.jpg',
+      imageAlt: 'Tarot card reading spread',
+      imageBg: 'from-purple-100 via-violet-50 to-purple-200 dark:from-purple-950 dark:via-violet-900 dark:to-slate-900',
+      imageFit: 'cover',
       btnText: t('service.tarot.btn'),
-      color: 'from-purple-500/20 to-pink-600/20',
-      iconColor: 'text-purple-600',
-      borderColor: 'border-purple-500/20',
-      glowColor: 'group-hover:shadow-purple-500/20',
+      accentBar: 'bg-violet-500',
+      accentGlow: 'bg-violet-400/25',
       cardHref: '/services?service=tarot',
       buttonHref: '/tarot-reading#contact-form',
       detailHref: '/tarot-reading',
-      actionType: 'link'
+      actionType: 'link',
     },
     {
       id: 'vastu',
       title: t('service.vastu.title'),
       desc: t('service.vastu.desc'),
-      icon: Home,
+      image: '/service-cards/Vastu-Shastra-Home-Layout.png',
+      imageAlt: 'Vastu shastra home layout',
+      imageBg: 'from-emerald-50 via-teal-50 to-emerald-100 dark:from-emerald-950 dark:via-slate-900 dark:to-black',
+      imageFit: 'cover',
       btnText: t('service.vastu.btn'),
-      color: 'from-emerald-500/20 to-teal-600/20',
-      iconColor: 'text-emerald-600',
-      borderColor: 'border-emerald-500/20',
-      glowColor: 'group-hover:shadow-emerald-500/20',
+      accentBar: 'bg-emerald-500',
+      accentGlow: 'bg-emerald-400/25',
       cardHref: '/services?service=vastu',
       buttonHref: '/vastu-consultation',
       detailHref: '/vastu-consultation',
-      actionType: 'link'
+      actionType: 'link',
     },
     {
       id: 'gemstone',
       title: t('service.gemstone.title'),
       desc: t('service.gemstone.desc'),
-      icon: Gem,
+      image: '/service-cards/gemstones.webp',
+      imageAlt: 'Gemstone consultation and navratna',
+      imageBg: 'from-rose-50 via-red-50 to-rose-100 dark:from-rose-950 dark:via-red-900 dark:to-slate-900',
+      imageFit: 'cover',
       btnText: t('service.gemstone.btn'),
-      color: 'from-red-500/20 to-rose-600/20',
-      iconColor: 'text-red-600',
-      borderColor: 'border-red-500/20',
-      glowColor: 'group-hover:shadow-red-500/20',
+      accentBar: 'bg-rose-500',
+      accentGlow: 'bg-rose-400/25',
       cardHref: '/services?service=gemstone',
       buttonHref: '/astromall',
       detailHref: '/astromall',
-      actionType: 'link'
+      actionType: 'link',
     },
     {
       id: 'matchmaking',
       title: t('service.matchmaking.title'),
       desc: t('service.matchmaking.desc'),
-      icon: Heart,
+      image: '/service-cards/matchmaking.jpg',
+      imageAlt: 'Kundli matchmaking for couples',
+      imageBg: 'from-rose-50 via-pink-50 to-rose-100 dark:from-rose-950 dark:via-pink-950 dark:to-slate-900',
+      imageFit: 'cover',
       btnText: t('service.matchmaking.btn'),
-      color: 'from-rose-500/20 to-pink-600/20',
-      iconColor: 'text-rose-600',
-      borderColor: 'border-rose-500/20',
-      glowColor: 'group-hover:shadow-rose-500/20',
+      accentBar: 'bg-pink-500',
+      accentGlow: 'bg-pink-400/25',
       cardHref: '/services?service=matchmaking',
       buttonHref: '/matchmaking',
       detailHref: '/matchmaking',
-      actionType: 'link'
+      actionType: 'link',
     },
     {
       id: 'matrimonial',
       title: t('service.matrimonial.title'),
       desc: t('service.matrimonial.desc'),
-      icon: Users,
+      image: '/service-cards/matrimonial.jpg',
+      imageAlt: 'Matrimonial bride and groom',
+      imageBg: 'from-cyan-50 via-sky-50 to-cyan-100 dark:from-cyan-950 dark:via-slate-900 dark:to-black',
+      imageFit: 'cover',
       btnText: t('service.matrimonial.btn'),
-      color: 'from-cyan-500/20 to-blue-600/20',
-      iconColor: 'text-cyan-600',
-      borderColor: 'border-cyan-500/20',
-      glowColor: 'group-hover:shadow-cyan-500/20',
+      accentBar: 'bg-sky-500',
+      accentGlow: 'bg-sky-400/25',
       cardHref: '/services?service=matrimonial',
       buttonHref: '/matrimonial',
       detailHref: '/matrimonial',
-      actionType: 'link'
+      actionType: 'link',
     },
     {
       id: 'business',
       title: t('service.business.title'),
       desc: t('service.business.desc'),
-      icon: TrendingUp,
+      image: '/service-cards/business.png',
+      imageAlt: 'Business growth astrology',
+      imageBg: 'from-orange-50 via-amber-50 to-yellow-100 dark:from-orange-950 dark:via-amber-950 dark:to-slate-900',
+      imageFit: 'contain',
       btnText: t('service.business.btn'),
-      color: 'from-orange-500/20 to-yellow-600/20',
-      iconColor: 'text-orange-600',
-      borderColor: 'border-orange-500/20',
-      glowColor: 'group-hover:shadow-orange-500/20',
+      accentBar: 'bg-yellow-500',
+      accentGlow: 'bg-yellow-400/25',
       cardHref: '/services?service=business',
       buttonHref: '/business-growth',
       detailHref: '/business-growth',
-      actionType: 'link'
-    }
+      actionType: 'link',
+    },
   ];
 
+  const featured = services.filter((s) => FEATURED_IDS.includes(s.id));
+  const standard = services.filter((s) => !FEATURED_IDS.includes(s.id));
+
+  const handleAction = (service: ServiceItem, e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (service.actionType === 'ask') {
+      setIsAskNowOpen(true);
+      return;
+    }
+    if (service.actionType === 'modal') {
+      setIsMatchmakingOpen(true);
+      return;
+    }
+    if (service.buttonHref) {
+      router.push(service.buttonHref);
+    }
+  };
+
   return (
-    <section id="services" className="py-12 md:py-24 relative bg-background overflow-hidden">
-      {/* Decorative Background Elements */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] translate-x-1/3 -translate-y-1/3" />
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-amber-500/5 rounded-full blur-[120px] -translate-x-1/3 translate-y-1/3" />
-        
-        {/* Floating Mandalas */}
-        <div className="absolute top-20 left-10 opacity-10 animate-slow-rotate hidden lg:block">
-          <VedicMandala />
-        </div>
-        <div className="absolute bottom-20 right-10 opacity-10 animate-slow-rotate-reverse hidden lg:block">
-          <VedicMandala />
-        </div>
-      </div>
+    <section id="services" className="relative overflow-hidden bg-[#fbfbfc] py-16 md:py-28 dark:bg-[#07090e]">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.4] dark:opacity-[0.08]"
+        style={{
+          backgroundImage:
+            'radial-gradient(circle at 20% 10%, rgba(37,99,235,0.06), transparent 40%), radial-gradient(circle at 80% 90%, rgba(245,158,11,0.05), transparent 35%)',
+        }}
+      />
 
-      <div className="section-container relative z-10">
-        <div className="max-w-4xl mx-auto text-center mb-12 space-y-4">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold tracking-widest uppercase">
-            <Sparkles size={14} />
-            Our Services
+      <div className="section-container relative">
+        {/* Header */}
+        <div className="mb-10 grid gap-8 md:mb-14 lg:grid-cols-[1fr_auto] lg:items-end">
+          <div className="max-w-2xl">
+            <h2 className="text-[2rem] leading-[1.08] tracking-tight sm:text-4xl md:text-5xl lg:text-[3.25rem]">
+              Consult for{' '}
+              <span className="italic text-primary">Better Life</span> Decisions
+            </h2>
+            <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
+              {t('services.subtitle')}
+            </p>
           </div>
-          <h2 className="text-4xl md:text-6xl font-serif tracking-tight leading-tight text-foreground">
-            Consult for <span className="text-primary italic">Better Life</span> Decisions
-          </h2>
-          <p className="text-muted-foreground text-lg font-light max-w-2xl mx-auto leading-relaxed">
-            {t('services.subtitle')}
-          </p>
+
+          <Link
+            href="/services"
+            className="inline-flex h-fit items-center gap-2 self-start rounded-full border border-border bg-background px-5 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-foreground transition-colors hover:border-primary/40 hover:bg-primary/5 hover:text-primary lg:self-auto"
+          >
+            All services
+            <ArrowRight size={14} />
+          </Link>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {services.map((service, index) => (
-            <div 
+        {/* Featured pair */}
+        <div className="mb-4 grid gap-4 sm:gap-5 md:grid-cols-2">
+          {featured.map((service, index) => (
+            <ServiceShowcaseCard
               key={service.id}
-              onClick={() => router.push(service.cardHref)}
-              className={`group relative flex flex-col h-full rounded-[2rem] border ${service.borderColor} bg-card hover:bg-white dark:hover:bg-white/5 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl ${service.glowColor} overflow-hidden cursor-pointer`}
-            >
-              {/* Background Gradient on Hover */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-              
-              <div className="relative z-10 p-5 flex flex-col h-full">
-                <div className="mb-4 flex justify-between items-start">
-                  <div className={`w-10 h-10 rounded-xl bg-white dark:bg-card border ${service.borderColor} flex items-center justify-center ${service.iconColor} shadow-lg group-hover:scale-110 transition-all duration-500`}>
-                    <service.icon size={20} strokeWidth={1.5} />
-                  </div>
-                  <span className="text-2xl font-serif text-foreground/5 font-bold">
-                    0{index + 1}
-                  </span>
-                </div>
-
-                <div className="space-y-2 mb-4 flex-grow">
-                  <h3 className="text-lg font-serif text-foreground group-hover:text-primary transition-colors">
-                    {service.title}
-                  </h3>
-                  <p className="text-muted-foreground font-light leading-relaxed text-[11px]">
-                    {service.desc}
-                  </p>
-                </div>
-
-                <div className="mt-auto space-y-3">
-                  <Button
-                    type="button"
-                    onClick={(event) => {
-                      event.stopPropagation();
-                      if (service.actionType === 'ask') {
-                        setIsAskNowOpen(true);
-                        return;
-                      }
-                      if (service.actionType === 'modal') {
-                        setIsMatchmakingOpen(true);
-                        return;
-                      }
-                      if (service.buttonHref) {
-                        router.push(service.buttonHref);
-                      }
-                    }}
-                    className="w-full py-4 h-auto rounded-xl bg-secondary/80 hover:bg-primary text-foreground hover:text-primary-foreground border border-border/50 hover:border-primary transition-all duration-500 flex items-center justify-center gap-2 font-bold text-[9px] uppercase tracking-widest"
-                  >
-                    {service.btnText}
-                    <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform duration-500" />
-                  </Button>
-
-                  {service.detailHref && (
-                    <Link
-                      href={service.detailHref}
-                      onClick={(event: React.MouseEvent<HTMLAnchorElement>) => event.stopPropagation()}
-                      className="block"
-                    >
-                      <Button
-                        variant="outline"
-                        className="w-full py-4 h-auto rounded-xl border border-border/50 text-foreground/80 hover:text-foreground hover:bg-background/10 transition-all duration-500 font-bold text-[9px] uppercase tracking-widest"
-                      >
-                        View in detail
-                      </Button>
-                    </Link>
-                  )}
-                </div>
-              </div>
-            </div>
+              service={service}
+              index={index}
+              featured
+              onCardClick={() => router.push(service.cardHref)}
+              onActionClick={(e) => handleAction(service, e)}
+            />
           ))}
         </div>
+
+        {/* Standard grid */}
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
+          {standard.map((service, index) => (
+            <ServiceShowcaseCard
+              key={service.id}
+              service={service}
+              index={index + featured.length}
+              onCardClick={() => router.push(service.cardHref)}
+              onActionClick={(e) => handleAction(service, e)}
+            />
+          ))}
+        </div>
+
+        {/* Bottom CTA strip */}
+        <div className="mt-10 flex flex-col items-center justify-between gap-4 rounded-2xl border border-border/70 bg-background/80 px-6 py-5 sm:flex-row sm:px-8">
+          <p className="text-center text-sm text-muted-foreground sm:text-left">
+            Not sure which service fits?{' '}
+            <span className="text-foreground">Tell us your concern — we&apos;ll guide you.</span>
+          </p>
+          <Button
+            type="button"
+            onClick={() => setIsAskNowOpen(true)}
+            className="h-11 shrink-0 rounded-full px-6 text-[10px] font-bold uppercase tracking-[0.2em]"
+          >
+            Ask now
+            <ArrowRight size={14} className="ml-2" />
+          </Button>
+        </div>
       </div>
 
-      {/* Prashna Kundli - Ask Now Dialog */}
+      {/* Prashna / Kundli — Ask Now Dialog */}
       <Dialog open={isAskNowOpen} onOpenChange={setIsAskNowOpen}>
-        <DialogContent className="sm:max-w-[400px] glass-effect border-primary/20">
+        <DialogContent className="glass-effect border-primary/20 sm:max-w-[400px]">
           <DialogHeader>
-            <DialogTitle className="text-3xl font-serif">Connect with Us</DialogTitle>
+            <DialogTitle className="font-serif text-3xl">Connect with Us</DialogTitle>
             <DialogDescription className="text-base">
               Choose your preferred way to get instant answers to your questions.
             </DialogDescription>
           </DialogHeader>
           <div className="grid grid-cols-1 gap-4 py-6">
-            <Button 
+            <Button
               onClick={() => window.open('https://wa.me/919999999999', '_blank')}
-              className="py-8 rounded-2xl bg-[#25D366] hover:bg-[#128C7E] text-white flex items-center justify-between px-8 text-lg group shadow-lg shadow-green-500/20"
+              className="group flex items-center justify-between rounded-2xl bg-[#25D366] px-8 py-8 text-lg text-white shadow-lg shadow-green-500/20 hover:bg-[#128C7E]"
             >
               <div className="flex items-center gap-4">
                 <MessageCircle size={24} />
                 <span className="font-serif">WhatsApp Chat</span>
               </div>
-              <ArrowRight className="group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="transition-transform group-hover:translate-x-1" />
             </Button>
-            
-            <Button 
+
+            <Button
               onClick={() => window.open('tel:+919999999999', '_self')}
-              className="py-8 rounded-2xl bg-primary hover:bg-foreground text-primary-foreground hover:text-background flex items-center justify-between px-8 text-lg group shadow-lg shadow-primary/20"
+              className="group flex items-center justify-between rounded-2xl bg-primary px-8 py-8 text-lg text-primary-foreground shadow-lg shadow-primary/20 hover:bg-foreground hover:text-background"
             >
               <div className="flex items-center gap-4">
                 <Phone size={24} />
                 <span className="font-serif">Direct Call</span>
               </div>
-              <ArrowRight className="group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="transition-transform group-hover:translate-x-1" />
             </Button>
           </div>
         </DialogContent>
@@ -317,122 +326,187 @@ export default function OurServices() {
 
       {/* Matchmaking Birth Details Modal */}
       <Dialog open={isMatchmakingOpen} onOpenChange={setIsMatchmakingOpen}>
-        <DialogContent className="sm:max-w-[600px] glass-effect border-primary/20 max-h-[90vh] overflow-y-auto">
+        <DialogContent className="glass-effect max-h-[90vh] overflow-y-auto border-primary/20 sm:max-w-[600px]">
           <DialogHeader>
-            <DialogTitle className="text-3xl font-serif">Matchmaking Analysis</DialogTitle>
+            <DialogTitle className="font-serif text-3xl">Matchmaking Analysis</DialogTitle>
             <DialogDescription>
               Enter birth details for both individuals to check compatibility.
             </DialogDescription>
           </DialogHeader>
           <form onSubmit={handleMatchmakingSubmit} className="space-y-8 py-4">
-            {/* Person 1 */}
-            <div className="space-y-4 p-4 rounded-2xl bg-primary/5 border border-primary/10">
-              <h4 className="font-serif text-lg text-primary flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs">1</span>
+            <div className="space-y-4 rounded-2xl border border-border/50 bg-muted/30 p-4">
+              <h4 className="font-serif text-lg text-foreground">Your Contact Details</h4>
+              <div className="grid gap-4 md:grid-cols-3">
+                <div className="space-y-2">
+                  <Label htmlFor="contactName">Full Name</Label>
+                  <Input
+                    id="contactName"
+                    required
+                    value={matchmakingDetails.contactName}
+                    onChange={(e) =>
+                      setMatchmakingDetails({ ...matchmakingDetails, contactName: e.target.value })
+                    }
+                    className="bg-background/50"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="contactPhone">Phone</Label>
+                  <Input
+                    id="contactPhone"
+                    type="tel"
+                    required
+                    value={matchmakingDetails.contactPhone}
+                    onChange={(e) =>
+                      setMatchmakingDetails({ ...matchmakingDetails, contactPhone: e.target.value })
+                    }
+                    className="bg-background/50"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="contactEmail">Email</Label>
+                  <Input
+                    id="contactEmail"
+                    type="email"
+                    value={matchmakingDetails.contactEmail}
+                    onChange={(e) =>
+                      setMatchmakingDetails({ ...matchmakingDetails, contactEmail: e.target.value })
+                    }
+                    className="bg-background/50"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-4 rounded-2xl border border-primary/10 bg-primary/5 p-4">
+              <h4 className="flex items-center gap-2 font-serif text-lg text-primary">
+                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs text-primary-foreground">
+                  1
+                </span>
                 Person 1 Details
               </h4>
-              <div className="grid md:grid-cols-2 gap-4">
+              <div className="grid gap-4 md:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="p1Name">Full Name</Label>
-                  <Input 
-                    id="p1Name" 
-                    required 
+                  <Input
+                    id="p1Name"
+                    required
                     value={matchmakingDetails.p1Name}
-                    onChange={(e) => setMatchmakingDetails({...matchmakingDetails, p1Name: e.target.value})}
+                    onChange={(e) =>
+                      setMatchmakingDetails({ ...matchmakingDetails, p1Name: e.target.value })
+                    }
                     className="bg-background/50"
                   />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="p1Dob">Date of Birth</Label>
-                  <Input 
-                    id="p1Dob" 
-                    type="date" 
-                    required 
+                  <Input
+                    id="p1Dob"
+                    type="date"
+                    required
                     value={matchmakingDetails.p1Dob}
-                    onChange={(e) => setMatchmakingDetails({...matchmakingDetails, p1Dob: e.target.value})}
+                    onChange={(e) =>
+                      setMatchmakingDetails({ ...matchmakingDetails, p1Dob: e.target.value })
+                    }
                     className="bg-background/50"
                   />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="p1Tob">Time of Birth</Label>
-                  <Input 
-                    id="p1Tob" 
-                    type="time" 
-                    required 
+                  <Input
+                    id="p1Tob"
+                    type="time"
+                    required
                     value={matchmakingDetails.p1Tob}
-                    onChange={(e) => setMatchmakingDetails({...matchmakingDetails, p1Tob: e.target.value})}
+                    onChange={(e) =>
+                      setMatchmakingDetails({ ...matchmakingDetails, p1Tob: e.target.value })
+                    }
                     className="bg-background/50"
                   />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="p1Pob">Place of Birth</Label>
-                  <Input 
-                    id="p1Pob" 
-                    required 
+                  <Input
+                    id="p1Pob"
+                    required
                     placeholder="City, Country"
                     value={matchmakingDetails.p1Pob}
-                    onChange={(e) => setMatchmakingDetails({...matchmakingDetails, p1Pob: e.target.value})}
+                    onChange={(e) =>
+                      setMatchmakingDetails({ ...matchmakingDetails, p1Pob: e.target.value })
+                    }
                     className="bg-background/50"
                   />
                 </div>
               </div>
             </div>
 
-            {/* Person 2 */}
-            <div className="space-y-4 p-4 rounded-2xl bg-accent/5 border border-accent/10">
-              <h4 className="font-serif text-lg text-accent flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-accent text-accent-foreground flex items-center justify-center text-xs">2</span>
+            <div className="space-y-4 rounded-2xl border border-accent/10 bg-accent/5 p-4">
+              <h4 className="flex items-center gap-2 font-serif text-lg text-accent">
+                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-accent text-xs text-accent-foreground">
+                  2
+                </span>
                 Person 2 Details
               </h4>
-              <div className="grid md:grid-cols-2 gap-4">
+              <div className="grid gap-4 md:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="p2Name">Full Name</Label>
-                  <Input 
-                    id="p2Name" 
-                    required 
+                  <Input
+                    id="p2Name"
+                    required
                     value={matchmakingDetails.p2Name}
-                    onChange={(e) => setMatchmakingDetails({...matchmakingDetails, p2Name: e.target.value})}
+                    onChange={(e) =>
+                      setMatchmakingDetails({ ...matchmakingDetails, p2Name: e.target.value })
+                    }
                     className="bg-background/50"
                   />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="p2Dob">Date of Birth</Label>
-                  <Input 
-                    id="p2Dob" 
-                    type="date" 
-                    required 
+                  <Input
+                    id="p2Dob"
+                    type="date"
+                    required
                     value={matchmakingDetails.p2Dob}
-                    onChange={(e) => setMatchmakingDetails({...matchmakingDetails, p2Dob: e.target.value})}
+                    onChange={(e) =>
+                      setMatchmakingDetails({ ...matchmakingDetails, p2Dob: e.target.value })
+                    }
                     className="bg-background/50"
                   />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="p2Tob">Time of Birth</Label>
-                  <Input 
-                    id="p2Tob" 
-                    type="time" 
-                    required 
+                  <Input
+                    id="p2Tob"
+                    type="time"
+                    required
                     value={matchmakingDetails.p2Tob}
-                    onChange={(e) => setMatchmakingDetails({...matchmakingDetails, p2Tob: e.target.value})}
+                    onChange={(e) =>
+                      setMatchmakingDetails({ ...matchmakingDetails, p2Tob: e.target.value })
+                    }
                     className="bg-background/50"
                   />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="p2Pob">Place of Birth</Label>
-                  <Input 
-                    id="p2Pob" 
-                    required 
+                  <Input
+                    id="p2Pob"
+                    required
                     placeholder="City, Country"
                     value={matchmakingDetails.p2Pob}
-                    onChange={(e) => setMatchmakingDetails({...matchmakingDetails, p2Pob: e.target.value})}
+                    onChange={(e) =>
+                      setMatchmakingDetails({ ...matchmakingDetails, p2Pob: e.target.value })
+                    }
                     className="bg-background/50"
                   />
                 </div>
               </div>
             </div>
 
-            <Button type="submit" className="w-full py-8 rounded-2xl text-lg font-serif">
-              Check Compatibility
+            <Button
+              type="submit"
+              disabled={isMatchmakingSubmitting}
+              className="w-full rounded-2xl py-8 font-serif text-lg"
+            >
+              {isMatchmakingSubmitting ? 'Submitting...' : 'Check Compatibility'}
             </Button>
           </form>
         </DialogContent>

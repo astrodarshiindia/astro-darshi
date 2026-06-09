@@ -1,146 +1,100 @@
 'use client';
 
 import { useRef, useState, useEffect } from 'react';
-import Link from 'next/link';
-import { ArrowLeft, ArrowRight, MessageCircle } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
-import { useLanguage } from '@/lib/LanguageContext';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+import type { AstroProduct } from '@/lib/products';
+import ProductCard from './products/ProductCard';
 
-interface Product {
-    id: string;
-    name: string;
-    image_url?: string;
-    price: number;
-    price_type: 'total' | 'per_unit';
-    unit_name: 'total' | 'ratti';
-    description?: string;
-    is_active: boolean;
-}
+export default function ProductScroller({ products }: { products: AstroProduct[] }) {
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
 
-export default function ProductScroller({ products }: { products: Product[] }) {
-    const scrollerRef = useRef<HTMLDivElement>(null);
-    const [canScrollLeft, setCanScrollLeft] = useState(false);
-    const [canScrollRight, setCanScrollRight] = useState(true);
-    const { t } = useLanguage();
+  const checkScroll = () => {
+    if (!scrollerRef.current) return;
+    const { scrollLeft, scrollWidth, clientWidth } = scrollerRef.current;
+    setCanScrollLeft(scrollLeft > 8);
+    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 8);
+  };
 
-    const checkScroll = () => {
-        if (scrollerRef.current) {
-            const { scrollLeft, scrollWidth, clientWidth } = scrollerRef.current;
-            setCanScrollLeft(scrollLeft > 10);
-            setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
-        }
-    };
+  useEffect(() => {
+    checkScroll();
+    window.addEventListener('resize', checkScroll);
+    return () => window.removeEventListener('resize', checkScroll);
+  }, [products]);
 
-    useEffect(() => {
-        checkScroll();
-        window.addEventListener('resize', checkScroll);
-        return () => window.removeEventListener('resize', checkScroll);
-    }, []);
+  const scroll = (direction: 'left' | 'right') => {
+    if (!scrollerRef.current) return;
+    const scrollAmount = scrollerRef.current.clientWidth * 0.85;
+    scrollerRef.current.scrollBy({
+      left: direction === 'left' ? -scrollAmount : scrollAmount,
+      behavior: 'smooth',
+    });
+  };
 
-    const scroll = (direction: 'left' | 'right') => {
-        if (scrollerRef.current) {
-            const scrollAmount = scrollerRef.current.clientWidth * 0.8;
-            scrollerRef.current.scrollBy({
-                left: direction === 'left' ? -scrollAmount : scrollAmount,
-                behavior: 'smooth'
-            });
-        }
-    };
+  return (
+    <div className="relative">
+      <div className="mb-4 hidden items-center justify-end gap-3 md:flex">
+        <button
+          type="button"
+          onClick={() => scroll('left')}
+          disabled={!canScrollLeft}
+          aria-label="Scroll products left"
+          className={`flex h-11 w-11 items-center justify-center rounded-full border border-border transition-all ${
+            canScrollLeft
+              ? 'hover:border-primary hover:text-primary'
+              : 'cursor-not-allowed opacity-30'
+          }`}
+        >
+          <ArrowLeft size={18} />
+        </button>
+        <button
+          type="button"
+          onClick={() => scroll('right')}
+          disabled={!canScrollRight}
+          aria-label="Scroll products right"
+          className={`flex h-11 w-11 items-center justify-center rounded-full border border-border transition-all ${
+            canScrollRight
+              ? 'hover:border-primary hover:text-primary'
+              : 'cursor-not-allowed opacity-30'
+          }`}
+        >
+          <ArrowRight size={18} />
+        </button>
+      </div>
 
-    return (
-        <div className="relative group/mall">
-            {/* Navigation Buttons */}
-            <div className="absolute -top-16 right-0 flex gap-4">
-                <button
-                    onClick={() => scroll('left')}
-                    disabled={!canScrollLeft}
-                    className={`w-12 h-12 rounded-full border border-border flex items-center justify-center transition-all duration-300 ${
-                        canScrollLeft ? 'opacity-100 hover:border-primary hover:text-primary' : 'opacity-30 cursor-not-allowed'
-                    }`}
-                >
-                    <ArrowLeft size={20} />
-                </button>
-                <button
-                    onClick={() => scroll('right')}
-                    disabled={!canScrollRight}
-                    className={`w-12 h-12 rounded-full border border-border flex items-center justify-center transition-all duration-300 ${
-                        canScrollRight ? 'opacity-100 hover:border-primary hover:text-primary' : 'opacity-30 cursor-not-allowed'
-                    }`}
-                >
-                    <ArrowRight size={20} />
-                </button>
-            </div>
+      <div className="relative">
+        <div
+          className={`pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-background to-transparent transition-opacity md:w-12 ${
+            canScrollLeft ? 'opacity-100' : 'opacity-0'
+          }`}
+        />
+        <div
+          className={`pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-background to-transparent transition-opacity md:w-12 ${
+            canScrollRight ? 'opacity-100' : 'opacity-0'
+          }`}
+        />
 
-            <div 
-                ref={scrollerRef}
-                onScroll={checkScroll}
-                className="flex overflow-x-auto gap-8 pb-12 scrollbar-hide snap-x snap-mandatory"
-                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        <div
+          ref={scrollerRef}
+          onScroll={checkScroll}
+          className="-mx-2 flex gap-4 overflow-x-auto px-2 pb-4 scrollbar-hide snap-x snap-mandatory sm:gap-5 md:gap-6"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
+          {products.map((product) => (
+            <div
+              key={product.id}
+              className="w-[min(82vw,300px)] shrink-0 snap-start sm:w-[min(70vw,320px)] md:w-[340px]"
             >
-                {products.map((product: Product) => (
-                    <div 
-                        key={product.id} 
-                        className="flex-none w-[300px] md:w-[380px] snap-start group relative bg-card/50 backdrop-blur-sm border border-border/50 rounded-[2.5rem] overflow-hidden hover:border-primary/30 transition-all duration-700 hover:shadow-[0_20px_50px_rgba(37,99,235,0.1)]"
-                    >
-                        <Link href={`/product/${product.id}`} className="block">
-                            <div className="relative h-72 overflow-hidden bg-accent/30">
-                                {product.image_url ? (
-                                    <img
-                                        src={product.image_url}
-                                        alt={product.name}
-                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 ease-out"
-                                    />
-                                ) : (
-                                    <div className="w-full h-full flex items-center justify-center text-5xl opacity-20 group-hover:scale-125 transition-transform duration-1000">✨</div>
-                                )}
-                                <div className="absolute top-6 right-6">
-                                    <Badge className="bg-primary/90 backdrop-blur-md text-primary-foreground border-0 text-[10px] tracking-[0.2em] uppercase px-4 py-1.5 rounded-full">
-                                        {t('mall.authentic')}
-                                    </Badge>
-                                </div>
-                                
-                                {/* Hover Overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                            </div>
-                        </Link>
-                        
-                        <div className="p-10">
-                            <Link href={`/product/${product.id}`}>
-                                <h3 className="text-2xl font-serif text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
-                                    {product.name}
-                                </h3>
-                            </Link>
-                            <div className="flex items-baseline gap-2 mb-6">
-                                <span className="text-3xl text-primary font-light tracking-tight">
-                                    ₹{product.price.toLocaleString()}
-                                </span>
-                                {product.price_type === 'per_unit' && (
-                                    <span className="text-sm text-muted-foreground font-light tracking-widest uppercase">
-                                        / {product.unit_name}
-                                    </span>
-                                )}
-                            </div>
-                            
-                            <a
-                                href={`https://wa.me/919999999999?text=${encodeURIComponent(
-                                    t('whatsapp.message')
-                                        .replace('{productName}', product.name)
-                                        .replace('{price}', product.price.toLocaleString())
-                                )}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-3 text-[10px] font-bold tracking-[0.3em] uppercase text-muted-foreground group-hover:text-primary transition-all duration-300 relative"
-                            >
-                                <span className="relative">
-                                    {t('mall.enquire')}
-                                    <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-primary group-hover:w-full transition-all duration-500" />
-                                </span>
-                                <MessageCircle size={14} className="group-hover:translate-x-2 transition-transform duration-500" />
-                            </a>
-                        </div>
-                    </div>
-                ))}
+              <ProductCard product={product} variant="carousel" className="h-full" />
             </div>
+          ))}
         </div>
-    );
+      </div>
+
+      <p className="mt-2 text-center text-[10px] uppercase tracking-[0.2em] text-muted-foreground md:hidden">
+        Swipe to explore more
+      </p>
+    </div>
+  );
 }

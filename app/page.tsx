@@ -4,7 +4,6 @@ import Hero from '@/components/Hero';
 import WhyChooseUs from '@/components/WhyChooseUs';
 import OurServices from '@/components/OurServices';
 import HowItWorks from '@/components/HowItWorks';
-import AstrologerProfile from '@/components/AstrologerProfile';
 import AstroMall from '@/components/AstroMall';
 import Testimonials from '@/components/Testimonials';
 import CTABanner from '@/components/CTABanner';
@@ -20,13 +19,10 @@ export default function Home() {
       <OurServices />
       <WhyChooseUs />
       <HowItWorks />
-      <AstrologerProfile />
       <AstroMall />
       <Testimonials />
       <CTABanner />
-      <section id="contact-form" className="py-12">
-        <ContactForm />
-      </section>
+      <ContactForm />
       <Footer />
     </main>
   );

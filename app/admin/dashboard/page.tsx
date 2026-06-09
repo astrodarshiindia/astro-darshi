@@ -1,180 +1,169 @@
 'use client';
 
-import { useAdminAuth } from '@/lib/adminAuth';
-import AdminSidebar from '@/components/AdminSidebar';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { MessageSquare, Users, Briefcase, TrendingUp } from 'lucide-react';
 import { useEffect, useState } from 'react';
-// import { supabase } from '@/lib/supabase'; // Client-side Supabase not needed for admin dashboard (read-only stats use server components/API)
+import Link from 'next/link';
+import { MessageSquare, Inbox, ShoppingBag, ArrowRight } from 'lucide-react';
+import AdminLayout from '@/components/admin/AdminLayout';
+import AdminPageHeader from '@/components/admin/AdminPageHeader';
+import AdminStatCard from '@/components/admin/AdminStatCard';
+import StatusBadge from '@/components/admin/StatusBadge';
 
-interface DashboardStats {
-  totalContacts: number;
-  newContacts: number;
-  totalServices: number;
-  totalTestimonials: number;
+interface ContactPreview {
+  id: string;
+  name: string;
+  email: string;
+  service_type: string;
+  status: string;
+  created_at: string;
 }
 
 export default function AdminDashboard() {
-  const { user, loading, logout } = useAdminAuth();
-  const [stats, setStats] = useState<DashboardStats>({
-    totalContacts: 0,
-    newContacts: 0,
-    totalServices: 0,
-    totalTestimonials: 0,
-  });
-  const [statsLoading, setStatsLoading] = useState(true);
+  const [stats, setStats] = useState({ total: 0, new: 0 });
+  const [activeServices, setActiveServices] = useState(0);
+  const [recent, setRecent] = useState<ContactPreview[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (loading) return;
-    fetchStats();
-  }, [loading]);
+    fetchData();
+  }, []);
 
-  const fetchStats = async () => {
-    setStatsLoading(false);
-    setStats({
-      totalContacts: 0,
-      newContacts: 0,
-      totalServices: 0,
-      totalTestimonials: 0,
-    });
-    // Stats disabled client-side until proper auth context provided
-    // Use server components or admin API routes for production stats
+  const fetchData = async () => {
+    const headers = { Authorization: `Bearer ${localStorage.getItem('adminToken') || ''}` };
+    try {
+      const [contactsRes, servicesRes] = await Promise.all([
+        fetch('/api/admin/contacts', { headers }),
+        fetch('/api/admin/services', { headers }),
+      ]);
+      if (contactsRes.ok) {
+        const data = await contactsRes.json();
+        setStats({ total: data.stats?.total || 0, new: data.stats?.new || 0 });
+        setRecent((data.contacts || []).slice(0, 6));
+      }
+      if (servicesRes.ok) {
+        const data = await servicesRes.json();
+        setActiveServices(data.stats?.active || 0);
+      }
+    } catch (error) {
+      console.error('Error fetching dashboard:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-center">
-          <div className="text-4xl mb-4">✨</div>
-          <p className="text-muted-foreground">Loading...</p>
-        </div>
-      </div>
-    );
-  }
+  const respondedRate =
+    stats.total > 0 ? Math.round(((stats.total - stats.new) / stats.total) * 100) : 0;
 
   return (
-    <main className="min-h-screen bg-background">
-      <AdminSidebar onLogout={logout} />
+    <AdminLayout>
+      <AdminPageHeader
+        title="Dashboard"
+        description="Overview of enquiries and catalog activity."
+      />
 
-      {/* Main Content */}
-      <div className="md:ml-64 p-4 md:p-8">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-serif text-primary mb-2">Dashboard</h1>
-          <p className="text-muted-foreground">
-            Welcome back, <span className="text-foreground font-semibold">{user?.name}</span>
-          </p>
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <AdminStatCard
+          label="Total enquiries"
+          value={loading ? '—' : stats.total}
+          hint={loading ? undefined : `${stats.new} awaiting review`}
+          icon={Inbox}
+        />
+        <AdminStatCard
+          label="New today"
+          value={loading ? '—' : stats.new}
+          hint="Needs attention"
+          icon={MessageSquare}
+        />
+        <AdminStatCard
+          label="Services live"
+          value={loading ? '—' : activeServices}
+          hint="Active on site"
+          icon={ShoppingBag}
+        />
+        <AdminStatCard
+          label="Handled rate"
+          value={loading ? '—' : `${respondedRate}%`}
+          hint="Read or responded"
+          icon={MessageSquare}
+        />
+      </div>
+
+      <div className="mt-8 grid gap-6 lg:grid-cols-5">
+        <div className="lg:col-span-3">
+          <div className="overflow-hidden rounded-xl border border-slate-200/80 bg-white shadow-sm">
+            <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4">
+              <h2 className="text-sm font-semibold text-slate-900">Recent enquiries</h2>
+              <Link
+                href="/admin/contacts"
+                className="inline-flex items-center gap-1 text-xs font-medium text-blue-600 hover:text-blue-700"
+              >
+                View all <ArrowRight size={14} />
+              </Link>
+            </div>
+
+            {loading ? (
+              <div className="px-5 py-12 text-center text-sm text-slate-500">Loading…</div>
+            ) : recent.length === 0 ? (
+              <div className="px-5 py-12 text-center text-sm text-slate-500">No enquiries yet.</div>
+            ) : (
+              <div className="divide-y divide-slate-100">
+                {recent.map((item) => (
+                  <Link
+                    key={item.id}
+                    href="/admin/contacts"
+                    className="flex items-center justify-between gap-4 px-5 py-4 transition-colors hover:bg-slate-50"
+                  >
+                    <div className="min-w-0">
+                      <p className="truncate text-sm font-medium text-slate-900">{item.name}</p>
+                      <p className="truncate text-xs text-slate-500">
+                        {item.service_type || 'General'} · {item.email}
+                      </p>
+                    </div>
+                    <div className="flex shrink-0 flex-col items-end gap-1">
+                      <StatusBadge status={item.status} />
+                      <span className="text-[11px] text-slate-400">
+                        {new Date(item.created_at).toLocaleDateString('en-IN')}
+                      </span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          {/* Total Contacts */}
-          <Card className="cosmic-border glass-effect">
-            <CardHeader className="pb-3">
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-sm font-medium">Total Inquiries</CardTitle>
-                <MessageSquare className="text-primary" size={20} />
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-primary">
-                {statsLoading ? '...' : stats.totalContacts}
-              </div>
-              <p className="text-xs text-muted-foreground mt-1">
-                {stats.newContacts} new
-              </p>
-            </CardContent>
-          </Card>
+        <div className="space-y-4 lg:col-span-2">
+          <div className="rounded-xl border border-slate-200/80 bg-white p-5 shadow-sm">
+            <h2 className="text-sm font-semibold text-slate-900">Quick actions</h2>
+            <div className="mt-4 space-y-2">
+              {[
+                { href: '/admin/contacts', label: 'Review enquiries', desc: 'Filter, export, respond' },
+                { href: '/admin/astromall', label: 'Manage products', desc: 'Astro Mall catalog' },
+                { href: '/admin/services', label: 'Edit services', desc: 'Pricing & visibility' },
+              ].map((action) => (
+                <Link
+                  key={action.href}
+                  href={action.href}
+                  className="flex items-center justify-between rounded-lg border border-slate-100 px-4 py-3 transition-colors hover:border-slate-200 hover:bg-slate-50"
+                >
+                  <div>
+                    <p className="text-sm font-medium text-slate-900">{action.label}</p>
+                    <p className="text-xs text-slate-500">{action.desc}</p>
+                  </div>
+                  <ArrowRight size={16} className="text-slate-400" />
+                </Link>
+              ))}
+            </div>
+          </div>
 
-          {/* Services */}
-          <Card className="cosmic-border glass-effect">
-            <CardHeader className="pb-3">
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-sm font-medium">Active Services</CardTitle>
-                <Briefcase className="text-secondary" size={20} />
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-secondary">
-                {statsLoading ? '...' : stats.totalServices}
-              </div>
-              <p className="text-xs text-muted-foreground mt-1">Published</p>
-            </CardContent>
-          </Card>
-
-          {/* Testimonials */}
-          <Card className="cosmic-border glass-effect">
-            <CardHeader className="pb-3">
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-sm font-medium">Testimonials</CardTitle>
-                <Users className="text-accent" size={20} />
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-accent">
-                {statsLoading ? '...' : stats.totalTestimonials}
-              </div>
-              <p className="text-xs text-muted-foreground mt-1">Approved</p>
-            </CardContent>
-          </Card>
-
-          {/* Engagement */}
-          <Card className="cosmic-border glass-effect">
-            <CardHeader className="pb-3">
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-sm font-medium">Response Rate</CardTitle>
-                <TrendingUp className="text-primary" size={20} />
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-primary">
-                {statsLoading ? '...' : stats.totalContacts > 0
-                  ? Math.round(((stats.totalContacts - stats.newContacts) / stats.totalContacts) * 100)
-                  : 0}%
-              </div>
-              <p className="text-xs text-muted-foreground mt-1">Responded</p>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Quick Actions */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <Card className="cosmic-border glass-effect">
-            <CardHeader>
-              <CardTitle className="text-lg">Recent Inquiries</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-center py-12">
-                <p className="text-muted-foreground text-sm">
-                  View and manage contact form submissions in the Contact Responses section
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="cosmic-border glass-effect">
-            <CardHeader>
-              <CardTitle className="text-lg">Quick Stats</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Conversion Rate:</span>
-                  <span className="font-semibold text-primary">
-                    {statsLoading ? '...' : stats.totalContacts > 0
-                      ? ((stats.totalTestimonials / stats.totalContacts) * 100).toFixed(1)
-                      : 0}%
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Avg Response Time:</span>
-                  <span className="font-semibold text-secondary">24 hrs</span>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          <div className="rounded-xl border border-slate-200/80 bg-slate-900 p-5 text-white shadow-sm">
+            <p className="text-sm font-medium">Response target</p>
+            <p className="mt-2 text-3xl font-semibold tabular-nums">24h</p>
+            <p className="mt-2 text-xs text-slate-400">
+              Aim to mark enquiries as read or responded within one business day.
+            </p>
+          </div>
         </div>
       </div>
-    </main>
+    </AdminLayout>
   );
 }

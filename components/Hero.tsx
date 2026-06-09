@@ -236,11 +236,51 @@ export default function Hero() {
   const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
   const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
 
+  const active = slides[selectedIndex];
+
   return (
-    <section className={`relative h-[85svh] min-h-[600px] md:h-[800px] flex items-center justify-center overflow-hidden transition-colors duration-1000 ${slides[selectedIndex].bg}`}>
-      {/* Zodiac Circle - Background Animation */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] md:w-[650px] md:h-[650px] border border-black/5 rounded-full animate-slow-rotate pointer-events-none">
-        <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full shadow-lg transition-colors duration-1000 ${slides[selectedIndex].btnBg}`} />
+    <section className={`hero-fonts relative flex h-[85svh] min-h-[600px] items-center justify-center overflow-hidden transition-colors duration-1000 md:h-[800px] ${active.bg}`}>
+      {/* Ambient color wash */}
+      <div
+        className={`pointer-events-none absolute -left-[10%] top-[8%] h-[55%] w-[45%] rounded-full blur-[100px] transition-colors duration-1000 animate-hero-orb ${active.btnBg} opacity-[0.14]`}
+      />
+      <div
+        className={`pointer-events-none absolute -right-[8%] bottom-[18%] h-[45%] w-[40%] rounded-full blur-[90px] transition-colors duration-1000 animate-hero-orb ${active.btnBg} opacity-[0.1]`}
+        style={{ animationDelay: '2s' }}
+      />
+
+      {/* Fine grain texture */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.35] mix-blend-multiply"
+        style={{
+          backgroundImage:
+            'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.85\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\' opacity=\'0.5\'/%3E%3C/svg%3E")',
+        }}
+      />
+
+      {/* Edge vignette */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(0,0,0,0.06)_100%)]" />
+
+      {/* Zodiac rings */}
+      <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        <div className="relative h-[300px] w-[300px] md:h-[680px] md:w-[680px]">
+          <div className="absolute inset-0 rounded-full border border-black/[0.06] animate-slow-rotate">
+            <div className={`absolute left-1/2 top-0 h-2.5 w-2.5 -translate-x-1/2 rounded-full shadow-md transition-colors duration-1000 ${active.btnBg}`} />
+            <div className={`absolute bottom-0 left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full opacity-40 transition-colors duration-1000 ${active.btnBg}`} />
+            <div className={`absolute left-0 top-1/2 h-1.5 w-1.5 -translate-y-1/2 rounded-full opacity-30 transition-colors duration-1000 ${active.btnBg}`} />
+            <div className={`absolute right-0 top-1/2 h-1.5 w-1.5 -translate-y-1/2 rounded-full opacity-30 transition-colors duration-1000 ${active.btnBg}`} />
+          </div>
+          <div className="absolute inset-[18%] rounded-full border border-dashed border-black/[0.05] animate-slow-rotate-reverse" />
+          <div className="absolute inset-[36%] rounded-full border border-black/[0.04]" />
+        </div>
+      </div>
+
+      {/* Slide progress */}
+      <div className="absolute left-0 right-0 top-0 z-20 h-[3px] bg-black/[0.04]">
+        <div
+          className={`h-full transition-all duration-700 ease-out ${active.btnBg}`}
+          style={{ width: `${((selectedIndex + 1) / slides.length) * 100}%` }}
+        />
       </div>
 
       <div className="w-full h-full" ref={emblaRef}>
@@ -249,34 +289,48 @@ export default function Hero() {
             const currentCta = slideCtas[slide.title] ?? { key: 'hero.cta.services', href: '/services' };
             return (
               <div key={index} className="flex-[0_0_100%] min-w-0 h-full flex items-center justify-center relative px-4">
-                <div className="max-w-4xl mx-auto text-center z-10 -mt-60 md:-mt-64">
+                <div className="relative z-10 mx-auto -mt-60 max-w-4xl text-center md:-mt-64">
                   {/* Main Heading */}
-                  <div className="space-y-1 md:space-y-2 mb-4 md:mb-8 pt-12 md:pt-16">
-                    <h1 className={`text-3xl md:text-6xl lg:text-8xl font-serif leading-tight tracking-tight transition-all duration-700 ${index === selectedIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'} ${slide.accent}`}>
+                  <div className="mb-4 space-y-1 pt-12 md:mb-8 md:space-y-2 md:pt-16">
+                    <h1
+                      className={`font-serif text-3xl leading-[1.05] tracking-tight transition-all duration-700 md:text-6xl lg:text-8xl ${index === selectedIndex ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'} ${slide.accent}`}
+                      style={{ textShadow: '0 1px 0 rgba(255,255,255,0.6)' }}
+                    >
                       {t(slide.title)} <br />
-                      <span className={`${slide.highlightColor} italic`}>{t(slide.highlight)}</span>
+                      <span className={`italic ${slide.highlightColor}`}>{t(slide.highlight)}</span>
                     </h1>
 
-                    <p className={`text-sm md:text-xl text-black/60 font-light tracking-wide max-w-[90vw] md:max-w-2xl mx-auto transition-all duration-700 delay-200 ${index === selectedIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                    <p
+                      className={`mx-auto max-w-[90vw] text-sm font-light tracking-wide text-black/60 transition-all delay-200 duration-700 md:max-w-2xl md:text-xl ${index === selectedIndex ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+                    >
                       {t(slide.subtitle)}
                     </p>
 
+                    <div
+                      className={`mx-auto mt-4 h-px w-16 transition-all delay-300 duration-700 md:mt-5 md:w-24 ${index === selectedIndex ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'} ${slide.btnBg}`}
+                    />
+
                     {/* Hindi Questions Scrollable Marquee */}
-                    <div className={`mt-6 md:mt-12 overflow-x-auto scrollbar-hide relative transition-all duration-700 delay-300 ${index === selectedIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-                      <div className="animate-marquee flex gap-3 md:gap-6 py-1.5 md:py-2 hover:[animation-play-state:paused] active:[animation-play-state:paused]">
+                    <div
+                      className={`relative mt-6 overflow-x-auto scrollbar-hide transition-all delay-300 duration-700 md:mt-12 ${index === selectedIndex ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+                      style={{
+                        maskImage: 'linear-gradient(to right, transparent, black 6%, black 94%, transparent)',
+                        WebkitMaskImage: 'linear-gradient(to right, transparent, black 6%, black 94%, transparent)',
+                      }}
+                    >
+                      <div className="animate-marquee flex gap-3 py-1.5 hover:[animation-play-state:paused] active:[animation-play-state:paused] md:gap-5 md:py-2">
                         {slide.questions.map((q, i) => (
-                          <div 
-                            key={i} 
-                            className={`flex-shrink-0 px-3 py-1.5 md:px-6 md:py-3 rounded-xl md:rounded-3xl text-[10px] md:text-base font-medium border border-black/5 shadow-sm backdrop-blur-sm transition-all hover:scale-105 ${slide.bg} ${slide.accent}`}
+                          <div
+                            key={i}
+                            className={`flex-shrink-0 rounded-full border border-white/60 bg-white/55 px-4 py-2 text-[10px] font-medium shadow-[0_4px_20px_rgba(0,0,0,0.06)] backdrop-blur-md transition-all hover:-translate-y-0.5 hover:bg-white/75 hover:shadow-[0_8px_28px_rgba(0,0,0,0.1)] md:px-6 md:py-2.5 md:text-base ${slide.accent}`}
                           >
                             {q}
                           </div>
                         ))}
-                        {/* Duplicate for seamless loop */}
                         {slide.questions.map((q, i) => (
-                          <div 
-                            key={`dup-${i}`} 
-                            className={`flex-shrink-0 px-3 py-1.5 md:px-6 md:py-3 rounded-xl md:rounded-3xl text-[10px] md:text-base font-medium border border-black/5 shadow-sm backdrop-blur-sm transition-all hover:scale-105 ${slide.bg} ${slide.accent}`}
+                          <div
+                            key={`dup-${i}`}
+                            className={`flex-shrink-0 rounded-full border border-white/60 bg-white/55 px-4 py-2 text-[10px] font-medium shadow-[0_4px_20px_rgba(0,0,0,0.06)] backdrop-blur-md transition-all hover:-translate-y-0.5 hover:bg-white/75 hover:shadow-[0_8px_28px_rgba(0,0,0,0.1)] md:px-6 md:py-2.5 md:text-base ${slide.accent}`}
                           >
                             {q}
                           </div>
@@ -286,18 +340,20 @@ export default function Hero() {
                   </div>
 
                   {/* Action Buttons */}
-                  <div className={`flex flex-row items-center justify-center gap-2 md:gap-4 transition-all duration-700 delay-500 ${index === selectedIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                  <div
+                    className={`flex flex-row items-center justify-center gap-2 transition-all delay-500 duration-700 md:gap-4 ${index === selectedIndex ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+                  >
                     <Link
                       href={currentCta.href}
-                      className={`group relative px-4 py-2 md:px-8 md:py-3 ${slide.btnBg} text-white rounded-full text-[10px] md:text-sm font-bold tracking-[0.05em] md:tracking-[0.2em] uppercase overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl whitespace-nowrap`}
+                      className={`group relative overflow-hidden whitespace-nowrap rounded-full px-5 py-2.5 text-[10px] font-bold uppercase tracking-[0.05em] text-white shadow-[0_8px_30px_rgba(0,0,0,0.15)] transition-all duration-300 hover:scale-105 hover:shadow-[0_12px_40px_rgba(0,0,0,0.2)] active:scale-95 md:px-8 md:py-3 md:text-sm md:tracking-[0.15em] ${slide.btnBg}`}
                     >
                       <span className="relative z-10">{t(currentCta.key)}</span>
-                      <div className="absolute inset-0 bg-black/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                      <div className="absolute inset-0 translate-y-full bg-black/10 transition-transform duration-300 group-hover:translate-y-0" />
                     </Link>
 
                     <Link
                       href="/contact"
-                      className={`px-4 py-2 md:px-8 md:py-3 border border-black/10 text-black/70 rounded-full text-[10px] md:text-sm font-bold tracking-[0.05em] md:tracking-[0.2em] uppercase hover:bg-black/5 transition-all duration-300 whitespace-nowrap`}
+                      className="whitespace-nowrap rounded-full border border-black/10 bg-white/50 px-5 py-2.5 text-[10px] font-bold uppercase tracking-[0.05em] text-black/70 shadow-sm backdrop-blur-sm transition-all duration-300 hover:bg-white/80 md:px-8 md:py-3 md:text-sm md:tracking-[0.15em]"
                     >
                       {t('hero.cta.book')}
                     </Link>
@@ -310,49 +366,67 @@ export default function Hero() {
       </div>
 
       {/* Slide-specific image at the very bottom center */}
-      <div className="absolute bottom-0 left-0 w-full flex justify-center pointer-events-none z-0">
-        <img 
-          src={slides[selectedIndex].bottomImage} 
-          alt="Bottom Background" 
-          className="w-full max-w-2xl md:max-w-4xl max-h-[250px] md:max-h-[350px] object-contain translate-y-0 transition-all duration-1000" 
-        />
+      <div className="pointer-events-none absolute bottom-0 left-0 z-0 flex w-full justify-center">
+        <div className="relative animate-hero-float">
+          <div
+            className={`absolute -bottom-2 left-1/2 h-8 w-[70%] -translate-x-1/2 rounded-[100%] blur-2xl transition-colors duration-1000 ${active.btnBg} opacity-20`}
+          />
+          <img
+            src={active.bottomImage}
+            alt=""
+            className="relative max-h-[250px] w-full max-w-2xl object-contain transition-all duration-1000 md:max-h-[350px] md:max-w-4xl"
+          />
+        </div>
+      </div>
+
+      {/* Slide counter */}
+      <div className="absolute right-5 top-6 z-20 hidden font-mono text-[11px] tracking-widest text-black/30 md:block">
+        <span className="text-black/50">{String(selectedIndex + 1).padStart(2, '0')}</span>
+        <span className="mx-1">/</span>
+        <span>{String(slides.length).padStart(2, '0')}</span>
       </div>
 
       {/* Navigation Arrows - Desktop Only */}
-      <button 
+      <button
         onClick={scrollPrev}
-        className="hidden md:flex absolute left-8 top-1/2 -translate-y-1/2 w-12 h-12 items-center justify-center rounded-full bg-white/20 hover:bg-white/40 transition-all z-20"
+        className="absolute left-6 top-1/2 z-20 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-black/5 bg-white/50 shadow-lg backdrop-blur-md transition-all hover:bg-white/80 md:flex"
+        aria-label="Previous slide"
       >
-        <ChevronLeft className="text-black/50" />
+        <ChevronLeft className="text-black/50" size={20} />
       </button>
-      <button 
+      <button
         onClick={scrollNext}
-        className="hidden md:flex absolute right-8 top-1/2 -translate-y-1/2 w-12 h-12 items-center justify-center rounded-full bg-white/20 hover:bg-white/40 transition-all z-20"
+        className="absolute right-6 top-1/2 z-20 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-black/5 bg-white/50 shadow-lg backdrop-blur-md transition-all hover:bg-white/80 md:flex"
+        aria-label="Next slide"
       >
-        <ChevronRight className="text-black/50" />
+        <ChevronRight className="text-black/50" size={20} />
       </button>
 
       {/* Slide Indicators */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-20">
+      <div className="absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2 rounded-full border border-black/5 bg-white/40 px-3 py-2 backdrop-blur-md">
         {slides.map((_, index) => (
           <button
             key={index}
             onClick={() => emblaApi?.scrollTo(index)}
-            className={`h-1.5 rounded-full transition-all duration-500 ${index === selectedIndex ? `w-8 ${slides[index].btnBg}` : 'w-2 bg-black/20'}`}
+            aria-label={`Go to slide ${index + 1}`}
+            className={`rounded-full transition-all duration-500 ${
+              index === selectedIndex ? `h-2 w-7 ${slides[index].btnBg}` : 'h-1.5 w-1.5 bg-black/20 hover:bg-black/35'
+            }`}
           />
         ))}
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce opacity-40">
-        <div className={`w-[1px] h-12 bg-gradient-to-b from-black/50 to-transparent`} />
+      <div className="absolute bottom-[4.5rem] left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-1 opacity-30">
+        <span className="text-[9px] uppercase tracking-[0.25em] text-black/50">Scroll</span>
+        <div className="h-8 w-px bg-gradient-to-b from-black/40 to-transparent" />
       </div>
 
       {/* Floating Call/Chat - Premium Version */}
-      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex gap-2 p-1 bg-white/80 backdrop-blur-xl border border-black/5 rounded-full shadow-2xl">
+      <div className="fixed bottom-8 left-1/2 z-50 flex -translate-x-1/2 gap-1.5 rounded-full border border-black/5 bg-white/85 p-1.5 shadow-[0_12px_40px_rgba(0,0,0,0.12)] backdrop-blur-xl">
         <a
           href="tel:+919999999999"
-          className={`flex items-center gap-3 px-6 py-3 ${slides[selectedIndex].btnBg} text-white rounded-full hover:opacity-90 transition-all font-medium text-sm shadow-md`}
+          className={`flex items-center gap-2.5 rounded-full px-5 py-2.5 text-sm font-medium text-white shadow-md transition-all hover:opacity-90 md:gap-3 md:px-6 md:py-3 ${active.btnBg}`}
         >
           <Phone size={16} className="shrink-0" /> {t('hero.call')}
         </a>
@@ -360,7 +434,7 @@ export default function Hero() {
           href="https://wa.me/919999999999?text=Hi%20AstroDarshi!%20I'd%20like%20a%20consultation."
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-3 px-6 py-3 bg-green-600 text-white rounded-full hover:opacity-90 transition-all font-medium text-sm shadow-md"
+          className="flex items-center gap-2.5 rounded-full bg-green-600 px-5 py-2.5 text-sm font-medium text-white shadow-md transition-all hover:bg-green-700 md:gap-3 md:px-6 md:py-3"
         >
           <MessageCircle size={16} className="shrink-0" /> {t('hero.chat')}
         </a>

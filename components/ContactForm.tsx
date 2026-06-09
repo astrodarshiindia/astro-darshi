@@ -1,18 +1,20 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { AlertCircle, CheckCircle, Loader2 } from 'lucide-react';
+import { AlertCircle, CheckCircle, Clock, Loader2, Mail, MessageCircle, Phone, Shield } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useLanguage } from '@/lib/LanguageContext';
 import { useSelectedService } from '@/lib/SelectedServiceContext';
-import { useEffect } from 'react';
 
-export default function ContactForm() {
+interface ContactFormProps {
+  embedded?: boolean;
+}
+
+export default function ContactForm({ embedded = false }: ContactFormProps) {
   const { t } = useLanguage();
   const { selectedService } = useSelectedService();
   const [formData, setFormData] = useState({
@@ -31,9 +33,9 @@ export default function ContactForm() {
       } else if (['gemstone', 'vastu', 'prashna', 'matrimonial'].includes(selectedService)) {
         serviceValue = 'other';
       }
-      
+
       if (serviceValue) {
-        setFormData(prev => ({ ...prev, service: serviceValue }));
+        setFormData((prev) => ({ ...prev, service: serviceValue }));
       }
     }
   }, [selectedService]);
@@ -108,8 +110,6 @@ export default function ContactForm() {
 
       setStatus('success');
       setFormData({ name: '', email: '', phone: '', service: '', message: '' });
-
-      // Reset success message after 5 seconds
       setTimeout(() => setStatus('idle'), 5000);
     } catch (error) {
       console.error('Form submission error:', error);
@@ -119,126 +119,191 @@ export default function ContactForm() {
   };
 
   return (
-    <Card className="cosmic-border glass-effect max-w-2xl mx-auto">
-      <CardHeader className="space-y-2">
-        <CardTitle className="text-3xl">{t('contact.title')}</CardTitle>
-        <CardDescription>
-          {t('contact.subtitle')}
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        {status === 'success' && (
-          <Alert className="mb-6 border-primary/50 bg-primary/10">
-            <CheckCircle className="h-4 w-4 text-primary" />
-            <AlertDescription className="text-primary">
-              {t('contact.success')}
-            </AlertDescription>
-          </Alert>
-        )}
+    <section
+      id="contact-form"
+      className={embedded ? 'relative w-full' : 'relative w-full bg-background py-12 md:py-16 lg:py-20'}
+    >
+      <div className={embedded ? 'w-full' : 'mx-auto w-full max-w-[1280px] px-4 sm:px-5 lg:px-6'}>
+        <div
+          className={`w-full rounded-2xl border border-stone-200/80 md:rounded-3xl ${
+            embedded ? 'overflow-visible shadow-sm' : 'overflow-hidden shadow-lg'
+          }`}
+        >
+          <div className="grid lg:grid-cols-2">
+            {/* Left trust panel */}
+            <div className="relative bg-[#0f172a] p-6 text-white sm:p-8 lg:p-9">
+              <div className="pointer-events-none absolute -right-8 -top-8 h-40 w-40 rounded-full bg-blue-500/20 blur-3xl" />
 
-        {status === 'error' && errorMessage && (
-          <Alert className="mb-6 border-destructive/50 bg-destructive/10">
-            <AlertCircle className="h-4 w-4 text-destructive" />
-            <AlertDescription className="text-destructive">
-              {errorMessage}
-            </AlertDescription>
-          </Alert>
-        )}
+              <h2 className="text-2xl leading-tight sm:text-3xl">{t('contact.title')}</h2>
+              <p className="mt-4 text-sm leading-relaxed text-slate-400">{t('contact.subtitle')}</p>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid md:grid-cols-2 gap-4">
-            {/* Name */}
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">{t('contact.label.name')}</label>
-              <Input
-                type="text"
-                name="name"
-                placeholder={t('contact.placeholder.name')}
-                value={formData.name}
-                onChange={handleChange}
-                className="bg-muted/50 border-border focus:border-primary"
-              />
+              <ul className="mt-10 space-y-5">
+                <li className="flex items-start gap-4">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/10">
+                    <Phone size={16} />
+                  </span>
+                  <div>
+                    <p className="text-[10px] uppercase tracking-widest text-slate-500">Call</p>
+                    <a href="tel:+919999999999" className="text-sm font-medium hover:text-blue-300">
+                      +91 99999 99999
+                    </a>
+                  </div>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/10">
+                    <MessageCircle size={16} />
+                  </span>
+                  <div>
+                    <p className="text-[10px] uppercase tracking-widest text-slate-500">WhatsApp</p>
+                    <a
+                      href="https://wa.me/919999999999"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm font-medium hover:text-blue-300"
+                    >
+                      Chat with us
+                    </a>
+                  </div>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/10">
+                    <Mail size={16} />
+                  </span>
+                  <div>
+                    <p className="text-[10px] uppercase tracking-widest text-slate-500">Email</p>
+                    <p className="text-sm font-medium">support@astrodarshi.com</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/10">
+                    <Clock size={16} />
+                  </span>
+                  <div>
+                    <p className="text-[10px] uppercase tracking-widest text-slate-500">Response time</p>
+                    <p className="text-sm font-medium">Within 24 hours</p>
+                  </div>
+                </li>
+              </ul>
+
+              <div className="mt-10 flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-xs text-slate-400">
+                <Shield size={14} className="shrink-0 text-blue-400" />
+                {t('contact.privacy')}
+              </div>
             </div>
 
-            {/* Email */}
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">{t('contact.label.email')}</label>
-              <Input
-                type="email"
-                name="email"
-                placeholder={t('contact.placeholder.email')}
-                value={formData.email}
-                onChange={handleChange}
-                className="bg-muted/50 border-border focus:border-primary"
-              />
+            {/* Right form */}
+            <div className="relative z-10 min-w-0 bg-card p-6 sm:p-8 lg:p-9">
+              {status === 'success' && (
+                <Alert className="mb-6 border-emerald-500/30 bg-emerald-500/10">
+                  <CheckCircle className="h-4 w-4 text-emerald-600" />
+                  <AlertDescription className="text-emerald-700 dark:text-emerald-400">
+                    {t('contact.success')}
+                  </AlertDescription>
+                </Alert>
+              )}
+
+              {status === 'error' && errorMessage && (
+                <Alert className="mb-6 border-destructive/50 bg-destructive/10">
+                  <AlertCircle className="h-4 w-4 text-destructive" />
+                  <AlertDescription className="text-destructive">{errorMessage}</AlertDescription>
+                </Alert>
+              )}
+
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <div className="space-y-2">
+                    <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                      {t('contact.label.name')}
+                    </label>
+                    <Input
+                      type="text"
+                      name="name"
+                      placeholder={t('contact.placeholder.name')}
+                      value={formData.name}
+                      onChange={handleChange}
+                      className="h-12 rounded-xl border-border bg-background"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                      {t('contact.label.email')}
+                    </label>
+                    <Input
+                      type="email"
+                      name="email"
+                      placeholder={t('contact.placeholder.email')}
+                      value={formData.email}
+                      onChange={handleChange}
+                      className="h-12 rounded-xl border-border bg-background"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <div className="space-y-2">
+                    <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                      {t('contact.label.phone')}
+                    </label>
+                    <Input
+                      type="tel"
+                      name="phone"
+                      placeholder={t('contact.placeholder.phone')}
+                      value={formData.phone}
+                      onChange={handleChange}
+                      className="h-12 rounded-xl border-border bg-background"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                      {t('contact.label.service')}
+                    </label>
+                    <Select value={formData.service} onValueChange={handleServiceChange}>
+                      <SelectTrigger className="h-12 w-full rounded-xl border-border bg-background">
+                        <SelectValue placeholder={t('contact.placeholder.service')} />
+                      </SelectTrigger>
+                      <SelectContent position="popper" className="z-[250] rounded-xl border-stone-200 bg-white shadow-lg">
+                        <SelectItem value="vedic-astrology">{t('contact.service.vedic')}</SelectItem>
+                        <SelectItem value="tarot-reading">{t('contact.service.tarot')}</SelectItem>
+                        <SelectItem value="both">{t('contact.service.both')}</SelectItem>
+                        <SelectItem value="other">{t('contact.service.other')}</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                    {t('contact.label.message')}
+                  </label>
+                  <Textarea
+                    name="message"
+                    placeholder={t('contact.placeholder.message')}
+                    value={formData.message}
+                    onChange={handleChange}
+                    rows={5}
+                    className="resize-none rounded-xl border-border bg-background"
+                  />
+                </div>
+
+                <Button
+                  type="submit"
+                  disabled={status === 'loading'}
+                  className="h-14 w-full rounded-xl text-sm font-bold uppercase tracking-[0.15em]"
+                >
+                  {status === 'loading' ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      {t('contact.button.sending')}
+                    </>
+                  ) : (
+                    t('contact.button.send')
+                  )}
+                </Button>
+              </form>
             </div>
           </div>
-
-          <div className="grid md:grid-cols-2 gap-4">
-            {/* Phone */}
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">{t('contact.label.phone')}</label>
-              <Input
-                type="tel"
-                name="phone"
-                placeholder={t('contact.placeholder.phone')}
-                value={formData.phone}
-                onChange={handleChange}
-                className="bg-muted/50 border-border focus:border-primary"
-              />
-            </div>
-
-            {/* Service */}
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">{t('contact.label.service')}</label>
-              <Select value={formData.service} onValueChange={handleServiceChange}>
-                <SelectTrigger className="bg-muted/50 border-border focus:border-primary">
-                  <SelectValue placeholder={t('contact.placeholder.service')} />
-                </SelectTrigger>
-                <SelectContent className="bg-card border-border">
-                  <SelectItem value="vedic-astrology">{t('contact.service.vedic')}</SelectItem>
-                  <SelectItem value="tarot-reading">{t('contact.service.tarot')}</SelectItem>
-                  <SelectItem value="both">{t('contact.service.both')}</SelectItem>
-                  <SelectItem value="other">{t('contact.service.other')}</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-
-          {/* Message */}
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-foreground">{t('contact.label.message')}</label>
-            <Textarea
-              name="message"
-              placeholder={t('contact.placeholder.message')}
-              value={formData.message}
-              onChange={handleChange}
-              rows={5}
-              className="bg-muted/50 border-border focus:border-primary resize-none"
-            />
-          </div>
-
-          {/* Submit Button */}
-          <Button
-            type="submit"
-            disabled={status === 'loading'}
-            className="btn-premium w-full py-6 text-base"
-          >
-            {status === 'loading' ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                {t('contact.button.sending')}
-              </>
-            ) : (
-              t('contact.button.send')
-            )}
-          </Button>
-
-          <p className="text-xs text-muted-foreground text-center">
-            {t('contact.privacy')}
-          </p>
-        </form>
-      </CardContent>
-    </Card>
+        </div>
+      </div>
+    </section>
   );
 }

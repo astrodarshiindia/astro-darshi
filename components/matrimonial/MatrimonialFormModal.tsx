@@ -22,6 +22,7 @@ import {
 import { Sparkles, Loader2, CheckCircle2, Heart, X } from 'lucide-react';
 import { useLanguage } from '@/lib/LanguageContext';
 import { useToast } from '@/hooks/use-toast';
+import { submitEnquiry } from '@/lib/submitEnquiry';
 
 interface MatrimonialFormModalProps {
   isOpen: boolean;
@@ -36,6 +37,8 @@ export default function MatrimonialFormModal({ isOpen, onOpenChange }: Matrimoni
   
   const [formData, setFormData] = useState({
     name: '',
+    phone: '',
+    email: '',
     dob: '',
     tob: '',
     pob: '',
@@ -66,19 +69,16 @@ export default function MatrimonialFormModal({ isOpen, onOpenChange }: Matrimoni
         `*Profession:* ${formData.profession}\n` +
         `*Location:* ${formData.location}`;
 
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: formData.name,
-          email: 'matrimonial@astrodarshi.com',
-          phone: 'N/A',
-          service_type: 'matrimonial',
-          message: message.replace(/\*/g, '')
-        }),
+      const result = await submitEnquiry({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        service_type: 'matrimonial',
+        source_page: 'Matrimonial Page',
+        message: message.replace(/\*/g, ''),
       });
 
-      if (!response.ok) throw new Error('Submission failed');
+      if (!result.success) throw new Error(result.error || 'Submission failed');
 
       setIsSuccess(true);
       toast({
@@ -137,6 +137,32 @@ export default function MatrimonialFormModal({ isOpen, onOpenChange }: Matrimoni
                     placeholder="Full Name"
                     value={formData.name}
                     onChange={(e) => setFormData({...formData, name: e.target.value})}
+                    className="h-12 rounded-xl border-slate-200 focus:border-primary focus:ring-primary/20"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="phone" className="text-slate-700 font-bold">Phone</Label>
+                  <Input
+                    id="phone"
+                    required
+                    type="tel"
+                    placeholder="+91 XXXXX XXXXX"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                    className="h-12 rounded-xl border-slate-200 focus:border-primary focus:ring-primary/20"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <Label htmlFor="email" className="text-slate-700 font-bold">Email</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="your@email.com"
+                    value={formData.email}
+                    onChange={(e) => setFormData({...formData, email: e.target.value})}
                     className="h-12 rounded-xl border-slate-200 focus:border-primary focus:ring-primary/20"
                   />
                 </div>

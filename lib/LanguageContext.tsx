@@ -15,6 +15,7 @@ const translations = {
     // Header
     'nav.home': 'Home',
     'nav.services': 'Services',
+    'nav.blog': 'Blog',
     'nav.about': 'About Us',
     'nav.contact': 'Contact',
     'nav.consult': 'Consult Now',
@@ -52,7 +53,7 @@ const translations = {
     'hero.cta.matchmaking': 'Check Compatibility',
     'hero.cta.matrimonial': 'Register for Matrimony',
     'hero.call': 'Call',
-    'hero.chat': 'Chat',
+    'hero.chat': 'WhatsApp',
 
     // Services
     'services.title': 'Our',
@@ -530,6 +531,7 @@ const translations = {
     // Header
     'nav.home': 'होम',
     'nav.services': 'सेवाएं',
+    'nav.blog': 'ब्लॉग',
     'nav.about': 'हमारे बारे में',
     'nav.contact': 'संपर्क',
     'nav.consult': 'अभी परामर्श लें',
@@ -567,7 +569,7 @@ const translations = {
     'hero.cta.matchmaking': 'मेल जांचें',
     'hero.cta.matrimonial': 'पंजीकरण करें',
     'hero.call': 'कॉल',
-    'hero.chat': 'चैट',
+    'hero.chat': 'व्हाट्सएप',
 
     // Services
     'services.title': 'हमारी',
