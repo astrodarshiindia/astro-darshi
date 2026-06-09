@@ -1,11 +1,20 @@
 import SEOLayout from '@/components/SEOLayout';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
+import { buildMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Marriage Astrology & Relationship Guidance - Astro Darshi',
-  description: 'Expert marriage astrology and relationship guidance. Find harmony in your love life based on your birth chart and planetary periods.',
-  keywords: 'marriage astrology, relationship guidance, love astrology, marriage matching, zodiac love, partnership analysis',
-};
+export const metadata: Metadata = buildMetadata({
+  title: 'Marriage Astrology & Relationship Guidance',
+  description:
+    'Expert marriage astrology and relationship guidance. Find harmony in your love life based on your birth chart and planetary periods.',
+  path: '/marriage-astrology',
+  keywords: [
+    'marriage astrology',
+    'relationship guidance',
+    'love astrology',
+    'marriage matching',
+    'partnership analysis',
+  ],
+});
 
 export default function MarriageAstrology() {
   return (

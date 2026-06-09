@@ -1,9 +1,13 @@
 import SEOLayout from '@/components/SEOLayout';
 
-export const metadata = {
-    title: 'Privacy Policy - Astro Darshi',
-    description: 'Our commitment to protecting your personal information and cosmic journey privacy.',
-};
+import type { Metadata } from 'next';
+import { buildMetadata } from '@/lib/seo';
+
+export const metadata: Metadata = buildMetadata({
+  title: 'Privacy Policy',
+  description: 'Our commitment to protecting your personal information and cosmic journey privacy.',
+  path: '/privacy-policy',
+});
 
 export default function PrivacyPolicy() {
     return (

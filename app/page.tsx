@@ -1,4 +1,21 @@
+import type { Metadata } from 'next';
 import Header from '@/components/Header';
+import { buildMetadata } from '@/lib/seo';
+
+export const metadata: Metadata = buildMetadata({
+  title: 'Vedic Astrology & Tarot Reading in Lucknow',
+  description:
+    'Book expert Vedic astrology, tarot readings, kundli matching, Vastu and gemstone consultations with Astro Darshi. Trusted guidance for career, marriage, health and business success.',
+  path: '/',
+  keywords: [
+    'vedic astrology lucknow',
+    'tarot reading online',
+    'best astrologer in lucknow',
+    'kundli matching',
+    'vastu consultant',
+    'gemstone consultation',
+  ],
+});
 import CosmicBackground from '@/components/CosmicBackground';
 import Hero from '@/components/Hero';
 import WhyChooseUs from '@/components/WhyChooseUs';

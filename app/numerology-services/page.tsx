@@ -1,11 +1,20 @@
 import SEOLayout from '@/components/SEOLayout';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
+import { buildMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Numerology Services Online - Astro Darshi',
-  description: 'Unlock the power of your numbers with numerology services. From name numerology to birth number analysis, get deep insights into your life.',
-  keywords: 'numerology services, name numerology, birth number analysis, life path number, destiny number, numerology consultation',
-};
+export const metadata: Metadata = buildMetadata({
+  title: 'Numerology Services Online',
+  description:
+    'Unlock the power of your numbers with numerology services. From name numerology to birth number analysis, get deep insights into your life.',
+  path: '/numerology-services',
+  keywords: [
+    'numerology services',
+    'name numerology',
+    'birth number analysis',
+    'life path number',
+    'numerology consultation',
+  ],
+});
 
 export default function NumerologyServices() {
   return (

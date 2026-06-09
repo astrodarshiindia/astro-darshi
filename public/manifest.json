@@ -1,11 +1,13 @@
 {
-  "name": "Astro Darshi",
-  "short_name": "AstroDarshi",
-  "description": "Vedic Astrology & Tarot Card Reading",
+  "name": "Astro Darshi — Vedic Astrology & Tarot",
+  "short_name": "Astro Darshi",
+  "description": "Expert Vedic astrology, tarot readings, kundli matching and gemstone guidance in Lucknow.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "lang": "en-IN",
+  "background_color": "#fafaf9",
+  "theme_color": "#d97706",
   "icons": [
     {
       "src": "/ab.png",

@@ -5,13 +5,22 @@ import VastuProblems from '@/components/vastu/VastuProblems';
 import VastuProcess from '@/components/vastu/VastuProcess';
 import VastuConsultationTypes from '@/components/vastu/VastuConsultationTypes';
 import VastuBookingForm from '@/components/vastu/VastuBookingForm';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
+import { buildMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Vastu Consultation for Home & Office - Astro Darshi',
-  description: 'Traditional Vastu Shastra consultation for a harmonious home and prosperous business. Expert Vastu advice and simple remedies without demolition.',
-  keywords: 'vastu consultation, vastu shastra for home, vastu for office, vastu dosha remedies, directions and elements, vastu in lucknow',
-};
+export const metadata: Metadata = buildMetadata({
+  title: 'Vastu Consultation for Home & Office',
+  description:
+    'Traditional Vastu Shastra consultation for a harmonious home and prosperous business. Expert Vastu advice and simple remedies without demolition.',
+  path: '/vastu-consultation',
+  keywords: [
+    'vastu consultation',
+    'vastu shastra for home',
+    'vastu for office',
+    'vastu dosha remedies',
+    'vastu in lucknow',
+  ],
+});
 
 export default function VastuConsultationPage() {
   return (

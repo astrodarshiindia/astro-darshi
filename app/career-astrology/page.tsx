@@ -1,11 +1,20 @@
 import SEOLayout from '@/components/SEOLayout';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
+import { buildMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Career Astrology & Business Success - Astro Darshi',
-  description: 'Expert career astrology and business guidance. Find the right path for your success based on your birth chart and planetary periods.',
-  keywords: 'career astrology, business success, vocational astrology, career path, career guidance, zodiac career',
-};
+export const metadata: Metadata = buildMetadata({
+  title: 'Career Astrology & Business Success',
+  description:
+    'Expert career astrology and business guidance. Find the right path for your success based on your birth chart and planetary periods.',
+  path: '/career-astrology',
+  keywords: [
+    'career astrology',
+    'business success',
+    'vocational astrology',
+    'career guidance',
+    'zodiac career',
+  ],
+});
 
 export default function CareerAstrology() {
   return (

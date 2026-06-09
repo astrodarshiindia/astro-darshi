@@ -1,11 +1,20 @@
 import SEOLayout from '@/components/SEOLayout';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
+import { buildMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Kundli Matching for Happy Marriage - Astro Darshi',
-  description: 'Online Kundli Matching for a successful marriage. Get accurate horoscope matching, Guna Milan, and compatibility analysis by expert astrologers.',
-  keywords: 'kundli matching, horoscope matching for marriage, guna milan, astrology compatibility, happy marriage solutions',
-};
+export const metadata: Metadata = buildMetadata({
+  title: 'Kundli Matching for Happy Marriage',
+  description:
+    'Online Kundli Matching for a successful marriage. Get accurate horoscope matching, Guna Milan, and compatibility analysis by expert astrologers.',
+  path: '/kundli-matching',
+  keywords: [
+    'kundli matching',
+    'horoscope matching for marriage',
+    'guna milan',
+    'astrology compatibility',
+    'happy marriage',
+  ],
+});
 
 export default function KundliMatching() {
   return (

@@ -1,11 +1,19 @@
 import SEOLayout from '@/components/SEOLayout';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
+import { buildMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Best Vedic Astrologer in Lucknow - Astro Darshi',
-  description: 'Experience the best Vedic Astrology services in Lucknow. Get deep insights into your birth chart, planetary positions, and future predictions.',
-  keywords: 'best vedic astrologer in lucknow, astrology lucknow, birth chart reading, kundli analysis',
-};
+export const metadata: Metadata = buildMetadata({
+  title: 'Best Vedic Astrologer in Lucknow',
+  description:
+    'Experience the best Vedic Astrology services in Lucknow. Get deep insights into your birth chart, planetary positions, and future predictions.',
+  path: '/best-vedic-astrologer-in-lucknow',
+  keywords: [
+    'best vedic astrologer in lucknow',
+    'astrology lucknow',
+    'birth chart reading',
+    'kundli analysis',
+  ],
+});
 
 export default function BestVedicAstrologerLucknow() {
   return (

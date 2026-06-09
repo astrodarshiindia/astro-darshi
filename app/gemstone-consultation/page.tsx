@@ -1,11 +1,22 @@
 import SEOLayout from '@/components/SEOLayout';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
+import { buildMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Gemstone Consultation Online - Astro Darshi',
-  description: 'Expert gemstone consultation for spiritual and material well-being. Find your lucky stone based on your birth chart and planetary periods.',
-  keywords: 'gemstone consultation, birthstone analysis, lucky gemstones, vedic gemology, ruby, sapphire, emerald',
-};
+export const metadata: Metadata = buildMetadata({
+  title: 'Gemstone Consultation Online',
+  description:
+    'Expert gemstone consultation for spiritual and material well-being. Find your lucky stone based on your birth chart and planetary periods.',
+  path: '/gemstone-consultation',
+  keywords: [
+    'gemstone consultation',
+    'birthstone analysis',
+    'lucky gemstones',
+    'vedic gemology',
+    'ruby',
+    'sapphire',
+    'emerald',
+  ],
+});
 
 export default function GemstoneConsultation() {
   return (

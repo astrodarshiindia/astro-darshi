@@ -1,11 +1,20 @@
+import type { Metadata } from 'next';
 import SEOLayout from '@/components/SEOLayout';
-import { Metadata } from 'metadata';
+import { buildMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Daily Horoscope & Zodiac Predictions - Astro Darshi',
-  description: 'Your daily horoscope for all 12 zodiac signs. Get personalized insights into your day based on planetary movements and cosmic energy.',
-  keywords: 'daily horoscope, zodiac predictions, personalized astrology, star signs, today horoscope',
-};
+export const metadata: Metadata = buildMetadata({
+  title: 'Daily Horoscope & Zodiac Predictions',
+  description:
+    'Your daily horoscope for all 12 zodiac signs. Get personalized insights into your day based on planetary movements and cosmic energy.',
+  path: '/daily-horoscope',
+  keywords: [
+    'daily horoscope',
+    'zodiac predictions',
+    'personalized astrology',
+    'star signs',
+    'today horoscope',
+  ],
+});
 
 export default function DailyHoroscope() {
   return (

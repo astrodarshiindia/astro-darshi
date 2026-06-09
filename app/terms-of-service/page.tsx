@@ -1,9 +1,13 @@
 import SEOLayout from '@/components/SEOLayout';
 
-export const metadata = {
-    title: 'Terms of Service - Astro Darshi',
-    description: 'Guidelines and agreements for using our astrological and tarot services.',
-};
+import type { Metadata } from 'next';
+import { buildMetadata } from '@/lib/seo';
+
+export const metadata: Metadata = buildMetadata({
+  title: 'Terms of Service',
+  description: 'Guidelines and agreements for using our astrological and tarot services.',
+  path: '/terms-of-service',
+});
 
 export default function TermsOfService() {
     return (

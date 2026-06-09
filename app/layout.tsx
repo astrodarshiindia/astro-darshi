@@ -1,9 +1,16 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Hind, Noto_Serif, Playfair_Display } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { ThemeProvider } from '@/components/theme-provider'
 import { LanguageProvider } from '@/lib/LanguageContext'
 import { SelectedServiceProvider } from '@/lib/SelectedServiceContext'
+import JsonLd from '@/components/seo/JsonLd'
+import {
+  localBusinessJsonLd,
+  organizationJsonLd,
+  rootMetadata,
+  websiteJsonLd,
+} from '@/lib/seo'
 import './globals.css'
 
 const hind = Hind({
@@ -30,31 +37,27 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: 'Astro Darshi - Vedic Astrology & Tarot Card Reading',
-  description: 'Get expert advice for your life journey with Astro Darshi. Traditional Vedic astrology and tarot card readings for your success.',
-  keywords: ['vedic astrology', 'tarot reading', 'astrology consultation', 'birth chart analysis'],
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 5,
-  },
+  ...rootMetadata,
+  manifest: '/manifest.json',
   icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
+    icon: [{ url: '/ab.png', type: 'image/png' }],
+    apple: [{ url: '/ab.png', type: 'image/png' }],
   },
+  appleWebApp: {
+    capable: true,
+    title: 'Astro Darshi',
+    statusBarStyle: 'default',
+  },
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#fafaf9' },
+    { media: '(prefers-color-scheme: dark)', color: '#1a0f0f' },
+  ],
 }
 
 export default function RootLayout({
@@ -64,11 +67,14 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="en-IN"
       suppressHydrationWarning
       className={`${hind.variable} ${notoSerif.variable} ${playfair.variable}`}
     >
       <body className="font-sans antialiased bg-background text-foreground">
+        <JsonLd
+          data={[organizationJsonLd(), websiteJsonLd(), localBusinessJsonLd()]}
+        />
         <ThemeProvider
           attribute="class"
           defaultTheme="light"

@@ -1,11 +1,20 @@
 import SEOLayout from '@/components/SEOLayout';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
+import { buildMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Best Astrologers for Vedic & Tarot Guidance - Astro Darshi',
-  description: 'Connect with the world\'s best astrologers for deep Vedic insights and intuitive Tarot readings. Transform your life with expert cosmic guidance.',
-  keywords: 'best astrologers, top vedic astrologers, professional tarot readers, cosmic guidance, spiritual advisors',
-};
+export const metadata: Metadata = buildMetadata({
+  title: 'Best Astrologers for Vedic & Tarot Guidance',
+  description:
+    "Connect with the world's best astrologers for deep Vedic insights and intuitive Tarot readings. Transform your life with expert cosmic guidance.",
+  path: '/best-astrologers',
+  keywords: [
+    'best astrologers',
+    'top vedic astrologers',
+    'professional tarot readers',
+    'cosmic guidance',
+    'spiritual advisors',
+  ],
+});
 
 export default function BestAstrologers() {
   return (

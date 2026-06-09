@@ -3,11 +3,19 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ContactForm from '@/components/ContactForm';
 import { Phone, Mail, MessageCircle, MapPin, Clock, ChevronDown } from 'lucide-react';
+import { buildMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Contact Us | Astro Darshi',
-  description: 'Get in touch with Astro Darshi for vedic astrology and tarot card reading consultations.',
-};
+export const metadata: Metadata = buildMetadata({
+  title: 'Contact Us',
+  description:
+    'Book a Vedic astrology or tarot consultation with Astro Darshi in Lucknow. Call, WhatsApp or send an enquiry — we respond within 24 hours.',
+  path: '/contact',
+  keywords: [
+    'contact astrologer lucknow',
+    'book astrology consultation',
+    'whatsapp astrologer',
+  ],
+});
 
 const CHANNELS = [
   {
