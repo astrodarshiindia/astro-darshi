@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { ArrowLeft, MessageCircle, ShieldCheck, Star } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { useLanguage } from '@/lib/LanguageContext';
+import { useSiteSettings } from '@/lib/SiteSettingsContext';
+import { whatsappHref as buildWhatsappHref } from '@/lib/siteSettings';
 import { supabase } from '@/lib/supabase';
 import { type AstroProduct, formatProductPrice, getProductImageUrl } from '@/lib/products';
 
@@ -13,6 +15,7 @@ export default function ProductDetailPage() {
     const { id } = useParams();
     const router = useRouter();
     const { t } = useLanguage();
+    const { settings } = useSiteSettings();
     const [product, setProduct] = useState<AstroProduct | null>(null);
     const [loading, setLoading] = useState(true);
 
@@ -60,11 +63,12 @@ export default function ProductDetailPage() {
         );
     }
 
-    const whatsappLink = `https://wa.me/919999999999?text=${encodeURIComponent(
+    const whatsappLink = buildWhatsappHref(
+        settings.phone,
         t('whatsapp.message')
             .replace('{productName}', product.name)
             .replace('{price}', product.price.toLocaleString())
-    )}`;
+    );
 
     return (
         <main className="min-h-screen pt-32 pb-24">

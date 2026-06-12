@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { MessageCircle, ArrowRight } from 'lucide-react';
 import { useLanguage } from '@/lib/LanguageContext';
+import { useSiteSettings } from '@/lib/SiteSettingsContext';
 
 function KundliGrid() {
   const houses = Array.from({ length: 12 });
@@ -22,6 +23,7 @@ function KundliGrid() {
 
 export default function CTABanner() {
   const { t } = useLanguage();
+  const { whatsappHref } = useSiteSettings();
 
   return (
     <section className="relative overflow-hidden py-0">
@@ -49,7 +51,7 @@ export default function CTABanner() {
                 <ArrowRight size={14} />
               </Link>
               <a
-                href="https://wa.me/919999999999"
+                href={whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] text-white/90 transition-colors hover:border-white/30 hover:bg-white/5"
@@ -66,18 +68,18 @@ export default function CTABanner() {
               <KundliGrid />
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="rounded-full border border-blue-400/30 bg-[#060a14]/90 px-6 py-4 text-center backdrop-blur-sm">
-                  <p className="font-serif text-lg text-blue-200">Your Chart</p>
+                  <p className="font-serif text-lg text-blue-200">{t('cta.chart.title')}</p>
                   <p className="mt-1 font-mono text-[10px] uppercase tracking-widest text-slate-500">
-                    12 Houses · 9 Grahas
+                    {t('cta.chart.subtitle')}
                   </p>
                 </div>
               </div>
             </div>
             <div className="absolute -bottom-4 -left-4 hidden rounded-2xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur md:block">
               <p className="font-mono text-[10px] uppercase tracking-widest text-slate-500">
-                Response within
+                {t('cta.response.label')}
               </p>
-              <p className="font-serif text-xl text-white">24 hrs</p>
+              <p className="font-serif text-xl text-white">{t('cta.response.value')}</p>
             </div>
           </div>
         </div>

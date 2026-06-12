@@ -2,6 +2,8 @@
 
 import React from 'react';
 import { useLanguage } from '@/lib/LanguageContext';
+import { useSiteSettings } from '@/lib/SiteSettingsContext';
+import { whatsappHref as buildWhatsappHref } from '@/lib/siteSettings';
 import { 
   Sparkles, 
   Compass, 
@@ -22,6 +24,7 @@ import CosmicBackground from './CosmicBackground';
 
 export default function TarotReading() {
   const { t } = useLanguage();
+  const { settings } = useSiteSettings();
 
   const scrollToContact = () => {
     document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
@@ -32,8 +35,10 @@ export default function TarotReading() {
   };
 
   const openWhatsApp = () => {
-    const message = encodeURIComponent("Hello, I'm interested in a Tarot Reading session.");
-    window.open(`https://wa.me/919999999999?text=${message}`, '_blank');
+    window.open(
+      buildWhatsappHref(settings.phone, "Hello, I'm interested in a Tarot Reading session."),
+      '_blank'
+    );
   };
 
   const spreads = [

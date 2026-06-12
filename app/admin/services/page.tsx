@@ -21,7 +21,8 @@ const EMPTY = {
   description: '',
   long_description: '',
   price: '',
-  duration: '',
+  duration_minutes: '',
+  show_price: false,
   features: '',
   image_url: '',
   is_active: true,
@@ -80,7 +81,11 @@ export default function ServicesPage() {
       description: service.description,
       long_description: service.long_description || '',
       price: service.price != null ? String(service.price) : '',
-      duration: service.duration || '',
+      duration_minutes:
+        service.duration_minutes != null
+          ? String(service.duration_minutes)
+          : service.duration?.match(/\d+/)?.[0] || '',
+      show_price: service.show_price ?? false,
       features: (service.features || []).join('\n'),
       image_url: service.image_url || '',
       is_active: service.is_active,
@@ -183,6 +188,7 @@ export default function ServicesPage() {
                   <th className="px-5 py-3 font-medium">Service</th>
                   <th className="px-5 py-3 font-medium">Duration</th>
                   <th className="px-5 py-3 font-medium">Price</th>
+                  <th className="px-5 py-3 font-medium">Show price</th>
                   <th className="px-5 py-3 font-medium">Order</th>
                   <th className="px-5 py-3 font-medium">Status</th>
                   <th className="px-5 py-3 font-medium text-right">Actions</th>
@@ -195,9 +201,16 @@ export default function ServicesPage() {
                       <p className="font-medium text-slate-900">{service.title}</p>
                       <p className="text-xs text-slate-500">{service.slug}</p>
                     </td>
-                    <td className="px-5 py-4 text-slate-600">{service.duration || '—'}</td>
+                    <td className="px-5 py-4 text-slate-600">
+                      {service.duration_minutes != null
+                        ? `${service.duration_minutes} min`
+                        : service.duration || '—'}
+                    </td>
                     <td className="px-5 py-4 tabular-nums text-slate-900">
                       {service.price != null ? `₹${service.price}` : '—'}
+                    </td>
+                    <td className="px-5 py-4">
+                      <StatusBadge status={service.show_price ? 'active' : 'inactive'} />
                     </td>
                     <td className="px-5 py-4 text-slate-600">{service.order_index}</td>
                     <td className="px-5 py-4">
@@ -297,19 +310,33 @@ export default function ServicesPage() {
                     <Label>Price (₹)</Label>
                     <Input
                       type="number"
+                      min="0"
                       value={form.price}
                       onChange={(e) => setForm((f) => ({ ...f, price: e.target.value }))}
+                      placeholder="1500"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label>Duration</Label>
+                    <Label>Duration (minutes)</Label>
                     <Input
-                      value={form.duration}
-                      onChange={(e) => setForm((f) => ({ ...f, duration: e.target.value }))}
-                      placeholder="60 min"
+                      type="number"
+                      min="1"
+                      value={form.duration_minutes}
+                      onChange={(e) => setForm((f) => ({ ...f, duration_minutes: e.target.value }))}
+                      placeholder="60"
                     />
+                    <p className="text-xs text-slate-500">Shown as “₹price / 60 min” on the website when pricing is visible.</p>
                   </div>
                 </div>
+                <label className="flex items-center gap-2 text-sm">
+                  <input
+                    type="checkbox"
+                    checked={form.show_price}
+                    onChange={(e) => setForm((f) => ({ ...f, show_price: e.target.checked }))}
+                    className="rounded"
+                  />
+                  Show price on public website
+                </label>
                 <div className="space-y-2">
                   <Label>Features (one per line)</Label>
                   <Textarea

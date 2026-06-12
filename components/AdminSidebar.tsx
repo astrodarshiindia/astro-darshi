@@ -9,6 +9,7 @@ import {
   ShoppingBag,
   BookOpen,
   BarChart3,
+  Settings,
   LogOut,
   Menu,
   X,
@@ -46,6 +47,10 @@ const NAV_GROUPS = [
   {
     label: 'Insights',
     items: [{ href: '/admin/analytics', label: 'Analytics', icon: BarChart3 }],
+  },
+  {
+    label: 'Website',
+    items: [{ href: '/admin/settings', label: 'Business Settings', icon: Settings }],
   },
 ];
 

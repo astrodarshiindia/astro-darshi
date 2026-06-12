@@ -3,6 +3,8 @@
 import { Heart, Sparkles, MessageCircle, ArrowRight, Users, ShieldCheck, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/lib/LanguageContext';
+import { useSiteSettings } from '@/lib/SiteSettingsContext';
+import { whatsappHref as buildWhatsappHref } from '@/lib/siteSettings';
 
 interface MatrimonialHeroProps {
   onRegisterClick: () => void;
@@ -10,6 +12,7 @@ interface MatrimonialHeroProps {
 
 export default function MatrimonialHero({ onRegisterClick }: MatrimonialHeroProps) {
   const { t } = useLanguage();
+  const { settings } = useSiteSettings();
 
   return (
     <section className="relative pt-24 pb-16 md:pt-40 md:pb-32 overflow-hidden bg-white">
@@ -56,7 +59,10 @@ export default function MatrimonialHero({ onRegisterClick }: MatrimonialHeroProp
                 {t('matrimonial.cta.register')}
               </Button>
               <a 
-                href="https://wa.me/919999999999?text=Hi, I'm interested in Astro Darshini Matrimonial services." 
+                href={buildWhatsappHref(
+                  settings.phone,
+                  "Hi, I'm interested in Astro Darshi Matrimonial services."
+                )} 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto"

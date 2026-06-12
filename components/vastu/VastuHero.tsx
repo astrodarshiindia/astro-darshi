@@ -4,9 +4,12 @@ import { Home, Briefcase, Building2, Sparkles, MessageCircle, ArrowRight } from 
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { useLanguage } from '@/lib/LanguageContext';
+import { useSiteSettings } from '@/lib/SiteSettingsContext';
+import { whatsappHref as buildWhatsappHref } from '@/lib/siteSettings';
 
 export default function VastuHero() {
   const { t } = useLanguage();
+  const { settings } = useSiteSettings();
 
   return (
     <section className="relative pt-24 pb-16 md:pt-40 md:pb-32 overflow-hidden bg-white">
@@ -51,7 +54,7 @@ export default function VastuHero() {
                 </Button>
               </Link>
               <a 
-                href="https://wa.me/919999999999?text=Hi, I want to book a Vastu consultation." 
+                href={buildWhatsappHref(settings.phone, 'Hi, I want to book a Vastu consultation.')} 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto"

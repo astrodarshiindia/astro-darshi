@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { MessageCircle, ArrowUpRight } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { useLanguage } from '@/lib/LanguageContext';
+import { useSiteSettings } from '@/lib/SiteSettingsContext';
+import { whatsappHref as buildWhatsappHref } from '@/lib/siteSettings';
 import {
   type AstroProduct,
   formatProductPrice,
@@ -22,6 +24,7 @@ export default function ProductCard({
   className = '',
 }: ProductCardProps) {
   const { t } = useLanguage();
+  const { settings } = useSiteSettings();
   const imageUrl = getProductImageUrl(product.image_url, variant === 'carousel' ? 640 : 800);
   const isCompact = variant === 'carousel';
 
@@ -92,7 +95,7 @@ export default function ProductCard({
             <ArrowUpRight size={14} />
           </Link>
           <a
-            href={`https://wa.me/919999999999?text=${encodeURIComponent(whatsappMessage)}`}
+            href={buildWhatsappHref(settings.phone, whatsappMessage)}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`Enquire about ${product.name} on WhatsApp`}

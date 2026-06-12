@@ -19,6 +19,8 @@ export interface DbService {
   icon: string | null;
   price: number | null;
   duration: string | null;
+  duration_minutes: number | null;
+  show_price: boolean;
   features: string[] | null;
   image_url: string | null;
   is_active: boolean;

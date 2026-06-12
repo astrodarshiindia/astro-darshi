@@ -8,14 +8,14 @@ import { useMemo } from 'react';
 import { useProducts } from '@/hooks/useProducts';
 import MallShowcaseCard, { MallShowcaseSkeleton } from './products/MallShowcaseCard';
 
-const TRUST_PILLS = [
-  { icon: ShieldCheck, label: 'Lab certified' },
-  { icon: Sparkles, label: 'Energized stones' },
-  { icon: Zap, label: 'Kundli-matched advice' },
-];
-
 export default function AstroMall() {
   const { t } = useLanguage();
+
+  const trustPills = [
+    { icon: ShieldCheck, label: t('mall.trust.certified') },
+    { icon: Sparkles, label: t('mall.trust.energized') },
+    { icon: Zap, label: t('mall.trust.matched') },
+  ];
   const { selectedService } = useSelectedService();
   const { products, loading, error } = useProducts();
 
@@ -80,7 +80,7 @@ export default function AstroMall() {
             </p>
 
             <div className="mt-8 flex flex-wrap gap-2">
-              {TRUST_PILLS.map((pill) => (
+              {trustPills.map((pill) => (
                 <span
                   key={pill.label}
                   className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-2 text-[11px] text-slate-300"
@@ -96,7 +96,7 @@ export default function AstroMall() {
                 href="/astromall"
                 className="mt-10 inline-flex w-fit items-center gap-2 rounded-full border border-amber-400/30 bg-amber-400/10 px-6 py-3 text-[10px] font-bold uppercase tracking-[0.22em] text-amber-100 transition-all hover:bg-amber-400 hover:text-slate-900"
               >
-                Explore full collection
+                {t('mall.explore')}
                 <ArrowRight size={14} />
               </Link>
             )}
@@ -118,13 +118,13 @@ export default function AstroMall() {
               <div className="rounded-2xl border border-dashed border-white/15 bg-white/[0.02] px-6 py-20 text-center">
                 <Sparkles className="mx-auto mb-4 text-amber-400/50" size={28} />
                 <p className="text-sm uppercase tracking-[0.2em] text-slate-500">
-                  {selectedService ? 'No products for this service' : t('mall.coming_soon')}
+                  {selectedService ? t('mall.noProducts') : t('mall.coming_soon')}
                 </p>
                 <Link
                   href="/astromall"
                   className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-amber-300 hover:underline"
                 >
-                  Visit Astro Mall
+                  {t('mall.visitMall')}
                   <ArrowRight size={14} />
                 </Link>
               </div>
@@ -146,18 +146,18 @@ export default function AstroMall() {
                   ))}
                   {filteredProducts.length === 1 && (
                     <div className="flex min-h-[200px] flex-col items-center justify-center rounded-2xl border border-dashed border-white/10 bg-white/[0.02] p-8 text-center md:row-span-2">
-                      <p className="font-serif text-lg text-slate-400">More pieces arriving soon</p>
+                      <p className="font-serif text-lg text-slate-400">{t('mall.moreComing')}</p>
                       <Link
                         href="/astromall"
                         className="mt-4 text-xs font-bold uppercase tracking-[0.2em] text-amber-300 hover:underline"
                       >
-                        View mall
+                        {t('mall.viewMall')}
                       </Link>
                     </div>
                   )}
                   {filteredProducts.length === 2 && (
                     <div className="flex min-h-[160px] flex-col items-center justify-center rounded-2xl border border-dashed border-white/10 bg-white/[0.02] p-6 text-center">
-                      <p className="text-sm text-slate-500">New arrivals coming</p>
+                      <p className="text-sm text-slate-500">{t('mall.newArrivals')}</p>
                     </div>
                   )}
                 </div>

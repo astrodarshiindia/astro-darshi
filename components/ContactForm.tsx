@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { AlertCircle, CheckCircle, Clock, Loader2, Mail, MessageCircle, Phone, Shield } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useLanguage } from '@/lib/LanguageContext';
+import { useSiteSettings } from '@/lib/SiteSettingsContext';
 import { useSelectedService } from '@/lib/SelectedServiceContext';
 
 interface ContactFormProps {
@@ -16,6 +17,7 @@ interface ContactFormProps {
 
 export default function ContactForm({ embedded = false }: ContactFormProps) {
   const { t } = useLanguage();
+  const { settings, telHref, whatsappHref, mailtoHref, supportMailtoHref } = useSiteSettings();
   const { selectedService } = useSelectedService();
   const [formData, setFormData] = useState({
     name: '',
@@ -143,9 +145,9 @@ export default function ContactForm({ embedded = false }: ContactFormProps) {
                     <Phone size={16} />
                   </span>
                   <div>
-                    <p className="text-[10px] uppercase tracking-widest text-slate-500">Call</p>
-                    <a href="tel:+919999999999" className="text-sm font-medium hover:text-blue-300">
-                      +91 99999 99999
+                    <p className="text-[10px] uppercase tracking-widest text-slate-500">{t('contact.channel.call')}</p>
+                    <a href={telHref} className="text-sm font-medium hover:text-blue-300">
+                      {settings.phoneDisplay}
                     </a>
                   </div>
                 </li>
@@ -154,14 +156,14 @@ export default function ContactForm({ embedded = false }: ContactFormProps) {
                     <MessageCircle size={16} />
                   </span>
                   <div>
-                    <p className="text-[10px] uppercase tracking-widest text-slate-500">WhatsApp</p>
+                    <p className="text-[10px] uppercase tracking-widest text-slate-500">{t('contact.channel.whatsapp')}</p>
                     <a
-                      href="https://wa.me/919999999999"
+                      href={whatsappHref}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-sm font-medium hover:text-blue-300"
                     >
-                      Chat with us
+                      {t('contact.channel.chat')}
                     </a>
                   </div>
                 </li>
@@ -170,8 +172,10 @@ export default function ContactForm({ embedded = false }: ContactFormProps) {
                     <Mail size={16} />
                   </span>
                   <div>
-                    <p className="text-[10px] uppercase tracking-widest text-slate-500">Email</p>
-                    <p className="text-sm font-medium">support@astrodarshi.com</p>
+                    <p className="text-[10px] uppercase tracking-widest text-slate-500">{t('contact.channel.email')}</p>
+                    <a href={supportMailtoHref} className="text-sm font-medium hover:text-blue-300">
+                      {settings.supportEmail}
+                    </a>
                   </div>
                 </li>
                 <li className="flex items-start gap-4">
@@ -179,8 +183,8 @@ export default function ContactForm({ embedded = false }: ContactFormProps) {
                     <Clock size={16} />
                   </span>
                   <div>
-                    <p className="text-[10px] uppercase tracking-widest text-slate-500">Response time</p>
-                    <p className="text-sm font-medium">Within 24 hours</p>
+                    <p className="text-[10px] uppercase tracking-widest text-slate-500">{t('contact.channel.response')}</p>
+                    <p className="text-sm font-medium">{t('contact.channel.responseTime')}</p>
                   </div>
                 </li>
               </ul>

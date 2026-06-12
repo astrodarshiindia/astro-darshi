@@ -4,6 +4,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { ArrowUp, MessageCircle, Phone, Sparkles, Briefcase, Heart, Coins, Activity, ChevronLeft, ChevronRight, Home, TrendingUp, Users, Gem } from 'lucide-react';
 import { useLanguage } from '@/lib/LanguageContext';
+import { useSiteSettings } from '@/lib/SiteSettingsContext';
+import { whatsappHref as buildWhatsappHref } from '@/lib/siteSettings';
 import useEmblaCarousel from 'embla-carousel-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
@@ -186,6 +188,7 @@ export default function Hero() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [dimensions, setDimensions] = useState({ width: 1200, height: 800 });
   const { t } = useLanguage();
+  const { telHref, settings } = useSiteSettings();
   const isMobile = useIsMobile();
   
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
@@ -425,13 +428,16 @@ export default function Hero() {
       {/* Floating Call/Chat - Premium Version */}
       <div className="fixed bottom-8 left-1/2 z-50 flex -translate-x-1/2 gap-1.5 rounded-full border border-black/5 bg-white/85 p-1.5 shadow-[0_12px_40px_rgba(0,0,0,0.12)] backdrop-blur-xl">
         <a
-          href="tel:+919999999999"
+          href={telHref}
           className={`flex items-center gap-2.5 rounded-full px-5 py-2.5 text-sm font-medium text-white shadow-md transition-all hover:opacity-90 md:gap-3 md:px-6 md:py-3 ${active.btnBg}`}
         >
           <Phone size={16} className="shrink-0" /> {t('hero.call')}
         </a>
         <a
-          href="https://wa.me/919999999999?text=Hi%20AstroDarshi!%20I'd%20like%20a%20consultation."
+          href={buildWhatsappHref(
+            settings.phone,
+            "Hi AstroDarshi! I'd like a consultation."
+          )}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-2.5 rounded-full bg-green-600 px-5 py-2.5 text-sm font-medium text-white shadow-md transition-all hover:bg-green-700 md:gap-3 md:px-6 md:py-3"

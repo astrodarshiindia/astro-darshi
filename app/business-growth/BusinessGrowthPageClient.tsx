@@ -18,10 +18,13 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/lib/LanguageContext';
+import { useSiteSettings } from '@/lib/SiteSettingsContext';
+import { whatsappHref as buildWhatsappHref } from '@/lib/siteSettings';
 import ContactForm from '@/components/ContactForm';
 
 export default function BusinessGrowthPageClient() {
   const { t } = useLanguage();
+  const { settings } = useSiteSettings();
 
   const analysisPoints = [
     {
@@ -194,7 +197,7 @@ export default function BusinessGrowthPageClient() {
             </Button>
 
             <a
-              href={`https://wa.me/919999999999?text=${encodeURIComponent(t('business.whatsapp.message'))}`}
+              href={buildWhatsappHref(settings.phone, t('business.whatsapp.message'))}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto flex items-center justify-center gap-3 px-12 py-8 border-2 border-primary text-foreground rounded-full text-lg font-bold tracking-[0.1em] hover:bg-primary/5 transition-all duration-300 font-serif"

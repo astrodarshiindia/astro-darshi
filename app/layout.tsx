@@ -4,6 +4,8 @@ import { Analytics } from '@vercel/analytics/next'
 import { ThemeProvider } from '@/components/theme-provider'
 import { LanguageProvider } from '@/lib/LanguageContext'
 import { SelectedServiceProvider } from '@/lib/SelectedServiceContext'
+import { SiteSettingsProvider } from '@/lib/SiteSettingsContext'
+import { fetchSiteSettings } from '@/lib/siteSettings'
 import JsonLd from '@/components/seo/JsonLd'
 import {
   localBusinessJsonLd,
@@ -39,10 +41,6 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   ...rootMetadata,
   manifest: '/manifest.json',
-  icons: {
-    icon: [{ url: '/ab.png', type: 'image/png' }],
-    apple: [{ url: '/ab.png', type: 'image/png' }],
-  },
   appleWebApp: {
     capable: true,
     title: 'Astro Darshi',
@@ -60,11 +58,13 @@ export const viewport: Viewport = {
   ],
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const settings = await fetchSiteSettings()
+
   return (
     <html
       lang="en-IN"
@@ -73,7 +73,11 @@ export default function RootLayout({
     >
       <body className="font-sans antialiased bg-background text-foreground">
         <JsonLd
-          data={[organizationJsonLd(), websiteJsonLd(), localBusinessJsonLd()]}
+          data={[
+            organizationJsonLd(settings),
+            websiteJsonLd(),
+            localBusinessJsonLd(settings),
+          ]}
         />
         <ThemeProvider
           attribute="class"
@@ -81,12 +85,14 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
-          <LanguageProvider>
-            <SelectedServiceProvider>
-              {children}
-              {process.env.NODE_ENV === 'production' && <Analytics />}
-            </SelectedServiceProvider>
-          </LanguageProvider>
+          <SiteSettingsProvider>
+            <LanguageProvider>
+              <SelectedServiceProvider>
+                {children}
+                {process.env.NODE_ENV === 'production' && <Analytics />}
+              </SelectedServiceProvider>
+            </LanguageProvider>
+          </SiteSettingsProvider>
         </ThemeProvider>
       </body>
     </html>

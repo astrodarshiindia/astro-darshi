@@ -7,11 +7,13 @@ import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { Calendar, User, Phone, MapPin, Building, MessageSquare, Send, Mail } from 'lucide-react';
 import { useLanguage } from '@/lib/LanguageContext';
+import { useSiteSettings } from '@/lib/SiteSettingsContext';
 import { submitEnquiry } from '@/lib/submitEnquiry';
 
 export default function VastuBookingForm() {
   const { toast } = useToast();
   const { t } = useLanguage();
+  const { settings } = useSiteSettings();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -93,7 +95,7 @@ export default function VastuBookingForm() {
                     </div>
                     <div>
                       <p className="text-xs text-slate-500 uppercase tracking-widest font-bold">{t('vastu.booking.call')}</p>
-                      <p className="text-white">+91 99999 99999</p>
+                      <p className="text-white">{settings.phoneDisplay}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-4">

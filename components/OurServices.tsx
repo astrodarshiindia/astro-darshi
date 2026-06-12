@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useLanguage } from '@/lib/LanguageContext';
+import { useSiteSettings } from '@/lib/SiteSettingsContext';
+import { whatsappHref as buildWhatsappHref, telHref as buildTelHref } from '@/lib/siteSettings';
 import { ArrowRight, MessageCircle, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -23,6 +25,7 @@ const FEATURED_IDS = ['kundli', 'prashna'];
 export default function OurServices() {
   const router = useRouter();
   const { t } = useLanguage();
+  const { settings } = useSiteSettings();
   const [isMatchmakingOpen, setIsMatchmakingOpen] = useState(false);
   const [isAskNowOpen, setIsAskNowOpen] = useState(false);
   const [matchmakingDetails, setMatchmakingDetails] = useState({
@@ -62,7 +65,7 @@ export default function OurServices() {
 
     if (result.success) {
       const encodedMessage = encodeURIComponent(message);
-      window.open(`https://wa.me/919999999999?text=${encodedMessage}`, '_blank');
+      window.open(buildWhatsappHref(settings.phone, message), '_blank');
       setIsMatchmakingOpen(false);
     }
   };
@@ -228,8 +231,9 @@ export default function OurServices() {
         <div className="mb-10 grid gap-8 md:mb-14 lg:grid-cols-[1fr_auto] lg:items-end">
           <div className="max-w-2xl">
             <h2 className="text-[2rem] leading-[1.08] tracking-tight sm:text-4xl md:text-5xl lg:text-[3.25rem]">
-              Consult for{' '}
-              <span className="italic text-primary">Better Life</span> Decisions
+              {t('home.services.title')}{' '}
+              <span className="italic text-primary">{t('home.services.title.highlight')}</span>{' '}
+              {t('home.services.title.suffix')}
             </h2>
             <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
               {t('services.subtitle')}
@@ -240,7 +244,7 @@ export default function OurServices() {
             href="/services"
             className="inline-flex h-fit items-center gap-2 self-start rounded-full border border-border bg-background px-5 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-foreground transition-colors hover:border-primary/40 hover:bg-primary/5 hover:text-primary lg:self-auto"
           >
-            All services
+            {t('home.services.all')}
             <ArrowRight size={14} />
           </Link>
         </div>
@@ -275,15 +279,15 @@ export default function OurServices() {
         {/* Bottom CTA strip */}
         <div className="mt-10 flex flex-col items-center justify-between gap-4 rounded-2xl border border-border/70 bg-background/80 px-6 py-5 sm:flex-row sm:px-8">
           <p className="text-center text-sm text-muted-foreground sm:text-left">
-            Not sure which service fits?{' '}
-            <span className="text-foreground">Tell us your concern — we&apos;ll guide you.</span>
+            {t('home.services.notSure')}{' '}
+            <span className="text-foreground">{t('home.services.guideYou')}</span>
           </p>
           <Button
             type="button"
             onClick={() => setIsAskNowOpen(true)}
             className="h-11 shrink-0 rounded-full px-6 text-[10px] font-bold uppercase tracking-[0.2em]"
           >
-            Ask now
+            {t('home.services.askNow')}
             <ArrowRight size={14} className="ml-2" />
           </Button>
         </div>
@@ -293,30 +297,30 @@ export default function OurServices() {
       <Dialog open={isAskNowOpen} onOpenChange={setIsAskNowOpen}>
         <DialogContent className="glass-effect border-primary/20 sm:max-w-[400px]">
           <DialogHeader>
-            <DialogTitle className="font-serif text-3xl">Connect with Us</DialogTitle>
+            <DialogTitle className="font-serif text-3xl">{t('home.ask.title')}</DialogTitle>
             <DialogDescription className="text-base">
-              Choose your preferred way to get instant answers to your questions.
+              {t('home.ask.desc')}
             </DialogDescription>
           </DialogHeader>
           <div className="grid grid-cols-1 gap-4 py-6">
             <Button
-              onClick={() => window.open('https://wa.me/919999999999', '_blank')}
+              onClick={() => window.open(buildWhatsappHref(settings.phone), '_blank')}
               className="group flex items-center justify-between rounded-2xl bg-[#25D366] px-8 py-8 text-lg text-white shadow-lg shadow-green-500/20 hover:bg-[#128C7E]"
             >
               <div className="flex items-center gap-4">
                 <MessageCircle size={24} />
-                <span className="font-serif">WhatsApp Chat</span>
+                <span className="font-serif">{t('home.ask.whatsapp')}</span>
               </div>
               <ArrowRight className="transition-transform group-hover:translate-x-1" />
             </Button>
 
             <Button
-              onClick={() => window.open('tel:+919999999999', '_self')}
+              onClick={() => window.open(buildTelHref(settings.phone), '_self')}
               className="group flex items-center justify-between rounded-2xl bg-primary px-8 py-8 text-lg text-primary-foreground shadow-lg shadow-primary/20 hover:bg-foreground hover:text-background"
             >
               <div className="flex items-center gap-4">
                 <Phone size={24} />
-                <span className="font-serif">Direct Call</span>
+                <span className="font-serif">{t('home.ask.call')}</span>
               </div>
               <ArrowRight className="transition-transform group-hover:translate-x-1" />
             </Button>
@@ -328,17 +332,17 @@ export default function OurServices() {
       <Dialog open={isMatchmakingOpen} onOpenChange={setIsMatchmakingOpen}>
         <DialogContent className="glass-effect max-h-[90vh] overflow-y-auto border-primary/20 sm:max-w-[600px]">
           <DialogHeader>
-            <DialogTitle className="font-serif text-3xl">Matchmaking Analysis</DialogTitle>
+            <DialogTitle className="font-serif text-3xl">{t('home.match.title')}</DialogTitle>
             <DialogDescription>
-              Enter birth details for both individuals to check compatibility.
+              {t('home.match.desc')}
             </DialogDescription>
           </DialogHeader>
           <form onSubmit={handleMatchmakingSubmit} className="space-y-8 py-4">
             <div className="space-y-4 rounded-2xl border border-border/50 bg-muted/30 p-4">
-              <h4 className="font-serif text-lg text-foreground">Your Contact Details</h4>
+              <h4 className="font-serif text-lg text-foreground">{t('home.match.contact')}</h4>
               <div className="grid gap-4 md:grid-cols-3">
                 <div className="space-y-2">
-                  <Label htmlFor="contactName">Full Name</Label>
+                  <Label htmlFor="contactName">{t('home.match.fullName')}</Label>
                   <Input
                     id="contactName"
                     required
@@ -350,7 +354,7 @@ export default function OurServices() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="contactPhone">Phone</Label>
+                  <Label htmlFor="contactPhone">{t('home.match.phone')}</Label>
                   <Input
                     id="contactPhone"
                     type="tel"
@@ -363,7 +367,7 @@ export default function OurServices() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="contactEmail">Email</Label>
+                  <Label htmlFor="contactEmail">{t('home.match.email')}</Label>
                   <Input
                     id="contactEmail"
                     type="email"
@@ -382,11 +386,11 @@ export default function OurServices() {
                 <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs text-primary-foreground">
                   1
                 </span>
-                Person 1 Details
+                {t('home.match.person1')}
               </h4>
               <div className="grid gap-4 md:grid-cols-2">
                 <div className="space-y-2">
-                  <Label htmlFor="p1Name">Full Name</Label>
+                  <Label htmlFor="p1Name">{t('home.match.fullName')}</Label>
                   <Input
                     id="p1Name"
                     required
@@ -398,7 +402,7 @@ export default function OurServices() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="p1Dob">Date of Birth</Label>
+                  <Label htmlFor="p1Dob">{t('home.match.dob')}</Label>
                   <Input
                     id="p1Dob"
                     type="date"
@@ -411,7 +415,7 @@ export default function OurServices() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="p1Tob">Time of Birth</Label>
+                  <Label htmlFor="p1Tob">{t('home.match.tob')}</Label>
                   <Input
                     id="p1Tob"
                     type="time"
@@ -424,11 +428,11 @@ export default function OurServices() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="p1Pob">Place of Birth</Label>
+                  <Label htmlFor="p1Pob">{t('home.match.pob')}</Label>
                   <Input
                     id="p1Pob"
                     required
-                    placeholder="City, Country"
+                    placeholder={t('home.match.placeholder.location')}
                     value={matchmakingDetails.p1Pob}
                     onChange={(e) =>
                       setMatchmakingDetails({ ...matchmakingDetails, p1Pob: e.target.value })
@@ -444,11 +448,11 @@ export default function OurServices() {
                 <span className="flex h-6 w-6 items-center justify-center rounded-full bg-accent text-xs text-accent-foreground">
                   2
                 </span>
-                Person 2 Details
+                {t('home.match.person2')}
               </h4>
               <div className="grid gap-4 md:grid-cols-2">
                 <div className="space-y-2">
-                  <Label htmlFor="p2Name">Full Name</Label>
+                  <Label htmlFor="p2Name">{t('home.match.fullName')}</Label>
                   <Input
                     id="p2Name"
                     required
@@ -460,7 +464,7 @@ export default function OurServices() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="p2Dob">Date of Birth</Label>
+                  <Label htmlFor="p2Dob">{t('home.match.dob')}</Label>
                   <Input
                     id="p2Dob"
                     type="date"
@@ -473,7 +477,7 @@ export default function OurServices() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="p2Tob">Time of Birth</Label>
+                  <Label htmlFor="p2Tob">{t('home.match.tob')}</Label>
                   <Input
                     id="p2Tob"
                     type="time"
@@ -486,11 +490,11 @@ export default function OurServices() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="p2Pob">Place of Birth</Label>
+                  <Label htmlFor="p2Pob">{t('home.match.pob')}</Label>
                   <Input
                     id="p2Pob"
                     required
-                    placeholder="City, Country"
+                    placeholder={t('home.match.placeholder.location')}
                     value={matchmakingDetails.p2Pob}
                     onChange={(e) =>
                       setMatchmakingDetails({ ...matchmakingDetails, p2Pob: e.target.value })
@@ -506,7 +510,7 @@ export default function OurServices() {
               disabled={isMatchmakingSubmitting}
               className="w-full rounded-2xl py-8 font-serif text-lg"
             >
-              {isMatchmakingSubmitting ? 'Submitting...' : 'Check Compatibility'}
+              {isMatchmakingSubmitting ? t('home.match.submitting') : t('home.match.submit')}
             </Button>
           </form>
         </DialogContent>

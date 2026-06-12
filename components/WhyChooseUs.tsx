@@ -1,37 +1,40 @@
 'use client';
 
 import { Fingerprint, HandHeart, Lock, Sparkles } from 'lucide-react';
-
-const STATS = [
-  { value: '10+', label: 'Years guiding seekers' },
-  { value: '500+', label: 'Consultations delivered' },
-  { value: '100%', label: 'Confidential sessions' },
-];
-
-const FEATURES = [
-  {
-    icon: Sparkles,
-    title: 'Qualified expert team',
-    desc: 'Readings led by trained Vedic astrologers — not automated software output.',
-  },
-  {
-    icon: Fingerprint,
-    title: 'Truly personalised',
-    desc: 'Every chart is studied manually with context from your life situation.',
-  },
-  {
-    icon: Lock,
-    title: 'Private & discreet',
-    desc: 'Your birth details and concerns stay between you and your consultant.',
-  },
-  {
-    icon: HandHeart,
-    title: 'Remedies with follow-through',
-    desc: 'Practical, tested remedies with guidance on how and when to apply them.',
-  },
-];
+import { useLanguage } from '@/lib/LanguageContext';
 
 export default function WhyChooseUs() {
+  const { t } = useLanguage();
+
+  const stats = [
+    { value: '10+', label: t('why.stat1.label') },
+    { value: '500+', label: t('why.stat2.label') },
+    { value: '100%', label: t('why.stat3.label') },
+  ];
+
+  const features = [
+    {
+      icon: Sparkles,
+      title: t('why.feature1.title'),
+      desc: t('why.feature1.desc'),
+    },
+    {
+      icon: Fingerprint,
+      title: t('why.feature2.title'),
+      desc: t('why.feature2.desc'),
+    },
+    {
+      icon: Lock,
+      title: t('why.feature3.title'),
+      desc: t('why.feature3.desc'),
+    },
+    {
+      icon: HandHeart,
+      title: t('why.feature4.title'),
+      desc: t('why.feature4.desc'),
+    },
+  ];
+
   return (
     <section className="relative overflow-hidden border-y border-amber-200/60 bg-[#faf6ef] py-16 md:py-28 dark:border-amber-900/30 dark:bg-[#0f0d0a]">
       <div
@@ -44,18 +47,20 @@ export default function WhyChooseUs() {
 
       <div className="section-container relative">
         <div className="grid items-start gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
-          {/* Left — manifesto + stats */}
           <div className="lg:sticky lg:top-28">
             <h2 className="max-w-md text-[2.35rem] leading-[1.08] tracking-tight text-stone-900 sm:text-5xl md:text-[3.25rem] dark:text-stone-50">
-              Guidance that feels{' '}
-              <span className="italic text-amber-700 dark:text-amber-400">human</span>, not generated.
+              {t('why.title')}{' '}
+              <span className="italic text-amber-700 dark:text-amber-400">
+                {t('why.title.highlight')}
+              </span>
+              {t('why.title.suffix')}
             </h2>
             <p className="mt-6 max-w-md text-base leading-relaxed text-stone-600 dark:text-stone-400">
-              Ancient Jyotish logic, explained in plain language — with care, clarity, and remedies you can actually use.
+              {t('why.subtitle')}
             </p>
 
             <div className="mt-10 grid grid-cols-3 gap-4 border-t border-amber-900/10 pt-8 dark:border-amber-100/10">
-              {STATS.map((stat) => (
+              {stats.map((stat) => (
                 <div key={stat.label}>
                   <p className="font-serif text-3xl text-amber-800 dark:text-amber-300 md:text-4xl">
                     {stat.value}
@@ -68,9 +73,8 @@ export default function WhyChooseUs() {
             </div>
           </div>
 
-          {/* Right — feature stack */}
           <div className="space-y-3">
-            {FEATURES.map((feature) => (
+            {features.map((feature) => (
               <div
                 key={feature.title}
                 className="group flex gap-5 rounded-2xl border border-amber-900/8 bg-white/70 p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-amber-700/20 hover:shadow-[0_12px_40px_rgba(120,80,20,0.08)] sm:p-6 dark:border-white/8 dark:bg-white/[0.03] dark:hover:border-amber-500/20"

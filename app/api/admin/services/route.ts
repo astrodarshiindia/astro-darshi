@@ -47,6 +47,8 @@ export async function POST(request: NextRequest) {
       long_description,
       price,
       duration,
+      duration_minutes,
+      show_price,
       features,
       image_url,
       is_active,
@@ -71,7 +73,16 @@ export async function POST(request: NextRequest) {
         description: description.trim(),
         long_description: long_description?.trim() || null,
         price: price != null && price !== '' ? parseFloat(price) : null,
-        duration: duration?.trim() || null,
+        duration:
+          duration?.trim() ||
+          (duration_minutes != null && duration_minutes !== ''
+            ? `${parseInt(String(duration_minutes), 10)} min`
+            : null),
+        duration_minutes:
+          duration_minutes != null && duration_minutes !== ''
+            ? parseInt(String(duration_minutes), 10)
+            : null,
+        show_price: Boolean(show_price),
         features: featureList,
         image_url: image_url?.trim() || null,
         is_active: is_active !== false,
@@ -109,6 +120,16 @@ export async function PUT(request: NextRequest) {
     if (rest.long_description !== undefined) updates.long_description = rest.long_description?.trim() || null;
     if (rest.price !== undefined) updates.price = rest.price !== '' && rest.price != null ? parseFloat(rest.price) : null;
     if (rest.duration !== undefined) updates.duration = rest.duration?.trim() || null;
+    if (rest.duration_minutes !== undefined) {
+      updates.duration_minutes =
+        rest.duration_minutes !== '' && rest.duration_minutes != null
+          ? parseInt(String(rest.duration_minutes), 10)
+          : null;
+      if (!rest.duration && updates.duration_minutes) {
+        updates.duration = `${updates.duration_minutes} min`;
+      }
+    }
+    if (rest.show_price !== undefined) updates.show_price = Boolean(rest.show_price);
     if (rest.image_url !== undefined) updates.image_url = rest.image_url?.trim() || null;
     if (rest.is_active !== undefined) updates.is_active = Boolean(rest.is_active);
     if (rest.order_index !== undefined) updates.order_index = rest.order_index;

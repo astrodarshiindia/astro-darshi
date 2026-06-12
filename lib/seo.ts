@@ -1,13 +1,16 @@
 import type { Metadata } from 'next';
 import type { BlogPost } from '@/lib/blog';
 import type { AstroProduct } from '@/lib/products';
+import type { SiteSettings } from '@/lib/siteSettings';
+import { DEFAULT_SITE_SETTINGS } from '@/lib/siteSettings';
 
 export const SITE_NAME = 'Astro Darshi';
 export const SITE_TAGLINE = 'Vedic Astrology & Tarot Card Reading';
 export const SITE_DESCRIPTION =
   'Expert Vedic astrology, tarot readings, kundli matching, Vastu and gemstone guidance in Lucknow. Personalized consultations for career, marriage, health and business.';
 export const SITE_LOCALE = 'en_IN';
-export const DEFAULT_OG_IMAGE = '/ab.png';
+export const SITE_LOGO = '/logo.png';
+export const DEFAULT_OG_IMAGE = '/logo.png';
 export const CONTACT_PHONE = '+919999999999';
 export const CONTACT_EMAIL = 'hello@astroDarshi.com';
 export const BUSINESS_ADDRESS = {
@@ -164,26 +167,34 @@ export const rootMetadata: Metadata = {
   robots: homeMetadata.robots,
 };
 
-export function organizationJsonLd() {
+export function organizationJsonLd(settings: SiteSettings = DEFAULT_SITE_SETTINGS) {
+  const sameAs = [settings.social.instagram, settings.social.youtube, settings.social.facebook].filter(
+    Boolean
+  );
+
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     '@id': `${getSiteUrl()}/#organization`,
     name: SITE_NAME,
     url: getSiteUrl(),
-    logo: absoluteUrl(DEFAULT_OG_IMAGE),
+    logo: absoluteUrl(SITE_LOGO),
     description: SITE_DESCRIPTION,
-    email: CONTACT_EMAIL,
-    telephone: CONTACT_PHONE,
+    email: settings.email,
+    telephone: settings.phone,
     address: {
       '@type': 'PostalAddress',
-      ...BUSINESS_ADDRESS,
+      streetAddress: settings.streetAddress,
+      addressLocality: settings.addressLocality,
+      addressRegion: settings.addressRegion,
+      postalCode: settings.postalCode,
+      addressCountry: settings.addressCountry,
     },
-    sameAs: [],
+    sameAs,
     contactPoint: [
       {
         '@type': 'ContactPoint',
-        telephone: CONTACT_PHONE,
+        telephone: settings.phone,
         contactType: 'customer service',
         areaServed: 'IN',
         availableLanguage: ['English', 'Hindi'],
@@ -213,7 +224,7 @@ export function websiteJsonLd() {
   };
 }
 
-export function localBusinessJsonLd() {
+export function localBusinessJsonLd(settings: SiteSettings = DEFAULT_SITE_SETTINGS) {
   return {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
@@ -221,13 +232,17 @@ export function localBusinessJsonLd() {
     name: SITE_NAME,
     image: absoluteUrl(DEFAULT_OG_IMAGE),
     url: getSiteUrl(),
-    telephone: CONTACT_PHONE,
-    email: CONTACT_EMAIL,
+    telephone: settings.phone,
+    email: settings.email,
     description: SITE_DESCRIPTION,
     priceRange: '₹₹',
     address: {
       '@type': 'PostalAddress',
-      ...BUSINESS_ADDRESS,
+      streetAddress: settings.streetAddress,
+      addressLocality: settings.addressLocality,
+      addressRegion: settings.addressRegion,
+      postalCode: settings.postalCode,
+      addressCountry: settings.addressCountry,
     },
     geo: {
       '@type': 'GeoCoordinates',
@@ -414,4 +429,6 @@ export const PUBLIC_STATIC_ROUTES: {
   { path: '/best-astrologers', priority: 0.75, changeFrequency: 'monthly' },
   { path: '/privacy-policy', priority: 0.3, changeFrequency: 'yearly' },
   { path: '/terms-of-service', priority: 0.3, changeFrequency: 'yearly' },
+  { path: '/cancellation-refund', priority: 0.3, changeFrequency: 'yearly' },
+  { path: '/shipping-delivery', priority: 0.3, changeFrequency: 'yearly' },
 ];

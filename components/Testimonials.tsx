@@ -11,44 +11,6 @@ const AVATAR_COLORS = [
   'bg-amber-100 text-amber-800',
 ];
 
-const TESTIMONIALS = [
-  {
-    id: 1,
-    name: 'Rahul',
-    location: 'Lucknow',
-    text: 'Aap ki guidance se meri job problem solve hui, 2 mahine me result mila.',
-    featured: true,
-  },
-  {
-    id: 2,
-    name: 'Neha',
-    location: 'Delhi',
-    text: 'Marriage delay issue clear hua, bahut accurate prediction tha.',
-    featured: false,
-  },
-  {
-    id: 3,
-    name: 'Amit',
-    location: 'Mumbai',
-    text: 'Life was stuck, but your remedies worked like magic. Highly recommended!',
-    featured: false,
-  },
-  {
-    id: 4,
-    name: 'Priya',
-    location: 'Bangalore',
-    text: 'Career transition was smooth after your consultation. Thank you!',
-    featured: false,
-  },
-  {
-    id: 5,
-    name: 'Vikram',
-    location: 'Jaipur',
-    text: 'Accurate and very professional service. The best in the field.',
-    featured: false,
-  },
-];
-
 function Stars() {
   return (
     <div className="flex gap-0.5 text-amber-500">
@@ -60,11 +22,15 @@ function Stars() {
 }
 
 function TestimonialCard({
-  testimonial,
+  name,
+  location,
+  text,
   index,
   large = false,
 }: {
-  testimonial: (typeof TESTIMONIALS)[0];
+  name: string;
+  location: string;
+  text: string;
   index: number;
   large?: boolean;
 }) {
@@ -82,17 +48,17 @@ function TestimonialCard({
           large ? 'font-serif text-xl md:text-2xl md:leading-snug' : 'text-sm md:text-base'
         }`}
       >
-        &ldquo;{testimonial.text}&rdquo;
+        &ldquo;{text}&rdquo;
       </p>
-      <div className={`mt-6 flex items-center gap-3 border-t border-border/50 pt-5`}>
+      <div className="mt-6 flex items-center gap-3 border-t border-border/50 pt-5">
         <div
           className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full font-semibold ${color}`}
         >
-          {testimonial.name[0]}
+          {name[0]}
         </div>
         <div>
-          <p className="text-sm font-semibold">{testimonial.name}</p>
-          <p className="text-xs text-muted-foreground">{testimonial.location}</p>
+          <p className="text-sm font-semibold">{name}</p>
+          <p className="text-xs text-muted-foreground">{location}</p>
         </div>
       </div>
     </article>
@@ -101,8 +67,17 @@ function TestimonialCard({
 
 export default function Testimonials() {
   const { t } = useLanguage();
-  const featured = TESTIMONIALS.find((t) => t.featured) || TESTIMONIALS[0];
-  const rest = TESTIMONIALS.filter((t) => t.id !== featured.id);
+
+  const testimonials = [1, 2, 3, 4, 5].map((id) => ({
+    id,
+    name: t(`testimonials.item.${id}.name`),
+    location: t(`testimonials.item.${id}.location`),
+    text: t(`testimonials.item.${id}.text`),
+    featured: id === 1,
+  }));
+
+  const featured = testimonials.find((item) => item.featured) || testimonials[0];
+  const rest = testimonials.filter((item) => item.id !== featured.id);
 
   return (
     <section className="relative overflow-hidden bg-[#f4f7fb] py-16 md:py-28 dark:bg-[#080b12]">
@@ -110,27 +85,44 @@ export default function Testimonials() {
         <div className="mb-12 flex flex-col gap-4 md:mb-16 md:flex-row md:items-end md:justify-between">
           <div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl">
-              Stories from <span className="italic text-primary">real people</span>
+              {t('testimonials.heading')}{' '}
+              <span className="italic text-primary">{t('testimonials.heading.highlight')}</span>
             </h2>
           </div>
           <p className="max-w-xs text-sm text-muted-foreground md:text-right">
-            Hindi & English consultations. Names shortened for privacy.
+            {t('testimonials.note')}
           </p>
         </div>
 
-        {/* Bento grid */}
         <div className="grid gap-4 md:grid-cols-2 md:gap-5 lg:grid-cols-12">
           <div className="lg:col-span-7">
-            <TestimonialCard testimonial={featured} index={0} large />
+            <TestimonialCard
+              name={featured.name}
+              location={featured.location}
+              text={featured.text}
+              index={0}
+              large
+            />
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:col-span-5 lg:grid-cols-1">
             {rest.slice(0, 2).map((item, i) => (
-              <TestimonialCard key={item.id} testimonial={item} index={i + 1} />
+              <TestimonialCard
+                key={item.id}
+                name={item.name}
+                location={item.location}
+                text={item.text}
+                index={i + 1}
+              />
             ))}
           </div>
           {rest.slice(2).map((item, i) => (
             <div key={item.id} className="md:col-span-1 lg:col-span-4">
-              <TestimonialCard testimonial={item} index={i + 3} />
+              <TestimonialCard
+                name={item.name}
+                location={item.location}
+                text={item.text}
+                index={i + 3}
+              />
             </div>
           ))}
         </div>

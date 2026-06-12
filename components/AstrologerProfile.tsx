@@ -33,7 +33,7 @@ export default function AstrologerProfile() {
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/50 to-transparent p-6 pt-20">
                 <p className="font-serif text-2xl text-white">Darshi</p>
                 <p className="text-xs uppercase tracking-[0.25em] text-white/70">
-                  Vedic Astrologer & Tarot Reader
+                  {t('profile.role')}
                 </p>
               </div>
             </div>
@@ -41,11 +41,11 @@ export default function AstrologerProfile() {
             <div className="mt-5 grid grid-cols-2 gap-3">
               <div className="rounded-2xl border border-border bg-card px-4 py-3 text-center">
                 <p className="font-serif text-2xl text-primary">10+</p>
-                <p className="text-[10px] uppercase tracking-widest text-muted-foreground">Years</p>
+                <p className="text-[10px] uppercase tracking-widest text-muted-foreground">{t('profile.years')}</p>
               </div>
               <div className="rounded-2xl border border-border bg-card px-4 py-3 text-center">
                 <p className="font-serif text-2xl text-primary">5.0</p>
-                <p className="text-[10px] uppercase tracking-widest text-muted-foreground">Rating</p>
+                <p className="text-[10px] uppercase tracking-widest text-muted-foreground">{t('profile.rating')}</p>
               </div>
             </div>
           </div>
@@ -53,7 +53,7 @@ export default function AstrologerProfile() {
           {/* Bio column */}
           <div>
             <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.28em] text-primary/80">
-              Your guide
+              {t('profile.guide')}
             </p>
             <h2 className="text-3xl leading-tight sm:text-4xl md:text-[2.75rem]">
               {t('profile.title')}{' '}
@@ -74,7 +74,7 @@ export default function AstrologerProfile() {
             <div className="mt-10 grid gap-4 sm:grid-cols-2">
               <div className="rounded-2xl border border-border/80 bg-muted/30 p-5">
                 <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-primary">
-                  Credential
+                  {t('profile.credential')}
                 </p>
                 <h3 className="mt-2 font-heading text-lg font-semibold">
                   {t('profile.cred1.title')}
@@ -83,7 +83,7 @@ export default function AstrologerProfile() {
               </div>
               <div className="rounded-2xl border border-border/80 bg-muted/30 p-5">
                 <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-primary">
-                  Credential
+                  {t('profile.credential')}
                 </p>
                 <h3 className="mt-2 font-heading text-lg font-semibold">
                   {t('profile.cred2.title')}

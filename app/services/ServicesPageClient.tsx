@@ -20,6 +20,7 @@ import {
   Check,
 } from 'lucide-react';
 import { useLanguage } from '@/lib/LanguageContext';
+import { formatServicePricing } from '@/lib/siteSettings';
 import { Button } from '@/components/ui/button';
 
 const validServiceIds = ['kundli', 'prashna', 'tarot', 'vastu', 'gemstone', 'matchmaking', 'matrimonial', 'business'] as const;
@@ -176,6 +177,10 @@ export default function ServicesPageClient({ initialService }: ServicesPageClien
         href: meta?.href || '/contact',
         highlights:
           s.features && s.features.length > 0 ? s.features : [s.description],
+        pricingLabel:
+          s.show_price
+            ? formatServicePricing(s.price, s.duration_minutes, s.duration)
+            : null,
       };
     });
   }, [dbServices, t]);
@@ -285,6 +290,11 @@ export default function ServicesPageClient({ initialService }: ServicesPageClien
                       <p className="mt-3 text-base leading-relaxed text-stone-600">
                         {service.description}
                       </p>
+                      {'pricingLabel' in service && service.pricingLabel && (
+                        <p className="mt-3 inline-flex rounded-full bg-amber-50 px-4 py-1.5 text-sm font-semibold text-amber-900">
+                          {service.pricingLabel}
+                        </p>
+                      )}
                     </div>
                   </div>
 

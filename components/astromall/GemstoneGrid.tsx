@@ -14,16 +14,16 @@ const CATEGORIES = [
 ] as const;
 
 const PLANETS = [
-  { id: 'all', name: 'All Planets' },
-  { id: 'sun', name: 'Sun (Ruby)' },
-  { id: 'moon', name: 'Moon (Pearl)' },
-  { id: 'mars', name: 'Mars (Coral)' },
-  { id: 'mercury', name: 'Mercury (Emerald)' },
-  { id: 'jupiter', name: 'Jupiter (Yellow Sapphire)' },
-  { id: 'venus', name: 'Venus (Diamond/Opal)' },
-  { id: 'saturn', name: 'Saturn (Blue Sapphire)' },
-  { id: 'rahu', name: 'Rahu (Hessonite)' },
-  { id: 'ketu', name: "Ketu (Cat's Eye)" },
+  { id: 'all', nameKey: 'gemstone.planet.all' },
+  { id: 'sun', nameKey: 'gemstone.planet.sun' },
+  { id: 'moon', nameKey: 'gemstone.planet.moon' },
+  { id: 'mars', nameKey: 'gemstone.planet.mars' },
+  { id: 'mercury', nameKey: 'gemstone.planet.mercury' },
+  { id: 'jupiter', nameKey: 'gemstone.planet.jupiter' },
+  { id: 'venus', nameKey: 'gemstone.planet.venus' },
+  { id: 'saturn', nameKey: 'gemstone.planet.saturn' },
+  { id: 'rahu', nameKey: 'gemstone.planet.rahu' },
+  { id: 'ketu', nameKey: 'gemstone.planet.ketu' },
 ] as const;
 
 const PLANET_KEYWORDS: Record<string, string[]> = {
@@ -95,10 +95,11 @@ export default function GemstoneGrid() {
         <div className="mb-10 flex flex-col gap-6 md:mb-12 md:flex-row md:items-end md:justify-between">
           <div className="max-w-xl">
             <h2 className="mb-4 font-serif text-3xl sm:text-4xl md:text-5xl">
-              Our Premium <span className="text-primary italic">Collection</span>
+              {t('gemstone.collection.title')}{' '}
+              <span className="text-primary italic">{t('gemstone.collection.highlight')}</span>
             </h2>
             <p className="text-base font-light text-muted-foreground sm:text-lg">
-              Explore authentic, lab-certified gemstones energized for your spiritual journey.
+              {t('gemstone.collection.subtitle')}
             </p>
           </div>
 
@@ -109,7 +110,7 @@ export default function GemstoneGrid() {
             />
             <input
               type="text"
-              placeholder="Search gemstones..."
+              placeholder={t('gemstone.search.placeholder')}
               className="w-full rounded-full border border-border bg-card py-3 pl-12 pr-4 transition-colors focus:border-primary focus:outline-none"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -154,7 +155,7 @@ export default function GemstoneGrid() {
                       : 'border-border text-muted-foreground hover:border-primary/30'
                   }`}
                 >
-                  {planet.name}
+                  {t(planet.nameKey)}
                 </button>
               ))}
             </div>
@@ -163,8 +164,9 @@ export default function GemstoneGrid() {
 
         {!loading && !error && (
           <p className="mb-6 text-sm text-muted-foreground">
-            Showing <span className="font-medium text-foreground">{filteredProducts.length}</span>{' '}
-            {filteredProducts.length === 1 ? 'product' : 'products'}
+            {t('gemstone.showing')}{' '}
+            <span className="font-medium text-foreground">{filteredProducts.length}</span>{' '}
+            {filteredProducts.length === 1 ? t('gemstone.product') : t('gemstone.products')}
           </p>
         )}
 
@@ -181,14 +183,14 @@ export default function GemstoneGrid() {
         ) : filteredProducts.length === 0 ? (
           <div className="rounded-3xl border border-dashed border-border bg-card px-6 py-20 text-center">
             <p className="text-lg font-light text-muted-foreground">
-              No gemstones found matching your criteria.
+              {t('gemstone.empty')}
             </p>
             <button
               type="button"
               onClick={resetFilters}
               className="mt-5 text-sm font-medium text-primary hover:underline"
             >
-              Reset all filters
+              {t('gemstone.reset')}
             </button>
           </div>
         ) : (

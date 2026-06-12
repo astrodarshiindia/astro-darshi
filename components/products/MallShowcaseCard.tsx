@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import { ArrowUpRight, MessageCircle, Gem } from 'lucide-react';
 import { useLanguage } from '@/lib/LanguageContext';
+import { useSiteSettings } from '@/lib/SiteSettingsContext';
+import { whatsappHref as buildWhatsappHref } from '@/lib/siteSettings';
 import {
   type AstroProduct,
   formatProductPrice,
@@ -19,6 +21,7 @@ export default function MallShowcaseCard({
   size = 'standard',
 }: MallShowcaseCardProps) {
   const { t } = useLanguage();
+  const { settings } = useSiteSettings();
   const isHero = size === 'hero';
   const imageUrl = getProductImageUrl(product.image_url, isHero ? 1000 : 720);
 
@@ -100,7 +103,7 @@ export default function MallShowcaseCard({
                 <ArrowUpRight size={13} />
               </Link>
               <a
-                href={`https://wa.me/919999999999?text=${encodeURIComponent(whatsappMessage)}`}
+                href={buildWhatsappHref(settings.phone, whatsappMessage)}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`Enquire about ${product.name}`}

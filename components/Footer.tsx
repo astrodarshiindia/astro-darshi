@@ -2,6 +2,7 @@
 
 import type { ReactNode } from 'react';
 import Link from 'next/link';
+import Logo from '@/components/Logo';
 import {
   Phone,
   Mail,
@@ -12,27 +13,7 @@ import {
   MapPin,
 } from 'lucide-react';
 import { useLanguage } from '@/lib/LanguageContext';
-
-const SOCIAL_LINKS = [
-  {
-    icon: Instagram,
-    href: '#',
-    label: 'Instagram',
-    color: 'text-[#E4405F] hover:text-[#c13584]',
-  },
-  {
-    icon: Youtube,
-    href: '#',
-    label: 'YouTube',
-    color: 'text-[#FF0000] hover:text-[#cc0000]',
-  },
-  {
-    icon: Facebook,
-    href: '#',
-    label: 'Facebook',
-    color: 'text-[#1877F2] hover:text-[#0d65d9]',
-  },
-] as const;
+import { useSiteSettings } from '@/lib/SiteSettingsContext';
 
 function FooterColumn({
   title,
@@ -62,6 +43,28 @@ function FooterLink({ href, children }: { href: string; children: React.ReactNod
 
 export default function Footer() {
   const { t } = useLanguage();
+  const { settings, telHref, whatsappHref, mailtoHref } = useSiteSettings();
+
+  const socialLinks = [
+    {
+      icon: Instagram,
+      href: settings.social.instagram,
+      label: 'Instagram',
+      color: 'text-[#E4405F] hover:text-[#c13584]',
+    },
+    {
+      icon: Youtube,
+      href: settings.social.youtube,
+      label: 'YouTube',
+      color: 'text-[#FF0000] hover:text-[#cc0000]',
+    },
+    {
+      icon: Facebook,
+      href: settings.social.facebook,
+      label: 'Facebook',
+      color: 'text-[#1877F2] hover:text-[#0d65d9]',
+    },
+  ].filter((link) => link.href);
 
   const exploreLinks = [
     { name: t('link.home'), href: '/' },
@@ -92,6 +95,9 @@ export default function Footer() {
   const legalLinks = [
     { name: t('link.privacy'), href: '/privacy-policy' },
     { name: t('link.terms'), href: '/terms-of-service' },
+    { name: t('link.cancellation'), href: '/cancellation-refund' },
+    { name: t('link.shipping'), href: '/shipping-delivery' },
+    { name: t('link.contact'), href: '/contact' },
   ];
 
   return (
@@ -100,46 +106,45 @@ export default function Footer() {
         <div className="grid gap-12 py-14 md:grid-cols-2 lg:grid-cols-12 lg:gap-10 lg:py-16">
           {/* Brand */}
           <div className="lg:col-span-4">
-            <Link href="/" className="inline-block">
-              <span className="font-serif text-2xl font-semibold tracking-tight text-foreground">
-                ASTRO <span className="text-primary">Darshi</span>
-              </span>
-            </Link>
+            <Logo
+              textClassName="font-serif text-2xl font-semibold tracking-tight text-foreground"
+              imageClassName="h-10 w-10 shrink-0"
+            />
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
               {t('footer.description')}
             </p>
 
             <div className="mt-8 space-y-2 text-sm text-muted-foreground">
               <a
-                href="tel:+919999999999"
+                href={telHref}
                 className="flex items-center gap-2.5 transition-colors hover:text-foreground"
               >
                 <Phone size={15} className="shrink-0 text-foreground/70" />
-                +91 99999 99999
+                {settings.phoneDisplay}
               </a>
               <a
-                href="mailto:hello@astroDarshi.com"
+                href={mailtoHref}
                 className="flex items-center gap-2.5 transition-colors hover:text-foreground"
               >
                 <Mail size={15} className="shrink-0 text-foreground/70" />
-                hello@astroDarshi.com
+                {settings.email}
               </a>
               <a
-                href="https://wa.me/919999999999"
+                href={whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2.5 transition-colors hover:text-[#128C7E]"
               >
                 <MessageCircle size={15} className="shrink-0 text-[#25D366]" />
-                WhatsApp
+                {t('footer.whatsapp')}
               </a>
               <p className="flex items-start gap-2.5 pt-1">
                 <MapPin size={15} className="mt-0.5 shrink-0 text-foreground/70" />
-                {t('footer.address')}
+                {settings.addressLine}
               </p>
 
               <div className="flex items-center gap-5 pt-4">
-                {SOCIAL_LINKS.map(({ icon: Icon, href, label, color }) => (
+                {socialLinks.map(({ icon: Icon, href, label, color }) => (
                   <a
                     key={label}
                     href={href}
@@ -188,9 +193,9 @@ export default function Footer() {
 
           {/* Consult */}
           <div className="lg:col-span-3 lg:pl-4">
-            <p className="mb-4 text-sm font-medium text-foreground">Consult</p>
+            <p className="mb-4 text-sm font-medium text-foreground">{t('footer.consult.title')}</p>
             <p className="text-sm leading-relaxed text-muted-foreground">
-              Questions about career, marriage, health, or gemstones? Speak with our team directly.
+              {t('footer.consult.desc')}
             </p>
             <Link
               href="/contact"
@@ -207,7 +212,7 @@ export default function Footer() {
             © {new Date().getFullYear()} {t('footer.rights')}
           </p>
 
-          <nav className="flex gap-5">
+          <nav className="flex flex-wrap gap-x-5 gap-y-2">
             {legalLinks.map((item) => (
               <Link
                 key={item.href}

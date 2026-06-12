@@ -21,6 +21,8 @@ import {
 } from "@/components/ui/select";
 import { Sparkles, Loader2, CheckCircle2, Heart, X } from 'lucide-react';
 import { useLanguage } from '@/lib/LanguageContext';
+import { useSiteSettings } from '@/lib/SiteSettingsContext';
+import { whatsappHref as buildWhatsappHref } from '@/lib/siteSettings';
 import { useToast } from '@/hooks/use-toast';
 import { submitEnquiry } from '@/lib/submitEnquiry';
 
@@ -31,6 +33,7 @@ interface MatrimonialFormModalProps {
 
 export default function MatrimonialFormModal({ isOpen, onOpenChange }: MatrimonialFormModalProps) {
   const { t } = useLanguage();
+  const { settings } = useSiteSettings();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -87,8 +90,7 @@ export default function MatrimonialFormModal({ isOpen, onOpenChange }: Matrimoni
       });
 
       setTimeout(() => {
-        const encodedMessage = encodeURIComponent(message);
-        window.open(`https://wa.me/919999999999?text=${encodedMessage}`, '_blank');
+        window.open(buildWhatsappHref(settings.phone, message), '_blank');
       }, 1500);
 
     } catch (error) {

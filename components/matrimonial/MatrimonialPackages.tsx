@@ -3,9 +3,11 @@
 import { Check, Heart, Star, Sparkles, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/lib/LanguageContext';
+import { useSiteSettings } from '@/lib/SiteSettingsContext';
 
 export default function MatrimonialPackages() {
   const { t } = useLanguage();
+  const { whatsappHref } = useSiteSettings();
 
   const packages = [
     {
@@ -104,7 +106,7 @@ export default function MatrimonialPackages() {
             </div>
           </div>
           <a 
-            href="https://wa.me/919999999999" 
+            href={whatsappHref} 
             target="_blank" 
             rel="noopener noreferrer"
             className="w-full md:w-auto"

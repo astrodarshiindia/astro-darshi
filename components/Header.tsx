@@ -1,11 +1,13 @@
 'use client';
 
 import Link from 'next/link';
+import Logo from '@/components/Logo';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { Menu, X, Phone, ChevronRight } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { useLanguage } from '@/lib/LanguageContext';
+import { useSiteSettings } from '@/lib/SiteSettingsContext';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -31,6 +33,7 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { language, setLanguage, t } = useLanguage();
+  const { settings, telHref } = useSiteSettings();
   const { resolvedTheme } = useTheme();
   const pathname = usePathname();
 
@@ -67,15 +70,11 @@ export default function Header() {
     >
       <div className="section-container">
         <nav className="flex items-center justify-between gap-3">
-          <Link href="/" className="group flex min-w-0 items-center gap-2">
-            <span
-              className={`truncate text-xl font-serif font-bold tracking-tighter transition-colors duration-300 md:text-2xl ${
-                useLightText ? 'text-white' : 'text-stone-900'
-              }`}
-            >
-              ASTRO <span className="text-primary">Darshi</span>
-            </span>
-          </Link>
+          <Logo
+            textClassName={`truncate text-xl font-serif font-bold tracking-tighter transition-colors duration-300 md:text-2xl ${
+              useLightText ? 'text-white' : 'text-stone-900'
+            }`}
+          />
 
           {/* Desktop Nav */}
           <div className="hidden items-center gap-8 md:flex lg:gap-10">
@@ -113,14 +112,14 @@ export default function Header() {
               <DropdownMenuTrigger asChild>
                 <Button
                   variant="ghost"
-                  size="sm"
-                  className={`rounded-full border px-2 py-1 text-[10px] md:px-3 md:py-2 transition-colors ${
+                  size="default"
+                  className={`h-10 min-w-[56px] rounded-full border px-4 text-sm font-semibold transition-colors md:h-11 md:min-w-[64px] md:px-5 md:text-base ${
                     useLightText
                       ? 'border-white/20 text-white hover:bg-white/10'
                       : 'border-stone-200 text-stone-700 hover:bg-stone-50'
                   }`}
                 >
-                  {language === 'en' ? 'En' : 'Hi'}
+                  {language === 'en' ? 'En' : 'हि'}
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent
@@ -143,7 +142,7 @@ export default function Header() {
             </DropdownMenu>
 
             <a
-              href="tel:+919999999999"
+              href={telHref}
               className={`hidden transition-colors sm:flex ${
                 useLightText
                   ? 'text-white/70 hover:text-white'
@@ -194,9 +193,10 @@ export default function Header() {
 
           {/* Panel header */}
           <div className="flex items-center justify-between border-b border-border/50 px-5 pb-4 pt-[max(1.25rem,env(safe-area-inset-top))]">
-            <span className="text-lg font-serif font-bold tracking-tighter text-foreground">
-              ASTRO <span className="text-primary">Darshi</span>
-            </span>
+            <Logo
+              imageClassName="h-8 w-8 shrink-0"
+              textClassName="text-lg font-serif font-bold tracking-tighter text-foreground"
+            />
             <button
               type="button"
               aria-label="Close menu"
@@ -242,14 +242,14 @@ export default function Header() {
           {/* Panel footer */}
           <div className="space-y-4 border-t border-border/50 px-5 py-5 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
             <div className="flex items-center gap-2">
-              <span className="text-[10px] uppercase tracking-widest text-muted-foreground">
-                Language
+              <span className="text-xs uppercase tracking-widest text-muted-foreground">
+                {t('nav.language')}
               </span>
-              <div className="flex rounded-full border border-border/60 p-0.5">
+              <div className="flex rounded-full border border-border/60 p-1">
                 <button
                   type="button"
                   onClick={() => setLanguage('en')}
-                  className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+                  className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
                     language === 'en'
                       ? 'bg-primary text-primary-foreground'
                       : 'text-muted-foreground hover:text-foreground'
@@ -260,7 +260,7 @@ export default function Header() {
                 <button
                   type="button"
                   onClick={() => setLanguage('hi')}
-                  className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+                  className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
                     language === 'hi'
                       ? 'bg-primary text-primary-foreground'
                       : 'text-muted-foreground hover:text-foreground'
@@ -272,7 +272,7 @@ export default function Header() {
             </div>
 
             <a
-              href="tel:+919999999999"
+              href={telHref}
               className="flex items-center gap-3 rounded-xl bg-muted/50 px-4 py-3 transition-colors hover:bg-muted"
             >
               <span className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-primary">
@@ -283,7 +283,7 @@ export default function Header() {
                   {t('nav.expert')}
                 </span>
                 <span className="text-sm font-medium text-foreground">
-                  +91 99999 99999
+                  {settings.phoneDisplay}
                 </span>
               </div>
             </a>
