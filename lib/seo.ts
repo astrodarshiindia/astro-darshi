@@ -37,6 +37,39 @@ export function absoluteUrl(path = ''): string {
   return `${getSiteUrl()}${normalized}`;
 }
 
+/** Normalize DB/API dates to W3C datetime for sitemap lastmod (Google Search Console). */
+export function formatSitemapLastMod(value: unknown, fallback: Date = new Date()): string {
+  const fallbackIso = fallback.toISOString();
+
+  if (value == null || value === '') {
+    return fallbackIso;
+  }
+
+  if (value instanceof Date) {
+    return Number.isNaN(value.getTime()) ? fallbackIso : value.toISOString();
+  }
+
+  if (typeof value === 'number' && Number.isFinite(value)) {
+    const parsed = new Date(value);
+    return Number.isNaN(parsed.getTime()) ? fallbackIso : parsed.toISOString();
+  }
+
+  if (typeof value === 'string') {
+    const trimmed = value.trim();
+    if (!trimmed) return fallbackIso;
+
+    // Postgres timestamps sometimes arrive as "YYYY-MM-DD HH:mm:ss.sss"
+    const normalized = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/.test(trimmed)
+      ? `${trimmed.replace(' ', 'T')}Z`
+      : trimmed;
+
+    const parsed = new Date(normalized);
+    return Number.isNaN(parsed.getTime()) ? fallbackIso : parsed.toISOString();
+  }
+
+  return fallbackIso;
+}
+
 export function resolveImageUrl(image?: string | null): string {
   if (!image) return absoluteUrl(DEFAULT_OG_IMAGE);
   if (image.startsWith('http')) return image;

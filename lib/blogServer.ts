@@ -2,12 +2,12 @@ import { supabaseAdmin } from '@/lib/supabaseServer';
 import type { BlogPost } from '@/lib/blog';
 
 export async function getPublishedBlogPosts(): Promise<
-  Pick<BlogPost, 'slug' | 'published_at' | 'updated_at'>[]
+  Pick<BlogPost, 'slug' | 'published_at' | 'updated_at' | 'created_at'>[]
 > {
   try {
     const { data, error } = await supabaseAdmin
       .from('blog_posts')
-      .select('slug, published_at, updated_at')
+      .select('slug, published_at, updated_at, created_at')
       .eq('is_published', true)
       .order('published_at', { ascending: false });
 
