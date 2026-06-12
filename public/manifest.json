@@ -3,7 +3,7 @@
   "name": "Astro Darshi — Vedic Astrology & Tarot",
   "short_name": "Astro Darshi",
   "description": "Expert Vedic astrology, tarot readings, kundli matching and gemstone guidance in Lucknow.",
-  "start_url": "/?source=pwa",
+  "start_url": "https://www.astrodarshi.com/?source=pwa",
   "scope": "/",
   "display": "standalone",
   "display_override": ["standalone", "minimal-ui", "browser"],

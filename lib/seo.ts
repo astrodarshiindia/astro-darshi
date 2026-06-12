@@ -21,11 +21,15 @@ export const BUSINESS_ADDRESS = {
   addressCountry: 'IN',
 };
 
+export const CANONICAL_SITE_URL = 'https://www.astrodarshi.com';
+
 export function getSiteUrl(): string {
   const envUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '');
   if (envUrl) return envUrl;
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
-  return 'https://astrodarshi.com';
+  if (process.env.VERCEL_ENV === 'preview' && process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
+  }
+  return CANONICAL_SITE_URL;
 }
 
 export function absoluteUrl(path = ''): string {
