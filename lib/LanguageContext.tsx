@@ -378,6 +378,24 @@ const translations = {
     // Nav language
     'nav.language': 'Language',
 
+    // PWA install
+    'pwa.bar.title': 'Install Astro Darshi App',
+    'pwa.bar.subtitle': 'Quick access to consultations & horoscope',
+    'pwa.modal.title': 'Install our app for the best experience',
+    'pwa.modal.subtitle': 'Get instant access to astrology services, bookings, and updates — right from your home screen.',
+    'pwa.install': 'Install',
+    'pwa.installNow': 'Install App Now',
+    'pwa.installing': 'Installing…',
+    'pwa.later': 'Maybe later',
+    'pwa.dismiss': "Don't show again",
+    'pwa.benefit1': 'One-tap access from your home screen',
+    'pwa.benefit2': 'Faster loading & app-like experience',
+    'pwa.benefit3': 'Easy booking for consultations & services',
+    'pwa.ios.step1': 'Tap the Share button at the bottom of Safari',
+    'pwa.ios.step2': 'Scroll and tap "Add to Home Screen"',
+    'pwa.ios.step3': 'Tap Add — Astro Darshi will appear on your home screen',
+    'pwa.android.fallback': 'Tap the menu (⋮) in your browser and select "Install app" or "Add to Home screen".',
+
     // Footer consult
     'footer.consult.title': 'Consult',
     'footer.consult.desc': 'Questions about career, marriage, health, or gemstones? Speak with our team directly.',
@@ -1077,6 +1095,24 @@ const translations = {
 
     // Nav language
     'nav.language': 'भाषा',
+
+    // PWA install
+    'pwa.bar.title': 'एस्ट्रो दर्शी ऐप इंस्टॉल करें',
+    'pwa.bar.subtitle': 'परामर्श और राशिफल तक तुरंत पहुँच',
+    'pwa.modal.title': 'सबसे अच्छे अनुभव के लिए ऐप इंस्टॉल करें',
+    'pwa.modal.subtitle': 'ज्योतिष सेवाएं, बुकिंग और अपडेट — सीधे होम स्क्रीन से तुरंत एक्सेस करें।',
+    'pwa.install': 'इंस्टॉल',
+    'pwa.installNow': 'अभी ऐप इंस्टॉल करें',
+    'pwa.installing': 'इंस्टॉल हो रहा है…',
+    'pwa.later': 'बाद में',
+    'pwa.dismiss': 'दोबारा न दिखाएं',
+    'pwa.benefit1': 'होम स्क्रीन से एक टैप में खुलें',
+    'pwa.benefit2': 'तेज़ लोडिंग और ऐप जैसा अनुभव',
+    'pwa.benefit3': 'परामर्श और सेवाओं की आसान बुकिंग',
+    'pwa.ios.step1': 'Safari में नीचे Share बटन पर टैप करें',
+    'pwa.ios.step2': 'नीचे स्क्रॉल करके "Add to Home Screen" चुनें',
+    'pwa.ios.step3': 'Add पर टैप करें — एस्ट्रो दर्शी होम स्क्रीन पर दिखेगा',
+    'pwa.android.fallback': 'ब्राउज़र मेनू (⋮) में जाएं और "Install app" या "Add to Home screen" चुनें।',
 
     // Footer consult
     'footer.consult.title': 'परामर्श',
