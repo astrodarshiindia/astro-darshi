@@ -5,7 +5,7 @@ import { ThemeProvider } from '@/components/theme-provider'
 import { LanguageProvider } from '@/lib/LanguageContext'
 import { SelectedServiceProvider } from '@/lib/SelectedServiceContext'
 import { SiteSettingsProvider } from '@/lib/SiteSettingsContext'
-import { fetchSiteSettings } from '@/lib/siteSettings'
+import { fetchSiteSettings } from '@/lib/siteSettingsServer'
 import JsonLd from '@/components/seo/JsonLd'
 import {
   localBusinessJsonLd,

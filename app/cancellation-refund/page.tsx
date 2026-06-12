@@ -1,7 +1,7 @@
 import SEOLayout from '@/components/SEOLayout';
 import { PolicyList, PolicySection } from '@/components/legal/PolicySection';
 import { buildLegalBusiness, LEGAL_LAST_UPDATED } from '@/lib/legal';
-import { fetchSiteSettings } from '@/lib/siteSettings';
+import { fetchSiteSettings } from '@/lib/siteSettingsServer';
 import type { Metadata } from 'next';
 import { buildMetadata } from '@/lib/seo';
 

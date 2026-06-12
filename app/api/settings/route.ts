@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { fetchSiteSettings } from '@/lib/siteSettings';
+import { fetchSiteSettings } from '@/lib/siteSettingsServer';
 
 export async function GET() {
   try {

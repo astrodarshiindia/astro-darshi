@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyAdminRequest } from '@/lib/adminRequest';
-import { fetchSiteSettings, normalizeSiteSettings, saveSiteSettings } from '@/lib/siteSettings';
+import { normalizeSiteSettings } from '@/lib/siteSettings';
+import { fetchSiteSettings, saveSiteSettings } from '@/lib/siteSettingsServer';
 import type { SiteSettings } from '@/lib/siteSettings';
 
 export async function GET(request: NextRequest) {
