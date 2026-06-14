@@ -71,11 +71,12 @@ export default function Header() {
       <div className="section-container">
         <nav className="flex items-center justify-between gap-3">
           <Logo
-            className="group flex shrink-0 items-center gap-2 sm:gap-2.5"
-            textClassName={`whitespace-nowrap font-serif font-bold transition-colors duration-300 ${
+            className="group flex shrink-0 items-center gap-1.5 overflow-visible sm:gap-2.5"
+            imageClassName="h-8 w-8 shrink-0 sm:h-9 sm:w-9 md:h-10 md:w-10"
+            textClassName={`overflow-visible font-serif font-bold transition-colors duration-300 ${
               language === 'en'
-                ? 'text-[15px] tracking-tight sm:text-base md:text-lg'
-                : 'text-lg tracking-tighter sm:text-xl md:text-2xl'
+                ? 'text-[13px] leading-tight tracking-tight sm:text-sm md:inline md:text-lg md:leading-normal'
+                : 'text-base tracking-tighter sm:text-lg sm:leading-normal md:text-2xl'
             } ${useLightText ? 'text-white/90' : 'text-stone-600'}`}
           />
 
@@ -116,7 +117,7 @@ export default function Header() {
                 <Button
                   variant="outline"
                   size="default"
-                  className={`h-10 shrink-0 rounded-full border-2 bg-transparent px-4 text-sm font-semibold whitespace-nowrap shadow-none transition-colors md:h-11 md:px-5 md:text-base ${
+                  className={`h-9 shrink-0 rounded-full border-2 bg-transparent px-2.5 text-xs font-semibold whitespace-nowrap shadow-none transition-colors sm:h-10 sm:px-4 sm:text-sm md:h-11 md:px-5 md:text-base ${
                     useLightText
                       ? 'border-white/60 text-white hover:bg-white/10 hover:text-white'
                       : 'border-stone-300 text-stone-700 hover:bg-stone-50'
