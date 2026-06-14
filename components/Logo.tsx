@@ -13,9 +13,9 @@ interface LogoProps {
 }
 
 export default function Logo({
-  className = 'group flex min-w-0 items-center gap-2.5',
+  className = 'group flex shrink-0 items-center gap-2.5',
   imageClassName = 'h-9 w-9 shrink-0 md:h-10 md:w-10',
-  textClassName = 'truncate text-xl font-serif font-bold tracking-tighter text-stone-600 md:text-2xl',
+  textClassName = 'whitespace-nowrap text-xl font-serif font-bold tracking-tighter text-stone-600 md:text-2xl',
   showText = true,
 }: LogoProps) {
   const { t } = useLanguage();

@@ -71,9 +71,12 @@ export default function Header() {
       <div className="section-container">
         <nav className="flex items-center justify-between gap-3">
           <Logo
-            textClassName={`truncate text-xl font-serif font-bold tracking-tighter transition-colors duration-300 md:text-2xl ${
-              useLightText ? 'text-white/90' : 'text-stone-600'
-            }`}
+            className="group flex shrink-0 items-center gap-2 sm:gap-2.5"
+            textClassName={`whitespace-nowrap font-serif font-bold transition-colors duration-300 ${
+              language === 'en'
+                ? 'text-[15px] tracking-tight sm:text-base md:text-lg'
+                : 'text-lg tracking-tighter sm:text-xl md:text-2xl'
+            } ${useLightText ? 'text-white/90' : 'text-stone-600'}`}
           />
 
           {/* Desktop Nav */}
@@ -195,7 +198,9 @@ export default function Header() {
           <div className="flex items-center justify-between border-b border-border/50 px-5 pb-4 pt-[max(1.25rem,env(safe-area-inset-top))]">
             <Logo
               imageClassName="h-8 w-8 shrink-0"
-              textClassName="text-lg font-serif font-bold tracking-tighter text-stone-600"
+              textClassName={`whitespace-nowrap font-serif font-bold text-stone-600 ${
+                language === 'en' ? 'text-base tracking-tight' : 'text-lg tracking-tighter'
+              }`}
             />
             <button
               type="button"
