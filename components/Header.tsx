@@ -71,13 +71,11 @@ export default function Header() {
       <div className="section-container max-md:px-4">
         <nav className="flex items-center justify-between gap-2 md:gap-3">
           <Logo
-            className="group flex shrink-0 items-center gap-1 overflow-visible md:gap-2.5"
-            imageClassName="h-7 w-7 shrink-0 sm:h-8 sm:w-8 md:h-10 md:w-10"
-            textClassName={`shrink-0 overflow-visible font-serif font-bold transition-colors duration-300 ${
-              language === 'en'
-                ? 'text-[10px] tracking-tight sm:text-[11px] md:text-lg md:tracking-normal'
-                : 'text-sm tracking-tighter sm:text-base md:text-2xl'
-            } ${useLightText ? 'text-white/90' : 'text-stone-600'}`}
+            className="group flex shrink-0 items-center gap-2 overflow-visible md:gap-2.5"
+            imageClassName="h-10 w-10 shrink-0 md:h-11 md:w-11"
+            textClassName={`shrink-0 overflow-visible font-serif font-bold transition-colors duration-300 text-sm leading-tight tracking-tight md:text-xl md:leading-normal lg:text-2xl md:tracking-tighter ${
+              useLightText ? 'text-white/90' : 'text-stone-600'
+            }`}
           />
 
           {/* Desktop Nav */}
@@ -117,16 +115,13 @@ export default function Header() {
                 <Button
                   variant="outline"
                   size="default"
-                  className={`h-8 shrink-0 rounded-full border-2 bg-transparent px-2 text-[10px] font-semibold whitespace-nowrap shadow-none transition-colors sm:h-9 sm:px-3 sm:text-xs md:h-11 md:px-5 md:text-base ${
+                  className={`h-10 shrink-0 rounded-full border-2 bg-transparent px-3 text-xs font-semibold whitespace-nowrap shadow-none transition-colors sm:px-4 sm:text-sm md:h-11 md:px-5 md:text-base ${
                     useLightText
                       ? 'border-white/60 text-white hover:bg-white/10 hover:text-white'
                       : 'border-stone-300 text-stone-700 hover:bg-stone-50'
                   }`}
                 >
-                  <span className="md:hidden">{language === 'en' ? 'EN' : 'हिं'}</span>
-                  <span className="hidden md:inline">
-                    {language === 'en' ? 'English' : 'हिंदी'}
-                  </span>
+                  {language === 'en' ? 'English' : 'हिंदी'}
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent
@@ -177,7 +172,7 @@ export default function Header() {
               aria-label={isOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={isOpen}
               onClick={() => setIsOpen((open) => !open)}
-              className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition-colors sm:h-10 sm:w-10 md:hidden ${
+              className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-colors md:hidden ${
                 useLightText && !isOpen
                   ? 'bg-white/10 text-white hover:bg-white/15'
                   : 'border border-stone-200 bg-white text-stone-800 hover:bg-stone-50'
@@ -201,10 +196,8 @@ export default function Header() {
           {/* Panel header */}
           <div className="flex items-center justify-between border-b border-border/50 px-5 pb-4 pt-[max(1.25rem,env(safe-area-inset-top))]">
             <Logo
-              imageClassName="h-8 w-8 shrink-0"
-              textClassName={`whitespace-nowrap font-serif font-bold text-stone-600 ${
-                language === 'en' ? 'text-base tracking-tight' : 'text-lg tracking-tighter'
-              }`}
+              imageClassName="h-10 w-10 shrink-0"
+              textClassName="font-serif text-sm font-bold leading-tight tracking-tight text-stone-600"
             />
             <button
               type="button"

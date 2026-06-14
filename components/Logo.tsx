@@ -18,8 +18,9 @@ export default function Logo({
   textClassName = 'whitespace-nowrap text-xl font-serif font-bold tracking-tighter text-stone-600 md:text-2xl',
   showText = true,
 }: LogoProps) {
-  const { t, language } = useLanguage();
-  const isEnglishBrand = language === 'en';
+  const { t } = useLanguage();
+  const brandPrefix = t('brand.name.prefix');
+  const brandHighlight = t('brand.name.highlight');
 
   return (
     <Link href="/" className={`${className} overflow-visible`}>
@@ -31,20 +32,17 @@ export default function Logo({
         className={`rounded-full object-cover ${imageClassName}`}
         priority
       />
-      {showText &&
-        (isEnglishBrand ? (
-          <>
-            <span className={`flex flex-col leading-[1.1] md:hidden ${textClassName}`}>
-              <span>Astro</span>
-              <span>Paramarsh</span>
-            </span>
-            <span className={`hidden whitespace-nowrap md:inline ${textClassName}`}>
-              Astro Paramarsh
-            </span>
-          </>
-        ) : (
-          <span className={`whitespace-nowrap ${textClassName}`}>{t('brand.name.full')}</span>
-        ))}
+      {showText && (
+        <>
+          <span className={`flex flex-col leading-tight md:hidden ${textClassName}`}>
+            <span>{brandPrefix}</span>
+            <span>{brandHighlight}</span>
+          </span>
+          <span className={`hidden whitespace-nowrap md:inline ${textClassName}`}>
+            {t('brand.name.full')}
+          </span>
+        </>
+      )}
     </Link>
   );
 }
