@@ -1,4 +1,4 @@
-# Astro Darshi Astro Mall Implementation
+# Astro Paramarsh Astro Mall Implementation
 
 ## Completed: 2/12
 

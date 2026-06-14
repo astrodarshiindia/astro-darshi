@@ -52,7 +52,7 @@ export default function AdminLogin() {
       <div className="hidden w-1/2 flex-col justify-between bg-[#0f1117] p-12 text-white lg:flex">
         <div>
           <span className="text-xl font-semibold tracking-tight">
-            Astro <span className="text-blue-400">Darshi</span>
+            Astro <span className="text-blue-400">Paramarsh</span>
           </span>
           <p className="mt-1 text-sm text-slate-500">Operations Console</p>
         </div>
@@ -64,7 +64,7 @@ export default function AdminLogin() {
             Secure access for authorised team members only.
           </p>
         </div>
-        <p className="text-xs text-slate-600">© Astro Darshi</p>
+        <p className="text-xs text-slate-600">© Astro Paramarsh</p>
       </div>
 
       <div className="flex flex-1 flex-col justify-center px-6 py-12 sm:px-12">
@@ -79,7 +79,7 @@ export default function AdminLogin() {
         <div className="mx-auto w-full max-w-sm">
           <div className="mb-8 lg:hidden">
             <span className="text-xl font-semibold text-slate-900">
-              Astro <span className="text-blue-600">Darshi</span>
+              Astro <span className="text-blue-600">Paramarsh</span>
             </span>
           </div>
 
@@ -97,7 +97,7 @@ export default function AdminLogin() {
               <label className="text-sm font-medium text-slate-700">Email</label>
               <Input
                 type="email"
-                placeholder="admin@astroDarshi.com"
+                placeholder="admin@astroparamarsh.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required

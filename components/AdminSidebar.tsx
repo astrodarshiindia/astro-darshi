@@ -70,7 +70,7 @@ function NavContent({
       <div className="shrink-0 border-b border-white/10 px-5 py-5">
         <Link href="/admin/dashboard" onClick={onNavigate} className="block">
           <span className="text-lg font-semibold tracking-tight text-white">
-            Astro <span className="text-blue-400">Darshi</span>
+            Astro <span className="text-blue-400">Paramarsh</span>
           </span>
           <p className="mt-0.5 text-[11px] text-slate-500">Operations Console</p>
         </Link>

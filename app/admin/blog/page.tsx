@@ -19,7 +19,7 @@ const EMPTY = {
   excerpt: '',
   category: '',
   image_url: '',
-  author: 'Astro Darshi',
+  author: 'Astro Paramarsh',
   content: '',
   is_published: false,
 };

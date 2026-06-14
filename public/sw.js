@@ -1,4 +1,4 @@
-const CACHE_NAME = 'astro-darshi-v1';
+const CACHE_NAME = 'astro-paramarsh-v1';
 
 self.addEventListener('install', (event) => {
   event.waitUntil(

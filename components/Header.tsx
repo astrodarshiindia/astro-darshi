@@ -72,7 +72,7 @@ export default function Header() {
         <nav className="flex items-center justify-between gap-3">
           <Logo
             textClassName={`truncate text-xl font-serif font-bold tracking-tighter transition-colors duration-300 md:text-2xl ${
-              useLightText ? 'text-white' : 'text-stone-900'
+              useLightText ? 'text-white/90' : 'text-stone-600'
             }`}
           />
 
@@ -111,15 +111,15 @@ export default function Header() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
-                  variant="ghost"
+                  variant="outline"
                   size="default"
-                  className={`h-10 min-w-[56px] rounded-full border px-4 text-sm font-semibold transition-colors md:h-11 md:min-w-[64px] md:px-5 md:text-base ${
+                  className={`h-10 shrink-0 rounded-full border-2 bg-transparent px-4 text-sm font-semibold whitespace-nowrap shadow-none transition-colors md:h-11 md:px-5 md:text-base ${
                     useLightText
-                      ? 'border-white/20 text-white hover:bg-white/10'
-                      : 'border-stone-200 text-stone-700 hover:bg-stone-50'
+                      ? 'border-white/60 text-white hover:bg-white/10 hover:text-white'
+                      : 'border-stone-300 text-stone-700 hover:bg-stone-50'
                   }`}
                 >
-                  {language === 'en' ? 'En' : 'हि'}
+                  {language === 'en' ? 'English' : 'हिंदी'}
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent
@@ -195,7 +195,7 @@ export default function Header() {
           <div className="flex items-center justify-between border-b border-border/50 px-5 pb-4 pt-[max(1.25rem,env(safe-area-inset-top))]">
             <Logo
               imageClassName="h-8 w-8 shrink-0"
-              textClassName="text-lg font-serif font-bold tracking-tighter text-foreground"
+              textClassName="text-lg font-serif font-bold tracking-tighter text-stone-600"
             />
             <button
               type="button"
@@ -245,25 +245,25 @@ export default function Header() {
               <span className="text-xs uppercase tracking-widest text-muted-foreground">
                 {t('nav.language')}
               </span>
-              <div className="flex rounded-full border border-border/60 p-1">
+              <div className="flex rounded-full border-2 border-border p-1">
                 <button
                   type="button"
                   onClick={() => setLanguage('en')}
-                  className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
+                  className={`rounded-full border px-4 py-2 text-sm font-semibold transition-colors ${
                     language === 'en'
-                      ? 'bg-primary text-primary-foreground'
-                      : 'text-muted-foreground hover:text-foreground'
+                      ? 'border-primary bg-primary text-primary-foreground'
+                      : 'border-transparent text-muted-foreground hover:border-border hover:text-foreground'
                   }`}
                 >
-                  En
+                  English
                 </button>
                 <button
                   type="button"
                   onClick={() => setLanguage('hi')}
-                  className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
+                  className={`rounded-full border px-4 py-2 text-sm font-semibold transition-colors ${
                     language === 'hi'
-                      ? 'bg-primary text-primary-foreground'
-                      : 'text-muted-foreground hover:text-foreground'
+                      ? 'border-primary bg-primary text-primary-foreground'
+                      : 'border-transparent text-muted-foreground hover:border-border hover:text-foreground'
                   }`}
                 >
                   हिंदी

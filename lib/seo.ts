@@ -4,7 +4,7 @@ import type { AstroProduct } from '@/lib/products';
 import type { SiteSettings } from '@/lib/siteSettings';
 import { DEFAULT_SITE_SETTINGS } from '@/lib/siteSettings';
 
-export const SITE_NAME = 'Astro Darshi';
+export const SITE_NAME = 'Astro Paramarsh';
 export const SITE_TAGLINE = 'Vedic Astrology & Tarot Card Reading';
 export const SITE_DESCRIPTION =
   'Expert Vedic astrology, tarot readings, kundli matching, Vastu and gemstone guidance in Lucknow. Personalized consultations for career, marriage, health and business.';
@@ -12,7 +12,7 @@ export const SITE_LOCALE = 'en_IN';
 export const SITE_LOGO = '/logo.png';
 export const DEFAULT_OG_IMAGE = '/logo.png';
 export const CONTACT_PHONE = '+919999999999';
-export const CONTACT_EMAIL = 'hello@astroDarshi.com';
+export const CONTACT_EMAIL = 'hello@astroparamarsh.com';
 export const BUSINESS_ADDRESS = {
   streetAddress: 'Lucknow',
   addressLocality: 'Lucknow',
@@ -21,7 +21,7 @@ export const BUSINESS_ADDRESS = {
   addressCountry: 'IN',
 };
 
-export const CANONICAL_SITE_URL = 'https://www.astrodarshi.com';
+export const CANONICAL_SITE_URL = 'https://www.astroparamarsh.com';
 
 export function getSiteUrl(): string {
   const envUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '');
@@ -387,7 +387,7 @@ export function productJsonLd(product: AstroProduct) {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: product.name,
-    description: product.description || `${product.name} — authentic Vedic gemstone from Astro Darshi`,
+    description: product.description || `${product.name} — authentic Vedic gemstone from Astro Paramarsh`,
     image: product.image_url ? resolveImageUrl(product.image_url) : absoluteUrl(DEFAULT_OG_IMAGE),
     url: absoluteUrl(`/product/${product.id}`),
     brand: {
@@ -427,7 +427,7 @@ export function servicesItemListJsonLd() {
   return {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: 'Astro Darshi Services',
+    name: 'Astro Paramarsh Services',
     itemListElement: services.map((service, index) => ({
       '@type': 'ListItem',
       position: index + 1,

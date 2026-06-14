@@ -1,6 +1,9 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
-import { SITE_LOGO, SITE_NAME } from '@/lib/seo';
+import { useLanguage } from '@/lib/LanguageContext';
+import { SITE_LOGO } from '@/lib/seo';
 
 interface LogoProps {
   className?: string;
@@ -12,23 +15,23 @@ interface LogoProps {
 export default function Logo({
   className = 'group flex min-w-0 items-center gap-2.5',
   imageClassName = 'h-9 w-9 shrink-0 md:h-10 md:w-10',
-  textClassName = 'truncate text-xl font-serif font-bold tracking-tighter md:text-2xl',
+  textClassName = 'truncate text-xl font-serif font-bold tracking-tighter text-stone-600 md:text-2xl',
   showText = true,
 }: LogoProps) {
+  const { t } = useLanguage();
+
   return (
     <Link href="/" className={className}>
       <Image
         src={SITE_LOGO}
-        alt={SITE_NAME}
+        alt={t('brand.name.full')}
         width={80}
         height={80}
         className={`rounded-full object-cover ${imageClassName}`}
         priority
       />
       {showText && (
-        <span className={textClassName}>
-          ASTRO <span className="text-primary">Darshi</span>
-        </span>
+        <span className={textClassName}>{t('brand.name.full')}</span>
       )}
     </Link>
   );

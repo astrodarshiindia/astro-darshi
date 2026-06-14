@@ -107,7 +107,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-4">
             <Logo
-              textClassName="font-serif text-2xl font-semibold tracking-tight text-foreground"
+              textClassName="font-serif text-2xl font-semibold tracking-tight text-stone-600"
               imageClassName="h-10 w-10 shrink-0"
             />
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">

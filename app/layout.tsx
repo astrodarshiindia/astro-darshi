@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
-    title: 'Astro Darshi',
+    title: 'Astro Paramarsh',
     statusBarStyle: 'default',
   },
 }
