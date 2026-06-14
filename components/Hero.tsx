@@ -291,102 +291,97 @@ export default function Hero() {
           {slides.map((slide, index) => {
             const currentCta = slideCtas[slide.title] ?? { key: 'hero.cta.services', href: '/services' };
             return (
-              <div key={index} className="flex-[0_0_100%] min-w-0 h-full flex items-center justify-center relative px-4">
-                <div className="relative z-10 mx-auto -mt-60 max-w-4xl text-center md:-mt-64">
-                  {/* Main Heading */}
-                  <div className="mb-4 space-y-1 pt-12 md:mb-8 md:space-y-2 md:pt-16">
-                    <h1
-                      className={`font-serif text-3xl leading-[1.05] tracking-tight transition-all duration-700 md:text-6xl lg:text-8xl ${index === selectedIndex ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'} ${slide.accent}`}
-                      style={{ textShadow: '0 1px 0 rgba(255,255,255,0.6)' }}
-                    >
-                      {t(slide.title)} <br />
-                      <span className={`italic ${slide.highlightColor}`}>{t(slide.highlight)}</span>
-                    </h1>
+              <div key={index} className="relative flex h-full min-w-0 flex-[0_0_100%] items-center px-4 md:px-8 lg:px-12">
+                <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-10 lg:gap-16">
+                  {/* Content — left on desktop */}
+                  <div className="order-1 pt-12 text-center md:pt-0 md:text-left">
+                    <div className="mb-4 space-y-1 md:mb-8 md:space-y-2">
+                      <h1
+                        className={`font-serif text-3xl leading-[1.05] tracking-tight transition-all duration-700 md:text-5xl lg:text-6xl xl:text-7xl ${index === selectedIndex ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'} ${slide.accent}`}
+                        style={{ textShadow: '0 1px 0 rgba(255,255,255,0.6)' }}
+                      >
+                        {t(slide.title)} <br />
+                        <span className={`italic ${slide.highlightColor}`}>{t(slide.highlight)}</span>
+                      </h1>
 
-                    <p
-                      className={`mx-auto max-w-[90vw] text-sm font-light tracking-wide text-black/60 transition-all delay-200 duration-700 md:max-w-2xl md:text-xl ${index === selectedIndex ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
-                    >
-                      {t(slide.subtitle)}
-                    </p>
+                      <p
+                        className={`mx-auto max-w-[90vw] text-sm font-light tracking-wide text-black/60 transition-all delay-200 duration-700 md:mx-0 md:max-w-xl md:text-lg lg:text-xl ${index === selectedIndex ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+                      >
+                        {t(slide.subtitle)}
+                      </p>
 
-                    <div
-                      className={`mx-auto mt-4 h-px w-16 transition-all delay-300 duration-700 md:mt-5 md:w-24 ${index === selectedIndex ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'} ${slide.btnBg}`}
-                    />
+                      <div
+                        className={`mx-auto mt-4 h-px w-16 transition-all delay-300 duration-700 md:mx-0 md:mt-5 md:w-24 ${index === selectedIndex ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'} ${slide.btnBg}`}
+                      />
 
-                    {/* Hindi Questions Scrollable Marquee */}
-                    <div
-                      className={`relative mt-6 overflow-x-auto scrollbar-hide transition-all delay-300 duration-700 md:mt-12 ${index === selectedIndex ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
-                      style={{
-                        maskImage: 'linear-gradient(to right, transparent, black 6%, black 94%, transparent)',
-                        WebkitMaskImage: 'linear-gradient(to right, transparent, black 6%, black 94%, transparent)',
-                      }}
-                    >
-                      <div className="animate-marquee flex gap-3 py-1.5 hover:[animation-play-state:paused] active:[animation-play-state:paused] md:gap-5 md:py-2">
-                        {slide.questions.map((q, i) => (
-                          <div
-                            key={i}
-                            className={`flex-shrink-0 rounded-full border border-white/60 bg-white/55 px-4 py-2 text-[10px] font-medium shadow-[0_4px_20px_rgba(0,0,0,0.06)] backdrop-blur-md transition-all hover:-translate-y-0.5 hover:bg-white/75 hover:shadow-[0_8px_28px_rgba(0,0,0,0.1)] md:px-6 md:py-2.5 md:text-base ${slide.accent}`}
-                          >
-                            {q}
-                          </div>
-                        ))}
-                        {slide.questions.map((q, i) => (
-                          <div
-                            key={`dup-${i}`}
-                            className={`flex-shrink-0 rounded-full border border-white/60 bg-white/55 px-4 py-2 text-[10px] font-medium shadow-[0_4px_20px_rgba(0,0,0,0.06)] backdrop-blur-md transition-all hover:-translate-y-0.5 hover:bg-white/75 hover:shadow-[0_8px_28px_rgba(0,0,0,0.1)] md:px-6 md:py-2.5 md:text-base ${slide.accent}`}
-                          >
-                            {q}
-                          </div>
-                        ))}
+                      {/* Hindi Questions Scrollable Marquee */}
+                      <div
+                        className={`relative mt-6 overflow-x-auto scrollbar-hide transition-all delay-300 duration-700 md:mt-10 ${index === selectedIndex ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+                        style={{
+                          maskImage: 'linear-gradient(to right, transparent, black 6%, black 94%, transparent)',
+                          WebkitMaskImage: 'linear-gradient(to right, transparent, black 6%, black 94%, transparent)',
+                        }}
+                      >
+                        <div className="animate-marquee flex gap-3 py-1.5 hover:[animation-play-state:paused] active:[animation-play-state:paused] md:gap-5 md:py-2">
+                          {slide.questions.map((q, i) => (
+                            <div
+                              key={i}
+                              className={`flex-shrink-0 rounded-full border border-white/60 bg-white/55 px-4 py-2 text-[10px] font-medium shadow-[0_4px_20px_rgba(0,0,0,0.06)] backdrop-blur-md transition-all hover:-translate-y-0.5 hover:bg-white/75 hover:shadow-[0_8px_28px_rgba(0,0,0,0.1)] md:px-6 md:py-2.5 md:text-base ${slide.accent}`}
+                            >
+                              {q}
+                            </div>
+                          ))}
+                          {slide.questions.map((q, i) => (
+                            <div
+                              key={`dup-${i}`}
+                              className={`flex-shrink-0 rounded-full border border-white/60 bg-white/55 px-4 py-2 text-[10px] font-medium shadow-[0_4px_20px_rgba(0,0,0,0.06)] backdrop-blur-md transition-all hover:-translate-y-0.5 hover:bg-white/75 hover:shadow-[0_8px_28px_rgba(0,0,0,0.1)] md:px-6 md:py-2.5 md:text-base ${slide.accent}`}
+                            >
+                              {q}
+                            </div>
+                          ))}
+                        </div>
                       </div>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div
+                      className={`flex flex-row items-center justify-center gap-2 transition-all delay-500 duration-700 md:justify-start md:gap-4 ${index === selectedIndex ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+                    >
+                      <Link
+                        href={currentCta.href}
+                        className={`group relative overflow-hidden whitespace-nowrap rounded-full px-5 py-2.5 text-[10px] font-bold uppercase tracking-[0.05em] text-white shadow-[0_8px_30px_rgba(0,0,0,0.15)] transition-all duration-300 hover:scale-105 hover:shadow-[0_12px_40px_rgba(0,0,0,0.2)] active:scale-95 md:px-8 md:py-3 md:text-sm md:tracking-[0.15em] ${slide.btnBg}`}
+                      >
+                        <span className="relative z-10">{t(currentCta.key)}</span>
+                        <div className="absolute inset-0 translate-y-full bg-black/10 transition-transform duration-300 group-hover:translate-y-0" />
+                      </Link>
+
+                      <Link
+                        href="/contact"
+                        className="whitespace-nowrap rounded-full border border-black/10 bg-white/50 px-5 py-2.5 text-[10px] font-bold uppercase tracking-[0.05em] text-black/70 shadow-sm backdrop-blur-sm transition-all duration-300 hover:bg-white/80 md:px-8 md:py-3 md:text-sm md:tracking-[0.15em]"
+                      >
+                        {t('hero.cta.book')}
+                      </Link>
                     </div>
                   </div>
 
-                  {/* Action Buttons */}
-                  <div
-                    className={`flex flex-row items-center justify-center gap-2 transition-all delay-500 duration-700 md:gap-4 ${index === selectedIndex ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
-                  >
-                    <Link
-                      href={currentCta.href}
-                      className={`group relative overflow-hidden whitespace-nowrap rounded-full px-5 py-2.5 text-[10px] font-bold uppercase tracking-[0.05em] text-white shadow-[0_8px_30px_rgba(0,0,0,0.15)] transition-all duration-300 hover:scale-105 hover:shadow-[0_12px_40px_rgba(0,0,0,0.2)] active:scale-95 md:px-8 md:py-3 md:text-sm md:tracking-[0.15em] ${slide.btnBg}`}
-                    >
-                      <span className="relative z-10">{t(currentCta.key)}</span>
-                      <div className="absolute inset-0 translate-y-full bg-black/10 transition-transform duration-300 group-hover:translate-y-0" />
-                    </Link>
-
-                    <Link
-                      href="/contact"
-                      className="whitespace-nowrap rounded-full border border-black/10 bg-white/50 px-5 py-2.5 text-[10px] font-bold uppercase tracking-[0.05em] text-black/70 shadow-sm backdrop-blur-sm transition-all duration-300 hover:bg-white/80 md:px-8 md:py-3 md:text-sm md:tracking-[0.15em]"
-                    >
-                      {t('hero.cta.book')}
-                    </Link>
+                  {/* Image — right on desktop, below content on mobile */}
+                  <div className="order-2 flex items-center justify-center md:justify-end">
+                    <div className="relative animate-hero-float">
+                      <div
+                        className={`absolute -bottom-2 left-1/2 h-8 w-[70%] -translate-x-1/2 rounded-[100%] blur-2xl transition-colors duration-1000 ${slide.btnBg} opacity-20`}
+                      />
+                      <img
+                        src={slide.bottomImage}
+                        alt=""
+                        className="relative max-h-[220px] w-full max-w-md object-contain transition-all duration-1000 md:max-h-[420px] md:max-w-xl lg:max-h-[480px] lg:max-w-2xl"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
             );
           })}
         </div>
-      </div>
-
-      {/* Slide-specific image at the very bottom center */}
-      <div className="pointer-events-none absolute bottom-0 left-0 z-0 flex w-full justify-center">
-        <div className="relative animate-hero-float">
-          <div
-            className={`absolute -bottom-2 left-1/2 h-8 w-[70%] -translate-x-1/2 rounded-[100%] blur-2xl transition-colors duration-1000 ${active.btnBg} opacity-20`}
-          />
-          <img
-            src={active.bottomImage}
-            alt=""
-            className="relative max-h-[250px] w-full max-w-2xl object-contain transition-all duration-1000 md:max-h-[350px] md:max-w-4xl"
-          />
-        </div>
-      </div>
-
-      {/* Slide counter */}
-      <div className="absolute right-5 top-6 z-20 hidden font-mono text-[11px] tracking-widest text-black/30 md:block">
-        <span className="text-black/50">{String(selectedIndex + 1).padStart(2, '0')}</span>
-        <span className="mx-1">/</span>
-        <span>{String(slides.length).padStart(2, '0')}</span>
       </div>
 
       {/* Navigation Arrows - Desktop Only */}
