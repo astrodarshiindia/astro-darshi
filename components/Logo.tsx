@@ -31,25 +31,20 @@ export default function Logo({
         className={`rounded-full object-cover ${imageClassName}`}
         priority
       />
-      {showText && (
-        <span
-          className={`overflow-visible ${textClassName} ${
-            isEnglishBrand ? 'max-md:whitespace-normal md:whitespace-nowrap' : 'whitespace-nowrap'
-          }`}
-        >
-          {isEnglishBrand ? (
-            <>
-              <span className="block leading-none md:inline md:leading-inherit">Astro</span>
-              <span className="block leading-none md:inline md:leading-inherit">
-                <span className="hidden md:inline"> </span>
-                Paramarsh
-              </span>
-            </>
-          ) : (
-            t('brand.name.full')
-          )}
-        </span>
-      )}
+      {showText &&
+        (isEnglishBrand ? (
+          <>
+            <span className={`flex flex-col leading-[1.1] md:hidden ${textClassName}`}>
+              <span>Astro</span>
+              <span>Paramarsh</span>
+            </span>
+            <span className={`hidden whitespace-nowrap md:inline ${textClassName}`}>
+              Astro Paramarsh
+            </span>
+          </>
+        ) : (
+          <span className={`whitespace-nowrap ${textClassName}`}>{t('brand.name.full')}</span>
+        ))}
     </Link>
   );
 }

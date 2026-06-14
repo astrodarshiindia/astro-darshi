@@ -68,15 +68,15 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-500 ease-out ${headerBgClass}`}
     >
-      <div className="section-container">
-        <nav className="flex items-center justify-between gap-3">
+      <div className="section-container max-md:px-4">
+        <nav className="flex items-center justify-between gap-2 md:gap-3">
           <Logo
-            className="group flex shrink-0 items-center gap-1.5 overflow-visible sm:gap-2.5"
-            imageClassName="h-8 w-8 shrink-0 sm:h-9 sm:w-9 md:h-10 md:w-10"
-            textClassName={`overflow-visible font-serif font-bold transition-colors duration-300 ${
+            className="group flex shrink-0 items-center gap-1 overflow-visible md:gap-2.5"
+            imageClassName="h-7 w-7 shrink-0 sm:h-8 sm:w-8 md:h-10 md:w-10"
+            textClassName={`shrink-0 overflow-visible font-serif font-bold transition-colors duration-300 ${
               language === 'en'
-                ? 'text-[13px] leading-tight tracking-tight sm:text-sm md:inline md:text-lg md:leading-normal'
-                : 'text-base tracking-tighter sm:text-lg sm:leading-normal md:text-2xl'
+                ? 'text-[10px] tracking-tight sm:text-[11px] md:text-lg md:tracking-normal'
+                : 'text-sm tracking-tighter sm:text-base md:text-2xl'
             } ${useLightText ? 'text-white/90' : 'text-stone-600'}`}
           />
 
@@ -117,13 +117,16 @@ export default function Header() {
                 <Button
                   variant="outline"
                   size="default"
-                  className={`h-9 shrink-0 rounded-full border-2 bg-transparent px-2.5 text-xs font-semibold whitespace-nowrap shadow-none transition-colors sm:h-10 sm:px-4 sm:text-sm md:h-11 md:px-5 md:text-base ${
+                  className={`h-8 shrink-0 rounded-full border-2 bg-transparent px-2 text-[10px] font-semibold whitespace-nowrap shadow-none transition-colors sm:h-9 sm:px-3 sm:text-xs md:h-11 md:px-5 md:text-base ${
                     useLightText
                       ? 'border-white/60 text-white hover:bg-white/10 hover:text-white'
                       : 'border-stone-300 text-stone-700 hover:bg-stone-50'
                   }`}
                 >
-                  {language === 'en' ? 'English' : 'हिंदी'}
+                  <span className="md:hidden">{language === 'en' ? 'EN' : 'हिं'}</span>
+                  <span className="hidden md:inline">
+                    {language === 'en' ? 'English' : 'हिंदी'}
+                  </span>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent
@@ -174,7 +177,7 @@ export default function Header() {
               aria-label={isOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={isOpen}
               onClick={() => setIsOpen((open) => !open)}
-              className={`flex h-11 w-11 items-center justify-center rounded-full transition-colors md:hidden ${
+              className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition-colors sm:h-10 sm:w-10 md:hidden ${
                 useLightText && !isOpen
                   ? 'bg-white/10 text-white hover:bg-white/15'
                   : 'border border-stone-200 bg-white text-stone-800 hover:bg-stone-50'
